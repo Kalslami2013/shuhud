@@ -1,0 +1,1214 @@
+[
+{
+"angle": "قطع مئات الهكتارات من الغابة الشمالية وتصريفها قبل تقييم الأثر البيئي يفتت الغابة المتصلة التي يحتاجها السنجاب الطائر للتنقل والتعشيش.",
+"animal": "custom",
+"animalEmoji": "🐿️",
+"animalHabitat": "الغابات الشمالية الناضجة في موهوس وكاياني",
+"animalName": "السنجاب الطائر السيبيري",
+"category": "الغابات",
+"createdAt": "2026-10-30T08:02:00+03:00",
+"crisis": "تحقيق جنائي في إزالة غابات لمراكز بيانات غوغل في فنلندا",
+"dispatch": "أنا السنجاب الطائر السيبيري. لا أطير حقاً؛ أنزلق بين الأشجار على غشاء من الجلد يمتد بين أطرافي، ولذلك أحتاج إلى غابة متصلة: شجرة أعشش فيها، وأخرى آكل منها، وممرات من الخشب تصل بينهما. فنلندا تؤوي أكبر أعدادنا في الاتحاد الأوروبي، ويقدّرنا البشر هنا بثلاثين ألفاً على الأقل، بعد أن تراجعنا بأكثر من 30% خلال عشر سنوات.\n\nفي سبتمبر أعلنت غوغل استثماراً إضافياً بـ13 مليار يورو في فنلندا. ثم قطعت شركتها الفرعية «تويكه فينلاند» نحو 330 هكتاراً من الغابة قرب موهوس، وما يقارب 200 هكتار قرب كاياني، قبل أن تكتمل تقييمات الأثر البيئي. تقول عالمة بيئة إن 250 ألف شجرة سقطت في موهوس وحدها، وتقدّر صحيفة «الغارديان» المجموع بنحو 400 ألف. ويقول سكان أوتانماكي إن الحيوانات البرية غادرت الغابة: «فرّت». وصارت الذئاب تُرى في القرى.\n\nفي 6 أكتوبر أمرت هيئة الترخيص والرقابة بوقف الأعمال. وفي 29 أكتوبر فتحت الشرطة تحقيقاً جنائياً في مخالفات مشتبه بها لقانون المياه، بعد قصور في التصريف وإدارة المياه في الموقع. اعتذرت غوغل وقالت إنها «قصّرت عن معاييرها العالية»، ووعدت بزراعة 130 هكتاراً، أي أقل من نصف ما أزالته في موهوس.\n\nلا أعرف إن كان أحد من بني جنسي يسكن تلك الأخشاب؛ لكن أكثرنا يعيش في الغابات المُدارة لا في المحميات، إذ يقع 63% من مواقعنا المعروفة فيها. وأعرف السابقة: في هامينا، بين 2018 و2019، يقول مقال رأي إن الشركة الفرعية نفسها أزالت نحو 1.3 هكتار من موائلنا المحمية دون إذن.\n\nقانونكم يمنع تدمير أعشاشنا وأماكن راحتنا. لكن الآلات تعمل أسرع من القانون. تبنون عقولاً اصطناعية تتذكر كل شيء، فوق غابة لم يتذكر أحد أن يسألها.",
+"en": {
+"angle": "Clearing and draining hundreds of hectares of boreal forest before any environmental assessment fragments the continuous woodland the flying squirrel needs to move and nest.",
+"animalHabitat": "Mature boreal forests of Muhos and Kajaani",
+"animalName": "Siberian flying squirrel",
+"crisis": "Criminal probe into forest clearing for Google's Finnish data centres",
+"dispatch": "I am the Siberian flying squirrel. I do not truly fly; I glide between trees on a membrane of skin stretched between my limbs, which is why I need a forest that holds together: a tree to nest in, another to feed in, and wooden corridors in between. Finland holds the largest population of my kind in the European Union. Humans here put us at a minimum of 30,000, after a fall of more than 30% in ten years.\n\nIn September, Google announced an additional €13 billion investment in Finland. Then its subsidiary, Tuike Finland, cleared about 330 hectares of forest near Muhos and almost 200 near Kajaani before the environmental impact assessments were done. An ecologist says 250,000 trees came down at Muhos alone; The Guardian puts the total at around 400,000. Residents of Otanmäki say the wild animals left the forest: \"They fled.\" Wolves have been seen in the villages.\n\nOn 6 October the licensing and supervision authority ordered the work to stop. On 29 October police opened a criminal investigation into suspected breaches of the water act, after finding shortcomings in drainage and water management at the site. Google apologised, saying it had \"fallen short of our own high standards\", and pledged to plant trees on 130 hectares, less than half of what it cleared at Muhos.\n\nI cannot say whether any of my kin lived in those woods. But most of us live in managed forests rather than reserves; 63% of our known sites lie there. And I know the precedent: at Hamina in 2018–2019, an opinion column says, the same subsidiary cleared some 1.3 hectares of our protected habitat without permission.\n\nYour law forbids destroying our breeding and resting places. But machines work faster than law. You are building artificial minds that remember everything, on top of a forest no one remembered to ask.",
+"fact": "Finnish police opened a criminal investigation on 29 October 2026 into suspected environmental breaches at a planned Google data-centre site near Muhos, where forest was cleared and drained before required environmental impact assessments were completed, Reuters reported.",
+"figures": [
+{
+"label": "Forest cleared near Muhos",
+"source": "Yle",
+"value": "330 hectares"
+},
+{
+"label": "Estimated trees felled at Muhos and Otanmäki",
+"source": "The Guardian via Fortune",
+"value": "400,000 trees"
+},
+{
+"label": "Google's additional investment announced for Finland",
+"source": "Yle",
+"value": "€13 billion"
+},
+{
+"label": "Area Google pledged to replant at Muhos",
+"source": "Fortune",
+"value": "130 hectares"
+},
+{
+"label": "Minimum estimated flying squirrel population in Finland",
+"source": "Metsähallitus",
+"value": "30,000"
+},
+{
+"label": "Flying squirrel decline over ten years",
+"source": "Metsähallitus",
+"value": "More than 30%"
+}
+],
+"headline": "A quarter-million trees, felled before the assessment",
+"impacts": [
+"A huge AI data-centre investment is announced",
+"About 530 hectares of forest cleared before environmental assessment",
+"Drainage and earthworks alter water and soil on site",
+"Mature forest fragments and tree-to-tree corridors break",
+"Wildlife flees and the flying squirrel loses the only habitat it can use"
+],
+"place": "Muhos and Kajaani, Finland",
+"question": "Does your artificial intelligence need a dead forest in order to think?",
+"sources": [
+{
+"name": "Reuters via ArcticToday",
+"url": "https://www.arctictoday.com/finland-launches-criminal-probe-into-land-clearance-for-google-data-center/"
+},
+{
+"name": "Yle",
+"url": "https://yle.fi/a/74-20251367"
+},
+{
+"name": "Fortune",
+"url": "https://fortune.com/2026/10/26/wolves-finland-google-1300-acres-data-center/"
+},
+{
+"name": "Mother Jones",
+"url": "https://www.motherjones.com/politics/2026/10/finland-finns-angry-google-illegal-clear-cutting-trees-data-center/"
+},
+{
+"name": "Metsähallitus",
+"url": "https://www.metsa.fi/wp-content/uploads/2024/11/flyingsquirrelseminar_estonia_fsstatusinfinland.pdf"
+},
+{
+"name": "University of Helsinki",
+"url": "https://www.helsinki.fi/en/news/evolution/new-study-reveals-urgent-conservation-needs-siberian-flying-squirrel"
+},
+{
+"name": "Fierce Network (opinion)",
+"url": "https://www.fierce-network.com/broadband/opinion-google-annihilates-protected-flying-squirrel-habitat-finland"
+}
+]
+},
+"eventDate": "2026-10-29",
+"fact": "فتحت الشرطة الفنلندية في 29 أكتوبر 2026 تحقيقاً جنائياً في مخالفات بيئية مشتبه بها في موقع مركز بيانات مزمع لغوغل قرب موهوس، بعد إزالة الغابة وتصريفها قبل استكمال تقييمات الأثر البيئي، بحسب رويترز.",
+"figures": [
+{
+"label": "مساحة الغابة المزالة قرب موهوس",
+"source": "يله (هيئة البث الفنلندية)",
+"value": "330 هكتاراً"
+},
+{
+"label": "تقدير الأشجار المقطوعة في موقعي موهوس وأوتانماكي",
+"source": "الغارديان عبر فورتشن",
+"value": "400 ألف شجرة"
+},
+{
+"label": "استثمار غوغل الإضافي المعلن في فنلندا",
+"source": "يله",
+"value": "13 مليار يورو"
+},
+{
+"label": "المساحة التي تعهدت غوغل بتشجيرها في موهوس",
+"source": "فورتشن",
+"value": "130 هكتاراً"
+},
+{
+"label": "الحد الأدنى المقدّر لأعداد السنجاب الطائر في فنلندا",
+"source": "ميتساهاليتوس (هيئة الغابات الفنلندية)",
+"value": "30 ألفاً"
+},
+{
+"label": "تراجع أعداد السنجاب الطائر خلال عشر سنوات",
+"source": "ميتساهاليتوس",
+"value": "أكثر من 30%"
+}
+],
+"headline": "غابة موهوس: ربع مليون شجرة سقطت قبل التقييم",
+"impacts": [
+"إعلان استثمار ضخم في مراكز بيانات الذكاء الاصطناعي",
+"إزالة نحو 530 هكتاراً من الغابة قبل تقييم الأثر البيئي",
+"تصريف وتجريف يغيّران مسار المياه والتربة في الموقع",
+"تفتت الغابة الناضجة وانقطاع الممرات بين الأشجار",
+"الحيوانات تفرّ والسنجاب الطائر يخسر موئلاً لا يعيش إلا فيه"
+],
+"kind": "live",
+"place": "موهوس وكاياني، فنلندا",
+"question": "هل يحتاج ذكاؤكم الاصطناعي إلى غابة ميتة كي يفكّر؟",
+"sources": [
+{
+"name": "رويترز عبر آركتيك توداي",
+"url": "https://www.arctictoday.com/finland-launches-criminal-probe-into-land-clearance-for-google-data-center/"
+},
+{
+"name": "يله",
+"url": "https://yle.fi/a/74-20251367"
+},
+{
+"name": "فورتشن",
+"url": "https://fortune.com/2026/10/26/wolves-finland-google-1300-acres-data-center/"
+},
+{
+"name": "ماذر جونز",
+"url": "https://www.motherjones.com/politics/2026/10/finland-finns-angry-google-illegal-clear-cutting-trees-data-center/"
+},
+{
+"name": "ميتساهاليتوس",
+"url": "https://www.metsa.fi/wp-content/uploads/2024/11/flyingsquirrelseminar_estonia_fsstatusinfinland.pdf"
+},
+{
+"name": "جامعة هلسنكي",
+"url": "https://www.helsinki.fi/en/news/evolution/new-study-reveals-urgent-conservation-needs-siberian-flying-squirrel"
+},
+{
+"name": "فيرس نتورك (مقال رأي)",
+"url": "https://www.fierce-network.com/broadband/opinion-google-annihilates-protected-flying-squirrel-habitat-finland"
+}
+],
+"id": "env-20261030-custom-flyingsquirrel-finland"
+},
+{
+"angle": "حرائق يشعلها البشر لتجديد المراعي تفلت في أرض جففها غياب المطر، فتلتهم عشب الجبال الحافظ للماء والقطعان التي يقتات الكندور على بقاياها.",
+"animal": "condor",
+"animalEmoji": "🦅",
+"animalHabitat": "منحدرات الأنديز العالية في كوسكو وأبوريماك",
+"animalName": "كندور الأنديز",
+"category": "كوارث بشرية",
+"createdAt": "2026-10-30T07:58:00+03:00",
+"crisis": "موجة حرائق في مرتفعات بيرو مع جفاف النينيو",
+"dispatch": "أنا كندور الأنديز. أمدّ جناحيّ إلى نحو 330 سنتيمتراً، وأعيش أكثر من خمسين عاماً، أقضي معظمها محلّقاً فوق المنحدرات العالية بحثاً عن الموت. لا تنزعجوا من العبارة؛ أنا عامل النظافة في هذه الجبال، آكل الجيف قبل أن تصير مصدراً للعدوى.\n\nهذا الموسم رأيت من فوق ما لا ترونه من تحت. في 12 أكتوبر أحصت هيئة الدفاع المدني في بيرو 58 حريقاً نشطاً في كوسكو وأياكوتشو وأبوريماك وجونين وأنكاش وأريكيبا وكاخاماركا. وفي كوسكو وحدها اشتعل نحو 280 حريقاً منذ بداية العام، والتهمت قرابة 16 ألف هكتار من الغطاء النباتي. وفي الأسبوع الأول من أكتوبر مات ستة من البشر، خمسة في كوسكو وواحد في بونو.\n\nيقول البشر هنا إن شحّ المطر المرتبط بظاهرة النينيو يترك الأرض يابسة، وإن «القِمات»، أي النيران التي يشعلونها في الحقول، تفلت منهم وتشعل الجبال. وقال مسؤول إن النار تجري بسرعة 15 إلى 20 كيلومتراً في الساعة. أنا أطير أسرع من ذلك؛ الأبقار والأغنام وحيوانات الفصيلة الجملية في إسبينار لم تستطع.\n\nقد تظنون أنني أفرح بالجيف. لكن ما يحترق ليس وجبة واحدة، بل المرعى الذي يطعم القطعان التي أعيش على بقاياها، والعشب الذي يمسك الماء في المنحدرات ويحفظه لمن يسكن تحتها. وليمة يوم، ثم جبل جائع لسنوات.\n\nفي أول تعداد وطني لنا لم يجد البشر سوى 301 كندور على الأقل في بيرو كلها، بينها 36 في أبوريماك و23 في كوسكو. يصنّفوننا «مهددين بالانقراض»، ويرسموننا على الشعارات ويرقصون لنا في الأعياد. ونحن نطير فوق نار أشعلتموها بأيديكم، ونسأل: أيّ رمز وطني هذا الذي يُترك جبله يحترق؟",
+"en": {
+"angle": "Fires set to renew pasture escape across land parched by missing rain, consuming the water-holding mountain grass and the herds whose remains feed the condor.",
+"animalHabitat": "High Andean slopes of Cusco and Apurímac",
+"animalName": "Andean condor",
+"crisis": "A wave of fires across Peru's highlands amid El Niño drought",
+"dispatch": "I am the Andean condor. My wings span about 330 centimetres and I live more than fifty years, most of them circling high slopes in search of death. Don't flinch at the phrase. I am the cleaner of these mountains; I eat carrion before it can turn into a source of infection.\n\nThis season I have seen from above what you cannot see from below. On 12 October, Peru's civil defence agency counted 58 active fires across Cusco, Ayacucho, Apurímac, Junín, Áncash, Arequipa and Cajamarca. In Cusco alone some 280 fires have burned since January, consuming around 16,000 hectares of vegetation. In the first week of October, six humans died: five in Cusco, one in Puno.\n\nPeople here say the scarce rain linked to El Niño has left the land brittle, and that the quemas, the fires they light in their fields, slip out of their hands and climb the mountains. One official said the flames were running at 15 to 20 km/h. I fly faster than that. The cattle, sheep and camelids of Espinar could not.\n\nYou might think I welcome the carcasses. But what burns is not a single meal. It is the pasture that feeds the herds whose remains I live on, and the grass that holds water on the slopes and keeps it for whoever lives below. A feast for a day, then a hungry mountain for years.\n\nIn our first national census, humans found a minimum of just 301 condors in the whole of Peru, 36 of them in Apurímac and 23 in Cusco. They list us as endangered, paint us on their emblems and dance for us at their festivals. And we fly over fires you lit with your own hands, asking: what kind of national symbol is left to watch its mountain burn?",
+"fact": "Peru's civil defence agency recorded 58 active wildfires in seven regions on 12 October 2026, while Cusco had logged about 280 fires covering some 16,000 hectares since the start of the year, according to PAHO/WHO.",
+"figures": [
+{
+"label": "Active wildfires in seven regions (12 October)",
+"source": "INDECI via PAHO/WHO",
+"value": "58 fires"
+},
+{
+"label": "Vegetation burned in Cusco in 2026",
+"source": "PAHO/WHO",
+"value": "16,000 hectares"
+},
+{
+"label": "Wildfires recorded in Cusco this year",
+"source": "PAHO/WHO",
+"value": "280 fires"
+},
+{
+"label": "Wildfire deaths in the first week of October",
+"source": "RPP Noticias",
+"value": "6 deaths"
+},
+{
+"label": "Minimum count in Peru's first national condor census",
+"source": "SERFOR via Actualidad Ambiental",
+"value": "301 condors"
+},
+{
+"label": "Andean condor wingspan",
+"source": "Andina",
+"value": "330 cm"
+}
+],
+"headline": "Condor wings above Peru's burning Andean slopes",
+"impacts": [
+"Scarce El Niño rains dry out the high Andes",
+"Field fires escape and spread at 15–20 km/h",
+"Pasture and water-holding grass on the slopes burn",
+"Herds die and long-term food sources shrink",
+"More pressure on a condor with a minimum count of 301 in Peru"
+],
+"place": "Cusco and Apurímac, Peru",
+"question": "Why do you light fires to renew the grass, then wait for rain to put them out?",
+"sources": [
+{
+"name": "PAHO/WHO",
+"url": "https://www.paho.org/en/natural-hazards-monitoring/natural-hazards-monitoring-13-october-2026"
+},
+{
+"name": "RPP Noticias",
+"url": "https://rpp.pe/peru/actualidad/incendios-forestales-en-peru-2026-seis-muertos-y-focos-activos-en-cinco-regiones-noticia-1711550"
+},
+{
+"name": "Infobae",
+"url": "https://www.infobae.com/peru/2026/10/13/la-cifra-de-incendios-forestales-en-peru-subio-hoy-a-mas-de-50-y-ya-son-14-regiones-afectadas-segun-serfor/"
+},
+{
+"name": "Actualidad Ambiental",
+"url": "https://www.actualidadambiental.pe/primer-censo-nacional-del-condor-contabilizo-301-como-poblacion-minima-a-nivel-nacional/"
+},
+{
+"name": "Andina",
+"url": "https://andina.pe/ingles/noticia-condor-andino-conoce-al-majestuoso-rey-las-aves-su-valor-biologico-y-cultural-863485.aspx"
+}
+]
+},
+"eventDate": "2026-10-12",
+"fact": "سجّلت هيئة الدفاع المدني في بيرو 58 حريقاً نشطاً في سبع مناطق في 12 أكتوبر 2026، فيما بلغ عدد الحرائق في كوسكو منذ بداية العام نحو 280 حريقاً على مساحة تقارب 16 ألف هكتار، بحسب منظمة الصحة للبلدان الأمريكية.",
+"figures": [
+{
+"label": "حرائق نشطة في سبع مناطق (12 أكتوبر)",
+"source": "هيئة الدفاع المدني INDECI عبر منظمة الصحة للبلدان الأمريكية",
+"value": "58 حريقاً"
+},
+{
+"label": "الغطاء النباتي المحترق في كوسكو منذ بداية 2026",
+"source": "منظمة الصحة للبلدان الأمريكية",
+"value": "16 ألف هكتار"
+},
+{
+"label": "عدد الحرائق في كوسكو منذ بداية العام",
+"source": "منظمة الصحة للبلدان الأمريكية",
+"value": "280 حريقاً"
+},
+{
+"label": "ضحايا الحرائق في الأسبوع الأول من أكتوبر",
+"source": "RPP Noticias",
+"value": "6 وفيات"
+},
+{
+"label": "الحد الأدنى في أول تعداد وطني للكندور في بيرو",
+"source": "هيئة الغابات والحياة البرية SERFOR عبر Actualidad Ambiental",
+"value": "301 كندور"
+},
+{
+"label": "امتداد جناحي الكندور",
+"source": "وكالة أندينا",
+"value": "330 سم"
+}
+],
+"headline": "أجنحة الكندور فوق منحدرات الأنديز المحترقة في بيرو",
+"impacts": [
+"شحّ المطر المرتبط بالنينيو يجفف مرتفعات الأنديز",
+"نيران الحقول تفلت وتنتشر بسرعة 15–20 كم/ساعة",
+"احتراق المراعي والعشب الحافظ للماء على المنحدرات",
+"نفوق القطعان وتراجع مصادر الغذاء على المدى البعيد",
+"ضغط إضافي على كندور لا يتجاوز تعداده الأدنى 301 في بيرو"
+],
+"kind": "live",
+"place": "كوسكو وأبوريماك، بيرو",
+"question": "لماذا تشعلون النار لتجديد العشب، ثم تنتظرون المطر ليطفئها؟",
+"sources": [
+{
+"name": "منظمة الصحة للبلدان الأمريكية",
+"url": "https://www.paho.org/en/natural-hazards-monitoring/natural-hazards-monitoring-13-october-2026"
+},
+{
+"name": "RPP Noticias",
+"url": "https://rpp.pe/peru/actualidad/incendios-forestales-en-peru-2026-seis-muertos-y-focos-activos-en-cinco-regiones-noticia-1711550"
+},
+{
+"name": "إنفوباي",
+"url": "https://www.infobae.com/peru/2026/10/13/la-cifra-de-incendios-forestales-en-peru-subio-hoy-a-mas-de-50-y-ya-son-14-regiones-afectadas-segun-serfor/"
+},
+{
+"name": "Actualidad Ambiental",
+"url": "https://www.actualidadambiental.pe/primer-censo-nacional-del-condor-contabilizo-301-como-poblacion-minima-a-nivel-nacional/"
+},
+{
+"name": "وكالة أندينا",
+"url": "https://andina.pe/ingles/noticia-condor-andino-conoce-al-majestuoso-rey-las-aves-su-valor-biologico-y-cultural-863485.aspx"
+}
+],
+"id": "env-20261030-condor-peru-fires"
+},
+{
+"angle": "نهر تحبسه السدود ثم تطلقه دفعة واحدة، وسيول تجرف الضفاف وتحمل مياه المخيمات، فتُمحى شواطئ الرمل التي تعشش فيها سلحفاة نادرة.",
+"animal": "custom",
+"animalEmoji": "🐢",
+"animalHabitat": "ضفاف الفرات الرملية في الرقة ودير الزور",
+"animalName": "سلحفاة الفرات الرخوة",
+"category": "المياه",
+"createdAt": "2026-10-30T07:54:00+03:00",
+"crisis": "سيول قاتلة في شرق سوريا بعد عام من تقلبات الفرات",
+"dispatch": "أنا سلحفاة الفرات ذات الدرقة الطرية، من أقدم السلالات الحية؛ انفصل فرعنا عن بقية السلاحف الرخوة قبل أكثر من أربعين مليون سنة. أعيش في الفرات ودجلة وروافدهما، وأفضّل المياه الضحلة الهادئة إلى جوار تيار عميق سريع، وأضع ما يصل إلى ثلاثين بيضة في شواطئ الرمل على الضفاف.\n\nفي ليلة الأربعاء 28 أكتوبر هطل مطر غزير على شرق سوريا. قالت وزارة الطوارئ إن خمسة أشخاص على الأقل ماتوا، بينهم أربعة أطفال غرقوا في الرقة ودير الزور، وانهار جسر السلماني غرب الطبقة، وأُجليت نحو 375 عائلة من ثلاثة مخيمات. ونُقل أن سبعة جسور ومعابر وطرق ترابية خرجت عن الخدمة.\n\nلكن قصتي مع الماء أطول من ليلة. منذ أن بنى البشر سدودهم الكبرى على حوضي الفرات ودجلة بين 1975 و2000، تراجعت أعدادنا تراجعاً هائلاً، واختفت مجموعات كاملة منا. صار النهر يجري بقرار: يُحبس سنوات ثم يُطلق دفعة واحدة. في مايو الماضي فُتحت مفيضات سد أتاتورك في تركيا لأول مرة منذ سبع سنوات، وفتحت سوريا بوابات سد الفرات التي قالت إنها لم تُستعمل منذ نحو أربعين عاماً، فاندفع الماء بنحو 1800 متر مكعب في الثانية.\n\nالنهر الذي يرتفع مترين في ساعات يمحو شواطئ الرمل التي أدفن فيها بيضي، ويطمر الماء الهادئ الذي أختبئ فيه بالطين. وحين تسيل المياه عبر المخيمات والحقول تحمل ما يتركه البشر وراءهم؛ في يونيو قالت اليونيسف إن 49 محطة لمعالجة المياه في دير الزور والرقة كانت خارج الخدمة.\n\nيصنّفني البشر «مهددة بالانقراض»، ويقولون إنني على الأرجح «مهددة بشدة» في سوريا، ولا أحد يعرف كم بقي منا. ولا يذكر المختصون أي إجراء لحمايتي في سوريا أو العراق أو جنوب شرق الأناضول.\n\nأنتم تعدّون الجسور المنهارة، وهذا حقكم. لكن من يعدّ الشواطئ؟",
+"en": {
+"angle": "A river held back by dams and then released in a rush, and floods that scour the banks and carry runoff from camps, erase the sand beaches where a rare turtle nests.",
+"animalHabitat": "Sandy Euphrates banks in Raqqa and Deir ez-Zor",
+"animalName": "Euphrates softshell turtle",
+"crisis": "Deadly flash floods in eastern Syria after a year of Euphrates swings",
+"dispatch": "I am the Euphrates softshell turtle, one of the oldest lineages still alive; my branch split from all other softshells more than forty million years ago. I live in the Euphrates and the Tigris and their tributaries. I like shallow, calm water beside a deep, fast current, and I lay up to thirty eggs on the sand beaches along the banks.\n\nOn the night of Wednesday, 28 October, heavy rain fell on eastern Syria. The emergency ministry says at least five people died, four of them children who drowned in Raqqa and Deir ez-Zor. The al-Salmani bridge west of Tabqa collapsed, and some 375 families were evacuated from three camps. Seven bridges, culverts and dirt roads were reported out of service.\n\nBut my story with water is longer than one night. Since humans built their great dams across the Euphrates and Tigris basins between 1975 and 2000, our numbers have collapsed, and whole populations of us have vanished. The river now runs by decision: held back for years, then let go all at once. Last May the spillways of Turkey's Atatürk Dam opened for the first time in seven years, and Syria opened gates on the Euphrates Dam that it said had not been used in about forty years. Water surged at around 1,800 cubic metres a second.\n\nA river that rises two metres in a few hours wipes out the sand beaches where I bury my eggs and smothers my quiet water in silt. And when floodwater runs through camps and fields, it carries whatever humans leave behind; in June, UNICEF said 49 water treatment plants in Deir ez-Zor and Raqqa were out of service.\n\nHumans list me as Endangered and say I am probably Critically Endangered in Syria. No one knows how many of us remain, and the specialists report no measures to protect me in Syria, Iraq or south-eastern Anatolia.\n\nYou count the fallen bridges, and you are right to. But who counts the beaches?",
+"fact": "At least five people, including four children, died in flash floods that hit Syria's Raqqa and Deir ez-Zor provinces on 28–29 October 2026, and the al-Salmani bridge west of Tabqa collapsed, according to Syria's emergency ministry.",
+"figures": [
+{
+"label": "Flood toll in Raqqa and Deir ez-Zor, including 4 children",
+"source": "Al Jazeera",
+"value": "5 dead"
+},
+{
+"label": "Evacuated from three camps in rural Raqqa",
+"source": "Al Jazeera",
+"value": "375 families"
+},
+{
+"label": "Put out of service by the floods",
+"source": "The Syrian Observer",
+"value": "7 bridges and crossings"
+},
+{
+"label": "Euphrates flow after Euphrates Dam gates opened in May",
+"source": "AP",
+"value": "1,800 m³/s"
+},
+{
+"label": "Water treatment plants out of service in Deir ez-Zor and Raqqa (June)",
+"source": "UNICEF via Al Jazeera",
+"value": "49 plants"
+},
+{
+"label": "Maximum clutch laid on sand beaches",
+"source": "EDGE of Existence",
+"value": "30 eggs"
+}
+],
+"headline": "The Euphrates softshell, caught between drought and deluge",
+"impacts": [
+"Large dams hold the Euphrates back for years, then release it at once",
+"Heavy rain and flash floods scour the banks in Raqqa and Deir ez-Zor",
+"Sand nesting beaches are erased and calm water silts up",
+"Floodwater runs through camps while treatment plants sit idle",
+"A rare turtle loses its nesting sites and refuges"
+],
+"place": "Raqqa and Deir ez-Zor, Syria",
+"question": "When will you learn that a river is not a tap to open and close?",
+"sources": [
+{
+"name": "Al Jazeera",
+"url": "https://www.aljazeera.com/news/2026/10/30/flash-floods-kills-five-in-syria"
+},
+{
+"name": "The Syrian Observer",
+"url": "https://syrianobserver.com/society/deadly-flash-floods-paralyze-eastern-syria-15-rescued-hundreds-evacuated-across-six-provinces.html"
+},
+{
+"name": "AP via PBS NewsHour",
+"url": "https://pbs.org/newshour/world/authorities-urge-euphrates-riverbank-residents-in-syria-to-move-inland-as-waters-rise"
+},
+{
+"name": "AFP via The Jordan Times",
+"url": "https://jordantimes.com/news/region/flooding-in-north-and-east-syria-as-euphrates-level-rises"
+},
+{
+"name": "EDGE of Existence (ZSL)",
+"url": "https://edgeofexistence.org/species/euphrates-softshell-turtle"
+},
+{
+"name": "IUCN Tortoise and Freshwater Turtle Specialist Group",
+"url": "https://iucn-tftsg.org/rafetus-euphraticus-098/"
+}
+]
+},
+"eventDate": "2026-10-29",
+"fact": "لقي خمسة أشخاص على الأقل، بينهم أربعة أطفال، حتفهم في سيول ضربت محافظتي الرقة ودير الزور السوريتين يومي 28 و29 أكتوبر 2026، وانهار جسر السلماني غرب الطبقة، بحسب وزارة الطوارئ السورية.",
+"figures": [
+{
+"label": "حصيلة السيول في الرقة ودير الزور، بينهم 4 أطفال",
+"source": "الجزيرة",
+"value": "5 قتلى"
+},
+{
+"label": "أُجليت من ثلاثة مخيمات في ريف الرقة",
+"source": "الجزيرة",
+"value": "375 عائلة"
+},
+{
+"label": "خرجت عن الخدمة بسبب السيول",
+"source": "سيريان أوبزرفر",
+"value": "7 جسور ومعابر"
+},
+{
+"label": "تدفق الفرات بعد فتح بوابات سد الفرات في مايو",
+"source": "أسوشيتد برس",
+"value": "1800 م³/ثانية"
+},
+{
+"label": "محطات معالجة مياه خارج الخدمة في دير الزور والرقة (يونيو)",
+"source": "اليونيسف عبر الجزيرة",
+"value": "49 محطة"
+},
+{
+"label": "الحد الأقصى لحضنة سلحفاة الفرات على شواطئ الرمل",
+"source": "EDGE of Existence",
+"value": "30 بيضة"
+}
+],
+"headline": "سلحفاة الفرات بين نهر جفّ ونهر فاض",
+"impacts": [
+"سدود كبرى تحبس الفرات سنوات ثم تطلقه دفعة واحدة",
+"أمطار غزيرة وسيول تجرف ضفاف الرقة ودير الزور",
+"شواطئ الرمل تُمحى والمياه الهادئة تُطمر بالطين",
+"مياه السيول تمر بالمخيمات في ظل محطات معالجة معطلة",
+"سلحفاة نادرة تفقد مواقع تعشيشها ومخابئها"
+],
+"kind": "live",
+"place": "الرقة ودير الزور، سوريا",
+"question": "متى تتعلمون أن النهر ليس صنبوراً تفتحونه وتغلقونه؟",
+"sources": [
+{
+"name": "الجزيرة",
+"url": "https://www.aljazeera.com/news/2026/10/30/flash-floods-kills-five-in-syria"
+},
+{
+"name": "سيريان أوبزرفر",
+"url": "https://syrianobserver.com/society/deadly-flash-floods-paralyze-eastern-syria-15-rescued-hundreds-evacuated-across-six-provinces.html"
+},
+{
+"name": "أسوشيتد برس عبر PBS",
+"url": "https://pbs.org/newshour/world/authorities-urge-euphrates-riverbank-residents-in-syria-to-move-inland-as-waters-rise"
+},
+{
+"name": "فرانس برس عبر جوردان تايمز",
+"url": "https://jordantimes.com/news/region/flooding-in-north-and-east-syria-as-euphrates-level-rises"
+},
+{
+"name": "EDGE of Existence (جمعية علم الحيوان في لندن)",
+"url": "https://edgeofexistence.org/species/euphrates-softshell-turtle"
+},
+{
+"name": "مجموعة المختصين بالسلاحف في الاتحاد الدولي لحماية الطبيعة",
+"url": "https://iucn-tftsg.org/rafetus-euphraticus-098/"
+}
+],
+"id": "env-20261030-custom-softshell-euphrates"
+},
+{
+"angle": "موج العاصفة يغمر مستنقعات القرم في دلتا غودافاري ويأكل الضفاف التي يصطاد منها قطّ الصيد، في غابة أضعفتها أحواض الاستزراع المائي.",
+"animal": "custom",
+"animalEmoji": "🐈",
+"animalHabitat": "غابات المانغروف في دلتا غودافاري",
+"animalName": "قطّ الصيد",
+"category": "كوارث طبيعية",
+"createdAt": "2026-10-30T07:50:00+03:00",
+"crisis": "الإعصار «أرناب» يضرب ساحل أندرا براديش",
+"dispatch": "أنا قطّ الصيد، أعيش في غابات المانغروف عند مصبّ نهر غودافاري، داخل محمية كورينغا التي تمتد على 235 كيلومتراً مربعاً من الطين والجذور والمدّ. لا أطارد السمك في الماء كما يتخيّل البشر؛ أجلس على حافة الضفة ساعات طويلة، وأنتظر أن يخطئ سمك السلّور مرة واحدة.\n\nفي الساعات الأولى من فجر الأربعاء 28 أكتوبر، وصل الإعصار «أرناب» إلى اليابسة قرب نارساپور ويانام، برياح بلغت 135 كيلومتراً في الساعة بحسب أسوشيتد برس. وتوقّعت الأرصاد الهندية أن يرتفع البحر بين متر ومتر ونصف فوق المدّ الفلكي. بالنسبة لي، هذا ليس رقماً في نشرة؛ إنه المسافة بين جحر جاف وجحر غارق.\n\nأجلى البشر أكثر من 180 ألفاً من أبناء جنسهم من المناطق المنخفضة، وأمّنوا قوارب الصيد. أما نحن فلا قارب لنا سوى أشجار القرم نفسها. هي التي تكسر الموج قبل أن يبلغ القرى؛ أربع وأربعون قرية يسكنها نحو 79 ألفاً و400 إنسان على حافة غابتي، يأخذون منها السمك والحطب والعلف.\n\nيقول الباحثون إن مسحاً أحصى نحو 115 قطّاً من بني جنسي في هذه المستنقعات، وإن حضورنا يزداد حيث يكثف القرم. لكن القرم يتراجع أمام أحواض الاستزراع المائي التي يحفرها البشر في كل اتجاه، ويقولون هم أنفسهم إن الأعاصير على هذا الساحل صارت أكثر تواتراً، تأكل الضفاف التي أنتظر عليها.\n\nبعد العاصفة أحصى البشر 79 ألف فدان من المحاصيل المتضررة، وطلب رئيس حكومة الولاية مساعدة عاجلة لأربع عشرة مقاطعة ساحلية. لا أحد يحصي الضفاف المنهارة ولا الجحور المالحة. وحين يجوع بعضنا ويقترب من أحواض السمك في القرى، يُقتل أحياناً على يد أصحابها.\n\nغريب أمركم: تهدمون الجدار الأخضر الذي يحميكم، ثم تتعجبون حين يدخل البحر.",
+"en": {
+"angle": "The storm surge floods the Godavari delta's mangrove swamps and eats away the banks the fishing cat hunts from, in a forest already thinned by aquaculture ponds.",
+"animalHabitat": "Mangrove forests of the Godavari delta",
+"animalName": "Fishing cat",
+"crisis": "Cyclone Arnab strikes the Andhra Pradesh coast",
+"dispatch": "I am a fishing cat. I live in the mangroves where the Godavari meets the sea, inside the Coringa sanctuary: 235 square kilometres of mud, roots and tide. I do not chase fish through the water as humans imagine. I sit at the edge of the bank for hours and wait for a catfish to make a single mistake.\n\nIn the small hours of Wednesday, 28 October, Cyclone Arnab came ashore near Narsapur and Yanam with winds of 135 km/h, according to the Associated Press. India's weather service expected the sea to rise one to one and a half metres above the astronomical tide. To me that is not a number in a bulletin. It is the distance between a dry den and a drowned one.\n\nHumans evacuated more than 180,000 of their own kind from the low ground and tied up their fishing boats. We have no boat but the mangroves themselves. They are what breaks the waves before they reach the villages: forty-four of them, home to some 79,400 people who live at the edge of my forest and take fish, firewood and fodder from it.\n\nResearchers say one survey counted around 115 of us in these swamps, and that we are likelier to be found where the mangroves grow thick. But the mangroves are retreating before the aquaculture ponds humans dig in every direction, and the humans themselves say cyclones are coming more often to this coast, gnawing at the banks where I wait.\n\nAfter the storm, humans counted 79,000 acres of damaged crops, and the state's chief minister asked for urgent help for fourteen coastal districts. No one counts the collapsed banks or the dens turned salty. And when some of us grow hungry and stray towards village fish ponds, the owners sometimes kill them.\n\nYou are curious creatures. You tear down the green wall that shields you, then wonder why the sea walks in.",
+"fact": "Cyclone Arnab made landfall near Narsapur in India's Andhra Pradesh early on 28 October 2026 as a very severe cyclonic storm, killing at least three people and forcing more than 180,000 to evacuate, the AP reported.",
+"figures": [
+{
+"label": "Wind speed at landfall",
+"source": "AP",
+"value": "135 km/h"
+},
+{
+"label": "Evacuated in Andhra Pradesh",
+"source": "AP",
+"value": "180,000 people"
+},
+{
+"label": "Crops damaged",
+"source": "AP",
+"value": "79,000 acres"
+},
+{
+"label": "Expected storm surge above astronomical tide",
+"source": "India Meteorological Department via Open",
+"value": "1–1.5 m"
+},
+{
+"label": "Area of Coringa Wildlife Sanctuary",
+"source": "RoundGlass Sustain",
+"value": "235 km²"
+},
+{
+"label": "Fishing cats estimated in a Godavari mangrove survey",
+"source": "RoundGlass Sustain",
+"value": "115 cats"
+}
+],
+"headline": "Coringa's fishing cat counts the cost of Arnab",
+"impacts": [
+"Cyclone Arnab hits the Godavari delta with 135 km/h winds",
+"A 1–1.5 m storm surge floods mud flats and dens",
+"Banks the fishing cat hunts from are eroded",
+"Mangroves lost to aquaculture ponds weaken the natural barrier",
+"Hungry cats approach village ponds and are killed"
+],
+"place": "Godavari delta, Andhra Pradesh, India",
+"question": "If the mangroves hold back the sea for you, why do you dig ponds in their place?",
+"sources": [
+{
+"name": "AP via The Manila Times",
+"url": "https://manilatimes.net/2026/10/30/world/asia-oceania/3-killed-as-cyclone-batters-eastern-india/2457372"
+},
+{
+"name": "Open Magazine (Reuters, IMD)",
+"url": "https://openthemagazine.com/india/cyclone-arnab-batters-andhra-uproots-trees-as-landfall-drags-on"
+},
+{
+"name": "India.com",
+"url": "https://www.india.com/news/india/cyclone-arnab-imd-weather-update-india-meteorological-department-kakinada-yaman-andhra-pradesh-odisha-narsapur-rainfall-thunderstorm-bay-of-bengal-8539908/"
+},
+{
+"name": "Wildlife Conservation Society India",
+"url": "https://india.wcs.org/Newsroom/Blog/ID/14990/Fishing-cats-of-the-Godavari-mangroves-Andhra-Pradesh"
+},
+{
+"name": "RoundGlass Sustain",
+"url": "https://roundglasssustain.com/species/fishing-cat-coringa"
+}
+]
+},
+"eventDate": "2026-10-28",
+"fact": "وصل الإعصار «أرناب» إلى اليابسة قرب نارساپور في ولاية أندرا براديش الهندية فجر 28 أكتوبر 2026 كعاصفة إعصارية شديدة جداً، ما أسفر عن مقتل ثلاثة أشخاص على الأقل وإجلاء أكثر من 180 ألفاً، بحسب أسوشيتد برس.",
+"figures": [
+{
+"label": "سرعة رياح الإعصار عند وصوله إلى اليابسة",
+"source": "أسوشيتد برس",
+"value": "135 كم/ساعة"
+},
+{
+"label": "عدد من أُجلوا في أندرا براديش",
+"source": "أسوشيتد برس",
+"value": "180 ألف شخص"
+},
+{
+"label": "مساحة المحاصيل المتضررة",
+"source": "أسوشيتد برس",
+"value": "79 ألف فدان"
+},
+{
+"label": "ارتفاع موج العاصفة المتوقع فوق المدّ الفلكي",
+"source": "الأرصاد الجوية الهندية عبر مجلة Open",
+"value": "1–1.5 متر"
+},
+{
+"label": "مساحة محمية كورينغا للحياة البرية",
+"source": "RoundGlass Sustain",
+"value": "235 كم²"
+},
+{
+"label": "تقدير عدد قطط الصيد في مسح مستنقعات غودافاري",
+"source": "RoundGlass Sustain",
+"value": "115 قطّاً"
+}
+],
+"headline": "قطّ الصيد في مانغروف كورينغا بعد ليلة أرناب",
+"impacts": [
+"إعصار «أرناب» يضرب دلتا غودافاري برياح 135 كم/ساعة",
+"موج عاصفة بين متر ومتر ونصف يغمر الطين والجحور",
+"تآكل الضفاف التي يصطاد منها قطّ الصيد",
+"تراجع القرم أمام أحواض الاستزراع يضعف الحاجز الطبيعي",
+"قطط جائعة تقترب من أحواض القرى فتتعرض للقتل"
+],
+"kind": "live",
+"place": "دلتا غودافاري، أندرا براديش، الهند",
+"question": "إذا كانت أشجار القرم هي التي تصدّ عنكم البحر، فلماذا تحفرون مكانها أحواضاً؟",
+"sources": [
+{
+"name": "أسوشيتد برس عبر مانيلا تايمز",
+"url": "https://manilatimes.net/2026/10/30/world/asia-oceania/3-killed-as-cyclone-batters-eastern-india/2457372"
+},
+{
+"name": "مجلة Open (رويترز والأرصاد الهندية)",
+"url": "https://openthemagazine.com/india/cyclone-arnab-batters-andhra-uproots-trees-as-landfall-drags-on"
+},
+{
+"name": "India.com",
+"url": "https://www.india.com/news/india/cyclone-arnab-imd-weather-update-india-meteorological-department-kakinada-yaman-andhra-pradesh-odisha-narsapur-rainfall-thunderstorm-bay-of-bengal-8539908/"
+},
+{
+"name": "جمعية حماية الحياة البرية – الهند",
+"url": "https://india.wcs.org/Newsroom/Blog/ID/14990/Fishing-cats-of-the-Godavari-mangroves-Andhra-Pradesh"
+},
+{
+"name": "RoundGlass Sustain",
+"url": "https://roundglasssustain.com/species/fishing-cat-coringa"
+}
+],
+"id": "env-20261030-custom-fishingcat-arnab"
+},
+{
+"angle": "حين تفيض الأنهار وتغمر الأرض، يتحرك الناس المنكوبون بحثًا عن مأوى وماء وحطب، فتتعرض ضفاف النهر والأراضي الرطبة لضغط إضافي: مخيمات مرتجلة، قطع للأشجار، ومخلفات وصرف غير معالج يصلان إلى المياه التي تعيش فيها الأسماك. ومع ضعف التمويل لا تكفي الاستجابة لتخفيف هذا الضغط.",
+"animal": "cow",
+"animalEmoji": "🐟",
+"animalHabitat": "نهر شبيلي ومروجه الفيضية في جنوب الصومال",
+"animalName": "سمكة القط الأفريقية (البربور)",
+"category": "الهجرة والنزوح",
+"createdAt": "2026-10-27T18:07:40.555Z",
+"crisis": "فيضانات الصومال وتهجير مئات الآلاف وسط شحّ التمويل",
+"dispatch": "أنا سمكة قط من نهر شبيلي. أعرف النهر في الصمت قبل أن يتكلم، فحين تتغير رائحة الطين في الماء أعلم أن المطر سقط بعيدًا في المرتفعات، وأن الماء سيصعد إلى المروج.\n\nالفيضان ليس غريبًا عليّ. أنا أتبعه إلى الحقول المغمورة لأتغذى على الحشرات والديدان وبقايا النبات، وأضع بيضي في المياه الضحلة الدافئة حيث تختبئ الصغار بين الأعشاب. هكذا عشنا قبل أن يأتي البشر وبعد أن جاؤوا.\n\nلكنني أرى الآن بشرًا كثيرين يتحركون أمام الماء. تقول المنظمة الدولية للهجرة إن 874 ألف شخص في الصومال قد ينزحون بسبب الفيضانات خلال الأشهر الثلاثة المقبلة. وتقول إنها لم تتلقَّ سوى نحو 14.4% من 16.6 مليون دولار مطلوبة للاستجابة.\n\nلا أفهم الأرقام، لكني أفهم أثرها على الضفة. من لا يجد مأوى يقيم عند حافة الماء، ومن لا يجد وقودًا يقطع الشجر الذي يثبّت التربة ويظلل الشاطئ. ومن لا يجد مرحاضًا يترك فضلاته تجري إلى المياه التي أتنفس منها وأبيض فيها.\n\nأنا لا ألوم أحدًا؛ فالبشر كائنات غريبة تبني بيوتها حيث يأتي النهر، ثم تُفاجأ بقدومه. غير أن المروج التي تحمل بيضي هي نفسها التي تسقي حقولهم. وحين تُترك الضفة بلا عون، يدفع الجميع الثمن: هم والنهر وأنا.",
+"en": {
+"angle": "When rivers overflow and drown the land, displaced people search for shelter, water and firewood, putting extra pressure on riverbanks and wetlands: improvised camps, felled trees, and untreated waste reaching the water where fish live. With funding short, the response cannot ease that pressure.",
+"animalHabitat": "The Shabelle River and its floodplains in southern Somalia",
+"animalName": "African catfish",
+"crisis": "Somalia's floods displace hundreds of thousands amid scarce funding",
+"dispatch": "I am a catfish of the Shabelle River. I know the river in its silence before it speaks. When the smell of mud changes in the water, I know rain has fallen far off in the highlands, and that the water will rise onto the meadows.\n\nThe flood is no stranger to me. I follow it into the drowned fields to feed on insects, worms and scraps of plants, and I lay my eggs in warm shallows where the young hide among the grasses. This is how we lived before humans came, and after.\n\nBut now I see many humans moving ahead of the water. The International Organization for Migration says 874,000 people in Somalia could be displaced by floods over the next three months. It says it has received only about 14.4% of the $16.6 million needed for its response.\n\nI do not understand numbers, but I understand what they do to the bank. Whoever finds no shelter settles at the water's edge. Whoever finds no fuel cuts the trees that hold the soil and shade the shore. Whoever finds no latrine leaves waste to run into the water I breathe and spawn in.\n\nI blame no one. Humans are strange beings who build their houses where the river comes, then are surprised when it arrives. Yet the meadows that carry my eggs are the same ones that water their fields. When the bank is left without help, everyone pays: they, the river and I.",
+"fact": "The International Organization for Migration says 874,000 people in Somalia could be displaced by floods over the next three months. It says it has received only about 14.4% of the $16.6 million needed for its response.",
+"figures": [
+{
+"label": "Number who could be displaced by floods in Somalia over three months",
+"source": "International Organization for Migration, via AFP",
+"value": "874,000 people"
+},
+{
+"label": "Share of requested funding the organization has received",
+"source": "International Organization for Migration, via AFP",
+"value": "14.4%"
+},
+{
+"label": "Funding needed for the response",
+"source": "International Organization for Migration, via AFP",
+"value": "$16.6 million"
+}
+],
+"headline": "Shabelle in Flood: Human Flight, Strained Riverbanks",
+"impacts": [
+"Floods drown villages and fields, pushing hundreds of thousands to flee",
+"Improvised camps and shelters rise near banks and wetlands",
+"Trees and shrubs are cut for fuel and shelter, weakening banks and eroding soil",
+"Untreated waste and sewage reach the river, harming fish and their spawning grounds",
+"Funding gaps limit the response and leave the environmental pressure unaddressed"
+],
+"place": "Southern Somalia",
+"question": "If the river returns every year, why is no room left for it to return to?",
+"sources": [
+{
+"name": "فرانس برس",
+"url": "https://www.bssnews.net/news/438766"
+}
+]
+},
+"eventDate": "2026-10-27",
+"fact": "قالت المنظمة الدولية للهجرة إن 874 ألف شخص في الصومال قد ينزحون بسبب الفيضانات خلال الأشهر الثلاثة المقبلة. وأضافت أنها لم تتلقَّ سوى نحو 14.4% من 16.6 مليون دولار مطلوبة للاستجابة.",
+"figures": [
+{
+"label": "عدد من قد ينزحون بسبب الفيضانات في الصومال خلال ثلاثة أشهر",
+"source": "المنظمة الدولية للهجرة، عبر فرانس برس",
+"value": "874 ألف شخص"
+},
+{
+"label": "نسبة ما تلقته المنظمة من التمويل المطلوب للاستجابة",
+"source": "المنظمة الدولية للهجرة، عبر فرانس برس",
+"value": "14.4%"
+},
+{
+"label": "التمويل المطلوب للاستجابة",
+"source": "المنظمة الدولية للهجرة، عبر فرانس برس",
+"value": "16.6 مليون دولار"
+}
+],
+"headline": "فيضان الشبيلي: نزوح بشري وضغط على الضفاف",
+"impacts": [
+"فيضانات تغمر القرى والحقول وتدفع مئات الآلاف إلى النزوح",
+"مخيمات ومآوٍ مرتجلة تقام قرب الضفاف والأراضي الرطبة",
+"قطع الأشجار والشجيرات للحصول على الوقود والمأوى فتضعف الضفة وتتآكل التربة",
+"صرف وفضلات غير معالجة تصل إلى مياه النهر وتضر بالأسماك وأماكن تكاثرها",
+"نقص التمويل يحدّ من الاستجابة ويترك الضغط على البيئة بلا علاج"
+],
+"kind": "desk",
+"place": "جنوب الصومال",
+"question": "إذا كان النهر سيعود كل عام، فلماذا لا يُترك له مكان يعود إليه؟",
+"sources": [
+{
+"name": "فرانس برس",
+"url": "https://www.bssnews.net/news/438766"
+}
+],
+"id": "lemdpl3rlx79csrkxy0k"
+},
+{
+"angle": "الأضرار المناخية التي تُقدَّر بمئات المليارات في أوروبا ناتجة عن الاحترار نفسه الذي يذيب بيت الدب القطبي؛ فالتكيّف يحمي البشر من النتائج، بينما يبقى الجليد يتراجع ما دامت الأسباب قائمة.",
+"animal": "bear",
+"animalEmoji": "🐻‍❄️",
+"animalHabitat": "جليد القطب الشمالي وبحر بيفورت وسواحل الأركتيك",
+"animalName": "الدب القطبي",
+"category": "المناخ",
+"createdAt": "2026-10-27T18:04:54.085Z",
+"crisis": "إطار أوروبي للقدرة على الصمود المناخي أمام الظواهر الجوية المتطرفة",
+"dispatch": "أنا دبٌّ قطبي، أمشي على سقف العالم. تعلّمتُ من أمي أن الجليد ليس أرضاً بل موسمٌ: يأتي فأصطاد عليه الفقمة عند فتحات التنفس، ويرحل فأنتظره صابراً على الشاطئ.\n\nبلغني أن بشراً يعيشون بعيداً جنوباً، في قارة اسمها أوروبا، اجتمعوا وكتبوا إطاراً للصمود أمام الطقس الشديد. قدّروا خسائر الأضرار المناخية في اتحادهم بنحو 200 مليار يورو بين 2022 و2025، وقالوا إن التكيّف يحتاج إلى نحو 70 مليار يورو كل عام. أعجبني أنهم يحسبون، فالحساب بداية الفهم.\n\nلكنني أنظر إلى الأمر من حيث أقف. الحرارة التي أرهقت مدنهم هي التي تُقصّر موسم الجليد عندي. كلما تأخر تجمّده في الخريف، طال صيامي على اليابسة، وهزلت الإناث الحوامل، وقلّ حليب الصغار في عرينها الثلجي. وكلما تبكّر ذوبانه في الربيع، فقدتُ أياماً من الصيد لا تعوَّض.\n\nهم يبنون سدوداً وخطط إنقاذ ليحتموا من النتائج، وأنا لا أملك سدّاً أبنيه ضد الدفء. عالمي يتغير بلا إطار يحميه.\n\nأراقبهم بدهشة هادئة: كائنات بارعة في إحصاء ما خسرت، وأبطأ في إيقاف ما يسبّب الخسارة. أتمنى أن تصل حساباتهم يوماً إلى الجليد أيضاً.",
+"en": {
+"angle": "The hundreds of billions in climate damage in Europe come from the same warming that melts the polar bear's home. Adaptation shields people from the consequences, but the ice keeps shrinking while the causes remain.",
+"animalHabitat": "Arctic sea ice, the Beaufort Sea and Arctic coasts",
+"animalName": "Polar bear",
+"crisis": "A European framework for climate resilience against extreme weather",
+"dispatch": "I am a polar bear, and I walk on the roof of the world. My mother taught me that ice is not land but a season: it arrives, and I hunt seals at their breathing holes; it departs, and I wait patiently on the shore.\n\nWord has reached me that humans living far to the south, on a continent called Europe, gathered and wrote a framework for resilience against severe weather. They estimated climate damage in their union at about €200 billion between 2022 and 2025, and said adaptation needs about €70 billion every year. I liked that they count. Counting is the beginning of understanding.\n\nBut I look at it from where I stand. The heat that wearied their cities is the same heat that shortens my ice season. The later the ice freezes in autumn, the longer I fast on land, the thinner pregnant females grow, and the less milk reaches cubs in their snow dens. The earlier it melts in spring, the more hunting days I lose, and none can be returned.\n\nThey build barriers and rescue plans to protect themselves from the consequences. I have no barrier to build against warmth. My world is changing with no framework to shelter it.\n\nI watch them with calm astonishment: creatures skilled at tallying what they have lost, and slower at stopping what causes the loss. I hope their arithmetic will one day reach the ice as well.",
+"fact": "The European Commission adopted a European Framework for Climate Resilience to tackle extreme weather. It estimated climate-related losses in the EU at about €200 billion in 2022–2025 and adaptation needs at about €70 billion a year.",
+"figures": [
+{
+"label": "Estimated climate-related losses in the EU, 2022–2025",
+"source": "European Commission, as reported by Eunews",
+"value": "About €200 billion"
+},
+{
+"label": "Estimated EU climate adaptation needs",
+"source": "European Commission, as reported by Eunews",
+"value": "About €70 billion a year"
+}
+],
+"headline": "Billions Spent on Resilience While Bears' Ice Melts Away",
+"impacts": [
+"Burning fossil fuels raises atmospheric temperatures",
+"Warming multiplies extreme weather in Europe and brings financial losses",
+"The same warming shortens the Arctic sea-ice season",
+"Bears hunt fewer seals and pregnant females weaken",
+"Cub survival falls and bear numbers decline"
+],
+"place": "The Arctic and Europe",
+"question": "If you count the cost of warming to your cities, who counts its cost to the ice I live on?",
+"sources": [
+{
+"name": "Eunews",
+"url": "https://www.eunews.it/en/2026/10/27/eu-charts-a-common-course-after-the-summer-of-truth-to-tackle-extreme-weather-events/"
+}
+]
+},
+"eventDate": "2026-10-27",
+"fact": "اعتمدت المفوضية الأوروبية «الإطار الأوروبي للقدرة على الصمود المناخي» لمواجهة الظواهر الجوية المتطرفة. وقدّرت خسائر الأضرار المناخية في الاتحاد بنحو 200 مليار يورو بين 2022 و2025، واحتياجات التكيّف بنحو 70 مليار يورو سنوياً.",
+"figures": [
+{
+"label": "تقدير خسائر الأضرار المناخية في الاتحاد الأوروبي بين 2022 و2025",
+"source": "المفوضية الأوروبية، كما نقلتها Eunews",
+"value": "نحو 200 مليار يورو"
+},
+{
+"label": "تقدير احتياجات التكيّف مع المناخ في الاتحاد الأوروبي",
+"source": "المفوضية الأوروبية، كما نقلتها Eunews",
+"value": "نحو 70 مليار يورو سنوياً"
+}
+],
+"headline": "مليارات تُنفَق على الصمود، وجليد يذوب تحت أقدام الدببة",
+"impacts": [
+"احتراق الوقود الأحفوري يرفع حرارة الغلاف الجوي",
+"الاحترار يضاعف الظواهر الجوية المتطرفة في أوروبا ويُلحق بها خسائر مالية",
+"الدفء نفسه يُقصّر موسم الجليد البحري في القطب الشمالي",
+"يقلّ صيد الدببة للفقمات وتضعف الإناث الحوامل",
+"ينخفض بقاء الصغار وتتراجع أعداد الدببة"
+],
+"kind": "desk",
+"place": "القطب الشمالي وأوروبا",
+"question": "إن كنتم تحسبون كلفة الدفء على مدنكم، فمن يحسب كلفته على الجليد الذي أعيش عليه؟",
+"sources": [
+{
+"name": "Eunews",
+"url": "https://www.eunews.it/en/2026/10/27/eu-charts-a-common-course-after-the-summer-of-truth-to-tackle-extreme-weather-events/"
+}
+],
+"id": "gm77erihodkhpsq6pns7"
+},
+{
+"angle": "تحتاج مراكز البيانات ماءً لتبريد خوادمها وأرضاً تبنى عليها، وكلاهما يُقتطع من غابات فرجينيا الناضجة، وهي آخر بيوت طائر خسر نحو 70% من أعداده.",
+"animal": "warbler",
+"animalEmoji": "🐦",
+"animalHabitat": "غابات الأبلاش الناضجة، فرجينيا",
+"animalName": "الهازجة السماوية",
+"category": "التقنية والذكاء الاصطناعي",
+"createdAt": "2026-10-27T12:10:00+03:00",
+"crisis": "توسع مراكز بيانات الذكاء الاصطناعي في الولايات المتحدة",
+"dispatch": "أنا الهازجة السماوية. طائر بحجم كفّ طفل، أقضي الشتاء في جبال الأنديز بكولومبيا، ثم أطير آلاف الكيلومترات كل ربيع لأبني عشي في أعالي الأشجار العجوز في جبال الأبلاش. لا أعشش إلا في الغابات الناضجة، حيث الأشجار عالية وقديمة والظل كثيف.\n\nمنذ ثمانينيات القرن الماضي فقدنا قرابة سبعين في المئة من أعدادنا. كنت أظن أن المناشير القديمة هي عدونا الوحيد، حتى سمعت البشر يتحدثون عن شيء اسمه «الذكاء الاصطناعي».\n\nفي مقاطعة بوتيتورت، تقول وثائق سلاح المهندسين الأمريكي إن نحو 120 فداناً ستُزال لبناء مركز بيانات لغوغل. وتعاقد المركز على مليوني غالون من الماء كل يوم، أي نحو 730 مليون غالون في السنة، وقد تصل إلى ثمانية ملايين غالون يومياً إن توسع. كل هذا الماء يذهب لتبريد آلات تفكر، في منطقة يضغط الجفاف على مصادر مياهها أصلاً.\n\nوعدت الشركة بأن تقطع الأشجار بين منتصف أكتوبر ونهاية مارس فقط، خارج موسم التعشيش. أي حين أكون أنا في كولومبيا. سأعود في الربيع إلى المكان نفسه، فلا أجد الشجرة.\n\nيقولون إن سؤالاً واحداً لمساعدهم الذكي يستهلك ربع مليلتر من الماء فقط. قطرة. لكنني أعرف ما تفعله القطرات حين تتراكم: تحفر الوديان.",
+"en": {
+"angle": "Data centers need water to cool their servers and land to stand on, and both are taken from Virginia's mature forests, the last homes of a bird that has lost about 70% of its numbers.",
+"animalHabitat": "Mature Appalachian forests, Virginia",
+"animalName": "Cerulean warbler",
+"crisis": "The AI data center boom in the United States",
+"dispatch": "I am the cerulean warbler. A bird the size of a child's palm, I spend the winter in the Andes of Colombia, then fly thousands of kilometres every spring to build my nest high in the old trees of the Appalachian Mountains. I nest only in mature forest, where the trees are tall and ancient and the shade runs deep.\n\nSince the 1980s we have lost nearly seventy percent of our numbers. I used to think the old saws were our only enemy, until I heard humans talking about something called \"artificial intelligence\".\n\nIn Botetourt County, US Army Corps of Engineers documents say about 120 acres will be cleared to build a Google data center. The center has contracted for two million gallons of water a day, about 730 million gallons a year, and could reach eight million gallons a day if it expands. All that water goes to cool machines that think, in a region where drought already strains the water supply.\n\nThe company promised to cut trees only between mid-October and the end of March, outside the nesting season. That is, while I am away in Colombia. I will come back in spring to the same place and find no tree.\n\nThey say a single question to their clever assistant uses only a quarter of a millilitre of water. A drop. But I know what drops do when they add up: they carve valleys.",
+"fact": "Google plans a data center in Botetourt County, southwest Virginia, that would use two million gallons of water a day, making it the company's eighth-largest complex worldwide by water use. The Southwest Virginia Wildlife Center has warned about its impact on threatened species, including the Indiana bat and the eastern box turtle.",
+"figures": [
+{
+"label": "Land to be cleared for Google's proposed data center in Botetourt",
+"source": "US Army Corps of Engineers documents via WDBJ7",
+"value": "120 acres"
+},
+{
+"label": "The center's contracted annual water use (2 million gallons a day)",
+"source": "Cardinal News",
+"value": "730 million gallons"
+},
+{
+"label": "Possible maximum if the center expands",
+"source": "Cardinal News",
+"value": "8 million gallons a day"
+},
+{
+"label": "Direct cooling water used by US data centers in 2023; could double or quadruple by 2028",
+"source": "Lawrence Berkeley National Laboratory via Civil Beat",
+"value": "17 billion gallons"
+},
+{
+"label": "Data center projects in Virginia, top of a US environmental pressure index, with 79 endangered species",
+"source": "Outforia via Newsweek",
+"value": "283 projects"
+},
+{
+"label": "Decline in cerulean warbler numbers since the 1980s",
+"source": "Audubon",
+"value": "≈70%"
+}
+],
+"headline": "The algorithms' thirst reaches Appalachian nests",
+"impacts": [
+"A surge in demand for computing",
+"New data centers need land and water",
+"Mature trees felled and water drawn from drought-stressed sources",
+"The old forests where the warbler nests shrink",
+"Further decline for a species that has lost 70% of its numbers"
+],
+"place": "Botetourt County, Virginia",
+"question": "If your machines are so clever, didn't they tell you where to build their homes without tearing down ours?",
+"sources": [
+{
+"name": "WDBJ7",
+"url": "https://www.wdbj7.com/2026/08/04/conservationists-raise-wildlife-concerns-over-virginia-data-centers/"
+},
+{
+"name": "Cardinal News",
+"url": "https://cardinalnews.org/2026/07/09/by-water-use-googles-botetourt-site-would-be-its-8th-largest-data-center-complex-in-the-world/"
+},
+{
+"name": "Newsweek",
+"url": "https://www.newsweek.com/map-ranks-where-data-centers-could-impact-endangered-species-12229004"
+},
+{
+"name": "Civil Beat",
+"url": "https://www.civilbeat.org/2025/08/data-centers-consume-massive-amounts-of-water-companies-rarely-say-exactly-how-much/"
+},
+{
+"name": "Audubon",
+"url": "https://www.audubon.org/news/cerulean-warbler-decline-help-way"
+}
+]
+},
+"eventDate": "2026-08-04",
+"fact": "تخطط غوغل لمركز بيانات في مقاطعة بوتيتورت بجنوب غرب فرجينيا يستهلك مليوني غالون من المياه يومياً، ما يجعله ثامن أكبر مجمع لها عالمياً من حيث استهلاك الماء. وحذّر مركز الحياة البرية في جنوب غرب فرجينيا من أثره على أنواع مهددة، منها خفاش إنديانا وسلحفاة الصندوق الشرقية.",
+"figures": [
+{
+"label": "مساحة ستُزال لمركز بيانات غوغل المقترح في بوتيتورت",
+"source": "وثائق سلاح المهندسين الأمريكي عبر WDBJ7",
+"value": "120 فداناً"
+},
+{
+"label": "استهلاك المركز السنوي من الماء بموجب العقد (2 مليون غالون يومياً)",
+"source": "Cardinal News",
+"value": "730 مليون غالون"
+},
+{
+"label": "الحد الأقصى المحتمل إن توسع المركز",
+"source": "Cardinal News",
+"value": "8 ملايين غالون يومياً"
+},
+{
+"label": "ماء التبريد المباشر لمراكز البيانات الأمريكية عام 2023، وقد يتضاعف مرتين إلى أربع بحلول 2028",
+"source": "مختبر لورنس بيركلي عبر Civil Beat",
+"value": "17 مليار غالون"
+},
+{
+"label": "مشاريع مراكز بيانات في فرجينيا، الأولى أمريكياً في مؤشر الضغط البيئي، مع 79 نوعاً مهدداً",
+"source": "Outforia عبر نيوزويك",
+"value": "283 مشروعاً"
+},
+{
+"label": "تراجع أعداد الهازجة السماوية منذ الثمانينيات",
+"source": "Audubon",
+"value": "≈70%"
+}
+],
+"headline": "عطش الخوارزميات يصل إلى أعشاش غابات الأبلاش",
+"imageId": "ae0bd0442dad68b4bcaaba12aa19d37b",
+"imageUrl": "/_blob/ae0bd0442dad68b4bcaaba12aa19d37b",
+"impacts": [
+"طفرة في الطلب على الحوسبة",
+"مراكز بيانات جديدة تحتاج أرضاً وماءً",
+"قطع أشجار ناضجة وسحب من مياه تحت ضغط الجفاف",
+"تضاؤل الغابات العجوز التي تعشش فيها الهازجة",
+"تراجع إضافي لنوع فقد 70% من أعداده"
+],
+"kind": "live",
+"place": "مقاطعة بوتيتورت، فرجينيا",
+"question": "إن كانت آلاتكم ذكية إلى هذا الحد، ألم تخبركم أين تبني بيوتها دون أن تهدم بيوتنا؟",
+"sources": [
+{
+"name": "WDBJ7",
+"url": "https://www.wdbj7.com/2026/08/04/conservationists-raise-wildlife-concerns-over-virginia-data-centers/"
+},
+{
+"name": "Cardinal News",
+"url": "https://cardinalnews.org/2026/07/09/by-water-use-googles-botetourt-site-would-be-its-8th-largest-data-center-complex-in-the-world/"
+},
+{
+"name": "Newsweek",
+"url": "https://www.newsweek.com/map-ranks-where-data-centers-could-impact-endangered-species-12229004"
+},
+{
+"name": "Civil Beat",
+"url": "https://www.civilbeat.org/2025/08/data-centers-consume-massive-amounts-of-water-companies-rarely-say-exactly-how-much/"
+},
+{
+"name": "Audubon",
+"url": "https://www.audubon.org/news/cerulean-warbler-decline-help-way"
+}
+],
+"id": "env-20261027-warbler-datacenters"
+},
+{
+"angle": "الحرب على الملاحة في هرمز تحوّل الناقلات المصابة إلى مصادر تسرب في بحر مغلق يتجدد ماؤه ببطء، فوق مراعٍ يعيش عليها ثاني أكبر تجمع للأطوم في العالم.",
+"animal": "dugong",
+"animalEmoji": "🌊",
+"animalHabitat": "مروج الأعشاب البحرية في الخليج",
+"animalName": "الأطوم",
+"category": "الحروب والبيئة",
+"createdAt": "2026-10-27T12:05:00+03:00",
+"crisis": "استهداف ناقلات النفط قرب مضيق هرمز",
+"dispatch": "أنا الأطوم. يسميني بعضكم «عروس البحر»، وأنا في الحقيقة بقرة بحرية بطيئة، أقضي يومي أرعى الأعشاب في قاع ضحل لا يزيد عمقه كثيراً عن قامة رجلين. نحن في هذا الخليج بين خمسة آلاف وسبعة آلاف وخمسمئة، ثاني أكبر تجمع لنوعنا على الكوكب.\n\nلا أملك خياشيم. كل بضع دقائق أصعد لأتنفس. وهذا الشهر صرت أصعد إلى سطح لزج له رائحة الحديد المحترق.\n\nفي التاسع من أكتوبر أُصيبت ناقلة طولها 330 متراً بمقذوف واشتعلت فيها النار. بعد أسبوعين تقريباً امتدت البقعة نحو تسعين كيلومتراً، وأغلقت الإمارات شواطئ الشارقة وأم القيوين ورأس الخيمة. يقول البشر إن الرائحة لا تضر صحتهم. لم يسألني أحد عن صحتي.\n\nبحرنا ضيق، متوسط عمقه خمسون متراً، ولا يتجدد ماؤه إلا كل سنتين إلى خمس سنوات. ما يسقط فيه يبقى معنا طويلاً. ومنذ بدأت الحرب هوجمت أكثر من خمس وسبعين سفينة، وتقول دراسة إن بقع النفط في مارس كانت أكبر بأربعة أضعاف من العام الذي سبقه.\n\nجدتي حكت لي عن عام 1991، حين غطى النفط مئات الكيلومترات من الساحل ونفق أكثر من ثلاثين ألف طائر. قالت إن الأعشاب عادت بعد سنين. لكنها لم تقل كم منا عاد.",
+"en": {
+"angle": "The war on shipping in Hormuz turns damaged tankers into leaks in a nearly enclosed sea that renews itself slowly, above meadows that feed the world's second-largest dugong population.",
+"animalHabitat": "Seagrass meadows of the Gulf",
+"animalName": "Dugong",
+"crisis": "Attacks on oil tankers near the Strait of Hormuz",
+"dispatch": "I am the dugong. Some of you call me a \"mermaid\". In truth I am a slow sea cow who spends the day grazing seagrass on a shallow floor barely deeper than two men standing on each other's shoulders. In this Gulf there are between five and seven and a half thousand of us, the second-largest gathering of our kind on the planet.\n\nI have no gills. Every few minutes I rise to breathe. This month I have been rising into a sticky surface that smells of burnt iron.\n\nOn the ninth of October a 330-metre tanker was hit by a projectile and caught fire. About two weeks later the slick stretched some ninety kilometres, and the Emirates closed beaches in Sharjah, Umm Al Quwain and Ras Al Khaimah. Humans say the smell does not harm their health. Nobody asked about mine.\n\nOur sea is narrow, fifty metres deep on average, and its water renews only every two to five years. Whatever falls into it stays with us a long time. Since the war began more than seventy-five ships have been attacked, and one study says the oil slicks in March were four times larger than the year before.\n\nMy grandmother told me about 1991, when oil covered hundreds of kilometres of coast and more than thirty thousand birds died. She said the grass came back after some years. She did not say how many of us did.",
+"fact": "On 25 October the UAE Ministry of Climate Change and Environment closed beaches in Sharjah, Umm Al Quwain and Ras Al Khaimah over an oil leak from a damaged tanker, which researchers linked to the Gem No 2, struck by a projectile on 9 October. The ministry says containment and clean-up teams began work immediately.",
+"figures": [
+{
+"label": "Length of the slick off Umm Al Quwain from the tanker Gem No 2",
+"source": "Researcher Wim Zwijnenburg (PAX) via Anews",
+"value": "≈90 km"
+},
+{
+"label": "Dugongs in the Gulf, the world's second-largest population; the species is listed as vulnerable",
+"source": "AFP via Channels TV",
+"value": "5,000–7,500"
+},
+{
+"label": "Ships attacked from the start of the war to September, with at least 21 seafarers killed",
+"source": "Al Jazeera",
+"value": "75+ ships"
+},
+{
+"label": "Size of oil slicks in the Gulf and Strait of Hormuz in March compared with the year before",
+"source": "University of South Florida study via Al Jazeera",
+"value": "×4"
+},
+{
+"label": "Time the Gulf's water takes to renew, with an average depth of 50 metres",
+"source": "AFP via Channels TV",
+"value": "2–5 years"
+},
+{
+"label": "Sea turtles living in the Gulf, including the critically endangered hawksbill",
+"source": "AFP via Channels TV",
+"value": "5 species"
+}
+],
+"headline": "A ninety-kilometre oil slick over the dugongs' pastures",
+"impacts": [
+"A projectile hits an oil tanker",
+"A leak and a slick about 90 km long",
+"Oil coats the surface and settles over seagrass and mangroves",
+"Dugongs, turtles and dolphins breathe and graze in polluted water",
+"A near-enclosed sea holds the pollution for years"
+],
+"place": "Coasts of Sharjah, Umm Al Quwain and Ras Al Khaimah",
+"question": "When you count the war's losses in barrels, who counts the pastures you cannot see from the surface?",
+"sources": [
+{
+"name": "Anews",
+"url": "https://www.anews.com.tr/world/2026/10/25/oil-pollution-from-war-damaged-tanker-polluting-uae-beaches"
+},
+{
+"name": "Euronews",
+"url": "https://www.euronews.com/2026/10/23/oil-spill-hits-uae-beaches-as-tanker-attacks-multiply-near-hormuz"
+},
+{
+"name": "Al Jazeera",
+"url": "https://www.aljazeera.com/news/2026/9/9/why-us-iran-war-over-hormuz-is-threatening-the-gulfs-waters"
+},
+{
+"name": "AFP via Channels TV",
+"url": "https://www.channelstv.com/2026/03/18/war-threatens-gulfs-dugongs-turtles-and-birds/"
+}
+]
+},
+"eventDate": "2026-10-25",
+"fact": "أغلقت وزارة التغير المناخي والبيئة الإماراتية في 25 أكتوبر شواطئ في الشارقة وأم القيوين ورأس الخيمة بسبب تسرب نفطي من ناقلة متضررة، وربط باحثون التسرب بالناقلة Gem No 2 التي أصيبت بمقذوف في 9 أكتوبر. وتقول الوزارة إن فرق الاحتواء والتنظيف بدأت العمل فوراً.",
+"figures": [
+{
+"label": "امتداد البقعة قبالة أم القيوين من الناقلة Gem No 2",
+"source": "الباحث فيم زفينينبورغ (PAX) عبر Anews",
+"value": "≈90 كم"
+},
+{
+"label": "عدد الأطوم في الخليج، ثاني أكبر تجمع في العالم، والنوع مصنف معرضاً للخطر",
+"source": "AFP عبر Channels TV",
+"value": "5,000–7,500"
+},
+{
+"label": "سفن هوجمت منذ بداية الحرب حتى سبتمبر، مع 21 بحاراً قتيلاً على الأقل",
+"source": "الجزيرة",
+"value": "75+ سفينة"
+},
+{
+"label": "حجم بقع النفط في الخليج ومضيق هرمز في مارس مقارنة بالعام السابق",
+"source": "دراسة جامعة جنوب فلوريدا عبر الجزيرة",
+"value": "×4"
+},
+{
+"label": "المدة التي يحتاجها ماء الخليج ليتجدد، مع متوسط عمق 50 متراً",
+"source": "AFP عبر Channels TV",
+"value": "2–5 سنوات"
+},
+{
+"label": "سلاحف بحرية تعيش في الخليج، منها صقرية المنقار المهددة بشدة",
+"source": "AFP عبر Channels TV",
+"value": "5 أنواع"
+}
+],
+"headline": "بقعة نفط بطول تسعين كيلومتراً فوق مراعي الأطوم",
+"impacts": [
+"مقذوف يصيب ناقلة نفط",
+"تسرب وبقعة تمتد نحو 90 كم",
+"النفط يغطي السطح ويترسب فوق الأعشاب البحرية والقرم",
+"الأطوم والسلاحف والدلافين تتنفس وترعى في الماء الملوث",
+"بحر شبه مغلق يحتفظ بالتلوث سنوات"
+],
+"kind": "live",
+"place": "سواحل الشارقة وأم القيوين ورأس الخيمة",
+"question": "حين تحصون خسائر الحرب بالبراميل، من يحصي المراعي التي لا تُرى من السطح؟",
+"sources": [
+{
+"name": "Anews",
+"url": "https://www.anews.com.tr/world/2026/10/25/oil-pollution-from-war-damaged-tanker-polluting-uae-beaches"
+},
+{
+"name": "Euronews",
+"url": "https://www.euronews.com/2026/10/23/oil-spill-hits-uae-beaches-as-tanker-attacks-multiply-near-hormuz"
+},
+{
+"name": "الجزيرة",
+"url": "https://www.aljazeera.com/news/2026/9/9/why-us-iran-war-over-hormuz-is-threatening-the-gulfs-waters"
+},
+{
+"name": "AFP عبر Channels TV",
+"url": "https://www.channelstv.com/2026/03/18/war-threatens-gulfs-dugongs-turtles-and-birds/"
+}
+],
+"id": "env-20261027-dugong-hormuz"
+},
+{
+"angle": "حرارة المحيط التي يرفعها احتراق الوقود الأحفوري، وتضاعفها ظاهرة النينيو هذا العام، تقطع الشراكة بين المرجان والطحالب التي تطعمه، فتنهار بيوت ربع أسماك البحر.",
+"animal": "coral",
+"animalEmoji": "🪸",
+"animalHabitat": "الشعاب الضحلة من الخليج إلى الكاريبي",
+"animalName": "المرجان",
+"category": "المناخ",
+"createdAt": "2026-10-27T12:00:00+03:00",
+"crisis": "ظاهرة نينيو قياسية فوق احترار متراكم",
+"dispatch": "يفاجئكم دائماً أنني حيوان لا حجر. بنيت مدناً تحت الماء قبل أن تبنوا أول جدار، وفي بيوتي تسكن كائنات لا تحصونها.\n\nأعيش في شراكة قديمة مع طحالب دقيقة تسكن أنسجتي، تعطيني لونها وغذائي. حين يسخن الماء أكثر مما أحتمل، أطردها. فيبقى هيكلي الكلسي عارياً أبيض كعظمة. هذا ما تسمونه الابيضاض. إن طال، أموت جوعاً وأنا في مكاني.\n\nهذا هو الابيضاض العالمي الرابع. ويقول علماؤكم إن 44 في المئة من أنواعنا البانية للشعاب صارت مهددة بالانقراض. وتتوقع وكالتكم الأمريكية للمحيطات أن تكون نينيو هذا العام الأقوى في سجلاتكم.\n\nأقاربي في الخليج سبقوني إلى المستقبل. يقول باحث قضى ثلاثين عاماً معهم إن نحو تسعين في المئة منهم ابيضّوا منذ موجات الحر التي بدأت أواخر التسعينيات. ويتوقع علماؤكم أن تواجه معظم الشعاب الاستوائية ظروفاً مماثلة بحلول عام 2100.\n\nأنا لا أستطيع الهجرة. لا أرجل لي ولا أجنحة. كل ما أملكه أن أبقى، وأنتظر أن يبرد العالم.",
+"en": {
+"angle": "Ocean heat driven by burning fossil fuels, amplified this year by El Niño, breaks the partnership between coral and the algae that feed it, collapsing the homes of a quarter of the sea's fish.",
+"animalHabitat": "Shallow reefs from the Gulf to the Caribbean",
+"animalName": "Coral",
+"crisis": "A record El Niño on top of accumulated warming",
+"dispatch": "It always surprises you that I am an animal, not a stone. I built cities under the water before you built your first wall, and creatures beyond your counting live in my houses.\n\nI live in an old partnership with tiny algae that dwell in my tissue and give me my colour and my food. When the water grows hotter than I can bear, I expel them. My limestone skeleton is left bare and white as bone. This is what you call bleaching. If it lasts, I starve where I stand.\n\nThis is the fourth global bleaching. Your scientists say 44 percent of our reef-building species are now threatened with extinction. And your American ocean agency expects this year's El Niño to be the strongest in your records.\n\nMy relatives in the Gulf reached the future before me. A researcher who has spent thirty years with them says about ninety percent have bleached since the heatwaves that began in the late 1990s. Your scientists expect most tropical reefs to face similar conditions by 2100.\n\nI cannot migrate. I have no legs and no wings. All I can do is stay, and wait for the world to cool.",
+"fact": "Coral reefs are going through the fourth global bleaching event, and the US National Oceanic and Atmospheric Administration expects the current El Niño to break the record set in 1982, with effects ranging from drought in Central America to floods in South America.",
+"figures": [
+{
+"label": "Global bleaching events so far; the current one is the fourth",
+"source": "Euronews",
+"value": "4"
+},
+{
+"label": "Reef-building coral species threatened with extinction",
+"source": "Euronews",
+"value": "44%"
+},
+{
+"label": "Year of the strongest El Niño on record; the current one may surpass it",
+"source": "NOAA via Euronews",
+"value": "1982"
+},
+{
+"label": "Share of Gulf corals bleached since the heatwaves of the late 1990s",
+"source": "Bernhard Riegl via Scientific American",
+"value": "≈90%"
+},
+{
+"label": "Year by which most tropical reefs are expected to face today's Gulf conditions",
+"source": "Scientific American",
+"value": "2100"
+}
+],
+"headline": "The fourth bleaching turns cities of the sea to bone",
+"impacts": [
+"Burning fossil fuels warms the oceans",
+"A record El Niño adds a heatwave on top of the warming",
+"Coral expels its partner algae and bleaches",
+"Reefs die and their structure collapses",
+"Fish and invertebrates lose shelter and coastal fisheries decline"
+],
+"place": "Coral reefs worldwide",
+"question": "You flee the heat into air conditioning. Where does someone who cannot move escape to?",
+"sources": [
+{
+"name": "Euronews",
+"url": "https://euronews.com/2026/10/20/tourist-attractions-shut-and-cattle-starving-how-el-nino-is-wreaking-havoc-around-the-worl"
+},
+{
+"name": "Scientific American",
+"url": "https://www.scientificamerican.com/article/the-war-in-iran-is-supercharging-an-ecological-crisis-in-the-persian-gulf/"
+}
+]
+},
+"eventDate": "2026-10-20",
+"fact": "تشهد الشعاب المرجانية رابع حدث ابيضاض عالمي، وتتوقع الإدارة الوطنية الأمريكية للمحيطات والغلاف الجوي أن تتجاوز ظاهرة النينيو الحالية الرقم القياسي المسجل عام 1982، مع آثار تمتد من الجفاف في أمريكا الوسطى إلى الفيضانات في أمريكا الجنوبية.",
+"figures": [
+{
+"label": "عدد أحداث الابيضاض العالمي، والحالي هو الرابع",
+"source": "Euronews",
+"value": "4"
+},
+{
+"label": "أنواع المرجان البانية للشعاب المهددة بالانقراض",
+"source": "Euronews",
+"value": "44%"
+},
+{
+"label": "عام أقوى نينيو مسجلة، والحالية مرشحة لتجاوزها",
+"source": "NOAA عبر Euronews",
+"value": "1982"
+},
+{
+"label": "نسبة مرجان الخليج الذي ابيضّ منذ موجات الحر في أواخر التسعينيات",
+"source": "برنارد ريغل عبر Scientific American",
+"value": "≈90%"
+},
+{
+"label": "العام الذي يتوقع أن تواجه فيه معظم الشعاب الاستوائية ظروف الخليج الحالية",
+"source": "Scientific American",
+"value": "2100"
+}
+],
+"headline": "الابيضاض الرابع يحوّل مدن البحر إلى عظام",
+"imageCredit": "",
+"imageId": "",
+"imageUrl": "",
+"impacts": [
+"احتراق الوقود الأحفوري يرفع حرارة المحيطات",
+"ظاهرة نينيو قياسية تضيف موجة حر فوق الاحترار",
+"المرجان يطرد طحالبه الشريكة ويبيضّ",
+"الشعاب تموت وتنهار بنيتها",
+"الأسماك واللافقاريات تفقد مأواها ومصائد الساحل تتراجع"
+],
+"kind": "live",
+"place": "الشعاب المرجانية حول العالم",
+"question": "أنتم تهربون من الحرّ إلى المكيفات، فإلى أين يهرب من لا يتحرك؟",
+"sources": [
+{
+"name": "Euronews",
+"url": "https://euronews.com/2026/10/20/tourist-attractions-shut-and-cattle-starving-how-el-nino-is-wreaking-havoc-around-the-worl"
+},
+{
+"name": "Scientific American",
+"url": "https://www.scientificamerican.com/article/the-war-in-iran-is-supercharging-an-ecological-crisis-in-the-persian-gulf/"
+}
+],
+"id": "env-20261027-coral-elnino"
+}
+]
