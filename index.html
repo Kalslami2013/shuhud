@@ -145,6 +145,14 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .empty .big{font-size:44px}
 
 /* tracker */
+.narr{display:grid;gap:8px;margin-top:4px;padding:10px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid var(--line)}
+.narr-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.narr .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:2px}
+.narr .seg button{border:0;background:transparent;color:var(--dim);border-radius:999px;padding:4px 12px;font:inherit;font-size:12.5px;cursor:pointer}
+.narr .seg button[aria-pressed="true"]{background:var(--amber);color:#1d1406;font-weight:600}
+.narr select.mini{max-width:170px}
+.narr-track{height:3px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.narr-prog{height:100%;width:0;background:var(--amber);transition:width .4s}
 .track-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
 .track-head .note{margin:0;color:var(--dim);font-size:13px}
 .track{list-style:disc;margin:0;padding-inline-start:22px;display:grid;gap:10px;background:var(--bark);border:1px solid var(--line);border-radius:18px;padding-block:16px;padding-inline-end:16px;backdrop-filter:blur(8px)}
@@ -396,6 +404,7 @@ ar:{
   toneLbl:"الخلفية",tones2:{dark:"داكنة",light:"فاتحة"},
   themeLbl:"الطابع",themes:{auto:"تلقائي حسب الموضوع",river:"نهر وأراضٍ رطبة",fields:"حقول وزراعة",forest:"غابة",ocean:"بحر",desert:"صحراء",ice:"جليد",war:"حرب ونار",city:"مدينة",cosmos:"فضاء",lab:"مختبر"},
   manualBtn:"✍️ اكتب يدوياً",bridgeBtn:"📋 عبر محادثة Claude",bridgeHelp:"انسخ الطلب، والصقه في أي محادثة مع Claude، ثم الصق رده هنا.",bridgeCopy:"انسخ الطلب",bridgePastePh:"الصق رد Claude هنا…",bridgeUse:"استعمل الرد",bridgeBad:"لم أجد في الرد مادة صالحة. الصق الرد كاملاً.",manualHelp:"اكتب المادة بنفسك. الحقول الفارغة لا تظهر في المادة.",mName:"اسم الكائن الراوي",mEmoji:"رمزه (إيموجي)",mHab:"موطنه",mHeadline:"العنوان",mPlace:"المكان",mCat:"الباب",mDispatch:"الرواية بلسان الكائن (افصل الفقرات بسطر فارغ)",mImpacts:"سلسلة الأثر (حلقة في كل سطر)",mFigures:"الأرقام (في كل سطر: الرقم | ماذا يقيس | المصدر)",mPreview:"اعرض المسودة",keyLbl:"مفتاح Anthropic API للكتابة الآلية (اختياري)",keySave:"احفظ",keyHelp:"يُحفظ في هذا المتصفح فقط. رصيده منفصل عن اشتراك Claude، والمادة الواحدة تكلّف سنتات قليلة.",needKey:"الكتابة الآلية هنا تحتاج مفتاح API (بالأسفل). أو اكتب يدوياً، أو استعمل «عبر محادثة Claude».",
+  nStop:"إيقاف",nMale:"صوت رجل",nFemale:"صوت امرأة",nVoice:"الصوت",nRate:"السرعة",nSlow:"أبطأ",nNormal:"عادية",nFast:"أسرع",nTip:"لصوت أكثر طبيعية على الآيفون: الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات ← العربية، وحمّل صوتاً بنسخته «المحسّنة». وعلى الحاسوب يعطي متصفح Edge أصواتاً عربية طبيعية.",
   readThem:"اقرأها",writeAs:"اكتب بلسانه",piecesBy:n=>"قطع بلسان "+n,showAll:"عرض الكل",writeFirst:n=>"لا قطع بلسان "+n+" بعد. اكتب أولها من هنا.",
   sceneAdd:"أضف صورة لهذا المشهد",sceneChange:"غيّر صورة المشهد",sceneRemove:"أزل صورة المشهد",sceneFind:"ابحث عن صورة مناسبة",sceneHint:"📷 أضف صورة لأي مشهد تريده، اختيارياً. تُلوَّن الصورة تلقائياً بطابع المادة وتذوب في خلفية البطاقة، وفي الفيديو تنتقل المشاهد بينها بسلاسة. يكفي أربع إلى ست صور للمادة.",
   changePhotoShort:"📷 غيّر الصورة",removePhotoShort:"🗑 احذف الصورة",confirmRemovePhoto:"تأكيد حذف الصورة",photoRemoved:"حُذفت الصورة",
@@ -454,6 +463,7 @@ en:{
   toneLbl:"Background",tones2:{dark:"Dark",light:"Light"},
   themeLbl:"Theme",themes:{auto:"Auto, by subject",river:"River & wetland",fields:"Fields & farming",forest:"Forest",ocean:"Sea",desert:"Desert",ice:"Ice",war:"War & fire",city:"City",cosmos:"Space",lab:"Lab"},
   manualBtn:"✍️ Write it myself",bridgeBtn:"📋 Via a Claude chat",bridgeHelp:"Copy the request, paste it into any Claude chat, then paste the reply here.",bridgeCopy:"Copy the request",bridgePastePh:"Paste Claude's reply here…",bridgeUse:"Use the reply",bridgeBad:"No usable piece found in the reply. Paste the whole reply.",manualHelp:"Write the piece yourself. Empty fields are left out.",mName:"Narrator species",mEmoji:"Its emoji",mHab:"Its habitat",mHeadline:"Headline",mPlace:"Place",mCat:"Section",mDispatch:"The story in the creature's voice (blank line between paragraphs)",mImpacts:"Chain of impact (one link per line)",mFigures:"Figures (each line: number | what it measures | source)",mPreview:"Show the draft",keyLbl:"Anthropic API key for automatic writing (optional)",keySave:"Save",keyHelp:"Stored in this browser only. Billed separately from the Claude plan; a piece costs a few cents.",needKey:"Automatic writing here needs an API key (below). Or write it yourself, or use “Via a Claude chat”.",
+  nStop:"Stop",nMale:"Male voice",nFemale:"Female voice",nVoice:"Voice",nRate:"Speed",nSlow:"Slower",nNormal:"Normal",nFast:"Faster",nTip:"For a more natural voice on iPhone: Settings → Accessibility → Spoken Content → Voices, and download an “Enhanced” voice. On a computer, Microsoft Edge offers natural voices.",
   readThem:"read them",writeAs:"Write in its voice",piecesBy:n=>"Pieces told by the "+n,showAll:"Show all",writeFirst:n=>"No pieces by the "+n+" yet. Write the first one here.",
   sceneAdd:"Add a photo to this scene",sceneChange:"Change scene photo",sceneRemove:"Remove scene photo",sceneFind:"Find a fitting photo",sceneHint:"📷 Add a photo to any scene you like, it is optional. Photos are tinted to the piece's theme and melt into the card; in the video, scenes dissolve smoothly between them. Four to six photos per piece is plenty.",
   changePhotoShort:"📷 Change photo",removePhotoShort:"🗑 Remove photo",confirmRemovePhoto:"Confirm removing photo",photoRemoved:"Photo removed",
@@ -618,6 +628,7 @@ function plain(i){
   return [i.crisis?T("crisis")+": "+i.crisis:"",i.headline,i.angle,i.dispatch,chain?T("chain")+":\n"+chain:"",figs?T("figures")+":\n"+figs:"",i.fact?T("fact")+": "+i.fact:"",i.question?T("question")+": "+i.question:"",srcs?T("sources")+":\n"+srcs:""].filter(Boolean).join("\n\n");
 }
 function renderFeed(){
+  if(typeof stopNarration==="function"&&NARR.playing)stopNarration();
   let list=cat==="الكل"?items:items.filter(i=>i.category===cat);
   if(byAnimal)list=list.filter(i=>i.animal===byAnimal);
   const fb=$("#by-animal");if(fb){fb.hidden=!byAnimal;if(byAnimal&&ROSTER[byAnimal])fb.innerHTML=`<span>${ROSTER[byAnimal].e} ${T("piecesBy")(rName(byAnimal))}</span><button class="btn" type="button" id="by-clear">${T("showAll")}</button>`;const c=$("#by-clear");if(c)c.onclick=()=>{byAnimal=null;renderFeed()}}
@@ -643,7 +654,7 @@ $("#feed").addEventListener("click",async e=>{
     if(armedPhoto!==id){armedPhoto=id;renderFeed();setTimeout(()=>{if(armedPhoto===id){armedPhoto=null;renderFeed()}},4000);return}
     armedPhoto=null;try{const oldId=raw.imageId;await db.collection("dispatches").doc(id).update({imageUrl:"",imageId:"",imageCredit:""});if(oldId&&assets){try{await assets.delete(oldId)}catch(e){}}toast(T("photoRemoved"))}catch(e){toast(T("photoFail"))}}
   if(act==="tr")translateItem(raw);
-  if(act==="say"){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(i.headline+". "+i.dispatch+(i.question?". "+i.question:""));u.lang=i._missing||!isEn()?"ar-SA":"en-US";u.rate=.95;speechSynthesis.speak(u)}
+  if(act==="say"){if(NARR.playing&&b.textContent===T("nStop")){stopNarration();return}stopNarration();const lang=i._missing||!isEn()?"ar":"en";const card=b.closest(".card");const bar=narrBar(card,i,lang);b.textContent=T("nStop");playNarration(i,lang,bar)}
   if(act==="del"){
     if(armed!==id){armed=id;renderFeed();setTimeout(()=>{if(armed===id){armed=null;renderFeed()}},4000);return}
     armed=null;try{await db.collection("dispatches").doc(id).delete();toast(T("deleted"))}catch(err){toast(T("delFail"))}
@@ -670,6 +681,60 @@ $("#track").addEventListener("click",e=>{const b=e.target.closest("[data-tk]");i
   location.hash="desk";show("desk");
   /* go straight to the reading; the draft appears below the form */
   setTimeout(()=>{if(sample){$("#d-go").click();$("#d-out").scrollIntoView({behavior:"smooth",block:"start"})}else{$("#d-bridge-box").hidden=false;$("#d-note").textContent=T("needKey")}},80)});
+
+/* ---------- narration: picks the most natural voice on the device and reads like a documentary ---------- */
+const NARR={gender:"m",voice:"",rate:1,playing:null};
+try{Object.assign(NARR,JSON.parse(localStorage.getItem("shuhud-voice")||"{}"));NARR.playing=null}catch(e){}
+const saveNarr=()=>{try{localStorage.setItem("shuhud-voice",JSON.stringify({gender:NARR.gender,voice:NARR.voice,rate:NARR.rate}))}catch(e){}};
+const MALE=/maged|majed|tarik|naayf|hamed|shakir|fahed|omar|bassel|moaz|rami|taim|saleh|hamdan|jamal|ali\b|hamza|daniel|alex\b|tom\b|aaron|arthur|guy\b|ryan|christopher|eric|davis|andrew|brian|fred|oliver|george|male/i;
+const FEMALE=/laila|layla|mariam|maryam|hoda|salma|zariyah|amany|amina|fatima|sana|rana|iman|noura|mouna|hala|sara\b|aysha|samantha|karen|serena|ava\b|jenny|aria\b|sonia|libby|moira|emma|susan|victoria|female/i;
+let voicesCache=[];
+function loadVoices(){voicesCache=speechSynthesis.getVoices();return voicesCache}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+function voiceGender(v){return MALE.test(v.name)?"m":FEMALE.test(v.name)?"f":"?"}
+function voiceScore(v,lang){let s=0;const n=v.name;
+  if(/natural|neural|online/i.test(n))s+=20;if(/enhanced|premium|siri/i.test(n))s+=12;if(!v.localService)s+=3;
+  if(lang==="ar"&&/ar-SA/i.test(v.lang))s+=2;if(lang==="en"&&/en-(GB|US)/i.test(v.lang))s+=2;if(/compact|eloquence|novelty|bad news|bells|zarvox|whisper|robot/i.test(n))s-=30;return s}
+function voicesFor(lang){return loadVoices().filter(v=>v.lang&&v.lang.toLowerCase().startsWith(lang)).sort((a,b)=>voiceScore(b,lang)-voiceScore(a,lang))}
+function pickVoice(lang){const list=voicesFor(lang);if(!list.length)return null;
+  if(NARR.voice){const v=list.find(x=>x.name===NARR.voice);if(v)return v}
+  return list.find(v=>voiceGender(v)===NARR.gender)||list[0]}
+/* documentary pacing: sentence by sentence, with breathing pauses between sentences and paragraphs */
+function narrationParts(i){const parts=[];const add=(t,pause)=>{String(t||"").split(/(?<=[.!؟?…])\s+/).map(s=>s.trim()).filter(Boolean).forEach((s,k,a)=>parts.push({t:s,pause:k===a.length-1?pause:320}))};
+  add(i.headline,900);if(i.angle)add(i.angle,800);String(i.dispatch||"").split(/\n\s*\n/).forEach(p=>add(p,750));
+  if(i.question){parts.push({t:T("question")+".",pause:450});add(i.question,600)}return parts}
+function stopNarration(){if(NARR.playing){NARR.playing.stop=true;NARR.playing=null}try{speechSynthesis.cancel()}catch(e){}document.querySelectorAll(".narr").forEach(n=>n.remove());document.querySelectorAll('[data-act="say"]').forEach(b=>b.textContent=T("listen"))}
+function playNarration(i,lang,bar){
+  try{speechSynthesis.cancel()}catch(e){}
+  const run={stop:false};NARR.playing=run;const parts=narrationParts(i),v=pickVoice(lang);let k=0;
+  const male=v?voiceGender(v)!=="f":NARR.gender==="m";
+  const next=()=>{if(run.stop)return;if(k>=parts.length){stopNarration();return}const p=parts[k++];
+    const u=new SpeechSynthesisUtterance(p.t);if(v){u.voice=v;u.lang=v.lang}else u.lang=lang==="ar"?"ar-SA":"en-GB";
+    u.rate=(lang==="ar"?.9:.94)*NARR.rate;u.pitch=male?.92:1.02;u.volume=1;
+    u.onend=()=>{if(!run.stop)setTimeout(next,p.pause)};u.onerror=()=>{if(!run.stop)setTimeout(next,100)};
+    speechSynthesis.speak(u);if(bar){const pr=bar.querySelector(".narr-prog");if(pr)pr.style.width=(k/parts.length*100)+"%"}};
+  next();
+}
+function narrBar(card,i,lang){
+  document.querySelectorAll(".narr").forEach(n=>n.remove());
+  const list=voicesFor(lang),bar=document.createElement("div");bar.className="narr";
+  const opts=list.map(v=>`<option value="${esc(v.name)}">${esc(v.name.replace(/\s*\(.*?\)\s*/g," ").replace(/Microsoft|Google/g,"").trim())}${/natural|neural|online|enhanced|premium/i.test(v.name)?" ★":""}</option>`).join("");
+  const cur=pickVoice(lang);
+  bar.innerHTML=`<div class="narr-row"><button class="btn" type="button" data-n="stop">■ ${T("nStop")}</button>
+    <span class="seg"><button type="button" data-n="m" aria-pressed="${NARR.gender==="m"}">${T("nMale")}</button><button type="button" data-n="f" aria-pressed="${NARR.gender==="f"}">${T("nFemale")}</button></span>
+    ${list.length?`<select class="mini" data-n="voice" aria-label="${T("nVoice")}">${opts}</select>`:""}
+    <select class="mini" data-n="rate" aria-label="${T("nRate")}"><option value=".9">${T("nSlow")}</option><option value="1">${T("nNormal")}</option><option value="1.12">${T("nFast")}</option></select></div>
+    <div class="narr-track"><div class="narr-prog"></div></div>
+    ${!list.some(v=>/natural|neural|online|enhanced|premium/i.test(v.name))?`<p class="note">${T("nTip")}</p>`:""}`;
+  card.querySelector(".foot").after(bar);
+  const vs=bar.querySelector('[data-n="voice"]');if(vs&&cur)vs.value=cur.name;bar.querySelector('[data-n="rate"]').value=String(NARR.rate);
+  bar.addEventListener("click",e=>{const b=e.target.closest("[data-n]");if(!b||b.tagName==="SELECT")return;const n=b.dataset.n;
+    if(n==="stop"){stopNarration();return}
+    if(n==="m"||n==="f"){NARR.gender=n;NARR.voice="";saveNarr();const v=pickVoice(lang);if(vs&&v)vs.value=v.name;bar.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.n===n));playNarration(i,lang,bar)}});
+  if(vs)vs.onchange=()=>{NARR.voice=vs.value;const v=list.find(x=>x.name===vs.value);if(v&&voiceGender(v)!=="?")NARR.gender=voiceGender(v);saveNarr();bar.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.n===NARR.gender));playNarration(i,lang,bar)};
+  bar.querySelector('[data-n="rate"]').onchange=e=>{NARR.rate=+e.target.value;saveNarr();playNarration(i,lang,bar)};
+  return bar;
+}
 
 /* ---------- translation ---------- */
 const TR_FIELDS=["animalName","animalHabitat","crisis","angle","headline","dispatch","impacts","figures","fact","question","place","sources"];
