@@ -348,8 +348,8 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793352245"</script>
-<script src="local.js?v=1793352245"></script>
+<script>window.SHUHUD_BUILD="1793352403"</script>
+<script src="local.js?v=1793352403"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -686,8 +686,8 @@ $("#track").addEventListener("click",e=>{const b=e.target.closest("[data-tk]");i
   setTimeout(()=>{if(sample){$("#d-go").click();$("#d-out").scrollIntoView({behavior:"smooth",block:"start"})}else{$("#d-bridge-box").hidden=false;$("#d-note").textContent=T("needKey")}},80)});
 
 /* ---------- narration: picks the most natural voice on the device and reads like a documentary ---------- */
-const NARR={gender:"m",voice:"",rate:1,playing:null};
-try{Object.assign(NARR,JSON.parse(localStorage.getItem("shuhud-voice")||"{}"));NARR.playing=null}catch(e){}
+const NARR={gender:"m",voice:"",rate:1,playing:null};const RATES=[.7,1,1.4];
+try{Object.assign(NARR,JSON.parse(localStorage.getItem("shuhud-voice")||"{}"));NARR.playing=null;if(!RATES.includes(NARR.rate))NARR.rate=1}catch(e){}
 const saveNarr=()=>{try{localStorage.setItem("shuhud-voice",JSON.stringify({gender:NARR.gender,voice:NARR.voice,rate:NARR.rate}))}catch(e){}};
 const MALE=/maged|majed|tarik|naayf|hamed|shakir|fahed|omar|bassel|moaz|rami|taim|saleh|hamdan|jamal|ali\b|hamza|daniel|alex\b|tom\b|aaron|arthur|guy\b|ryan|christopher|eric|davis|andrew|brian|fred|oliver|george|male/i;
 const FEMALE=/laila|layla|mariam|maryam|hoda|salma|zariyah|amany|amina|fatima|sana|rana|iman|noura|mouna|hala|sara\b|aysha|samantha|karen|serena|ava\b|jenny|aria\b|sonia|libby|moira|emma|susan|victoria|female/i;
@@ -714,7 +714,7 @@ function playNarration(i,lang,bar){
   const male=v?voiceGender(v)!=="f":NARR.gender==="m";
   const next=()=>{if(run.stop||gen!==NARR.gen)return;if(k>=parts.length){stopNarration();return}const p=parts[k++];
     const u=new SpeechSynthesisUtterance(p.t);if(v){u.voice=v;u.lang=v.lang}else u.lang=lang==="ar"?"ar-SA":"en-GB";
-    u.rate=(lang==="ar"?.9:.94)*NARR.rate;u.pitch=male?.92:1.02;u.volume=1;
+    u.rate=Math.min(2,(lang==="ar"?.92:.95)*NARR.rate);u.pitch=male?.92:1.02;u.volume=1;
     u.onend=()=>{if(!run.stop)setTimeout(next,p.pause)};u.onerror=()=>{if(!run.stop)setTimeout(next,100)};
     try{speechSynthesis.resume()}catch(e){}speechSynthesis.speak(u);if(bar){const pr=bar.querySelector(".narr-prog");if(pr)pr.style.width=(k/parts.length*100)+"%"}};
   setTimeout(next,280);
@@ -729,7 +729,7 @@ function narrBar(card,i,lang){
   bar.innerHTML=`<div class="narr-row"><button class="btn" type="button" data-n="stop">■ ${T("nStop")}</button>
     <span class="seg"><button type="button" data-n="m" aria-pressed="${NARR.gender==="m"}">${T("nMale")}</button><button type="button" data-n="f" aria-pressed="${NARR.gender==="f"}">${T("nFemale")}</button></span>
     ${list.length?`<select class="mini" data-n="voice" aria-label="${T("nVoice")}">${opts}</select>`:""}
-    <select class="mini" data-n="rate" aria-label="${T("nRate")}"><option value=".9">${T("nSlow")}</option><option value="1">${T("nNormal")}</option><option value="1.12">${T("nFast")}</option></select></div>
+    <select class="mini" data-n="rate" aria-label="${T("nRate")}"><option value=".7">${T("nSlow")}</option><option value="1">${T("nNormal")}</option><option value="1.4">${T("nFast")}</option></select></div>
     <div class="narr-track"><div class="narr-prog"></div></div><p class="note narr-miss"></p>
     ${!list.some(v=>/natural|neural|online|enhanced|premium/i.test(v.name))?`<p class="note">${T("nTip")}</p>`:""}`;
   card.querySelector(".foot").after(bar);
