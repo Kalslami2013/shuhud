@@ -77,6 +77,19 @@ async function main() {
       console.log("ok", f[0], items.length);
     } catch (e) { console.log("fail", f[0], e.message); }
   }
+  // English headlines also get an Arabic translation (free Google endpoint; skipped quietly if unavailable)
+  let tr = 0;
+  for (const it of seen.values()) {
+    if (it.lang !== "en" || it.trAr || tr >= 80) continue;
+    try {
+      const r = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ar&dt=t&q=" + encodeURIComponent(it.text), { signal: AbortSignal.timeout(10000) });
+      if (!r.ok) { console.log("translate", r.status); break; }
+      const j = await r.json(); const ar = (j[0] || []).map((x) => x[0]).join("").trim();
+      if (ar) { it.trAr = ar; tr++; }
+      await new Promise((ok) => setTimeout(ok, 250));
+    } catch (e) { console.log("translate fail", e.message); break; }
+  }
+  console.log("translated", tr);
   const all = [...seen.values()].sort((a, b) => (a.at < b.at ? 1 : -1)).slice(0, 400);
   writeFileSync(path, JSON.stringify(all));
   console.log("added", added, "total", all.length);
