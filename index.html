@@ -319,7 +319,7 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
         <div><label class="l" for="m-impacts" data-i18n="mImpacts">سلسلة الأثر (حلقة في كل سطر)</label><textarea id="m-impacts" style="min-height:90px"></textarea></div>
         <div><label class="l" for="m-figures" data-i18n="mFigures">الأرقام (في كل سطر: الرقم | ماذا يقيس | المصدر)</label><textarea id="m-figures" style="min-height:90px" placeholder="90 كم | امتداد البقعة النفطية | رويترز"></textarea></div>
         <div><label class="l" for="m-fact" data-i18n="fact">ما حدث عند البشر</label><textarea id="m-fact" style="min-height:60px"></textarea></div>
-        <div><label class="l" for="m-question" data-i18n="question">سؤال إلى البشر</label><input type="text" id="m-question"></div>
+        <div><label class="l" for="m-question" data-i18n="question">سؤال مفتوح</label><input type="text" id="m-question"></div>
         <div><button class="btn primary" type="button" id="m-preview" data-i18n="mPreview">اعرض المسودة</button></div>
       </div>
       <div class="manual" id="d-az-box" hidden>
@@ -356,8 +356,8 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793353638"</script>
-<script src="local.js?v=1793353638"></script>
+<script>window.SHUHUD_BUILD="1793369515"</script>
+<script src="local.js?v=1793369515"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -383,7 +383,7 @@ ar:{
   dAtt:"المرفقات",dDrop:"اسحب الملفات هنا: صور، أصوات، مستندات (PDF، Word، نص)",aImg:"🖼 صورة",aAud:"🎙 صوت أو تسجيل",aDoc:"📄 مستند",
   dGo:"اقرأ الأزمة بعين الكائن",
   manifesto:"نحن لا نقرأ الصحف. نقرأ الماء حين يجف، والسماء حين تحترق، والأرض حين ترتجف قبل أن تشعروا بها. هؤلاء مراسلونا.",
-  crisis:"الأزمة",angle:"الزاوية البيئية",chain:"سلسلة الأثر",figures:"بالأرقام",fact:"ما حدث عند البشر",question:"سؤال إلى البشر",
+  crisis:"الأزمة",angle:"الزاوية البيئية",chain:"سلسلة الأثر",figures:"بالأرقام",fact:"ما حدث عند البشر",question:"سؤال مفتوح",
   sources:"المصادر",source:"المصدر",fromDesk:"من غرفة التحرير",listen:"استمع",export:"تصدير",copy:"نسخ",del:"حذف",delConfirm:"تأكيد الحذف",
   deleted:"حُذفت الرواية",delFail:"تعذر الحذف",copied:"نُسخ النص",witness:"شاهد",
   emptyLoading:"تتجمع الحيوانات حول النار، وستظهر النشرة بعد لحظات.",emptyCat:"لا قطع في هذا الباب بعد. اكتب واحدة من غرفة التحرير.",
@@ -444,7 +444,7 @@ en:{
   dAtt:"Attachments",dDrop:"Drop files here: images, audio, documents (PDF, Word, text)",aImg:"🖼 Image",aAud:"🎙 Audio or recording",aDoc:"📄 Document",
   dGo:"Read the crisis through the creature's eyes",
   manifesto:"We don't read newspapers. We read water as it dries, skies as they burn, and the ground as it trembles before you feel it. These are our correspondents.",
-  crisis:"The crisis",angle:"The environmental angle",chain:"Chain of impact",figures:"By the numbers",fact:"What happened among humans",question:"A question for humans",
+  crisis:"The crisis",angle:"The environmental angle",chain:"Chain of impact",figures:"By the numbers",fact:"What happened among humans",question:"An open question",
   sources:"Sources",source:"Source",fromDesk:"from the newsroom",listen:"Listen",export:"Export",copy:"Copy",del:"Delete",delConfirm:"Confirm delete",
   deleted:"Story deleted",delFail:"Couldn't delete",copied:"Text copied",witness:"Witness",
   emptyLoading:"The animals are gathering around the fire. The feed will appear in a moment.",emptyCat:"Nothing in this section yet. Write one from the newsroom.",
@@ -924,7 +924,8 @@ Tasks:
 5. Chain of impact: 3 to 5 short links from the human act to the harm.
 6. 3 to 6 figures. Strict rule: every figure from the material is attributed to its source as given. If you add a figure from general knowledge because the context needs it, its source must read exactly "معرفة عامة، تحتاج تحقق" in Arabic and "General knowledge, needs verification" in English. Never invent numbers; if unsure, leave it out.
 7. Headline: professional, creative and dense, 6 to 9 words, NOT starting with a verb (in both languages).
-8. Write everything twice: Arabic (elegant Modern Standard Arabic) at the top level, and an English version (polished, literary) inside "en". Same facts and numbers in both.
+8. Closing question ("question"): one general, reasoned, open question that grows out of the story's logic and stays with the reader, in a calm analytical register. It must NOT be spoken by the creature, must NOT address anyone (no "you", "humans", "people", "أيها البشر", "يا بني آدم", "لكم", "أنتم"), must NOT mention the creature or use "we/us/our", and must not be naive, pleading or rhetorical-emotional. It frames the underlying dilemma. Example of the right register: "هل يحتاج الذكاء الاصطناعي إلى غابات ميتة كي يفكّر؟" / "Does artificial intelligence need dead forests in order to think?"
+9. Write everything twice: Arabic (elegant Modern Standard Arabic) at the top level, and an English version (polished, literary) inside "en". Same facts and numbers in both.
 
 Ready-made species (use the key if you pick one, otherwise "custom"):
 ${roster}
@@ -937,7 +938,7 @@ ${docs?"\n"+docs:""}${audio?"\n"+audio:""}${imgs?`\n(${imgs} image(s) attached; 
 ${$("#d-src").value?"\nAttached source: "+$("#d-src").value:""}
 
 Return JSON only:
-{"animal":"key or custom","animalEmoji":"one close emoji","animalName":"Arabic name","animalHabitat":"Arabic habitat in a few words","crisis":"…","angle":"…","headline":"…","dispatch":"paragraphs separated by a blank line","impacts":["…"],"figures":[{"value":"number with unit","label":"what it measures","source":"source"}],"fact":"1-2 neutral news sentences","question":"short question from the creature to humans","category":"Arabic section","place":"Arabic place","eventDate":"YYYY-MM-DD or empty",
+{"animal":"key or custom","animalEmoji":"one close emoji","animalName":"Arabic name","animalHabitat":"Arabic habitat in a few words","crisis":"…","angle":"…","headline":"…","dispatch":"paragraphs separated by a blank line","impacts":["…"],"figures":[{"value":"number with unit","label":"what it measures","source":"source"}],"fact":"1-2 neutral news sentences","question":"one open, general question (rule 8)","category":"Arabic section","place":"Arabic place","eventDate":"YYYY-MM-DD or empty",
 "en":{"animalName":"…","animalHabitat":"…","crisis":"…","angle":"…","headline":"…","dispatch":"…","impacts":["…"],"figures":[{"value":"…","label":"…","source":"…"}],"fact":"…","question":"…","place":"…"}}
 Do not include "sources"; they are added by the page.`;
 }
