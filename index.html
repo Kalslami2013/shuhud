@@ -348,7 +348,8 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
   </div>
 </div>
 
-<script src="local.js"></script>
+<script>window.SHUHUD_BUILD="1793352245"</script>
+<script src="local.js?v=1793352245"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -406,7 +407,7 @@ ar:{
   toneLbl:"الخلفية",tones2:{dark:"داكنة",light:"فاتحة"},
   themeLbl:"الطابع",themes:{auto:"تلقائي حسب الموضوع",river:"نهر وأراضٍ رطبة",fields:"حقول وزراعة",forest:"غابة",ocean:"بحر",desert:"صحراء",ice:"جليد",war:"حرب ونار",city:"مدينة",cosmos:"فضاء",lab:"مختبر"},
   manualBtn:"✍️ اكتب يدوياً",bridgeBtn:"📋 عبر محادثة Claude",bridgeHelp:"انسخ الطلب، والصقه في أي محادثة مع Claude، ثم الصق رده هنا.",bridgeCopy:"انسخ الطلب",bridgePastePh:"الصق رد Claude هنا…",bridgeUse:"استعمل الرد",bridgeBad:"لم أجد في الرد مادة صالحة. الصق الرد كاملاً.",manualHelp:"اكتب المادة بنفسك. الحقول الفارغة لا تظهر في المادة.",mName:"اسم الكائن الراوي",mEmoji:"رمزه (إيموجي)",mHab:"موطنه",mHeadline:"العنوان",mPlace:"المكان",mCat:"الباب",mDispatch:"الرواية بلسان الكائن (افصل الفقرات بسطر فارغ)",mImpacts:"سلسلة الأثر (حلقة في كل سطر)",mFigures:"الأرقام (في كل سطر: الرقم | ماذا يقيس | المصدر)",mPreview:"اعرض المسودة",keyLbl:"مفتاح Anthropic API للكتابة الآلية (اختياري)",keySave:"احفظ",keyHelp:"يُحفظ في هذا المتصفح فقط. رصيده منفصل عن اشتراك Claude، والمادة الواحدة تكلّف سنتات قليلة.",needKey:"الكتابة الآلية هنا تحتاج مفتاح API (بالأسفل). أو اكتب يدوياً، أو استعمل «عبر محادثة Claude».",
-  nStopAll:"إيقاف القراءة",nStop:"إيقاف",nMale:"صوت رجل",nFemale:"صوت امرأة",nVoice:"الصوت",nRate:"السرعة",nSlow:"أبطأ",nNormal:"عادية",nFast:"أسرع",nTip:"لصوت أكثر طبيعية على الآيفون: الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات ← العربية، وحمّل صوتاً بنسخته «المحسّنة». وعلى الحاسوب يعطي متصفح Edge أصواتاً عربية طبيعية.",
+  nNoFemale:"لا يوجد على جهازك صوت عربي نسائي. على الآيفون يمكنك تحميل صوت آخر من إعدادات المحتوى المنطوق.",nNoMale:"لا يوجد على جهازك صوت عربي رجالي.",nStopAll:"إيقاف القراءة",nStop:"إيقاف",nMale:"صوت رجل",nFemale:"صوت امرأة",nVoice:"الصوت",nRate:"السرعة",nSlow:"أبطأ",nNormal:"عادية",nFast:"أسرع",nTip:"لصوت أكثر طبيعية على الآيفون: الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات ← العربية، وحمّل صوتاً بنسخته «المحسّنة». وعلى الحاسوب يعطي متصفح Edge أصواتاً عربية طبيعية.",
   readThem:"اقرأها",writeAs:"اكتب بلسانه",piecesBy:n=>"قطع بلسان "+n,showAll:"عرض الكل",writeFirst:n=>"لا قطع بلسان "+n+" بعد. اكتب أولها من هنا.",
   sceneAdd:"أضف صورة لهذا المشهد",sceneChange:"غيّر صورة المشهد",sceneRemove:"أزل صورة المشهد",sceneFind:"ابحث عن صورة مناسبة",sceneHint:"📷 أضف صورة لأي مشهد تريده، اختيارياً. تُلوَّن الصورة تلقائياً بطابع المادة وتذوب في خلفية البطاقة، وفي الفيديو تنتقل المشاهد بينها بسلاسة. يكفي أربع إلى ست صور للمادة.",
   changePhotoShort:"📷 غيّر الصورة",removePhotoShort:"🗑 احذف الصورة",confirmRemovePhoto:"تأكيد حذف الصورة",photoRemoved:"حُذفت الصورة",
@@ -465,7 +466,7 @@ en:{
   toneLbl:"Background",tones2:{dark:"Dark",light:"Light"},
   themeLbl:"Theme",themes:{auto:"Auto, by subject",river:"River & wetland",fields:"Fields & farming",forest:"Forest",ocean:"Sea",desert:"Desert",ice:"Ice",war:"War & fire",city:"City",cosmos:"Space",lab:"Lab"},
   manualBtn:"✍️ Write it myself",bridgeBtn:"📋 Via a Claude chat",bridgeHelp:"Copy the request, paste it into any Claude chat, then paste the reply here.",bridgeCopy:"Copy the request",bridgePastePh:"Paste Claude's reply here…",bridgeUse:"Use the reply",bridgeBad:"No usable piece found in the reply. Paste the whole reply.",manualHelp:"Write the piece yourself. Empty fields are left out.",mName:"Narrator species",mEmoji:"Its emoji",mHab:"Its habitat",mHeadline:"Headline",mPlace:"Place",mCat:"Section",mDispatch:"The story in the creature's voice (blank line between paragraphs)",mImpacts:"Chain of impact (one link per line)",mFigures:"Figures (each line: number | what it measures | source)",mPreview:"Show the draft",keyLbl:"Anthropic API key for automatic writing (optional)",keySave:"Save",keyHelp:"Stored in this browser only. Billed separately from the Claude plan; a piece costs a few cents.",needKey:"Automatic writing here needs an API key (below). Or write it yourself, or use “Via a Claude chat”.",
-  nStopAll:"Stop reading",nStop:"Stop",nMale:"Male voice",nFemale:"Female voice",nVoice:"Voice",nRate:"Speed",nSlow:"Slower",nNormal:"Normal",nFast:"Faster",nTip:"For a more natural voice on iPhone: Settings → Accessibility → Spoken Content → Voices, and download an “Enhanced” voice. On a computer, Microsoft Edge offers natural voices.",
+  nNoFemale:"There is no female voice for this language on your device.",nNoMale:"There is no male voice for this language on your device.",nStopAll:"Stop reading",nStop:"Stop",nMale:"Male voice",nFemale:"Female voice",nVoice:"Voice",nRate:"Speed",nSlow:"Slower",nNormal:"Normal",nFast:"Faster",nTip:"For a more natural voice on iPhone: Settings → Accessibility → Spoken Content → Voices, and download an “Enhanced” voice. On a computer, Microsoft Edge offers natural voices.",
   readThem:"read them",writeAs:"Write in its voice",piecesBy:n=>"Pieces told by the "+n,showAll:"Show all",writeFirst:n=>"No pieces by the "+n+" yet. Write the first one here.",
   sceneAdd:"Add a photo to this scene",sceneChange:"Change scene photo",sceneRemove:"Remove scene photo",sceneFind:"Find a fitting photo",sceneHint:"📷 Add a photo to any scene you like, it is optional. Photos are tinted to the piece's theme and melt into the card; in the video, scenes dissolve smoothly between them. Four to six photos per piece is plenty.",
   changePhotoShort:"📷 Change photo",removePhotoShort:"🗑 Remove photo",confirmRemovePhoto:"Confirm removing photo",photoRemoved:"Photo removed",
@@ -705,17 +706,20 @@ function pickVoice(lang){const list=voicesFor(lang);if(!list.length)return null;
 function narrationParts(i){const parts=[];const add=(t,pause)=>{String(t||"").split(/(?<=[.!؟?…])\s+/).map(s=>s.trim()).filter(Boolean).forEach((s,k,a)=>parts.push({t:s,pause:k===a.length-1?pause:320}))};
   add(i.headline,900);if(i.angle)add(i.angle,800);String(i.dispatch||"").split(/\n\s*\n/).forEach(p=>add(p,750));
   if(i.question){parts.push({t:T("question")+".",pause:450});add(i.question,600)}return parts}
-function stopNarration(){if(NARR.playing){NARR.playing.stop=true;NARR.playing=null}try{speechSynthesis.cancel();setTimeout(()=>{try{speechSynthesis.cancel()}catch(e){}},120)}catch(e){}const fs=$("#narr-stop");if(fs)fs.hidden=true;document.querySelectorAll(".narr").forEach(n=>n.remove());document.querySelectorAll('[data-act="say"]').forEach(b=>b.textContent=T("listen"))}
+function hardCancel(){try{speechSynthesis.pause()}catch(e){}try{speechSynthesis.cancel()}catch(e){}}
+function stopNarration(){NARR.gen=(NARR.gen||0)+1;if(NARR.playing){NARR.playing.stop=true;NARR.playing=null}hardCancel();setTimeout(hardCancel,150);setTimeout(hardCancel,500);const fs=$("#narr-stop");if(fs)fs.hidden=true;document.querySelectorAll(".narr").forEach(n=>n.remove());document.querySelectorAll('[data-act="say"]').forEach(b=>b.textContent=T("listen"))}
 function playNarration(i,lang,bar){
-  try{speechSynthesis.cancel()}catch(e){}
+  NARR.gen=(NARR.gen||0)+1;const gen=NARR.gen;if(NARR.playing)NARR.playing.stop=true;hardCancel();
   const run={stop:false};NARR.playing=run;$("#narr-stop").hidden=false;const parts=narrationParts(i),v=pickVoice(lang);let k=0;
   const male=v?voiceGender(v)!=="f":NARR.gender==="m";
-  const next=()=>{if(run.stop)return;if(k>=parts.length){stopNarration();return}const p=parts[k++];
+  const next=()=>{if(run.stop||gen!==NARR.gen)return;if(k>=parts.length){stopNarration();return}const p=parts[k++];
     const u=new SpeechSynthesisUtterance(p.t);if(v){u.voice=v;u.lang=v.lang}else u.lang=lang==="ar"?"ar-SA":"en-GB";
     u.rate=(lang==="ar"?.9:.94)*NARR.rate;u.pitch=male?.92:1.02;u.volume=1;
     u.onend=()=>{if(!run.stop)setTimeout(next,p.pause)};u.onerror=()=>{if(!run.stop)setTimeout(next,100)};
-    speechSynthesis.speak(u);if(bar){const pr=bar.querySelector(".narr-prog");if(pr)pr.style.width=(k/parts.length*100)+"%"}};
-  next();
+    try{speechSynthesis.resume()}catch(e){}speechSynthesis.speak(u);if(bar){const pr=bar.querySelector(".narr-prog");if(pr)pr.style.width=(k/parts.length*100)+"%"}};
+  setTimeout(next,280);
+  /* tell the reader when the chosen kind of voice does not exist on this device */
+  if(bar){const want=NARR.gender,has=voicesFor(lang).some(x=>voiceGender(x)===want);const n=bar.querySelector(".narr-miss");if(n)n.textContent=has||NARR.voice?"":(want==="f"?T("nNoFemale"):T("nNoMale"))}
 }
 function narrBar(card,i,lang){
   document.querySelectorAll(".narr").forEach(n=>n.remove());
@@ -726,7 +730,7 @@ function narrBar(card,i,lang){
     <span class="seg"><button type="button" data-n="m" aria-pressed="${NARR.gender==="m"}">${T("nMale")}</button><button type="button" data-n="f" aria-pressed="${NARR.gender==="f"}">${T("nFemale")}</button></span>
     ${list.length?`<select class="mini" data-n="voice" aria-label="${T("nVoice")}">${opts}</select>`:""}
     <select class="mini" data-n="rate" aria-label="${T("nRate")}"><option value=".9">${T("nSlow")}</option><option value="1">${T("nNormal")}</option><option value="1.12">${T("nFast")}</option></select></div>
-    <div class="narr-track"><div class="narr-prog"></div></div>
+    <div class="narr-track"><div class="narr-prog"></div></div><p class="note narr-miss"></p>
     ${!list.some(v=>/natural|neural|online|enhanced|premium/i.test(v.name))?`<p class="note">${T("nTip")}</p>`:""}`;
   card.querySelector(".foot").after(bar);
   const vs=bar.querySelector('[data-n="voice"]');if(vs&&cur)vs.value=cur.name;bar.querySelector('[data-n="rate"]').value=String(NARR.rate);

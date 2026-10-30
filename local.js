@@ -60,6 +60,10 @@
     limits:async()=>({images:{maxCount:4,maxBytes:5e6,mediaTypes:["image/jpeg","image/png","image/webp","image/gif"]}})
   });
 
+  /* new version on the site? reload once, so the home-screen app is never stuck on an old copy */
+  async function checkVersion(){try{const r=await fetch("version.txt?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const v=(await r.text()).trim();
+    if(v&&window.SHUHUD_BUILD&&v!==window.SHUHUD_BUILD){const k="shuhud-reloaded-"+v;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.replace(location.pathname+"?v="+v+location.hash)}}}catch(e){}}
+  checkVersion();document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkVersion()});
   window.SHUHUD_STANDALONE=true;window.shuhudKey={get:getKey,set:k=>{try{k?localStorage.setItem(KEY,k):localStorage.removeItem(KEY)}catch(e){}}};
   window.shuhudRefresh=refresh;
   window.claude={use:async name=>name==="db"?db:name==="assets"?assets:name==="downloads"?downloads:name==="sample"?(getKey()?sample:null):name==="user"?{isOwner:()=>true,canEdit:()=>true}:null};
