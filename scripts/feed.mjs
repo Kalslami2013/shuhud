@@ -78,17 +78,19 @@ async function main() {
     } catch (e) { console.log("fail", f[0], e.message); }
   }
   // English headlines also get an Arabic translation (free Google endpoint; skipped quietly if unavailable)
-  let tr = 0;
+  let tr = 0; const trLog = [];
+  const gtx = async (q) => { const r = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ar&dt=t&q=" + encodeURIComponent(q), { headers: { "user-agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(10000) }); if (!r.ok) throw new Error("gtx " + r.status); const j = await r.json(); return (j[0] || []).map((x) => x[0]).join("").trim(); };
+  const mym = async (q) => { const r = await fetch("https://api.mymemory.translated.net/get?langpair=en|ar&q=" + encodeURIComponent(q.slice(0, 480)), { signal: AbortSignal.timeout(10000) }); if (!r.ok) throw new Error("mymemory " + r.status); const j = await r.json(); const t = j?.responseData?.translatedText || ""; if (/MYMEMORY WARNING|QUERY LENGTH/i.test(t)) throw new Error("mymemory quota"); return t.trim(); };
+  let engines = [gtx, mym];
   for (const it of seen.values()) {
-    if (it.lang !== "en" || it.trAr || tr >= 80) continue;
-    try {
-      const r = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ar&dt=t&q=" + encodeURIComponent(it.text), { signal: AbortSignal.timeout(10000) });
-      if (!r.ok) { console.log("translate", r.status); break; }
-      const j = await r.json(); const ar = (j[0] || []).map((x) => x[0]).join("").trim();
-      if (ar) { it.trAr = ar; tr++; }
-      await new Promise((ok) => setTimeout(ok, 250));
-    } catch (e) { console.log("translate fail", e.message); break; }
+    if (it.lang !== "en" || it.trAr || tr >= 80 || !engines.length) continue;
+    for (const eng of [...engines]) {
+      try { const ar = await eng(it.text); if (ar) { it.trAr = ar; tr++; break; } }
+      catch (e) { trLog.push(e.message); engines = engines.filter((x) => x !== eng); }
+    }
+    await new Promise((ok) => setTimeout(ok, 300));
   }
+  writeFileSync("data/feed-status.json", JSON.stringify({ at: new Date().toISOString(), translated: tr, errors: trLog.slice(0, 5) }));
   console.log("translated", tr);
   const all = [...seen.values()].sort((a, b) => (a.at < b.at ? 1 : -1)).slice(0, 400);
   writeFileSync(path, JSON.stringify(all));
