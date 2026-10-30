@@ -320,6 +320,12 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
         <div><label class="l" for="m-question" data-i18n="question">سؤال إلى البشر</label><input type="text" id="m-question"></div>
         <div><button class="btn primary" type="button" id="m-preview" data-i18n="mPreview">اعرض المسودة</button></div>
       </div>
+      <div class="manual" id="d-az-box" hidden>
+        <label class="l" data-i18n="azLbl">الأصوات الطبيعية (Azure Speech)</label>
+        <div class="row2"><div><input type="password" id="az-key" placeholder="Key 1" aria-label="Azure key"></div><div><input type="text" id="az-region" placeholder="westeurope" aria-label="Azure region"></div></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn" type="button" id="az-save" data-i18n="azSave">احفظ وجرّب</button><span class="note" id="az-note"></span></div>
+        <p class="note" data-i18n="azHelp">المفتاح والمنطقة من صفحة «Keys and Endpoint» في خدمة Speech على Azure. يُحفظان في هذا المتصفح فقط.</p>
+      </div>
       <div class="manual" id="d-key-box" hidden>
         <label class="l" for="k-key" data-i18n="keyLbl">مفتاح Anthropic API للكتابة الآلية (اختياري)</label>
         <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="password" id="k-key" placeholder="sk-ant-…" style="flex:1;min-width:200px"><button class="btn" type="button" id="k-save" data-i18n="keySave">احفظ</button></div>
@@ -348,8 +354,8 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793352403"</script>
-<script src="local.js?v=1793352403"></script>
+<script>window.SHUHUD_BUILD="1793352603"</script>
+<script src="local.js?v=1793352603"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -407,6 +413,7 @@ ar:{
   toneLbl:"الخلفية",tones2:{dark:"داكنة",light:"فاتحة"},
   themeLbl:"الطابع",themes:{auto:"تلقائي حسب الموضوع",river:"نهر وأراضٍ رطبة",fields:"حقول وزراعة",forest:"غابة",ocean:"بحر",desert:"صحراء",ice:"جليد",war:"حرب ونار",city:"مدينة",cosmos:"فضاء",lab:"مختبر"},
   manualBtn:"✍️ اكتب يدوياً",bridgeBtn:"📋 عبر محادثة Claude",bridgeHelp:"انسخ الطلب، والصقه في أي محادثة مع Claude، ثم الصق رده هنا.",bridgeCopy:"انسخ الطلب",bridgePastePh:"الصق رد Claude هنا…",bridgeUse:"استعمل الرد",bridgeBad:"لم أجد في الرد مادة صالحة. الصق الرد كاملاً.",manualHelp:"اكتب المادة بنفسك. الحقول الفارغة لا تظهر في المادة.",mName:"اسم الكائن الراوي",mEmoji:"رمزه (إيموجي)",mHab:"موطنه",mHeadline:"العنوان",mPlace:"المكان",mCat:"الباب",mDispatch:"الرواية بلسان الكائن (افصل الفقرات بسطر فارغ)",mImpacts:"سلسلة الأثر (حلقة في كل سطر)",mFigures:"الأرقام (في كل سطر: الرقم | ماذا يقيس | المصدر)",mPreview:"اعرض المسودة",keyLbl:"مفتاح Anthropic API للكتابة الآلية (اختياري)",keySave:"احفظ",keyHelp:"يُحفظ في هذا المتصفح فقط. رصيده منفصل عن اشتراك Claude، والمادة الواحدة تكلّف سنتات قليلة.",needKey:"الكتابة الآلية هنا تحتاج مفتاح API (بالأسفل). أو اكتب يدوياً، أو استعمل «عبر محادثة Claude».",
+  azLbl:"الأصوات الطبيعية (Azure Speech)",azSave:"احفظ وجرّب",azHelp:"المفتاح (Key 1) والمنطقة (Location/Region) من صفحة «Keys and Endpoint» في خدمة Speech على Azure. يُحفظان في هذا المتصفح فقط.",azTesting:"نجرّب الصوت…",azOk:"✓ تعمل. ستُقرأ المواد الآن بأصوات طبيعية.",azFail:"تعذّر الاتصال بـ Azure. تحقق من المفتاح والمنطقة.",azOff:"أُلغيت الأصوات الطبيعية، وعادت أصوات الجهاز.",
   nNoFemale:"لا يوجد على جهازك صوت عربي نسائي. على الآيفون يمكنك تحميل صوت آخر من إعدادات المحتوى المنطوق.",nNoMale:"لا يوجد على جهازك صوت عربي رجالي.",nStopAll:"إيقاف القراءة",nStop:"إيقاف",nMale:"صوت رجل",nFemale:"صوت امرأة",nVoice:"الصوت",nRate:"السرعة",nSlow:"أبطأ",nNormal:"عادية",nFast:"أسرع",nTip:"لصوت أكثر طبيعية على الآيفون: الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات ← العربية، وحمّل صوتاً بنسخته «المحسّنة». وعلى الحاسوب يعطي متصفح Edge أصواتاً عربية طبيعية.",
   readThem:"اقرأها",writeAs:"اكتب بلسانه",piecesBy:n=>"قطع بلسان "+n,showAll:"عرض الكل",writeFirst:n=>"لا قطع بلسان "+n+" بعد. اكتب أولها من هنا.",
   sceneAdd:"أضف صورة لهذا المشهد",sceneChange:"غيّر صورة المشهد",sceneRemove:"أزل صورة المشهد",sceneFind:"ابحث عن صورة مناسبة",sceneHint:"📷 أضف صورة لأي مشهد تريده، اختيارياً. تُلوَّن الصورة تلقائياً بطابع المادة وتذوب في خلفية البطاقة، وفي الفيديو تنتقل المشاهد بينها بسلاسة. يكفي أربع إلى ست صور للمادة.",
@@ -466,6 +473,7 @@ en:{
   toneLbl:"Background",tones2:{dark:"Dark",light:"Light"},
   themeLbl:"Theme",themes:{auto:"Auto, by subject",river:"River & wetland",fields:"Fields & farming",forest:"Forest",ocean:"Sea",desert:"Desert",ice:"Ice",war:"War & fire",city:"City",cosmos:"Space",lab:"Lab"},
   manualBtn:"✍️ Write it myself",bridgeBtn:"📋 Via a Claude chat",bridgeHelp:"Copy the request, paste it into any Claude chat, then paste the reply here.",bridgeCopy:"Copy the request",bridgePastePh:"Paste Claude's reply here…",bridgeUse:"Use the reply",bridgeBad:"No usable piece found in the reply. Paste the whole reply.",manualHelp:"Write the piece yourself. Empty fields are left out.",mName:"Narrator species",mEmoji:"Its emoji",mHab:"Its habitat",mHeadline:"Headline",mPlace:"Place",mCat:"Section",mDispatch:"The story in the creature's voice (blank line between paragraphs)",mImpacts:"Chain of impact (one link per line)",mFigures:"Figures (each line: number | what it measures | source)",mPreview:"Show the draft",keyLbl:"Anthropic API key for automatic writing (optional)",keySave:"Save",keyHelp:"Stored in this browser only. Billed separately from the Claude plan; a piece costs a few cents.",needKey:"Automatic writing here needs an API key (below). Or write it yourself, or use “Via a Claude chat”.",
+  azLbl:"Natural voices (Azure Speech)",azSave:"Save and test",azHelp:"Key 1 and Location/Region from the “Keys and Endpoint” page of your Speech resource on Azure. Stored in this browser only.",azTesting:"Testing the voice…",azOk:"✓ Working. Pieces will now be read with natural voices.",azFail:"Couldn't reach Azure. Check the key and region.",azOff:"Natural voices turned off; back to device voices.",
   nNoFemale:"There is no female voice for this language on your device.",nNoMale:"There is no male voice for this language on your device.",nStopAll:"Stop reading",nStop:"Stop",nMale:"Male voice",nFemale:"Female voice",nVoice:"Voice",nRate:"Speed",nSlow:"Slower",nNormal:"Normal",nFast:"Faster",nTip:"For a more natural voice on iPhone: Settings → Accessibility → Spoken Content → Voices, and download an “Enhanced” voice. On a computer, Microsoft Edge offers natural voices.",
   readThem:"read them",writeAs:"Write in its voice",piecesBy:n=>"Pieces told by the "+n,showAll:"Show all",writeFirst:n=>"No pieces by the "+n+" yet. Write the first one here.",
   sceneAdd:"Add a photo to this scene",sceneChange:"Change scene photo",sceneRemove:"Remove scene photo",sceneFind:"Find a fitting photo",sceneHint:"📷 Add a photo to any scene you like, it is optional. Photos are tinted to the piece's theme and melt into the card; in the video, scenes dissolve smoothly between them. Four to six photos per piece is plenty.",
@@ -688,7 +696,7 @@ $("#track").addEventListener("click",e=>{const b=e.target.closest("[data-tk]");i
 /* ---------- narration: picks the most natural voice on the device and reads like a documentary ---------- */
 const NARR={gender:"m",voice:"",rate:1,playing:null};const RATES=[.7,1,1.4];
 try{Object.assign(NARR,JSON.parse(localStorage.getItem("shuhud-voice")||"{}"));NARR.playing=null;if(!RATES.includes(NARR.rate))NARR.rate=1}catch(e){}
-const saveNarr=()=>{try{localStorage.setItem("shuhud-voice",JSON.stringify({gender:NARR.gender,voice:NARR.voice,rate:NARR.rate}))}catch(e){}};
+const saveNarr=()=>{try{localStorage.setItem("shuhud-voice",JSON.stringify({gender:NARR.gender,voice:NARR.voice,azVoice:NARR.azVoice,rate:NARR.rate}))}catch(e){}};
 const MALE=/maged|majed|tarik|naayf|hamed|shakir|fahed|omar|bassel|moaz|rami|taim|saleh|hamdan|jamal|ali\b|hamza|daniel|alex\b|tom\b|aaron|arthur|guy\b|ryan|christopher|eric|davis|andrew|brian|fred|oliver|george|male/i;
 const FEMALE=/laila|layla|mariam|maryam|hoda|salma|zariyah|amany|amina|fatima|sana|rana|iman|noura|mouna|hala|sara\b|aysha|samantha|karen|serena|ava\b|jenny|aria\b|sonia|libby|moira|emma|susan|victoria|female/i;
 let voicesCache=[];
@@ -707,10 +715,32 @@ function narrationParts(i){const parts=[];const add=(t,pause)=>{String(t||"").sp
   add(i.headline,900);if(i.angle)add(i.angle,800);String(i.dispatch||"").split(/\n\s*\n/).forEach(p=>add(p,750));
   if(i.question){parts.push({t:T("question")+".",pause:450});add(i.question,600)}return parts}
 function hardCancel(){try{speechSynthesis.pause()}catch(e){}try{speechSynthesis.cancel()}catch(e){}}
-function stopNarration(){NARR.gen=(NARR.gen||0)+1;if(NARR.playing){NARR.playing.stop=true;NARR.playing=null}hardCancel();setTimeout(hardCancel,150);setTimeout(hardCancel,500);const fs=$("#narr-stop");if(fs)fs.hidden=true;document.querySelectorAll(".narr").forEach(n=>n.remove());document.querySelectorAll('[data-act="say"]').forEach(b=>b.textContent=T("listen"))}
+function stopNarration(){NARR.gen=(NARR.gen||0)+1;if(NARR.playing){NARR.playing.stop=true;try{NARR.playing.abort&&NARR.playing.abort()}catch(e){}NARR.playing=null}hardCancel();setTimeout(hardCancel,150);setTimeout(hardCancel,500);const fs=$("#narr-stop");if(fs)fs.hidden=true;document.querySelectorAll(".narr").forEach(n=>n.remove());document.querySelectorAll('[data-act="say"]').forEach(b=>b.textContent=T("listen"))}
+/* natural neural voices through Azure Speech (standalone app only) */
+const AZ_VOICES={ar:[["ar-SA-HamedNeural","m","حامد · سعودي"],["ar-SA-ZariyahNeural","f","زرية · سعودية"],["ar-EG-ShakirNeural","m","شاكر · مصري"],["ar-EG-SalmaNeural","f","سلمى · مصرية"],["ar-AE-HamdanNeural","m","حمدان · إماراتي"],["ar-AE-FatimaNeural","f","فاطمة · إماراتية"],["ar-SY-LaithNeural","m","ليث · سوري"],["ar-SY-AmanyNeural","f","أماني · سورية"]],
+  en:[["en-US-AndrewNeural","m","Andrew · US"],["en-US-AvaNeural","f","Ava · US"],["en-GB-RyanNeural","m","Ryan · UK"],["en-GB-SoniaNeural","f","Sonia · UK"]]};
+const azCfg=()=>{try{return JSON.parse(localStorage.getItem("shuhud-azure")||"null")}catch(e){return null}};
+const azOn=()=>!!(window.SHUHUD_STANDALONE&&azCfg()&&azCfg().key&&azCfg().region);
+function azVoice(lang){const list=AZ_VOICES[lang];return list.find(v=>v[0]===NARR.azVoice)||list.find(v=>v[1]===NARR.gender)||list[0]}
+const xmlEsc=t=>String(t).replace(/[<>&'"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;","'":"&apos;",'"':"&quot;"}[c]));
+async function azSpeak(text,lang,voice,signal){const c=azCfg();const rate=NARR.rate<1?"-22%":NARR.rate>1?"+22%":"-6%";
+  const ssml=`<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${voice[0].slice(0,5)}"><voice name="${voice[0]}"><prosody rate="${rate}">${xmlEsc(text)}</prosody></voice></speak>`;
+  const r=await fetch(`https://${c.region.trim()}.tts.speech.microsoft.com/cognitiveservices/v1`,{method:"POST",signal,headers:{"Ocp-Apim-Subscription-Key":c.key.trim(),"Content-Type":"application/ssml+xml","X-Microsoft-OutputFormat":"audio-24khz-96kbitrate-mono-mp3"},body:ssml});
+  if(!r.ok)throw new Error("azure "+r.status);return URL.createObjectURL(await r.blob())}
+function azPlay(i,lang,bar,run,gen){
+  const chunks=[i.headline,i.angle,...String(i.dispatch||"").split(/\n\s*\n/),i.question?T("question")+". "+i.question:""].map(x=>String(x||"").trim()).filter(Boolean);
+  const voice=azVoice(lang),ctl=new AbortController();run.abort=()=>{ctl.abort();if(run.audio){run.audio.pause();run.audio.src=""}};
+  const fetches=[];const get=k=>fetches[k]||(fetches[k]=azSpeak(chunks[k],lang,voice,ctl.signal));
+  let k=0;const step=async()=>{if(run.stop||gen!==NARR.gen)return;if(k>=chunks.length){stopNarration();return}
+    let url;try{url=await get(k);if(k+1<chunks.length)get(k+1).catch(()=>{})}catch(e){if(run.stop)return;const n=bar&&bar.querySelector(".narr-miss");if(n)n.textContent=T("azFail");stopNarration();return}
+    if(run.stop||gen!==NARR.gen)return;const a=new Audio(url);run.audio=a;a.onended=()=>{URL.revokeObjectURL(url);k++;setTimeout(step,k===1?700:550)};a.onerror=()=>{k++;step()};
+    a.play().catch(()=>{});if(bar){const pr=bar.querySelector(".narr-prog");if(pr)pr.style.width=((k+1)/chunks.length*100)+"%"}};
+  step();
+}
 function playNarration(i,lang,bar){
-  NARR.gen=(NARR.gen||0)+1;const gen=NARR.gen;if(NARR.playing)NARR.playing.stop=true;hardCancel();
-  const run={stop:false};NARR.playing=run;$("#narr-stop").hidden=false;const parts=narrationParts(i),v=pickVoice(lang);let k=0;
+  NARR.gen=(NARR.gen||0)+1;const gen=NARR.gen;if(NARR.playing){NARR.playing.stop=true;try{NARR.playing.abort&&NARR.playing.abort()}catch(e){}}hardCancel();
+  const run={stop:false};NARR.playing=run;$("#narr-stop").hidden=false;
+  if(azOn()){azPlay(i,lang,bar,run,gen);return}const parts=narrationParts(i),v=pickVoice(lang);let k=0;
   const male=v?voiceGender(v)!=="f":NARR.gender==="m";
   const next=()=>{if(run.stop||gen!==NARR.gen)return;if(k>=parts.length){stopNarration();return}const p=parts[k++];
     const u=new SpeechSynthesisUtterance(p.t);if(v){u.voice=v;u.lang=v.lang}else u.lang=lang==="ar"?"ar-SA":"en-GB";
@@ -719,25 +749,25 @@ function playNarration(i,lang,bar){
     try{speechSynthesis.resume()}catch(e){}speechSynthesis.speak(u);if(bar){const pr=bar.querySelector(".narr-prog");if(pr)pr.style.width=(k/parts.length*100)+"%"}};
   setTimeout(next,280);
   /* tell the reader when the chosen kind of voice does not exist on this device */
-  if(bar){const want=NARR.gender,has=voicesFor(lang).some(x=>voiceGender(x)===want);const n=bar.querySelector(".narr-miss");if(n)n.textContent=has||NARR.voice?"":(want==="f"?T("nNoFemale"):T("nNoMale"))}
+  if(bar&&!azOn()){const want=NARR.gender,has=voicesFor(lang).some(x=>voiceGender(x)===want);const n=bar.querySelector(".narr-miss");if(n)n.textContent=has||NARR.voice?"":(want==="f"?T("nNoFemale"):T("nNoMale"))}
 }
 function narrBar(card,i,lang){
   document.querySelectorAll(".narr").forEach(n=>n.remove());
-  const list=voicesFor(lang),bar=document.createElement("div");bar.className="narr";
-  const opts=list.map(v=>`<option value="${esc(v.name)}">${esc(v.name.replace(/\s*\(.*?\)\s*/g," ").replace(/Microsoft|Google/g,"").trim())}${/natural|neural|online|enhanced|premium/i.test(v.name)?" ★":""}</option>`).join("");
-  const cur=pickVoice(lang);
+  const az=azOn(),list=az?AZ_VOICES[lang].map(v=>({name:v[0],label:v[2],g:v[1]})):voicesFor(lang),bar=document.createElement("div");bar.className="narr";
+  const opts=list.map(v=>`<option value="${esc(v.name)}">${esc(az?v.label:v.name.replace(/\s*\(.*?\)\s*/g," ").replace(/Microsoft|Google/g,"").trim())}${!az&&/natural|neural|online|enhanced|premium/i.test(v.name)?" ★":""}</option>`).join("");
+  const cur=az?{name:azVoice(lang)[0]}:pickVoice(lang);
   bar.innerHTML=`<div class="narr-row"><button class="btn" type="button" data-n="stop">■ ${T("nStop")}</button>
     <span class="seg"><button type="button" data-n="m" aria-pressed="${NARR.gender==="m"}">${T("nMale")}</button><button type="button" data-n="f" aria-pressed="${NARR.gender==="f"}">${T("nFemale")}</button></span>
     ${list.length?`<select class="mini" data-n="voice" aria-label="${T("nVoice")}">${opts}</select>`:""}
     <select class="mini" data-n="rate" aria-label="${T("nRate")}"><option value=".7">${T("nSlow")}</option><option value="1">${T("nNormal")}</option><option value="1.4">${T("nFast")}</option></select></div>
     <div class="narr-track"><div class="narr-prog"></div></div><p class="note narr-miss"></p>
-    ${!list.some(v=>/natural|neural|online|enhanced|premium/i.test(v.name))?`<p class="note">${T("nTip")}</p>`:""}`;
+    ${!az&&!list.some(v=>/natural|neural|online|enhanced|premium/i.test(v.name))?`<p class="note">${T("nTip")}</p>`:""}`;
   card.querySelector(".foot").after(bar);
   const vs=bar.querySelector('[data-n="voice"]');if(vs&&cur)vs.value=cur.name;bar.querySelector('[data-n="rate"]').value=String(NARR.rate);
   bar.addEventListener("click",e=>{const b=e.target.closest("[data-n]");if(!b||b.tagName==="SELECT")return;const n=b.dataset.n;
     if(n==="stop"){stopNarration();return}
-    if(n==="m"||n==="f"){NARR.gender=n;NARR.voice="";saveNarr();const v=pickVoice(lang);if(vs&&v)vs.value=v.name;bar.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.n===n));playNarration(i,lang,bar)}});
-  if(vs)vs.onchange=()=>{NARR.voice=vs.value;const v=list.find(x=>x.name===vs.value);if(v&&voiceGender(v)!=="?")NARR.gender=voiceGender(v);saveNarr();bar.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.n===NARR.gender));playNarration(i,lang,bar)};
+    if(n==="m"||n==="f"){NARR.gender=n;NARR.voice="";NARR.azVoice="";saveNarr();const v=az?{name:azVoice(lang)[0]}:pickVoice(lang);if(vs&&v)vs.value=v.name;bar.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.n===n));playNarration(i,lang,bar)}});
+  if(vs)vs.onchange=()=>{const v=list.find(x=>x.name===vs.value);if(az){NARR.azVoice=vs.value;if(v)NARR.gender=v.g}else{NARR.voice=vs.value;if(v&&voiceGender(v)!=="?")NARR.gender=voiceGender(v)}saveNarr();bar.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.n===NARR.gender));playNarration(i,lang,bar)};
   bar.querySelector('[data-n="rate"]').onchange=e=>{NARR.rate=+e.target.value;saveNarr();playNarration(i,lang,bar)};
   return bar;
 }
@@ -842,7 +872,12 @@ $("#b-copy").onclick=()=>copy(buildPrompt());
 $("#b-use").onclick=()=>{const t=$("#b-paste").value;const m=t.match(/\{[\s\S]*\}/);if(!m){toast(T("bridgeBad"));return}
   try{const r=JSON.parse(m[0]);if(chosen!=="auto")r.animal=chosen;if(ROSTER[r.animal]){const R0=ROSTER[r.animal];r.animalName=r.animalName||R0.n;r.animalEmoji=r.animalEmoji||R0.e;r.animalHabitat=r.animalHabitat||R0.b}
     r.figures=Array.isArray(r.figures)?r.figures:[];r.impacts=Array.isArray(r.impacts)?r.impacts:[];draft=r;renderDraft();$("#d-out").scrollIntoView({behavior:"smooth",block:"start"})}catch(e){toast(T("bridgeBad"))}};
-if(window.SHUHUD_STANDALONE){$("#d-key-box").hidden=false;$("#k-key").value=window.shuhudKey.get();$("#k-save").onclick=()=>{window.shuhudKey.set($("#k-key").value.trim());location.reload()}}
+if(window.SHUHUD_STANDALONE){$("#d-az-box").hidden=false;{const c=azCfg()||{};$("#az-key").value=c.key||"";$("#az-region").value=c.region||""}
+  $("#az-save").onclick=async()=>{const key=$("#az-key").value.trim(),region=$("#az-region").value.trim().toLowerCase().replace(/\s+/g,"");const note=$("#az-note");
+    if(!key||!region){try{localStorage.removeItem("shuhud-azure")}catch(e){}note.textContent=T("azOff");return}
+    try{localStorage.setItem("shuhud-azure",JSON.stringify({key,region}))}catch(e){}note.textContent=T("azTesting");
+    try{const u=await azSpeak(isEn()?"Al-Shuhud. Human crises, as the other species live them.":"الشهود. أزمات البشر كما تعيشها الكائنات الأخرى.",isEn()?"en":"ar",azVoice(isEn()?"en":"ar"));new Audio(u).play().catch(()=>{});note.textContent=T("azOk")}catch(e){note.textContent=T("azFail")}};
+  $("#d-key-box").hidden=false;$("#k-key").value=window.shuhudKey.get();$("#k-save").onclick=()=>{window.shuhudKey.set($("#k-key").value.trim());location.reload()}}
 
 /* ---------- generation (both languages at once) ---------- */
 function buildPrompt(){
