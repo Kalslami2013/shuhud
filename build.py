@@ -11,8 +11,17 @@ head='''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><me
 BUILD=str(int(time.time()))
 open('version.txt','w').write(BUILD)
 src=src.replace('\n<script>\n','\n<script>window.SHUHUD_BUILD="'+BUILD+'"</script>\n<script src="local.js?v='+BUILD+'"></script>\n<script>\n',1)
-open(sys.argv[2],'w',encoding='utf8').write(head+src+'\n</body></html>\n')
+open(sys.argv[2],'w',encoding='utf8').write(head.replace('</head>','<meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://kalslami2013.github.io/shuhud/reader.html">\n</head>')+src+'\n</body></html>\n')
 # reader page: the same page with no newsroom and no controls, for the public
-rhead=head.replace('href="manifest.webmanifest"','href="reader.webmanifest"')
-rsrc=src.replace('<script>window.SHUHUD_BUILD=','<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD=',1)
+BASE="https://kalslami2013.github.io/shuhud/"
+DESC_AR="الشهود: منصة صحفية بالعربية والإنجليزية تروي أزمات العالم من زاويتها البيئية بلسان الكائنات التي تعيشها، من الحروب والتلوث إلى الجفاف والزلازل، مع الأرقام ومصادرها."
+DESC_EN="Al-Shuhud (The Witnesses): an Arabic-English journalism platform telling the world's crises from their environmental side, in the voices of the species living them."
+seo=f'''<title>الشهود | أزمات العالم بلسان الكائنات التي تعيشها — Al-Shuhud</title>
+<meta name="description" content="{DESC_AR}"><link rel="canonical" href="{BASE}reader.html"><meta name="robots" content="index,follow">
+<meta property="og:type" content="website"><meta property="og:site_name" content="الشهود · Al-Shuhud"><meta property="og:title" content="الشهود — أزمات العالم بلسان الكائنات التي تعيشها"><meta property="og:description" content="{DESC_AR}"><meta property="og:url" content="{BASE}reader.html"><meta property="og:image" content="{BASE}og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ar_AR"><meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="الشهود · Al-Shuhud"><meta name="twitter:description" content="{DESC_EN}"><meta name="twitter:image" content="{BASE}og.jpg">
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"الشهود","alternateName":"Al-Shuhud","url":"{BASE}reader.html","logo":"{BASE}icon-512.png","description":"{DESC_EN}","founder":{{"@type":"Person","name":"Kamal Al-Salami","alternateName":"كمال السلامي","jobTitle":"Founder and editor-in-chief"}},"inLanguage":["ar","en"]}}</script>
+'''
+rhead=head.replace('href="manifest.webmanifest"','href="reader.webmanifest"').replace('</head>',seo+'</head>')
+rsrc=src.replace('<script>window.SHUHUD_BUILD=','<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD=',1).replace('<title>الشهود</title>','',1)
 open('reader.html','w',encoding='utf8').write(rhead+rsrc+'\n</body></html>\n')

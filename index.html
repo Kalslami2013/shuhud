@@ -2,6 +2,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="الشهود"><meta name="theme-color" content="#0b1712">
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://kalslami2013.github.io/shuhud/reader.html">
 </head><body>
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>الشهود</title>
@@ -502,8 +503,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794003688"</script>
-<script src="local.js?v=1794003688"></script>
+<script>window.SHUHUD_BUILD="1794006321"</script>
+<script src="local.js?v=1794006321"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -641,7 +642,7 @@ const isEn=()=>lang==="en";
 function L(i){if(!isEn()||!i)return i;return i.en?{...i,...i.en,_tr:true}:{...i,_missing:true}}
 function applyStatic(){
   document.documentElement.lang=lang;document.documentElement.dir=isEn()?"ltr":"rtl";document.body.classList.toggle("en",isEn());
-  document.title=isEn()?"Al-Shuhud":"الشهود";
+  document.title=window.SHUHUD_READER?(isEn()?"Al-Shuhud | The world's crises, told by the species living them":"الشهود | أزمات العالم بلسان الكائنات التي تعيشها"):(isEn()?"Al-Shuhud":"الشهود");
   document.querySelectorAll("[data-i18n]").forEach(el=>{const v=T(el.dataset.i18n);if(typeof v==="string")el.innerHTML=v});
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>el.placeholder=T(el.dataset.i18nPh));
   document.querySelectorAll("[data-i18n-aria]").forEach(el=>el.setAttribute("aria-label",T(el.dataset.i18nAria)));
