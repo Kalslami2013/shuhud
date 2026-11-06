@@ -454,8 +454,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793969140"</script>
-<script src="local.js?v=1793969140"></script>
+<script>window.SHUHUD_BUILD="1793969927"</script>
+<script src="local.js?v=1793969927"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2080,7 +2080,8 @@ const canDelMedia=m=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE)||(type
 function mediaHTML(m){
   const files=Array.isArray(m.files)?m.files:[];const isVid=f=>String(f.mime||"").startsWith("video/");
   let body="";
-  if(files.length>1)body=`<div class="md-car">${files.map((f,k)=>isVid(f)?`<video src="${esc(mSrc(f))}" controls playsinline preload="metadata"></video>`:`<img src="${esc(mSrc(f))}" alt="${esc((m.title||"")+" "+(k+1))}" loading="lazy">`).join("")}</div><div class="md-n">${files.length} ↔</div>`;
+  const mdir=m.lang==="en"?"ltr":m.lang==="ar"?"rtl":(isEn()?"ltr":"rtl");
+  if(files.length>1)body=`<div class="md-car" dir="${mdir}">${files.map((f,k)=>isVid(f)?`<video src="${esc(mSrc(f))}" controls playsinline preload="metadata"></video>`:`<img src="${esc(mSrc(f))}" alt="${esc((m.title||"")+" "+(k+1))}">`).join("")}</div><div class="md-n" dir="ltr">1 / ${files.length}</div>`;
   else if(files[0])body=isVid(files[0])?`<video src="${esc(mSrc(files[0]))}" controls playsinline preload="metadata"></video>`:`<a href="${esc(mSrc(files[0]))}" target="_blank" rel="noopener"><img src="${esc(mSrc(files[0]))}" alt="${esc(m.title||"")}" loading="lazy"></a>`;
   const t=isEn()&&m.en&&m.en.title?m.en.title:m.title,c=isEn()&&m.en&&m.en.caption?m.en.caption:m.caption;
   return `<article class="md" data-mid="${esc(m.id)}"><div class="md-media">${body}</div><div class="md-bd">
@@ -2094,6 +2095,10 @@ function renderMedia(){
   $("#media-chips").innerHTML=["all",...M_TYPES].filter(t=>t==="all"||cnt[t]).map(t=>`<button class="chip" type="button" aria-pressed="${t===mType}" data-mt="${t}">${t==="all"?T("mAll"):esc(T("mTypes")[t])}<span class="n">${t==="all"?media.length:cnt[t]}</span></button>`).join("");
   const list=mType==="all"?media:media.filter(m=>m.type===mType);
   g.innerHTML=list.length?list.map(mediaHTML).join(""):`<div class="card empty"><div class="big">🎞️</div>${T("mEmpty")}</div>`;
+  /* every carousel opens on its first card (the title card), and the counter follows the swipe */
+  g.querySelectorAll(".md-car").forEach(c=>{const n=c.parentElement.querySelector(".md-n"),tot=c.children.length;
+    const start=()=>{c.scrollLeft=0};start();requestAnimationFrame(start);c.querySelectorAll("img").forEach(im=>im.addEventListener("load",()=>{if(!c.dataset.moved)start()},{once:true}));
+    c.addEventListener("scroll",()=>{c.dataset.moved="1";const k=Math.round(Math.abs(c.scrollLeft)/Math.max(1,c.clientWidth))+1;if(n)n.textContent=Math.min(tot,k)+" / "+tot},{passive:true})});
   const sel=$("#m-type");if(sel&&!sel.options.length)sel.innerHTML=M_TYPES.map(t=>`<option value="${t}"></option>`).join("");
   if(sel)[...sel.options].forEach(o=>o.textContent=T("mTypes")[o.value]);
 }
@@ -2105,7 +2110,7 @@ $("#media-grid").addEventListener("click",async e=>{const b=e.target.closest("[d
 /* one place that publishes to Media, used by the form and by the export studio */
 async function mediaPublish(type,title,caption,files,extra={}){
   if(files.some(f=>f.size>20*1024*1024))throw {code:"too_big"};
-  if(typeof ghMode==="function"&&ghMode()){await ghAdd(type,title,caption,files);return}
+  if(typeof ghMode==="function"&&ghMode()){await ghAdd(type,title,caption,files,extra);return}
   const up=[];for(const f of files){const u=await assets.upload(f);const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[""])[0].toLowerCase();up.push({id:u.id,url:u.url,mime:f.type||u.contentType||"",ext,name:f.name})}
   await db.collection("media").add({type,title,caption,files:up,createdAt:new Date().toISOString(),...extra});
 }
@@ -2119,7 +2124,7 @@ function studioMediaBtn(act,type,getFiles){
   if(!canAddMedia())return;
   act.insertAdjacentHTML("beforeend",`<button class="btn export" type="button" id="st-media">${T("toMedia")}</button>`);
   const b=$("#st-media");b.onclick=async()=>{if(b.disabled)return;b.disabled=true;b.textContent=T("mSaving");
-    try{const i=L(stItem);const files=await getFiles();await mediaPublish(files.length>1&&type==="card"?"carousel":type,i.headline||"",i.crisis||i.angle||"",files,{pieceId:stItem.id});
+    try{const i=L(stItem);const files=await getFiles();await mediaPublish(files.length>1&&type==="card"?"carousel":type,i.headline||"",i.crisis||i.angle||"",files,{pieceId:stItem.id,lang:isEn()&&stItem.en?"en":"ar"});
       b.textContent=T("toMediaDone");toast(T("mSaved")+(ghMode()?" · "+T("ghNote"):""))}
     catch(e){b.disabled=false;b.textContent=T("toMedia");toast(e&&e.code==="too_big"?T("mTooBig"):T("mFail"))}};
 }
@@ -2155,10 +2160,10 @@ async function ghApi(path,method="GET",body){
   if(r.status===404&&method==="GET")return null;if(!r.ok)throw {code:r.status};return r.json()}
 async function ghList(){const j=await ghApi(GH.list);return {sha:j&&j.sha,list:j?JSON.parse(ghUnB64(j.content)||"[]"):[]}}
 async function ghSaveList(change,msg){for(let k=0;k<2;k++){const {sha,list}=await ghList();try{await ghApi(GH.list,"PUT",{message:msg,content:ghB64(JSON.stringify(change(list))),...(sha?{sha}:{})});return}catch(e){if(e.code!==409||k)throw e}}}
-async function ghAdd(type,title,caption,files){
+async function ghAdd(type,title,caption,files,extra={}){
   const up=[];for(const f of files){const id="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[".jpg"])[0].toLowerCase();
     await ghApi("media/"+id+ext,"PUT",{message:"Media: add "+f.name,content:await fileB64(f)});up.push({id,url:"media/"+id+ext,mime:f.type||"",ext,name:f.name})}
-  const item={id:"g_"+Date.now().toString(36),type,title,caption,files:up,createdAt:new Date().toISOString()};
+  const item={id:"g_"+Date.now().toString(36),type,title,caption,files:up,createdAt:new Date().toISOString(),...extra};
   await ghSaveList(l=>[item,...l],"Media: add "+title);
   try{const {id,...rest}=item;await db.collection("media").doc(id).set(rest)}catch(e){}
 }
