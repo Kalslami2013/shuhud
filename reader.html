@@ -454,8 +454,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1793967325"</script>
-<script src="local.js?v=1793967325"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1793968670"</script>
+<script src="local.js?v=1793968670"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1768,10 +1768,12 @@ async function renderStudio(){
     body.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>saveBlob(blobs[+b.dataset.k],`shuhud-${slugOf(stItem)}${tag}-${+b.dataset.k+1}.png`));
     if(downloads){act.innerHTML=`<button class="btn primary" id="st-zip" type="button">${T("saveZip")}</button>`;
       $("#st-zip").onclick=async()=>{const b=$("#st-zip");b.disabled=true;b.textContent=T("zipping");try{if(!window.JSZip)await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js");const z=new JSZip();blobs.forEach((bl,k)=>z.file(`shuhud-${slugOf(stItem)}${tag}-${k+1}.png`,bl));await saveBlob(await z.generateAsync({type:"blob"}),`shuhud-${slugOf(stItem)}${tag}-cards.zip`)}catch(e){toast(T("zipFail"))}b.disabled=false;b.textContent=T("saveZip")}}
+    studioMediaBtn(act,"card",async()=>blobs.map((bl,k)=>new File([bl],`shuhud-${slugOf(stItem)}${tag}-${k+1}.png`,{type:"image/png"})));
   }else if(stMode==="info"){
     const [IW,IH]=curSize(),rs=curRes();setCanvasLang(stItem,IW);const icv=infographic(i,IW,IH,rs),blob=await toBlob(icv),u=URL.createObjectURL(blob);note.textContent=(downloads?"":T("noSave")+" ")+`${icv.width}×${icv.height}px`;stUrls.push(u);
     body.innerHTML=`<div class="st-info"><img src="${u}" alt="${T("infoAlt")}"></div>`;
     if(downloads){act.innerHTML=`<button class="btn primary" id="st-png" type="button">${T("savePng")}</button>`;$("#st-png").onclick=()=>saveBlob(blob,`shuhud-${slugOf(stItem)}${tag}-infographic-${$("#st-size").value}.png`)}
+    studioMediaBtn(act,"info",async()=>[new File([blob],`shuhud-${slugOf(stItem)}${tag}-infographic.png`,{type:"image/png"})]);
   }else{
     const [W,H]=curSize();setCanvasLang(stItem,W);const S=slidesFor(i,W,H,true,+$("#st-dur").value||0),total=S.reduce((a,s)=>a+s.d,0);
     const strip=[];for(let k=0;k<S.length;k++){const c=drawStill(i,W,H,S[k],k+1,S.length,0,.18);strip.push(`<figure><img src="${c.toDataURL("image/jpeg",.7)}" alt="${k+1}"><figcaption><span>${k+1}</span>${sceneCtl(S[k].key)}</figcaption></figure>`)}
@@ -1790,6 +1792,7 @@ async function renderStudio(){
         vn.textContent=T("recReady")((res.blob.size/1048576).toFixed(1),res.ext.toUpperCase());
         body.insertAdjacentHTML("beforeend",`<video class="st-out" controls playsinline src="${u}"></video>`);
         if(downloads){b.outerHTML=`<button class="btn primary" id="st-vsave" type="button">${T("saveVideo")(res.ext.toUpperCase())}</button>`;$("#st-vsave").onclick=()=>saveBlob(res.blob,`shuhud-${slugOf(stItem)}${tag}.${res.ext}`)}
+        studioMediaBtn(act,"video",async()=>[new File([res.blob],`shuhud-${slugOf(stItem)}${tag}.${res.ext}`,{type:res.blob.type||("video/"+res.ext)})]);
       }catch(e){vn.textContent=T("recFail")}
       finally{const p=$("#st-play");if(p)p.disabled=false;if($("#st-rec"))$("#st-rec").disabled=false}};
   }
@@ -2017,6 +2020,7 @@ Object.assign(DICT.ar,{
   mAddBtn:"➕ أضف مادة",mAddTitle:"أضف مادة إلى ميديا",mType:"النوع",mTitle:"العنوان",mCaption:"وصف قصير (اختياري)",mFiles:"الملفات (صورة أو أكثر، أو فيديو)",
   mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تظهر المادة في الصفحة العامة بعد «زامن النسخة المستقلة».",
   mSave:"انشر في ميديا",mSaving:"تُرفع الملفات…",mSaved:"نُشرت في ميديا",mFail:"تعذر النشر",mNeed:"اختر ملفاً وأضف عنواناً",mTooBig:"ملف أكبر من 20 ميغابايت",
+  toMedia:"📤 أضف إلى ميديا",toMediaDone:"✓ أضيفت إلى ميديا",
   mEmpty:"لا مواد هنا بعد.",mDel:"حذف",mDelConfirm:"تأكيد الحذف",mDeleted:"حُذفت المادة",mOpen:"افتح",
   aboutHTML:`<h3>منصة شهود</h3>
 <p class="lead">منصة صحفية تروي أزمات العالم من زاويتها البيئية، بلسان الكائنات التي تعيش في قلبها.</p>
@@ -2045,6 +2049,7 @@ Object.assign(DICT.en,{
   mAddBtn:"➕ Add an item",mAddTitle:"Add to Media",mType:"Type",mTitle:"Title",mCaption:"Short description (optional)",mFiles:"Files (one or more images, or a video)",
   mFilesNote:"20 MB per file. For a carousel pick several images in order. Items reach the public page after “Sync the standalone copy”.",
   mSave:"Publish to Media",mSaving:"Uploading…",mSaved:"Published to Media",mFail:"Couldn't publish",mNeed:"Pick a file and add a title",mTooBig:"A file is larger than 20 MB",
+  toMedia:"📤 Add to Media",toMediaDone:"✓ Added to Media",
   mEmpty:"Nothing here yet.",mDel:"Delete",mDelConfirm:"Confirm delete",mDeleted:"Item deleted",mOpen:"Open",
   aboutHTML:`<h3>Shuhud</h3>
 <p class="lead">A journalism platform that tells the world's crises from their environmental side, in the voices of the creatures living at their heart.</p>
@@ -2097,6 +2102,22 @@ $("#media-add-btn").onclick=()=>{$("#media-add").hidden=!$("#media-add").hidden}
 $("#media-grid").addEventListener("click",async e=>{const b=e.target.closest("[data-md]");if(!b)return;const id=b.closest(".md").dataset.mid;const m=media.find(x=>x.id===id);if(!m)return;
   if(mArmed!==id){mArmed=id;renderMedia();setTimeout(()=>{if(mArmed===id){mArmed=null;renderMedia()}},4000);return}
   mArmed=null;try{if(ghMode()){await ghDel(m)}else{await db.collection("media").doc(id).delete();for(const f of m.files||[]){try{await assets.delete(f.id)}catch(_){}}}toast(T("mDeleted"))}catch(err){toast(T("mFail"))}});
+/* one place that publishes to Media, used by the form and by the export studio */
+async function mediaPublish(type,title,caption,files,extra={}){
+  if(files.some(f=>f.size>20*1024*1024))throw {code:"too_big"};
+  if(typeof ghMode==="function"&&ghMode()){await ghAdd(type,title,caption,files);return}
+  const up=[];for(const f of files){const u=await assets.upload(f);const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[""])[0].toLowerCase();up.push({id:u.id,url:u.url,mime:f.type||u.contentType||"",ext,name:f.name})}
+  await db.collection("media").add({type,title,caption,files:up,createdAt:new Date().toISOString(),...extra});
+}
+/* the export studio's button: send what was just made straight to Media */
+function studioMediaBtn(act,type,getFiles){
+  if(!canAddMedia()||!stItem||stItem.id==="draft")return;
+  act.insertAdjacentHTML("beforeend",`<button class="btn export" type="button" id="st-media">${T("toMedia")}</button>`);
+  const b=$("#st-media");b.onclick=async()=>{if(b.disabled)return;b.disabled=true;b.textContent=T("mSaving");
+    try{const i=L(stItem);const files=await getFiles();await mediaPublish(files.length>1&&type==="card"?"carousel":type,i.headline||"",i.crisis||i.angle||"",files,{pieceId:stItem.id});
+      b.textContent=T("toMediaDone");toast(T("mSaved")+(ghMode()?" · "+T("ghNote"):""))}
+    catch(e){b.disabled=false;b.textContent=T("toMedia");toast(e&&e.code==="too_big"?T("mTooBig"):T("mFail"))}};
+}
 $("#m-save").onclick=async()=>{
   if(mBusy||!canAddMedia())return;const files=[...$("#m-files").files],title=$("#m-title").value.trim();
   if(!files.length||!title){toast(T("mNeed"));return}
