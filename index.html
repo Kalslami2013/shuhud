@@ -298,6 +298,10 @@ body:not(.en) .sp .sci{text-align:right}
 .about p,.about ul{margin:0}.about ul{padding-inline-start:20px;display:grid;gap:6px}
 .about .lead{font-size:17px;color:var(--parchment);font-weight:500}
 .about .q{font-family:var(--f-display);font-size:19px;color:var(--amber);margin-top:6px}
+.founder{display:flex;gap:18px;align-items:center;margin:12px 0 0;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(0,0,0,.18)}
+.founder img{width:120px;height:160px;object-fit:cover;border-radius:12px;flex:none}
+.founder figcaption{display:grid;gap:4px}.founder b{font-family:var(--f-display);font-size:21px;color:var(--parchment)}.founder span{font-size:14.5px;line-height:1.7;opacity:.9}.founder span:first-of-type{color:var(--amber);font-weight:600}
+@media(max-width:480px){.founder{flex-direction:column;text-align:center}.founder img{width:150px;height:200px}}
 .about-fr{display:grid;gap:8px;margin-top:10px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);text-align:left}
 body.reader nav.main button[data-view="desk"],body.reader nav.main button[data-view="track"],body.reader #v-track,body.reader #v-desk,body.reader .runbar,body.reader #studio,
 body.reader [data-act="del"],body.reader [data-act="photo"],body.reader [data-act="unphoto"],body.reader [data-act="export"],body.reader [data-act="tr"],
@@ -498,8 +502,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793995018"</script>
-<script src="local.js?v=1793995018"></script>
+<script>window.SHUHUD_BUILD="1794003688"</script>
+<script src="local.js?v=1794003688"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2086,10 +2090,11 @@ Object.assign(DICT.ar,{
 <li><b>ميديا:</b> صور وبطاقات وفيديو وإنفوجراف من إنتاج المنصة.</li>
 </ul>
 <p class="q">نحن لا نقرأ الصحف. نقرأ الماء حين يجف، والسماء حين تحترق، والأرض حين ترتجف.</p>
+<figure class="founder"><img src="media/founder.jpg" alt="كمال السلامي" loading="lazy" width="600" height="800"><figcaption><b>كمال السلامي</b><span>مؤسس المنصة ورئيس تحريرها</span><span>صحفي يمني مقيم في إسطنبول، يغطي الشأن اليمني والنزاعات وآثارها منذ 2006.</span></figcaption></figure>
 <section class="about-fr" lang="fr" dir="ltr"><h4>Shuhud en français</h4>
 <p>Shuhud (« les Témoins ») est une plateforme journalistique arabe-anglaise qui raconte les crises du monde sous leur angle environnemental, par la voix des espèces qui vivent en leur cœur : guerres, sécheresses, marées noires, grands projets industriels et technologiques, séismes et inondations. Chaque récit part d’un fait réel, suit son impact jusqu’au nid, au pâturage ou à l’eau de l’animal, et donne la source de chaque chiffre.</p>
 <p>Une édition française est en préparation pour le Maghreb et l’Afrique francophone. Contact : kalslami2013@gmail.com</p></section>
-<p class="note">أسسها الصحفي اليمني كمال السلامي في إسطنبول.</p>`
+`
 });
 Object.assign(DICT.en,{
   navMedia:"Media",navAbout:"About us",
@@ -2118,10 +2123,11 @@ Object.assign(DICT.en,{
 <li><b>Media:</b> photos, cards, videos and infographics made by Shuhud.</li>
 </ul>
 <p class="q">We don't read newspapers. We read water as it dries, skies as they burn, and the ground as it trembles.</p>
+<figure class="founder"><img src="media/founder.jpg" alt="Kamal Al-Salami" loading="lazy" width="600" height="800"><figcaption><b>Kamal Al-Salami</b><span>Founder and editor-in-chief</span><span>A Yemeni journalist based in Istanbul, covering Yemen, conflict and its impact since 2006.</span></figcaption></figure>
 <section class="about-fr" lang="fr" dir="ltr"><h4>Shuhud en français</h4>
 <p>Shuhud (« les Témoins ») est une plateforme journalistique arabe-anglaise qui raconte les crises du monde sous leur angle environnemental, par la voix des espèces qui vivent en leur cœur : guerres, sécheresses, marées noires, grands projets industriels et technologiques, séismes et inondations. Chaque récit part d’un fait réel, suit son impact jusqu’au nid, au pâturage ou à l’eau de l’animal, et donne la source de chaque chiffre.</p>
 <p>Une édition française est en préparation pour le Maghreb et l’Afrique francophone. Contact : kalslami2013@gmail.com</p></section>
-<p class="note">Founded by Yemeni journalist Kamal Al-Salami in Istanbul.</p>`
+`
 });
 let media=[],mType="all",mArmed=null,mBusy=false;
 const M_TYPES=["image","card","video","carousel","info"];
