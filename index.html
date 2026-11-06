@@ -251,7 +251,25 @@ body:not(.en) .sp .sci{text-align:right}
 .sp-seen li{font-size:13px;line-height:1.55}.sp-seen .when{display:block;font-size:11.5px;color:var(--faint)}
 .sp-act{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .sp-act a.btn{text-decoration:none}
-body.reader nav.main button[data-view="desk"],body.reader #v-desk,body.reader .runbar,body.reader #studio,
+.md-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px;margin-bottom:24px}
+.md-grid>.empty{grid-column:1/-1}
+.md{background:var(--bark);border:1px solid var(--line);border-radius:18px;overflow:hidden;backdrop-filter:blur(8px);display:flex;flex-direction:column;min-width:0}
+.md-media{position:relative;background:#07120d}
+.md-media img,.md-media video{display:block;width:100%;max-height:520px;object-fit:contain;background:#07120d}
+.md-car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.md-car>*{flex:0 0 100%;scroll-snap-align:center}
+.md-n{position:absolute;top:10px;inset-inline-end:10px;background:rgba(0,0,0,.6);color:var(--parchment);border-radius:999px;padding:2px 10px;font-size:12px}
+.md-bd{padding:12px 16px 14px;display:grid;gap:6px}
+.md-bd h3{font-family:var(--f-display);font-size:21px;margin:0;line-height:1.35}
+.md-bd p{margin:0;font-size:13.5px;color:var(--dim)}
+.md-bd .tag{justify-self:start}
+.md-ft{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.about{gap:10px;font-size:15.5px;line-height:1.9}
+.about h3{font-size:30px}.about h4{font-family:var(--f-display);font-size:21px;color:var(--amber);margin:8px 0 0}
+.about p,.about ul{margin:0}.about ul{padding-inline-start:20px;display:grid;gap:6px}
+.about .lead{font-size:17px;color:var(--parchment);font-weight:500}
+.about .q{font-family:var(--f-display);font-size:19px;color:var(--amber);margin-top:6px}
+body.reader nav.main button[data-view="desk"],body.reader nav.main button[data-view="track"],body.reader #v-track,body.reader #v-desk,body.reader .runbar,body.reader #studio,
 body.reader [data-act="del"],body.reader [data-act="photo"],body.reader [data-act="unphoto"],body.reader [data-act="export"],body.reader [data-act="tr"],
 body.reader .trbar button,body.reader #track .mk,body.reader [data-sa="photo"],body.reader [data-sa="fill"],body.reader [data-sa="write"],body.reader [data-sa="about"]{display:none!important}
 body.reader .rc .cnt.none{visibility:hidden}
@@ -277,6 +295,8 @@ body.reader .rc .cnt.none{visibility:hidden}
     <button role="tab" data-view="corr" aria-selected="false" data-i18n="navCorr">المراسلون</button>
     <button role="tab" data-view="ids" aria-selected="false" data-i18n="navIds">بطاقات الكائنات</button>
     <button role="tab" data-view="red" aria-selected="false" data-i18n="navRed">مهددة بالانقراض</button>
+    <button role="tab" data-view="media" aria-selected="false" data-i18n="navMedia">ميديا</button>
+    <button role="tab" data-view="about" aria-selected="false" data-i18n="navAbout">من نحن</button>
   </nav>
 
   <section id="v-live">
@@ -384,6 +404,23 @@ body.reader .rc .cnt.none{visibility:hidden}
     <div class="sp-grid" id="ids-grid"></div>
   </section>
 
+  <section id="v-media" hidden>
+    <p class="manifesto" data-i18n="mediaIntro">ما تنتجه منصة شهود.</p>
+    <div class="sp-head"><div class="cats" id="media-chips" role="toolbar" style="flex:1;min-width:0"></div><button class="btn export" type="button" id="media-add-btn" hidden data-i18n="mAddBtn">➕ أضف مادة</button></div>
+    <div class="panel" id="media-add" hidden style="margin-bottom:14px">
+      <h3 data-i18n="mAddTitle">أضف مادة إلى ميديا</h3>
+      <div class="row2"><div><label class="l" for="m-type" data-i18n="mType">النوع</label><select id="m-type"></select></div><div><label class="l" for="m-title" data-i18n="mTitle">العنوان</label><input type="text" id="m-title"></div></div>
+      <div><label class="l" for="m-caption" data-i18n="mCaption">وصف قصير</label><textarea id="m-caption" style="min-height:70px"></textarea></div>
+      <div><label class="l" for="m-files" data-i18n="mFiles">الملفات</label><input type="file" id="m-files" multiple accept="image/*,video/*"><p class="note" data-i18n="mFilesNote"></p></div>
+      <div><button class="btn primary" type="button" id="m-save" data-i18n="mSave">انشر في ميديا</button></div>
+    </div>
+    <div class="md-grid" id="media-grid"></div>
+  </section>
+
+  <section id="v-about" hidden>
+    <div class="panel about" data-i18n="aboutHTML"></div>
+  </section>
+
   <section id="v-red" hidden>
     <p class="manifesto" data-i18n="redIntro">كائنات مهددة بالانقراض.</p>
     <p class="note" data-i18n="redNote">التصنيفات من القائمة الحمراء IUCN.</p>
@@ -412,8 +449,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793966666"</script>
-<script src="local.js?v=1793966666"></script>
+<script>window.SHUHUD_BUILD="1793966996"</script>
+<script src="local.js?v=1793966996"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -560,7 +597,7 @@ function applyStatic(){
   
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
 }
-function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();renderCats();renderFeed();renderRoster();updateStatus();if(typeof renderSpecies==="function")renderSpecies();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
+function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();renderCats();renderFeed();renderRoster();updateStatus();if(typeof renderSpecies==="function")renderSpecies();if(typeof renderMedia==="function")renderMedia();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
 
 const ROSTER={
   oryx:{e:"🦌",n:"المها العربي",b:"صحراء الربع الخالي",r:"arabia"},
@@ -644,8 +681,8 @@ function toast(t){const d=document.createElement("div");d.className="toast";d.te
 function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB":"ar",{day:"numeric",month:"long",year:"numeric"})}catch(e){return""}}
 
 /* ---------- views ---------- */
-const VIEWS=["live","track","desk","corr","ids","red"];
-function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v)||(READER&&v==="desk"))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
+const VIEWS=["live","track","desk","corr","ids","red","media","about"];
+function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
 document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{location.hash=b.dataset.view;show(b.dataset.view)});
 addEventListener("hashchange",()=>show(location.hash.slice(1)));
 show(location.hash.slice(1));
@@ -1967,13 +2004,111 @@ $("#sp-photo-in").onchange=async e=>{const f=e.target.files[0];e.target.value=""
   toast(T("uploading"));
   try{const old=spDocs[k]&&spDocs[k].imageId;const up=await assets.upload(f);await spSave(k,{imageUrl:up.url,imageId:up.id});if(old){try{await assets.delete(old)}catch(_){}}toast(T("photoSaved"))}
   catch(err){toast(T("photoFail"))}};
+/* ---------- media & about ---------- */
+Object.assign(DICT.ar,{
+  navMedia:"ميديا",navAbout:"من نحن",
+  mediaIntro:"ما تنتجه منصة شهود من صور وبطاقات وفيديو وكاروسيل وإنفوجراف.",
+  mAll:"الكل",mTypes:{image:"صور",card:"بطاقات",video:"فيديو",carousel:"كاروسيل",info:"إنفوجراف"},
+  mAddBtn:"➕ أضف مادة",mAddTitle:"أضف مادة إلى ميديا",mType:"النوع",mTitle:"العنوان",mCaption:"وصف قصير (اختياري)",mFiles:"الملفات (صورة أو أكثر، أو فيديو)",
+  mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تظهر المادة في الصفحة العامة بعد «زامن النسخة المستقلة».",
+  mSave:"انشر في ميديا",mSaving:"تُرفع الملفات…",mSaved:"نُشرت في ميديا",mFail:"تعذر النشر",mNeed:"اختر ملفاً وأضف عنواناً",mTooBig:"ملف أكبر من 20 ميغابايت",
+  mEmpty:"لا مواد هنا بعد.",mDel:"حذف",mDelConfirm:"تأكيد الحذف",mDeleted:"حُذفت المادة",mOpen:"افتح",
+  aboutHTML:`<h3>منصة شهود</h3>
+<p class="lead">منصة صحفية تروي أزمات العالم من زاويتها البيئية، بلسان الكائنات التي تعيش في قلبها.</p>
+<p>حين تشتعل حرب، أو يجف نهر، أو تتسرب بقعة نفط، أو تُقطع غابة، لا يقتصر الأثر على البشر. هناك طائر يفقد عشه، وسمكة تختنق في مياه ملوثة، وحيوان يهجر موطنه. في «شهود» نعطي هذه الكائنات صوتاً، فيروي كل منها ما يحدث في عالمه كما يعيشه.</p>
+<h4>كيف نعمل</h4>
+<ul>
+<li>كل مادة تبدأ من خبر حقيقي، ونتتبع أثره من مكان الحدث حتى أعشاش الكائنات ومراعيها ومياهها.</li>
+<li>يروي المادة كائن يعيش في قلب الأزمة، ومعها سلسلة الأثر، والأرقام، وما حدث عند البشر.</li>
+<li>نعتمد على وكالات الأنباء والمؤسسات العلمية والمصادر الموثوقة، ونذكر مصدر كل رقم.</li>
+</ul>
+<h4>ما تجده هنا</h4>
+<ul>
+<li><b>النشرة الحية:</b> المواد بلسان الكائنات، بالعربية والإنجليزية، ويمكن الاستماع إليها.</li>
+<li><b>المراسلون:</b> الكائنات التي تروي موادنا من كل قارات العالم وبحاره.</li>
+<li><b>بطاقات الكائنات:</b> تعريف بكل كائن ظهر في موادنا، مع وضعه على القائمة الحمراء.</li>
+<li><b>مهددة بالانقراض:</b> كائنات تقف على حافة الاختفاء.</li>
+<li><b>ميديا:</b> صور وبطاقات وفيديو وإنفوجراف من إنتاج المنصة.</li>
+</ul>
+<p class="q">نحن لا نقرأ الصحف. نقرأ الماء حين يجف، والسماء حين تحترق، والأرض حين ترتجف.</p>
+<p class="note">أسسها الصحفي اليمني كمال السلامي في إسطنبول.</p>`
+});
+Object.assign(DICT.en,{
+  navMedia:"Media",navAbout:"About us",
+  mediaIntro:"Photos, cards, videos, carousels and infographics produced by Shuhud.",
+  mAll:"All",mTypes:{image:"Photos",card:"Cards",video:"Video",carousel:"Carousels",info:"Infographics"},
+  mAddBtn:"➕ Add an item",mAddTitle:"Add to Media",mType:"Type",mTitle:"Title",mCaption:"Short description (optional)",mFiles:"Files (one or more images, or a video)",
+  mFilesNote:"20 MB per file. For a carousel pick several images in order. Items reach the public page after “Sync the standalone copy”.",
+  mSave:"Publish to Media",mSaving:"Uploading…",mSaved:"Published to Media",mFail:"Couldn't publish",mNeed:"Pick a file and add a title",mTooBig:"A file is larger than 20 MB",
+  mEmpty:"Nothing here yet.",mDel:"Delete",mDelConfirm:"Confirm delete",mDeleted:"Item deleted",mOpen:"Open",
+  aboutHTML:`<h3>Shuhud</h3>
+<p class="lead">A journalism platform that tells the world's crises from their environmental side, in the voices of the creatures living at their heart.</p>
+<p>When a war breaks out, a river dries up, oil spills or a forest falls, people are not the only ones hit. A bird loses its nest, a fish chokes in polluted water, an animal abandons its home. Shuhud — “the witnesses” — gives these creatures a voice, each telling what happens in its world as it lives it.</p>
+<h4>How we work</h4>
+<ul>
+<li>Every piece starts from a real news event, and follows its impact from where it happened to the nests, pastures and waters of wildlife.</li>
+<li>Each piece is told by a creature living at the heart of the crisis, with the chain of impact, the numbers and what happened among humans.</li>
+<li>We rely on news agencies, scientific bodies and trusted sources, and cite the source of every figure.</li>
+</ul>
+<h4>What you'll find</h4>
+<ul>
+<li><b>Live feed:</b> pieces in the creatures' voices, in Arabic and English, with audio.</li>
+<li><b>Correspondents:</b> the creatures who tell our stories, from every continent and sea.</li>
+<li><b>Species cards:</b> a profile of every creature in our pieces, with its Red List status.</li>
+<li><b>Endangered:</b> species on the edge of disappearing.</li>
+<li><b>Media:</b> photos, cards, videos and infographics made by Shuhud.</li>
+</ul>
+<p class="q">We don't read newspapers. We read water as it dries, skies as they burn, and the ground as it trembles.</p>
+<p class="note">Founded by Yemeni journalist Kamal Al-Salami in Istanbul.</p>`
+});
+let media=[],mType="all",mArmed=null,mBusy=false;
+const M_TYPES=["image","card","video","carousel","info"];
+/* files uploaded inside Claude are copied to media/ on the public site by the sync task */
+const mSrc=f=>window.SHUHUD_STANDALONE&&String(f.url||"").startsWith("/_blob/")?"media/"+f.id+(f.ext||""):f.url;
+const canAddMedia=()=>!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE;
+function mediaHTML(m){
+  const files=Array.isArray(m.files)?m.files:[];const isVid=f=>String(f.mime||"").startsWith("video/");
+  let body="";
+  if(files.length>1)body=`<div class="md-car">${files.map((f,k)=>isVid(f)?`<video src="${esc(mSrc(f))}" controls playsinline preload="metadata"></video>`:`<img src="${esc(mSrc(f))}" alt="${esc((m.title||"")+" "+(k+1))}" loading="lazy">`).join("")}</div><div class="md-n">${files.length} ↔</div>`;
+  else if(files[0])body=isVid(files[0])?`<video src="${esc(mSrc(files[0]))}" controls playsinline preload="metadata"></video>`:`<a href="${esc(mSrc(files[0]))}" target="_blank" rel="noopener"><img src="${esc(mSrc(files[0]))}" alt="${esc(m.title||"")}" loading="lazy"></a>`;
+  const t=isEn()&&m.en&&m.en.title?m.en.title:m.title,c=isEn()&&m.en&&m.en.caption?m.en.caption:m.caption;
+  return `<article class="md" data-mid="${esc(m.id)}"><div class="md-media">${body}</div><div class="md-bd">
+    <span class="tag">${esc(T("mTypes")[m.type]||"")}</span>${t?`<h3>${esc(t)}</h3>`:""}${c?`<p>${esc(c)}</p>`:""}
+    <div class="md-ft"><span class="note">${fmtDate(m.createdAt)}</span>${canAddMedia()?`<button class="btn danger" type="button" data-md="del">${mArmed===m.id?T("mDelConfirm"):T("mDel")}</button>`:""}</div></div></article>`;
+}
+function renderMedia(){
+  const g=$("#media-grid");if(!g)return;
+  $("#media-add-btn").hidden=!canAddMedia();if(!canAddMedia())$("#media-add").hidden=true;
+  const cnt={};media.forEach(m=>cnt[m.type]=(cnt[m.type]||0)+1);
+  $("#media-chips").innerHTML=["all",...M_TYPES].filter(t=>t==="all"||cnt[t]).map(t=>`<button class="chip" type="button" aria-pressed="${t===mType}" data-mt="${t}">${t==="all"?T("mAll"):esc(T("mTypes")[t])}<span class="n">${t==="all"?media.length:cnt[t]}</span></button>`).join("");
+  const list=mType==="all"?media:media.filter(m=>m.type===mType);
+  g.innerHTML=list.length?list.map(mediaHTML).join(""):`<div class="card empty"><div class="big">🎞️</div>${T("mEmpty")}</div>`;
+  const sel=$("#m-type");if(sel&&!sel.options.length)sel.innerHTML=M_TYPES.map(t=>`<option value="${t}"></option>`).join("");
+  if(sel)[...sel.options].forEach(o=>o.textContent=T("mTypes")[o.value]);
+}
+$("#media-chips").addEventListener("click",e=>{const b=e.target.closest("[data-mt]");if(!b)return;mType=b.dataset.mt;renderMedia()});
+$("#media-add-btn").onclick=()=>{$("#media-add").hidden=!$("#media-add").hidden};
+$("#media-grid").addEventListener("click",async e=>{const b=e.target.closest("[data-md]");if(!b)return;const id=b.closest(".md").dataset.mid;const m=media.find(x=>x.id===id);if(!m)return;
+  if(mArmed!==id){mArmed=id;renderMedia();setTimeout(()=>{if(mArmed===id){mArmed=null;renderMedia()}},4000);return}
+  mArmed=null;try{await db.collection("media").doc(id).delete();for(const f of m.files||[]){try{await assets.delete(f.id)}catch(_){}}toast(T("mDeleted"))}catch(err){toast(T("mFail"))}});
+$("#m-save").onclick=async()=>{
+  if(mBusy||!canAddMedia())return;const files=[...$("#m-files").files],title=$("#m-title").value.trim();
+  if(!files.length||!title){toast(T("mNeed"));return}
+  if(files.some(f=>f.size>20*1024*1024)){toast(T("mTooBig"));return}
+  mBusy=true;const b=$("#m-save");b.disabled=true;b.textContent=T("mSaving");
+  try{const up=[];for(const f of files){const u=await assets.upload(f);const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[""])[0].toLowerCase();up.push({id:u.id,url:u.url,mime:f.type||u.contentType||"",ext,name:f.name})}
+    let type=$("#m-type").value;if(type==="image"&&up.length>1)type="carousel";
+    await db.collection("media").add({type,title,caption:$("#m-caption").value.trim(),files:up,createdAt:new Date().toISOString()});
+    toast(T("mSaved"));$("#m-title").value="";$("#m-caption").value="";$("#m-files").value="";$("#media-add").hidden=true}
+  catch(err){toast(T("mFail"))}
+  finally{mBusy=false;b.disabled=false;b.textContent=T("mSave")}};
 /* ---------- capabilities ---------- */
-applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrack();renderSpecies();
+applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrack();renderSpecies();renderMedia();
 (async()=>{
   const c=window.claude;
   if(!c?.use){statusMsg="openInClaude";dbReady=true;updateStatus();renderFeed();return}
   c.use("sample").then(s=>{sample=s;if(!s)$("#d-note").textContent=T("sampleOff");renderFeed();renderSpecies()});
-  c.use("assets").then(a=>{assets=a;renderSpecies()});
+  c.use("assets").then(a=>{assets=a;renderSpecies();renderMedia()});
   c.use("downloads").then(d=>{downloads=d;if(!$("#studio").hidden)renderStudio()});
   c.use("mcp").then(m=>{mcp=m;const on=!!m&&!window.SHUHUD_STANDALONE;$("#run-track").hidden=!on;$("#run-live").hidden=!on;runNotes()}).catch(()=>{});
   db=await c.use("db");
@@ -1982,6 +2117,7 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
     dbReady=true;items=snap.docs.map(d=>({id:d.id,...d.data()}));
     updateStatus();renderCats();renderFeed();renderRoster();renderTrack();renderSpecies();
   },()=>{dbReady=true;statusMsg="feedFail";updateStatus();renderFeed()});
+  db.collection("media").orderBy("createdAt","desc").limit(300).onSnapshot(snap=>{media=snap.docs.map(d=>({id:d.id,...d.data()}));renderMedia()},()=>{});
   db.collection("species").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{const x=d.data();m[x.key||d.id]=x});spDocs=m;spLoaded=true;renderSpecies()},()=>{});
   db.collection("monitor").orderBy("at","desc").limit(300).onSnapshot(snap=>{track=snap.docs.map(d=>({id:d.id,...d.data()}));renderTrack()},()=>{});
 })();
