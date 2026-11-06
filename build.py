@@ -12,3 +12,7 @@ BUILD=str(int(time.time()))
 open('version.txt','w').write(BUILD)
 src=src.replace('\n<script>\n','\n<script>window.SHUHUD_BUILD="'+BUILD+'"</script>\n<script src="local.js?v='+BUILD+'"></script>\n<script>\n',1)
 open(sys.argv[2],'w',encoding='utf8').write(head+src+'\n</body></html>\n')
+# reader page: the same page with no newsroom and no controls, for the public
+rhead=head.replace('href="manifest.webmanifest"','href="reader.webmanifest"')
+rsrc=src.replace('<script>window.SHUHUD_BUILD=','<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD=',1)
+open('reader.html','w',encoding='utf8').write(rhead+rsrc+'\n</body></html>\n')

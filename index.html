@@ -156,6 +156,11 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .narr-prog{height:100%;width:0;background:var(--amber);transition:width .4s}
 .track-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
 .track-head .note{margin:0;color:var(--dim);font-size:13px}
+.runbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+.runbar[hidden]{display:none}
+.btn.run{background:var(--amber);color:#1d1406;border-color:var(--amber);font-weight:600;font-size:13.5px;padding:8px 14px}
+.btn.run:disabled{opacity:.55;cursor:default}
+.runbar .note{font-size:12.5px;color:var(--dim)}
 .track{list-style:disc;margin:0;padding-inline-start:22px;display:grid;gap:10px;background:var(--bark);border:1px solid var(--line);border-radius:18px;padding-block:16px;padding-inline-end:16px;backdrop-filter:blur(8px)}
 .track li{line-height:1.7;font-size:14.5px;min-width:0;overflow-wrap:anywhere}
 .track li::marker{color:var(--amber)}
@@ -218,6 +223,38 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
 .manifesto{font-family:var(--f-display);font-size:20px;line-height:1.7;color:var(--parchment);margin:0 0 16px;text-wrap:pretty}
 .toast{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--amber);color:#1d1406;padding:9px 18px;border-radius:999px;font-size:13.5px;font-weight:600;z-index:20}
 @media (prefers-reduced-motion:reduce){.walker{animation:none}}
+nav.main{flex-wrap:wrap}
+nav.main button{flex:1 1 auto;white-space:nowrap}
+@media (max-width:620px){nav.main button{flex:1 1 30%}}
+input[type=search].sp-q{box-sizing:border-box;background:rgba(0,0,0,.28);border:1px solid var(--line);color:var(--parchment);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:15px}
+.sp-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.sp-head input{flex:1;min-width:180px}
+.sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:14px;margin-bottom:24px}
+.sp-grid>.empty{grid-column:1/-1}
+.sp{background:var(--bark);border:1px solid var(--line);border-radius:18px;overflow:hidden;backdrop-filter:blur(8px);display:flex;flex-direction:column;min-width:0}
+.sp-ph{position:relative;aspect-ratio:4/3;background:radial-gradient(circle at 40% 35%,#2a4a37,#0e1f17);display:grid;place-items:center;overflow:hidden}
+.sp-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.sp-emo{font-size:84px;line-height:1;filter:drop-shadow(0 6px 18px rgba(0,0,0,.5))}
+.stb{position:absolute;top:10px;inset-inline-start:10px;border-radius:999px;padding:3px 11px;font-size:12px;font-weight:600;color:#1d1406;background:var(--faint)}
+.sp-cr{position:absolute;bottom:6px;inset-inline-end:8px;font-size:10.5px;color:rgba(239,230,207,.8);text-shadow:0 1px 4px #000}
+.st-CR{background:#e0574a!important;color:#fff!important}.st-EN{background:var(--ember)!important}.st-VU{background:var(--amber)!important}.st-NT{background:#d8cf6a!important}.st-LC{background:var(--leaf)!important}.st-DD,.st-NE,.st-DOM{background:#8a9a84!important}
+.chip .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-inline-end:6px;vertical-align:middle}
+.sp-bd{padding:14px 16px 16px;display:grid;gap:7px;min-width:0}
+.sp-bd h3{font-family:var(--f-display);font-size:23px;margin:0;line-height:1.3}
+.sp .sci{font-style:italic;color:var(--dim);font-size:13px;text-align:start}
+body:not(.en) .sp .sci{text-align:right}
+.sp .hab{font-size:13px;color:var(--dim)}
+.sp-tx{margin:0;font-size:13.5px;line-height:1.7}.sp-tx b{color:var(--amber);font-weight:600}
+.sp-seen{border-top:1px solid var(--line);padding-top:8px}
+.sp-seen .lbl{font-size:12px;color:var(--amber);margin-bottom:4px}
+.sp-seen ul{margin:0;padding:0;list-style:none;display:grid;gap:5px}
+.sp-seen li{font-size:13px;line-height:1.55}.sp-seen .when{display:block;font-size:11.5px;color:var(--faint)}
+.sp-act{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.sp-act a.btn{text-decoration:none}
+body.reader nav.main button[data-view="desk"],body.reader #v-desk,body.reader .runbar,body.reader #studio,
+body.reader [data-act="del"],body.reader [data-act="photo"],body.reader [data-act="unphoto"],body.reader [data-act="export"],body.reader [data-act="tr"],
+body.reader .trbar button,body.reader #track .mk,body.reader [data-sa="photo"],body.reader [data-sa="fill"],body.reader [data-sa="write"],body.reader [data-sa="about"]{display:none!important}
+body.reader .rc .cnt.none{visibility:hidden}
 </style>
 
 <canvas id="forest" aria-hidden="true"></canvas>
@@ -238,10 +275,13 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
     <button role="tab" data-view="track" aria-selected="false" data-i18n="navTrack">الرصد</button>
     <button role="tab" data-view="desk" aria-selected="false" data-i18n="navDesk">غرفة التحرير</button>
     <button role="tab" data-view="corr" aria-selected="false" data-i18n="navCorr">المراسلون</button>
+    <button role="tab" data-view="ids" aria-selected="false" data-i18n="navIds">بطاقات الكائنات</button>
+    <button role="tab" data-view="red" aria-selected="false" data-i18n="navRed">مهددة بالانقراض</button>
   </nav>
 
   <section id="v-live">
     <div class="cats" id="cats" role="toolbar" aria-label="أبواب النشرة" data-i18n-aria="catsAria"></div>
+    <div class="runbar" id="run-live" hidden><button class="btn run" type="button" data-run="daily" data-i18n="runDaily">✨ اكتب قطع اليوم الآن</button><span class="note" data-note="daily"></span></div>
     <div class="status" id="status">تتجمع الحيوانات حول النار…</div>
     <div class="by-animal" id="by-animal" hidden></div>
     <div class="feed" id="feed"></div>
@@ -249,6 +289,7 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
 
   <section id="v-track" hidden>
     <div class="track-head"><p class="note" data-i18n="trackIntro">تطورات البيئة والأزمات المرتبطة بها كما تصل، وتتحدث كل ساعتين.</p><span style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button class="btn" id="tr-all" type="button" hidden></button><button class="btn" id="tr-order" type="button"></button></span></div>
+    <div class="runbar" id="run-track" hidden><button class="btn run" type="button" data-run="monitor" data-i18n="runMonitor">🔍 ارصد الآن</button><button class="btn" type="button" data-run="sync" data-i18n="runSync">↻ زامن النسخة المستقلة</button><span class="note" data-note="monitor"></span><span class="note" data-note="sync"></span></div>
     <div class="status" id="tr-status"></div>
     <ul class="track" id="track"></ul>
   </section>
@@ -337,6 +378,21 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
     </div>
   </section>
 
+  <section id="v-ids" hidden>
+    <p class="manifesto" data-i18n="idsIntro">بطاقة تعريف لكل كائن ظهر في مادة.</p>
+    <div class="sp-head"><input type="search" class="sp-q" data-i18n-ph="spSearch" placeholder="ابحث باسم الكائن…" aria-label="بحث"><span class="note" id="ids-count"></span></div>
+    <div class="sp-grid" id="ids-grid"></div>
+  </section>
+
+  <section id="v-red" hidden>
+    <p class="manifesto" data-i18n="redIntro">كائنات مهددة بالانقراض.</p>
+    <p class="note" data-i18n="redNote">التصنيفات من القائمة الحمراء IUCN.</p>
+    <div class="cats" id="red-chips" role="toolbar"></div>
+    <div class="sp-head"><input type="search" class="sp-q" data-i18n-ph="spSearch" placeholder="ابحث باسم الكائن…" aria-label="بحث"></div>
+    <div class="sp-grid" id="red-grid"></div>
+  </section>
+  <input type="file" id="sp-photo-in" accept="image/*" hidden>
+
   <section id="v-corr" hidden>
     <p class="manifesto" data-i18n="manifesto">نحن لا نقرأ الصحف. نقرأ الماء حين يجف، والسماء حين تحترق، والأرض حين ترتجف قبل أن تشعروا بها. هؤلاء مراسلونا.</p>
     <div class="roster" id="roster"></div>
@@ -356,8 +412,8 @@ textarea{min-height:140px;resize:vertical;line-height:1.7}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793369515"</script>
-<script src="local.js?v=1793369515"></script>
+<script>window.SHUHUD_BUILD="1793966480"</script>
+<script src="local.js?v=1793966480"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -369,7 +425,8 @@ ar:{
   sceneLoading:"الغابة تقرأ ساعتك…",timeAuto:"الوقت تلقائي",seasonAuto:"الفصل تلقائي",
   dawn:"فجر",day:"نهار",dusk:"غروب",night:"ليل",spring:"ربيع",summer:"صيف",autumn:"خريف",winter:"شتاء",tropic:"موسم استوائي",moon:"القمر",
   moonNames:["محاق","هلال","تربيع أول","أحدب متزايد","بدر","أحدب متناقص","تربيع ثانٍ","هلال أخير"],
-  navTrack:"الرصد",trackIntro:"تطورات البيئة والأزمات المرتبطة بها كما تصل، وتتحدث كل ساعتين.",toPiece:"حوّل إلى مادة",trTrack:"ترجم",trTrackBack:"الأصل",trTrackIng:"يترجم…",trTrackFail:"تعذّرت الترجمة، حاول بعد قليل",trAll:n=>`ترجم الإنجليزي (${n.toLocaleString("ar")})`,converted:"✓ صارت مادة",newestFirst:"الأحدث أولاً",oldestFirst:"الأقدم أولاً",trackEmpty:"لم يصل شيء إلى الرصد بعد. أول تحديث خلال ساعتين.",lastScan:"آخر رصد",trackCount:n=>`${n.toLocaleString("ar")} تطوراً مرصوداً`,
+  navTrack:"الرصد",trackIntro:"تطورات البيئة والأزمات المرتبطة بها. الرصد يدوي: لا يعمل إلا حين تضغط «ارصد الآن».",toPiece:"حوّل إلى مادة",trTrack:"ترجم",trTrackBack:"الأصل",trTrackIng:"يترجم…",trTrackFail:"تعذّرت الترجمة، حاول بعد قليل",trAll:n=>`ترجم الإنجليزي (${n.toLocaleString("ar")})`,converted:"✓ صارت مادة",newestFirst:"الأحدث أولاً",oldestFirst:"الأقدم أولاً",trackEmpty:"لم يصل شيء إلى الرصد بعد. اضغط «ارصد الآن» لتبدأ جولة رصد.",lastScan:"آخر رصد",trackCount:n=>`${n.toLocaleString("ar")} تطوراً مرصوداً`,
+  runMonitor:"🔍 ارصد الآن",runSync:"↻ زامن النسخة المستقلة",runDaily:"✨ اكتب قطع اليوم الآن",runSending:"يبدأ…",runStarted:"بدأ. تصل النتائج خلال دقائق، ثم يتوقف وحده.",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"وافق على طلب الإذن ثم اضغط مرة أخرى.",runDenied:"لم يُسمح للصفحة بتشغيل المهام. فعّلها من قائمة الأذونات أعلى الصفحة.",runFail:"لم يبدأ. جرّب بعد دقيقة.",runLast:"آخر تشغيل",
   navLive:"النشرة الحية",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
   loadingStatus:"تتجمع الحيوانات حول النار…",all:"الكل",
   deskTitle:"غرفة التحرير",deskSub:"أعطِ الشهود أزمة، واختر من يرويها، أو دع الغابة تختار.",
@@ -387,7 +444,7 @@ ar:{
   sources:"المصادر",source:"المصدر",fromDesk:"من غرفة التحرير",listen:"استمع",export:"تصدير",copy:"نسخ",del:"حذف",delConfirm:"تأكيد الحذف",
   deleted:"حُذفت الرواية",delFail:"تعذر الحذف",copied:"نُسخ النص",witness:"شاهد",
   emptyLoading:"تتجمع الحيوانات حول النار، وستظهر النشرة بعد لحظات.",emptyCat:"لا قطع في هذا الباب بعد. اكتب واحدة من غرفة التحرير.",
-  emptyAll:"الغابة صامتة الآن. ستصل قطع اليوم مع التحديث التالي، ويمكنك كتابة أول قطعة من غرفة التحرير.",
+  emptyAll:"الغابة صامتة الآن. اضغط «اكتب قطع اليوم الآن»، أو اكتب أول قطعة من غرفة التحرير.",
   statusCount:n=>`${n.toLocaleString("ar")} قطعة في النشرة`,lastUpdate:"آخر تحديث من الغابة",
   openInClaude:"افتح الصفحة داخل Claude لترى النشرة الحية.",signIn:"سجّل الدخول في Claude لترى النشرة الحية.",feedFail:"تعذر الوصول إلى النشرة الآن.",
   stories:n=>`${n} من الروايات`,
@@ -430,7 +487,8 @@ en:{
   sceneLoading:"The forest is reading your clock…",timeAuto:"Time: auto",seasonAuto:"Season: auto",
   dawn:"Dawn",day:"Day",dusk:"Dusk",night:"Night",spring:"Spring",summer:"Summer",autumn:"Autumn",winter:"Winter",tropic:"Tropical season",moon:"Moon",
   moonNames:["new","waxing crescent","first quarter","waxing gibbous","full","waning gibbous","last quarter","waning crescent"],
-  navTrack:"Tracker",trackIntro:"Environmental developments and related crises as they come in, updated every two hours.",toPiece:"Turn into a piece",trTrack:"Translate",trTrackBack:"Original",trTrackIng:"Translating…",trTrackFail:"Translation failed, try again shortly",trAll:n=>`Translate English (${n})`,converted:"✓ Turned into a piece",newestFirst:"Newest first",oldestFirst:"Oldest first",trackEmpty:"Nothing in the tracker yet. The first update arrives within two hours.",lastScan:"Last scan",trackCount:n=>`${n} ${n===1?"development":"developments"} tracked`,
+  navTrack:"Tracker",trackIntro:"Environmental developments and related crises. Tracking is manual: it only runs when you press “Track now”.",toPiece:"Turn into a piece",trTrack:"Translate",trTrackBack:"Original",trTrackIng:"Translating…",trTrackFail:"Translation failed, try again shortly",trAll:n=>`Translate English (${n})`,converted:"✓ Turned into a piece",newestFirst:"Newest first",oldestFirst:"Oldest first",trackEmpty:"Nothing in the tracker yet. Press “Track now” to start a scan.",lastScan:"Last scan",trackCount:n=>`${n} ${n===1?"development":"developments"} tracked`,
+  runMonitor:"🔍 Track now",runSync:"↻ Sync the standalone copy",runDaily:"✨ Write today's pieces now",runSending:"Starting…",runStarted:"Started. Results arrive in a few minutes, then it stops on its own.",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"Approve the permission prompt, then press again.",runDenied:"This page isn't allowed to run tasks. Turn it on from the page's permissions menu.",runFail:"Didn't start. Try again in a minute.",runLast:"Last run",
   navLive:"Live feed",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
   loadingStatus:"The animals are gathering around the fire…",all:"All",
   deskTitle:"Newsroom",deskSub:"Give the witnesses a crisis, pick who tells it, or let the forest choose.",
@@ -448,7 +506,7 @@ en:{
   sources:"Sources",source:"Source",fromDesk:"from the newsroom",listen:"Listen",export:"Export",copy:"Copy",del:"Delete",delConfirm:"Confirm delete",
   deleted:"Story deleted",delFail:"Couldn't delete",copied:"Text copied",witness:"Witness",
   emptyLoading:"The animals are gathering around the fire. The feed will appear in a moment.",emptyCat:"Nothing in this section yet. Write one from the newsroom.",
-  emptyAll:"The forest is quiet. Today's pieces arrive with the next update, or write the first one from the newsroom.",
+  emptyAll:"The forest is quiet. Press “Write today's pieces now”, or write the first one from the newsroom.",
   statusCount:n=>`${n} ${n===1?"piece":"pieces"} in the feed`,lastUpdate:"last update from the forest",
   openInClaude:"Open this page inside Claude to see the live feed.",signIn:"Sign in to Claude to see the live feed.",feedFail:"Can't reach the feed right now.",
   stories:n=>`${n} ${n===1?"story":"stories"}`,
@@ -502,7 +560,7 @@ function applyStatic(){
   
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
 }
-function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();renderCats();renderFeed();renderRoster();updateStatus();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
+function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();renderCats();renderFeed();renderRoster();updateStatus();if(typeof renderSpecies==="function")renderSpecies();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
 
 const ROSTER={
   oryx:{e:"🦌",n:"المها العربي",b:"صحراء الربع الخالي",r:"arabia"},
@@ -574,6 +632,10 @@ const rName=k=>isEn()&&ROSTER_EN[k]?ROSTER_EN[k][0]:ROSTER[k].n;
 const rBio=k=>isEn()&&ROSTER_EN[k]?ROSTER_EN[k][1]:ROSTER[k].b;
 const CATS=["الكل","الحروب والبيئة","التقنية والذكاء الاصطناعي","التلوث","المياه","الطاقة","كوارث طبيعية","كوارث بشرية","الغابات","المناخ","البحار والمحيطات","الميكروبات والأوبئة","الانقراض","الكون","المدن","الغذاء والزراعة","الهجرة والنزوح"];
 
+/* reader mode: the public page for readers, with no newsroom and no controls */
+const READER=!!window.SHUHUD_READER;if(READER)document.body.classList.add("reader");
+/* photos stored inside Claude (/_blob/) can't load on the public site */
+const pubImg=u=>u&&!(window.SHUHUD_STANDALONE&&String(u).startsWith("/_blob/"))?u:"";
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let byAnimal=null,armedPhoto=null,db=null,sample=null,assets=null,items=[],cat="الكل",chosen="auto",att=[],draft=null,armed=null,dbReady=false,translatingId=null,statusMsg="";
 const isWarn=s=>/تحقق|verif/i.test(s||"");
@@ -582,8 +644,8 @@ function toast(t){const d=document.createElement("div");d.className="toast";d.te
 function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB":"ar",{day:"numeric",month:"long",year:"numeric"})}catch(e){return""}}
 
 /* ---------- views ---------- */
-const VIEWS=["live","track","desk","corr"];
-function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
+const VIEWS=["live","track","desk","corr","ids","red"];
+function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v)||(READER&&v==="desk"))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
 document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{location.hash=b.dataset.view;show(b.dataset.view)});
 addEventListener("hashchange",()=>show(location.hash.slice(1)));
 show(location.hash.slice(1));
@@ -610,7 +672,7 @@ function richHTML(i,editable){
   return `${i.crisis?`<div class="crisis"><b${ce("crisis")}>${esc(i.crisis)}</b></div>`:""}
     <h2${ce("headline")}>${esc(i.headline)}</h2>
     ${i.angle?`<p class="angle"${ce("angle")}>${esc(i.angle)}</p>`:""}
-    ${i.imageUrl?`<img class="att" src="${esc(i.imageUrl)}" alt="">${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
+    ${pubImg(i.imageUrl)?`<img class="att" src="${esc(i.imageUrl)}" alt="">${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
     <p class="voice"${ce("dispatch")}>${esc(i.dispatch)}</p>
     ${chain.length?`<div class="chain"><div class="lbl">${T("chain")}</div><ol>${chain.map(c=>`<li>${esc(c)}</li>`).join("")}</ol></div>`:""}
     ${figs.length?`<div class="figs"><div class="lbl">${T("figures")}</div><div class="grid">${figs.map(f=>{const warn=isWarn(f.source);return `<div class="fig${warn?" warn":""}"><div class="v">${esc(f.value)}</div><div class="t">${esc(f.label)}</div>${f.source?`<div class="s">${esc(f.source)}</div>`:""}</div>`}).join("")}</div></div>`:""}
@@ -643,8 +705,8 @@ function plain(i){
 function renderFeed(){
   try{if(NARR.playing)stopNarration()}catch(e){}
   let list=cat==="الكل"?items:items.filter(i=>i.category===cat);
-  if(byAnimal)list=list.filter(i=>i.animal===byAnimal);
-  const fb=$("#by-animal");if(fb){fb.hidden=!byAnimal;if(byAnimal&&ROSTER[byAnimal])fb.innerHTML=`<span>${ROSTER[byAnimal].e} ${T("piecesBy")(rName(byAnimal))}</span><button class="btn" type="button" id="by-clear">${T("showAll")}</button>`;const c=$("#by-clear");if(c)c.onclick=()=>{byAnimal=null;renderFeed()}}
+  if(byAnimal)list=list.filter(i=>spKey(i)===byAnimal);
+  const fb=$("#by-animal");if(fb){fb.hidden=!byAnimal;if(byAnimal){const sI=spInfo(byAnimal);fb.innerHTML=`<span>${safeE(sI.e)} ${T("piecesBy")(sI.name)}</span><button class="btn" type="button" id="by-clear">${T("showAll")}</button>`}const c=$("#by-clear");if(c)c.onclick=()=>{byAnimal=null;renderFeed()}}
   const feed=$("#feed");
   if(!dbReady&&!items.length){feed.innerHTML=`<div class="card empty"><div class="big">🔥</div>${T("emptyLoading")}</div>`;return}
   if(!list.length){feed.innerHTML=`<div class="card empty"><div class="big">🌙</div>${items.length?T("emptyCat"):T("emptyAll")}</div>`;return}
@@ -833,12 +895,12 @@ async function translateItem(raw){
 function renderRoster(){
   const counts={};items.forEach(i=>counts[i.animal]=(counts[i.animal]||0)+1);
   const rg=k=>isEn()?REGIONS.find(x=>x.k===k).en:REGIONS.find(x=>x.k===k).ar;
-  $("#roster").innerHTML=REGIONS.map(R=>{const list=Object.entries(ROSTER).filter(([k,r])=>r.r===R.k);return `<h3 class="region">${esc(rg(R.k))}</h3><div class="roster-grid">${list.map(([k,r])=>`<button type="button" class="rc" data-rk="${k}"><div class="ava">${r.e}</div><div><b>${esc(rName(k))}</b><small>${esc(rBio(k))}</small><div class="cnt">${counts[k]?T("stories")(counts[k])+" · "+T("readThem"):T("writeAs")}</div></div></button>`).join("")}</div>`}).join("");
+  $("#roster").innerHTML=REGIONS.map(R=>{const list=Object.entries(ROSTER).filter(([k,r])=>r.r===R.k);return `<h3 class="region">${esc(rg(R.k))}</h3><div class="roster-grid">${list.map(([k,r])=>`<button type="button" class="rc" data-rk="${k}"><div class="ava">${r.e}</div><div><b>${esc(rName(k))}</b><small>${esc(rBio(k))}</small><div class="cnt">${counts[k]?T("stories")(counts[k])+" · "+T("readThem"):READER?"":T("writeAs")}</div></div></button>`).join("")}</div>`}).join("");
   const sel=$("#d-narr");sel.innerHTML=`<option value="auto">🌳 ${esc(T("anySpecies"))}</option>`+REGIONS.map(R=>`<optgroup label="${esc(rg(R.k))}">${Object.entries(ROSTER).filter(([k,r])=>r.r===R.k).map(([k,r])=>`<option value="${k}">${r.e} ${esc(rName(k))} · ${esc(rBio(k))}</option>`).join("")}</optgroup>`).join("");sel.value=chosen;
 }
 $("#d-narr").onchange=e=>{chosen=e.target.value};
 
-$("#roster").addEventListener("click",e=>{const b=e.target.closest("[data-rk]");if(!b)return;const k=b.dataset.rk;
+$("#roster").addEventListener("click",e=>{const b=e.target.closest("[data-rk]");if(!b)return;const k=b.dataset.rk;if(READER&&!items.some(i=>i.animal===k))return;
   if(items.some(i=>i.animal===k)){byAnimal=k;cat="الكل";renderCats();renderFeed();location.hash="live";show("live");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
   else{chosen=k;renderRoster();location.hash="desk";show("desk");toast(T("writeFirst")(rName(k)));window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}});
 
@@ -1699,20 +1761,228 @@ let mPrev=null;$("#st-mprev").onclick=()=>{const b=$("#st-mprev");if(mPrev){mPre
 $("#st-music").onchange=()=>{if(mPrev)mPrev()};$("#st-amb").onchange=()=>{if(mPrev)mPrev()};$("#st-dur").onchange=renderStudio;$("#st-motion").onchange=()=>{};$("#st-theme").onchange=renderStudio;$("#st-tone").onchange=renderStudio;
 
 
+/* ---------- manual runs: nothing runs on a schedule; each press starts one short run ---------- */
+const RUNS={monitor:"trig_0125YiqtfabraBE2uwyQPiTC",daily:"trig_01G2eR2CZH9M4hgUHgKRreAW",sync:"trig_01NmR7hkZpXxnmNxCbVjXcVE"};
+const RUN_COOL=10*60*1000,RUN_KEY="shuhud-runs";
+const RUN_TEXT="تشغيل يدوي طلبه كمال الآن من داخل التطبيق. نفّذ جولة واحدة قصيرة ومحدودة: بضع دقائق وعدد قليل من عمليات البحث، ثم توقف. لا تنشئ أي جدولة ولا تعِد تشغيل نفسك.";
+let mcp=null;
+const runsGet=()=>{try{return JSON.parse(localStorage.getItem(RUN_KEY)||"{}")}catch(e){return{}}};
+const runsSet=o=>{try{localStorage.setItem(RUN_KEY,JSON.stringify(o))}catch(e){}};
+function runNotes(){const last=runsGet();document.querySelectorAll("[data-note]").forEach(n=>{const k=n.dataset.note,t=last[k];if(n.dataset.msg){n.textContent=n.dataset.msg;return}
+  n.textContent=t?T("runLast")+": "+new Date(t).toLocaleString(isEn()?"en-GB":"ar",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}):""})}
+function runMsg(k,m){const n=document.querySelector(`[data-note="${k}"]`);if(!n)return;n.dataset.msg=m;n.textContent=m;clearTimeout(n._t);n._t=setTimeout(()=>{delete n.dataset.msg;runNotes()},9000)}
+document.querySelectorAll("[data-run]").forEach(b=>b.onclick=async()=>{
+  const k=b.dataset.run,last=runsGet(),ago=Date.now()-(last[k]||0);
+  if(ago<RUN_COOL){runMsg(k,T("runWait")(Math.ceil((RUN_COOL-ago)/60000)));return}
+  if(!mcp)return;b.disabled=true;runMsg(k,T("runSending"));
+  try{await mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:RUNS[k],text:RUN_TEXT},{cache:false});
+    last[k]=Date.now();runsSet(last);runMsg(k,T("runStarted"))}
+  catch(e){const c=e&&e.code;runMsg(k,c==="approval_required"?T("runApproval"):(c==="not_in_manifest"||c==="blocked_by_policy")?T("runDenied"):T("runFail"))}
+  finally{setTimeout(()=>{b.disabled=false},4000)}});
+/* ---------- species cards & endangered list ---------- */
+Object.assign(DICT.ar,{
+  navIds:"بطاقات الكائنات",navRed:"مهددة بالانقراض",
+  idsIntro:"بطاقة تعريف لكل كائن ظهر في مادة من مواد الشهود: صورته، وموطنه، ووضعه على القائمة الحمراء، والأحداث التي ظهر فيها.",
+  redIntro:"كائنات مهددة بالانقراض، بعضها من مراسلي الشهود وبعضها خارجهم. الأشد خطراً أولاً.",
+  redNote:"التصنيفات من القائمة الحمراء للاتحاد الدولي لصون الطبيعة (IUCN) وقد تتغير. راجع رابط IUCN في البطاقة قبل النشر.",
+  spSearch:"ابحث باسم الكائن…",spEmpty:"لا كائنات بعد. ستظهر هنا بطاقة لكل كائن يروي مادة في النشرة.",spNone:"لا نتائج.",
+  spSeen:"ظهر في",spPieces:n=>`📰 قطعه (${n.toLocaleString("ar")})`,spPhoto:"📷 صورة",spPhotoChange:"📷 غيّر الصورة",spFind:"🔍 ابحث عن صورة",
+  spFill:"✨ أكمل البطاقة",spFilling:"تُكتب البطاقة…",spFilled:"اكتملت البطاقة",spFillFail:"تعذر إكمال البطاقة",spWrite:"✍️ اكتب بلسانه",spWriteAbout:"✍️ اكتب عنه",
+  spCount:n=>`${n.toLocaleString("ar")} كائناً`,spPop:"العدد",spThreat:"الخطر",spAbout:"عنه",spFromShuhud:"من مراسلي الشهود",
+  spAngle:n=>`بلسان ${n}، الكائن المهدد بالانقراض`,spNeedEdit:"رفع الصور يحتاج صلاحية تحرير",
+  st:{CR:"مهدد بشدة بالانقراض",EN:"مهدد بالانقراض",VU:"معرّض للخطر",NT:"قريب من التهديد",LC:"غير مهدد",DD:"بيانات ناقصة",NE:"غير مُقيَّم",DOM:"حيوان مستأنس"},
+  stAll:"الكل"
+});
+Object.assign(DICT.en,{
+  navIds:"Species cards",navRed:"Endangered",
+  idsIntro:"An ID card for every creature that appeared in a Shuhud piece: its photo, home, Red List status and the events it witnessed.",
+  redIntro:"Threatened species, some from the Shuhud correspondents and some beyond them. Most at risk first.",
+  redNote:"Statuses follow the IUCN Red List and can change. Check the IUCN link on each card before publishing.",
+  spSearch:"Search by name…",spEmpty:"No species yet. Every creature that tells a piece in the feed gets a card here.",spNone:"No results.",
+  spSeen:"Appeared in",spPieces:n=>`📰 Its pieces (${n})`,spPhoto:"📷 Photo",spPhotoChange:"📷 Change photo",spFind:"🔍 Find a photo",
+  spFill:"✨ Complete the card",spFilling:"Writing the card…",spFilled:"Card completed",spFillFail:"Couldn't complete the card",spWrite:"✍️ Write in its voice",spWriteAbout:"✍️ Write about it",
+  spCount:n=>`${n} ${n===1?"species":"species"}`,spPop:"Population",spThreat:"Threat",spAbout:"About",spFromShuhud:"Shuhud correspondent",
+  spAngle:n=>`Told by the ${n}, a threatened species`,spNeedEdit:"Uploading photos needs edit access",
+  st:{CR:"Critically Endangered",EN:"Endangered",VU:"Vulnerable",NT:"Near Threatened",LC:"Least Concern",DD:"Data Deficient",NE:"Not Evaluated",DOM:"Domesticated"},
+  stAll:"All"
+});
+if(window.SHUHUD_STANDALONE){
+  Object.assign(DICT.ar,{trackIntro:"تطورات البيئة والأزمات المرتبطة بها كما تصل."});
+  Object.assign(DICT.en,{trackIntro:"Environmental developments and related crises as they come in."});
+}
+if(READER){
+  Object.assign(DICT.ar,{emptyAll:"الغابة صامتة الآن. ستظهر المواد هنا قريباً.",emptyCat:"لا مواد في هذا الباب بعد."});
+  Object.assign(DICT.en,{emptyAll:"The forest is quiet. Pieces will appear here soon.",emptyCat:"Nothing in this section yet."});
+}
+/* scientific name and IUCN Red List category for the correspondents */
+const SPX={oryx:["Oryx leucoryx","VU"],arleopard:["Panthera pardus nimr","CR"],camel:["Camelus dromedarius","DOM"],houbara:["Chlamydotis macqueenii","VU"],hoopoe:["Upupa epops","LC"],dugong:["Dugong dugon","VU"],whaleshark:["Rhincodon typus","EN"],flamingo:["Phoenicopterus roseus","LC"],otter:["Lutrogale perspicillata","VU"],ibis:["Geronticus eremita","EN"],socotra:["Onychognathus frater","LC"],mangrove:["Scylla serrata","NE"],
+  gorilla:["Gorilla beringei beringei","EN"],elephant:["Loxodonta cyclotis","CR"],croc:["Crocodylus niloticus","LC"],shoebill:["Balaeniceps rex","VU"],lion:["Panthera leo","VU"],cheetah:["Acinonyx jubatus","VU"],locust:["Schistocerca gregaria","NE"],rhino:["Diceros bicornis","CR"],lemur:["Lemur catta","EN"],donkey:["Equus asinus","DOM"],
+  tiger:["Panthera tigris tigris","EN"],asiaele:["Elephas maximus","EN"],snowleo:["Panthera uncia","VU"],panda:["Ailuropoda melanoleuca","VU"],amur:["Panthera tigris altaica","EN"],crane:["Leucogeranus leucogeranus","CR"],orangutan:["Pongo pygmaeus","CR"],irrawaddy:["Orcaella brevirostris","EN"],saiga:["Saiga tatarica","NT"],komodo:["Varanus komodoensis","EN"],
+  brownbear:["Ursus arctos","LC"],lynx:["Lynx pardinus","VU"],bison:["Bison bonasus","NT"],monkseal:["Monachus monachus","VU"],stork:["Ciconia ciconia","LC"],
+  jaguar:["Panthera onca","NT"],boto:["Inia geoffrensis","EN"],monarch:["Danaus plexippus plexippus","VU"],salmon:["Oncorhynchus spp.","NE"],condor:["Vultur gryphus","VU"],sloth:["Bradypus variegatus","LC"],warbler:["Setophaga cerulea","NT"],
+  bear:["Ursus maritimus","VU"],penguin:["Aptenodytes forsteri","NT"],reindeer:["Rangifer tarandus","VU"],coral:["Scleractinia","NE"],turtle:["Caretta caretta","VU"],whale:["Balaenoptera musculus","EN"],shark:["Carcharhinus longimanus","CR"],krill:["Euphausia superba","LC"],albatross:["Diomedea exulans","VU"],octopus:["Octopoda","NE"],
+  koala:["Phascolarctos cinereus","VU"],kangaroo:["Osphranter rufus","LC"],ant:["Formicidae","NE"],bee:["Apis mellifera","DD"],bat:["Chiroptera","NE"],frog:["Anura","NE"],cow:["Bos taurus","DOM"],cat:["Felis catus","DOM"],vulture:["Neophron percnopterus","EN"]};
+/* threatened species beyond the correspondents: [emoji, ar name, en name, ar home, en home, sci, status, region, ar threat, en threat] */
+const EXTRA={
+  vaquita:["🐬","الفاكيتا (خنزير البحر الصغير)","Vaquita","خليج كاليفورنيا في المكسيك","Gulf of California, Mexico","Phocoena sinus","CR","americas","تموت في شباك الصيد غير القانونية لسمك التوتوابا، ولم يبق منها إلا نحو عشرة أفراد.","Drowns in illegal gillnets set for totoaba; only about ten remain."],
+  javanrhino:["🦏","وحيد القرن الجاوي","Javan rhino","منتزه أوجونغ كولون في جاوة","Ujung Kulon, Java","Rhinoceros sondaicus","CR","asia","تجمع وحيد صغير في مكان واحد، يهدده الصيد الجائر والكوارث.","A single small population in one park, exposed to poaching and disasters."],
+  sumatranrhino:["🦏","وحيد القرن السومطري","Sumatran rhino","غابات سومطرة وبورنيو","Sumatra and Borneo forests","Dicerorhinus sumatrensis","CR","asia","أقل من خمسين فرداً متفرقين في الغابات، يصعب أن يلتقوا ليتكاثروا.","Fewer than fifty, scattered so thinly they rarely meet to breed."],
+  amurleopard:["🐆","نمر آمور","Amur leopard","غابات الشرق الأقصى الروسي وشمال الصين","Russian Far East and northeast China","Panthera pardus orientalis","CR","asia","تجمع صغير جداً يهدده الصيد وحرائق الغابات وضيق المساحة.","A tiny population threatened by poaching, forest fires and shrinking range."],
+  saola:["🦌","الساولا","Saola","جبال أنام بين فيتنام ولاوس","Annamite Mountains, Vietnam and Laos","Pseudoryx nghetinhensis","CR","asia","تقتله الأفخاخ السلكية المنصوبة لحيوانات أخرى، ولم يُرَ في البرية منذ سنوات.","Killed by wire snares set for other animals; not seen in the wild for years."],
+  pangolin:["🦔","البنغول الصيني","Chinese pangolin","غابات جنوب الصين وجنوب شرق آسيا","Southern China and Southeast Asia","Manis pentadactyla","CR","asia","أكثر الثدييات تهريباً في العالم، من أجل حراشفه ولحمه.","Among the most trafficked mammals on Earth, for its scales and meat."],
+  gharial:["🐊","الغاريال","Gharial","أنهار شمال الهند ونيبال","Rivers of northern India and Nepal","Gavialis gangeticus","CR","asia","السدود واستخراج الرمال من الأنهار وشباك الصيد.","Dams, river sand mining and fishing nets."],
+  yangtze:["🐬","خنزير البحر اليانغتسي عديم الزعنفة","Yangtze finless porpoise","نهر اليانغتسي في الصين","Yangtze River, China","Neophocaena asiaeorientalis asiaeorientalis","CR","asia","حركة السفن والتلوث والصيد في نهر مزدحم.","Ship traffic, pollution and fishing on a crowded river."],
+  redpanda:["🐼","الباندا الحمراء","Red panda","غابات الهيمالايا الشرقية","Eastern Himalayan forests","Ailurus fulgens","EN","asia","قطع الغابات والصيد وتجارة الحيوانات الأليفة.","Deforestation, poaching and the pet trade."],
+  phileagle:["🦅","العقاب الفلبيني","Philippine eagle","غابات الفلبين المطيرة","Philippine rainforests","Pithecophaga jefferyi","CR","asia","إزالة الغابات المطيرة وإطلاق النار عليه.","Rainforest loss and shooting."],
+  arabtahr:["🐐","الطهر العربي","Arabian tahr","جبال الحجر في عُمان والإمارات","Hajar Mountains, Oman and the UAE","Arabitragus jayakari","EN","arabia","الرعي الجائر للماعز الأليف ينافسه على الكلأ والماء، إضافة إلى الجفاف.","Overgrazing by domestic goats competing for food and water, plus drought."],
+  nubianibex:["🐐","الوعل النوبي","Nubian ibex","جبال الجزيرة العربية وسيناء وشمال شرق أفريقيا","Mountains of Arabia, Sinai and NE Africa","Capra nubiana","VU","arabia","الصيد الجائر وتراجع المراعي.","Hunting and shrinking pastures."],
+  hawksbill:["🐢","السلحفاة صقرية المنقار","Hawksbill turtle","الشعاب المرجانية الاستوائية ومنها البحر الأحمر والخليج","Tropical reefs, including the Red Sea and the Gulf","Eretmochelys imbricata","CR","oceans","تجارة صدفتها، وموت الشعاب المرجانية، وتخريب شواطئ التعشيش.","The shell trade, dying reefs and lost nesting beaches."],
+  egtortoise:["🐢","السلحفاة المصرية","Egyptian tortoise","سواحل ليبيا ومصر الصحراوية","Desert coasts of Libya and Egypt","Testudo kleinmanni","CR","africa","تجارة الحيوانات الأليفة وتدهور موطنها الساحلي.","The pet trade and degraded coastal habitat."],
+  addax:["🦌","المها أداكس","Addax","الصحراء الكبرى في النيجر وتشاد","Sahara, Niger and Chad","Addax nasomaculatus","CR","africa","الصيد والنزاعات المسلحة والتنقيب عن النفط في آخر معاقله.","Hunting, armed conflict and oil exploration in its last refuges."],
+  hirola:["🦌","الهيرولا","Hirola","الحدود بين كينيا والصومال","Kenya–Somalia border","Beatragus hunteri","CR","africa","الجفاف ومنافسة الماشية على المراعي.","Drought and competition with livestock for grazing."],
+  wilddog:["🐕","الكلب البري الأفريقي","African wild dog","سافانا شرق أفريقيا وجنوبها","East and southern African savanna","Lycaon pictus","EN","africa","تقطّع موطنه والصراع مع الرعاة والأمراض.","Fragmented habitat, conflict with herders and disease."],
+  grevy:["🦓","حمار الوحش غريفي","Grévy's zebra","شمال كينيا وإثيوبيا","Northern Kenya and Ethiopia","Equus grevyi","EN","africa","الجفاف ومنافسة الماشية على الماء والكلأ.","Drought and competition with livestock for water and grazing."],
+  ethwolf:["🐺","الذئب الإثيوبي","Ethiopian wolf","مرتفعات إثيوبيا","Ethiopian Highlands","Canis simensis","EN","africa","داء الكلب ينتقل إليه من الكلاب، وتقلص مراعيه الجبلية.","Rabies caught from domestic dogs and shrinking mountain pastures."],
+  bonobo:["🐒","البونوبو","Bonobo","غابات الكونغو الديمقراطية","Forests of DR Congo","Pan paniscus","EN","africa","الصيد من أجل اللحم والحروب وقطع الغابات.","Bushmeat hunting, war and deforestation."],
+  angelshark:["🦈","قرش الملاك","Angelshark","سواحل جزر الكناري والبحر المتوسط","Canary Islands and the Mediterranean","Squatina squatina","CR","europe","يعلق في شباك الجر القاعية.","Caught as bycatch in bottom trawls."],
+  eel:["🐍","ثعبان الماء الأوروبي","European eel","أنهار أوروبا وبحر سارغاسو","European rivers and the Sargasso Sea","Anguilla anguilla","CR","europe","السدود تقطع طريق هجرته، والصيد والتهريب.","Dams block its migration; overfishing and trafficking."],
+  rightwhale:["🐋","حوت شمال الأطلسي الصائب","North Atlantic right whale","الساحل الشرقي لأمريكا الشمالية","Eastern seaboard of North America","Eubalaena glacialis","CR","oceans","اصطدام السفن والاشتباك بحبال معدات الصيد.","Ship strikes and entanglement in fishing gear."],
+  axolotl:["🦎","الأكسولوتل","Axolotl","قنوات سوتشيميلكو في مدينة مكسيكو","Xochimilco canals, Mexico City","Ambystoma mexicanum","CR","americas","تلوث القنوات وتمدد المدينة والأسماك الدخيلة.","Polluted canals, urban sprawl and invasive fish."],
+  kakapo:["🦜","الكاكابو","Kākāpō","جزر محمية في نيوزيلندا","Predator-free islands, New Zealand","Strigops habroptila","CR","oceania","ببغاء لا يطير، أبادته القطط والجرذان الدخيلة، ويعيش اليوم على جزر خالية منها.","A flightless parrot wiped out by introduced cats and rats; it now survives only on predator-free islands."],
+  wombat:["🐨","الومبت الشمالي ذو الأنف المشعر","Northern hairy-nosed wombat","كوينزلاند في أستراليا","Queensland, Australia","Lasiorhinus krefftii","CR","oceania","الجفاف والحرائق والمنافسة على العشب في موطن صغير.","Drought, fire and competition for grass in a tiny range."]
+};
+const ST_ORDER=["CR","EN","VU","NT","DD","LC","NE","DOM"],THREAT=["CR","EN","VU","NT"];
+let spDocs={},spQuery="",redSt="all",spBusy=null,spPhotoKey=null;
+const spHash=s=>{let h=5381;for(const c of String(s))h=(h*33+c.codePointAt(0))>>>0;return h.toString(36)};
+const spNorm=x=>String(x||"").trim().replace(/^ال/,"").toLowerCase();
+const spKey=i=>{const n=String(i.animalName||"").trim();
+  if(ROSTER[i.animal]){const ra=spNorm(ROSTER[i.animal].n),re=String((ROSTER_EN[i.animal]||[""])[0]).toLowerCase(),na=spNorm(n),ne=String((i.en&&i.en.animalName)||"").toLowerCase();
+    if(!n||na===ra||(na.startsWith(ra)&&(!ne||!re||ne.endsWith(re))))return i.animal}const m=Object.keys(EXTRA).find(k=>[EXTRA[k][1].split(" (")[0],EXTRA[k][2]].some(v=>spNorm(v)===spNorm(n)));return m||"n:"+n};
+const spDocId=k=>k.startsWith("n:")?"c_"+spHash(k):k;
+const spItems=k=>items.filter(i=>spKey(i)===k);
+function spInfo(k){
+  let b;
+  if(ROSTER[k]){const x=SPX[k]||[];b={e:ROSTER[k].e,name:rName(k),bio:rBio(k),sci:x[0],st:x[1],roster:true,r:ROSTER[k].r}}
+  else if(EXTRA[k]){const x=EXTRA[k];b={e:x[0],name:isEn()?x[2]:x[1],bio:isEn()?x[4]:x[3],sci:x[5],st:x[6],r:x[7],threat:isEn()?x[9]:x[8]}}
+  else{const it=spItems(k)[0];const w=it?who(L(it)):{e:"🐾",n:k.slice(2),b:""};b={e:w.e,name:w.n,bio:w.b}}
+  const d=spDocs[k]||{};
+  if(d.sci&&!b.sci)b.sci=d.sci;
+  if(d.st&&(!b.st||b.st==="NE"&&!ROSTER[k]))b.st=d.st;
+  const info=(d.info&&(d.info[isEn()?"en":"ar"]||d.info.ar))||{};
+  b.about=info.about||"";b.pop=info.pop||"";if(!b.threat)b.threat=info.threats||"";
+  const withImg=spItems(k).find(i=>pubImg(i.imageUrl)),feedImg=withImg?withImg.imageUrl:"";
+  b.img=pubImg(d.imageUrl)||feedImg||d.extImg||"";b.credit=feedImg&&b.img===feedImg?(withImg.imageCredit||""):(d.credit||"");
+  b.filled=!!d.info;
+  if(!b.img){const w=spWiki[k];if(w&&w.img){b.img=w.img;b.credit="Wikipedia"}else spWikiFetch(k,b)}
+  return b;
+}
+const spWiki={};let spWikiOff=false,spLoaded=false;
+function spWikiFetch(k,b){
+  if(spWikiOff||!spLoaded||k in spWiki)return;spWiki[k]=null;
+  const q=(ROSTER_EN[k]&&b.sci&&!/^[A-Z][a-z]+(idae|ptera|ra|nia|oda)$/.test(b.sci)?b.sci:null)||b.sci||(EXTRA[k]&&EXTRA[k][2])||(spItems(k)[0]?.en?.animalName)||"";
+  if(!q)return;
+  fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(q.replace(/ /g,"_")))
+    .then(r=>r.ok?r.json():null).then(j=>{const src=j&&(j.thumbnail&&j.thumbnail.source);if(src){spWiki[k]={img:src.replace("//thumb.wikimedia.org/","//upload.wikimedia.org/").replace(/\?.*$/,"")};clearTimeout(spWikiT);spWikiT=setTimeout(renderSpecies,300)}})
+    .catch(()=>{spWikiOff=true});
+}
+let spWikiT=null;
+const iucnLink=sci=>"https://www.iucnredlist.org/search?query="+encodeURIComponent(sci);
+const photoSearch=s=>"https://commons.wikimedia.org/w/index.php?title=Special:MediaSearch&type=image&search="+encodeURIComponent(s);
+function spCardHTML(k){
+  const s=spInfo(k),its=spItems(k),st=s.st||"NE";
+  const enName=ROSTER_EN[k]?ROSTER_EN[k][0]:EXTRA[k]?EXTRA[k][2]:"";
+  const seen=its.slice(0,4).map(raw=>{const i=L(raw);return `<li><span class="when">${esc([i.place,fmtDate(i.eventDate||i.createdAt)].filter(Boolean).join(" · "))}</span>${esc(i.crisis||i.headline||"")}</li>`}).join("");
+  const busy=spBusy===k;
+  return `<article class="sp" data-sk="${esc(k)}">
+    <div class="sp-ph"><span class="sp-emo">${safeE(s.e)}</span>${s.img?`<img src="${esc(s.img)}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()">`:""}
+      <span class="stb st-${st}">${esc(T("st")[st]||st)}</span>${s.credit?`<span class="sp-cr">📷 ${esc(s.credit)}</span>`:""}</div>
+    <div class="sp-bd">
+      <h3>${esc(s.name)}</h3>${s.sci?`<div class="sci" dir="ltr">${esc(s.sci)}</div>`:""}
+      ${s.bio?`<div class="hab">📍 ${esc(s.bio)}</div>`:""}
+      ${s.about?`<p class="sp-tx"><b>${T("spAbout")}:</b> ${esc(s.about)}</p>`:""}
+      ${s.threat?`<p class="sp-tx"><b>${T("spThreat")}:</b> ${esc(s.threat)}</p>`:""}
+      ${s.pop?`<p class="sp-tx"><b>${T("spPop")}:</b> ${esc(s.pop)}</p>`:""}
+      ${seen?`<div class="sp-seen"><div class="lbl">${T("spSeen")}</div><ul>${seen}</ul></div>`:""}
+      <div class="sp-act">
+        ${its.length?`<button class="btn export" type="button" data-sa="pieces">${T("spPieces")(its.length)}</button>`:""}
+        ${s.roster?`<button class="btn" type="button" data-sa="write">${T("spWrite")}</button>`:!its.length?`<button class="btn" type="button" data-sa="about">${T("spWriteAbout")}</button>`:""}
+        ${assets?`<button class="btn" type="button" data-sa="photo">${s.img&&spDocs[k]&&spDocs[k].imageUrl?T("spPhotoChange"):T("spPhoto")}</button>`:""}
+        <a class="btn" href="${photoSearch(enName||s.sci||s.name)}" target="_blank" rel="noopener">${T("spFind")} ↗</a>
+        ${sample?`<button class="btn" type="button" data-sa="fill" ${busy?"disabled":""}>${busy?T("spFilling"):T("spFill")}</button>`:""}
+        ${s.sci&&!/spp\.|^[A-Z][a-z]+(idae|ptera|ra|nia)$/.test(s.sci)?`<a class="btn" href="${iucnLink(s.sci)}" target="_blank" rel="noopener">IUCN ↗</a>`:""}
+      </div>
+    </div></article>`;
+}
+function renderSpecies(){
+  const ids=$("#ids-grid"),red=$("#red-grid");if(!ids||!red)return;
+  const q=spQuery.trim().toLowerCase();
+  const match=k=>{if(!q)return true;const s=spInfo(k);return [s.name,s.sci,ROSTER[k]?.n,ROSTER_EN[k]?.[0],EXTRA[k]?.[1],EXTRA[k]?.[2]].some(v=>v&&String(v).toLowerCase().includes(q))};
+  /* species that appeared in pieces */
+  const cnt={};items.forEach(i=>{const k=spKey(i);if(k!=="n:")cnt[k]=(cnt[k]||0)+1});
+  const keys=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]);
+  const shown=keys.filter(match);
+  $("#ids-count").textContent=keys.length?T("spCount")(keys.length):"";
+  ids.innerHTML=!dbReady&&!items.length?`<div class="card empty"><div class="big">🔥</div>${T("emptyLoading")}</div>`:!keys.length?`<div class="card empty"><div class="big">🐾</div>${T("spEmpty")}</div>`:!shown.length?`<div class="card empty">${T("spNone")}</div>`:shown.map(spCardHTML).join("");
+  /* endangered */
+  const pool=new Set([...Object.keys(ROSTER),...Object.keys(EXTRA),...keys]);
+  let list=[...pool].filter(k=>THREAT.includes(spInfo(k).st));
+  $("#red-chips").innerHTML=["all",...THREAT].map(s=>{const n=s==="all"?list.length:list.filter(k=>spInfo(k).st===s).length;return `<button class="chip" type="button" aria-pressed="${s===redSt}" data-rs="${s}">${s==="all"?T("stAll"):`<i class="dot st-${s}"></i>`+esc(T("st")[s])}<span class="n">${n}</span></button>`}).join("");
+  if(redSt!=="all")list=list.filter(k=>spInfo(k).st===redSt);
+  list=list.filter(match).sort((a,b)=>ST_ORDER.indexOf(spInfo(a).st)-ST_ORDER.indexOf(spInfo(b).st)||(cnt[b]||0)-(cnt[a]||0));
+  red.innerHTML=list.length?list.map(spCardHTML).join(""):`<div class="card empty">${T("spNone")}</div>`;
+}
+async function spSave(k,patch){
+  if(!db)return;const ref=db.collection("species").doc(spDocId(k));
+  if(spDocs[k])await ref.update(patch);else await ref.set({key:k,...patch});
+}
+async function spFill(k){
+  if(!sample||spBusy)return;const s=spInfo(k);spBusy=k;renderSpecies();
+  const name=ROSTER[k]?ROSTER[k].n:EXTRA[k]?EXTRA[k][1]:s.name;
+  const p=`أنت محرر علمي في موسوعة أحياء. اكتب بطاقة تعريف قصيرة ودقيقة لهذا الكائن.
+الكائن: ${name}${s.sci?` (${s.sci})`:""}
+موطنه كما في الموقع: ${s.bio||"غير محدد"}
+أعد JSON فقط بهذا الشكل:
+{"sci":"الاسم العلمي","st":"تصنيفه في القائمة الحمراء IUCN: CR أو EN أو VU أو NT أو LC أو DD أو NE، أو DOM إن كان حيواناً مستأنساً","ar":{"about":"جملتان بالعربية عن الكائن وما يميزه","pop":"تقدير عدده في البرية مع سنة التقدير إن كان معروفاً، وإلا اتركه فارغاً","threats":"أبرز ما يهدده في جملة واحدة"},"en":{"about":"...","pop":"...","threats":"..."}}
+لا تخترع أرقاماً. إن لم تكن متأكداً من رقم فاترك pop فارغاً.`;
+  try{const r=await sample.json(p,{modelTier:"default"});
+    const patch={info:{ar:r.ar||{},en:r.en||{}}};
+    if(r.sci&&!s.sci)patch.sci=String(r.sci).slice(0,120);
+    if(r.st&&ST_ORDER.includes(r.st)&&!ROSTER[k]&&!EXTRA[k])patch.st=r.st;
+    await spSave(k,patch);toast(T("spFilled"))}
+  catch(e){toast(e&&e.code==="not_granted"?T("notGranted"):T("spFillFail"))}
+  finally{spBusy=null;renderSpecies()}
+}
+function spClick(e){
+  const b=e.target.closest("[data-sa]");if(!b)return;const k=b.closest(".sp").dataset.sk,a=b.dataset.sa;
+  if(a==="pieces"){byAnimal=k;cat="الكل";renderCats();renderFeed();location.hash="live";show("live");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
+  if(a==="write"){chosen=k;renderRoster();location.hash="desk";show("desk");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
+  if(a==="about"){chosen="auto";renderRoster();$("#d-angle").value=T("spAngle")(spInfo(k).name);location.hash="desk";show("desk");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
+  if(a==="photo"){if(!assets){toast(T("spNeedEdit"));return}spPhotoKey=k;$("#sp-photo-in").click()}
+  if(a==="fill")spFill(k);
+}
+$("#ids-grid").addEventListener("click",spClick);$("#red-grid").addEventListener("click",spClick);
+$("#red-chips").addEventListener("click",e=>{const b=e.target.closest("[data-rs]");if(!b)return;redSt=b.dataset.rs;renderSpecies()});
+document.querySelectorAll(".sp-q").forEach(inp=>inp.addEventListener("input",()=>{spQuery=inp.value;document.querySelectorAll(".sp-q").forEach(o=>{if(o!==inp)o.value=inp.value});renderSpecies()}));
+$("#sp-photo-in").onchange=async e=>{const f=e.target.files[0];e.target.value="";const k=spPhotoKey;spPhotoKey=null;if(!f||!k||!assets||!db)return;
+  toast(T("uploading"));
+  try{const old=spDocs[k]&&spDocs[k].imageId;const up=await assets.upload(f);await spSave(k,{imageUrl:up.url,imageId:up.id});if(old){try{await assets.delete(old)}catch(_){}}toast(T("photoSaved"))}
+  catch(err){toast(T("photoFail"))}};
 /* ---------- capabilities ---------- */
-applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrack();
+applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrack();renderSpecies();
 (async()=>{
   const c=window.claude;
   if(!c?.use){statusMsg="openInClaude";dbReady=true;updateStatus();renderFeed();return}
-  c.use("sample").then(s=>{sample=s;if(!s)$("#d-note").textContent=T("sampleOff");renderFeed()});
-  c.use("assets").then(a=>{assets=a});
+  c.use("sample").then(s=>{sample=s;if(!s)$("#d-note").textContent=T("sampleOff");renderFeed();renderSpecies()});
+  c.use("assets").then(a=>{assets=a;renderSpecies()});
   c.use("downloads").then(d=>{downloads=d;if(!$("#studio").hidden)renderStudio()});
+  c.use("mcp").then(m=>{mcp=m;const on=!!m&&!window.SHUHUD_STANDALONE;$("#run-track").hidden=!on;$("#run-live").hidden=!on;runNotes()}).catch(()=>{});
   db=await c.use("db");
   if(!db){statusMsg="signIn";dbReady=true;updateStatus();renderFeed();return}
   db.collection("dispatches").orderBy("createdAt","desc").limit(200).onSnapshot(snap=>{
     dbReady=true;items=snap.docs.map(d=>({id:d.id,...d.data()}));
-    updateStatus();renderCats();renderFeed();renderRoster();renderTrack();
+    updateStatus();renderCats();renderFeed();renderRoster();renderTrack();renderSpecies();
   },()=>{dbReady=true;statusMsg="feedFail";updateStatus();renderFeed()});
+  db.collection("species").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{const x=d.data();m[x.key||d.id]=x});spDocs=m;spLoaded=true;renderSpecies()},()=>{});
   db.collection("monitor").orderBy("at","desc").limit(300).onSnapshot(snap=>{track=snap.docs.map(d=>({id:d.id,...d.data()}));renderTrack()},()=>{});
 })();
 
@@ -1895,5 +2165,4 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
 })();
 
 </script>
-
 </body></html>

@@ -14,9 +14,12 @@
 ## ما يضيفه Claude حين يتوفر الرصيد
 - نشرة الصباح اليومية والرصد التحريري كل ساعتين، تُكتب في `data/pieces.json` و`data/monitor.json`.
 
+## واجهة القرّاء
+`reader.html` هي الصفحة العامة للقرّاء: النشرة والرصد والمراسلون وبطاقات الكائنات والمهددة بالانقراض، بلا غرفة تحرير ولا أزرار تحكم. تُبنى مع `index.html` من المصدر نفسه.
+
 ## الملفات
 - `index.html` يُبنى من مصدر الصفحة المشترك عبر `build.py`.
 - `local.js` يحفظ ما تضيفه على جهازك (IndexedDB) ويدمجه مع ملفات `data/`.
-- `data/pieces.json` المواد، `data/monitor.json` رصد Claude، `data/feed.json` الرصد الآلي.
+- `data/pieces.json` المواد، `data/species.json` بطاقات الكائنات، `data/monitor.json` رصد Claude، `data/feed.json` الرصد الآلي.
 
 ما تكتبه يدوياً يُحفظ في المتصفح الذي كتبته فيه. لنقله إلى جهاز آخر يلزم إضافته إلى `data/pieces.json`.

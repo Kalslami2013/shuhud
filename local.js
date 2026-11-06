@@ -9,8 +9,8 @@
   const put=(k,v)=>tx("readwrite",s=>s.put(v,k)),del=k=>tx("readwrite",s=>s.delete(k));
   const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 
-  const FILES={dispatches:["data/pieces.json"],monitor:["data/monitor.json","data/feed.json"]};
-  const remote={dispatches:[],monitor:[]},subs=[];let remoteAt={};
+  const FILES={dispatches:["data/pieces.json"],monitor:["data/monitor.json","data/feed.json"],species:["data/species.json"]};
+  const remote={dispatches:[],monitor:[],species:[]},subs=[];let remoteAt={};
   async function loadRemote(col){const parts=await Promise.all(FILES[col].map(async f=>{try{const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"});return r.ok?await r.json():null}catch(e){return null}}));if(parts.some(Boolean)){remote[col]=parts.filter(Boolean).flat();remoteAt[col]=new Date()}}
   async function merged(col){
     const loc=await getAll();const map=new Map();
@@ -66,5 +66,7 @@
   checkVersion();document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkVersion()});
   window.SHUHUD_STANDALONE=true;window.shuhudKey={get:getKey,set:k=>{try{k?localStorage.setItem(KEY,k):localStorage.removeItem(KEY)}catch(e){}}};
   window.shuhudRefresh=refresh;
+  /* reader page (reader.html): reading only, no uploads, no AI, no saving */
+  if(window.SHUHUD_READER){window.claude={use:async name=>name==="db"?db:name==="user"?{isOwner:()=>false,canEdit:()=>false}:null};return}
   window.claude={use:async name=>name==="db"?db:name==="assets"?assets:name==="downloads"?downloads:name==="sample"?(getKey()?sample:null):name==="user"?{isOwner:()=>true,canEdit:()=>true}:null};
 })();
