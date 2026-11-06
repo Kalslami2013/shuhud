@@ -454,8 +454,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793968670"</script>
-<script src="local.js?v=1793968670"></script>
+<script>window.SHUHUD_BUILD="1793969140"</script>
+<script src="local.js?v=1793969140"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2111,7 +2111,12 @@ async function mediaPublish(type,title,caption,files,extra={}){
 }
 /* the export studio's button: send what was just made straight to Media */
 function studioMediaBtn(act,type,getFiles){
-  if(!canAddMedia()||!stItem||stItem.id==="draft")return;
+  if(!stItem||stItem.id==="draft")return;
+  /* standalone app not linked to GitHub yet (each browser and the home-screen app keep their own copy of the key) */
+  if(!canAddMedia()&&typeof ghMode==="function"&&ghMode()&&!ghTok()){
+    act.insertAdjacentHTML("beforeend",`<button class="btn export" type="button" id="st-media">${T("toMedia")}</button>`);
+    $("#st-media").onclick=()=>{closeStudio();location.hash="media";show("media");$("#gh-box").hidden=false;toast(T("ghFirst"));window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})};return}
+  if(!canAddMedia())return;
   act.insertAdjacentHTML("beforeend",`<button class="btn export" type="button" id="st-media">${T("toMedia")}</button>`);
   const b=$("#st-media");b.onclick=async()=>{if(b.disabled)return;b.disabled=true;b.textContent=T("mSaving");
     try{const i=L(stItem);const files=await getFiles();await mediaPublish(files.length>1&&type==="card"?"carousel":type,i.headline||"",i.crisis||i.angle||"",files,{pieceId:stItem.id});
@@ -2133,10 +2138,10 @@ $("#m-save").onclick=async()=>{
   catch(err){toast(T("mFail"))}
   finally{mBusy=false;b.disabled=false;b.textContent=T("mSave")}};
 /* ---------- media from the standalone app: straight to the GitHub repo, with Kamal's own token kept in this browser ---------- */
-Object.assign(DICT.ar,{ghLink:"🔑 اربط GitHub لإضافة المواد",ghLbl:"مفتاح GitHub (Fine-grained token)",ghSave:"احفظ",ghUnlink:"افصل GitHub",ghSaved:"حُفظ المفتاح في هذا المتصفح",ghBad:"المفتاح لا يعمل. تأكد أنه لمستودع shuhud ومعه صلاحية Contents: Read and write",
+Object.assign(DICT.ar,{ghFirst:"اربط GitHub أولاً: الصق المفتاح واضغط «احفظ»، ثم ارجع إلى التصدير",ghLink:"🔑 اربط GitHub لإضافة المواد",ghLbl:"مفتاح GitHub (Fine-grained token)",ghSave:"احفظ",ghUnlink:"افصل GitHub",ghSaved:"حُفظ المفتاح في هذا المتصفح",ghBad:"المفتاح لا يعمل. تأكد أنه لمستودع shuhud ومعه صلاحية Contents: Read and write",
   ghHelp:"أنشئه من GitHub: Settings ← Developer settings ← Fine-grained tokens ← Generate new token. اختر المستودع Kalslami2013/shuhud فقط، ثم صلاحية Contents: Read and write. يُحفظ المفتاح في هذا المتصفح فقط، فلا تضعه إلا على جهازك.",
   ghNote:"تظهر المادة للقرّاء بعد دقيقة أو دقيقتين."});
-Object.assign(DICT.en,{ghLink:"🔑 Connect GitHub to add items",ghLbl:"GitHub fine-grained token",ghSave:"Save",ghUnlink:"Disconnect GitHub",ghSaved:"Token saved in this browser",ghBad:"The token doesn't work. Make sure it is for the shuhud repo with Contents: Read and write",
+Object.assign(DICT.en,{ghFirst:"Connect GitHub first: paste the token and press Save, then go back to Export",ghLink:"🔑 Connect GitHub to add items",ghLbl:"GitHub fine-grained token",ghSave:"Save",ghUnlink:"Disconnect GitHub",ghSaved:"Token saved in this browser",ghBad:"The token doesn't work. Make sure it is for the shuhud repo with Contents: Read and write",
   ghHelp:"Create it on GitHub: Settings → Developer settings → Fine-grained tokens → Generate new token. Pick only the Kalslami2013/shuhud repo and Contents: Read and write. It is stored in this browser only, so use it on your own device.",
   ghNote:"Readers see the item within a minute or two."});
 if(window.SHUHUD_STANDALONE){Object.assign(DICT.ar,{mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تُرفع المادة إلى GitHub وتظهر للقرّاء بعد دقيقة أو دقيقتين."});Object.assign(DICT.en,{mFilesNote:"20 MB per file. For a carousel pick several images in order. The item goes to GitHub and readers see it within a minute or two."})}
