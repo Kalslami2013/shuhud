@@ -9,7 +9,7 @@
   const put=(k,v)=>tx("readwrite",s=>s.put(v,k)),del=k=>tx("readwrite",s=>s.delete(k));
   const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 
-  const FILES={dispatches:["data/pieces.json"],monitor:["data/monitor.json","data/feed.json"],species:["data/species.json"],media:["data/media.json"]};
+  const FILES={dispatches:["data/pieces.json"],monitor:["data/monitor.json","data/feed.json"],species:["data/species.json"],media:["data/media.json","data/media-gh.json"]};
   /* the public reader page shows only the tracker items Kamal chose (data/monitor.json), not the unsorted hourly feed */
   if(window.SHUHUD_READER)FILES.monitor=["data/monitor.json"];
   const remote={dispatches:[],monitor:[],species:[],media:[]},subs=[];let remoteAt={};
