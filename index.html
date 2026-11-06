@@ -498,8 +498,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793994599"</script>
-<script src="local.js?v=1793994599"></script>
+<script>window.SHUHUD_BUILD="1793995018"</script>
+<script src="local.js?v=1793995018"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1836,7 +1836,7 @@ async function renderStudio(){
         vn.textContent=T("recReady")((res.blob.size/1048576).toFixed(1),res.ext.toUpperCase());
         body.insertAdjacentHTML("beforeend",`<video class="st-out" controls playsinline src="${u}"></video>`);
         if(downloads){b.outerHTML=`<button class="btn primary" id="st-vsave" type="button">${T("saveVideo")(res.ext.toUpperCase())}</button>`;$("#st-vsave").onclick=()=>saveBlob(res.blob,`shuhud-${slugOf(stItem)}${tag}.${res.ext}`)}
-        studioMediaBtn(act,"video",async()=>[new File([res.blob],`shuhud-${slugOf(stItem)}${tag}.${res.ext}`,{type:res.blob.type||("video/"+res.ext)})]);
+        studioMediaBtn(act,"video",async()=>[new File([res.blob],`shuhud-${slugOf(stItem)}${tag}.${res.ext}`,{type:res.blob.type||("video/"+res.ext)})],async()=>{setCanvasLang(stItem,W);return new File([await toBlob(drawStill(i,W,H,S[0],1,S.length,0,curRes()))],`shuhud-${slugOf(stItem)}${tag}-cover.png`,{type:"image/png"})});
       }catch(e){vn.textContent=T("recFail")}
       finally{const p=$("#st-play");if(p)p.disabled=false;if($("#st-rec"))$("#st-rec").disabled=false}};
   }
@@ -2129,12 +2129,14 @@ const M_TYPES=["image","card","video","carousel","info"];
 const mSrc=f=>window.SHUHUD_STANDALONE&&String(f.url||"").startsWith("/_blob/")?"media/"+f.id+(f.ext||""):f.url;
 const canAddMedia=()=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE)||(typeof ghMode==="function"&&ghMode()&&!!ghTok());
 const canDelMedia=m=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE)||(typeof ghMode==="function"&&ghMode()&&!!ghTok()&&String(m.id).startsWith("g_"));
+/* a video shows its cover (title card) before it plays; older videos without one open on the title frame */
+const vidTag=(m,f)=>m.poster?`<video src="${esc(mSrc(f))}" poster="${esc(/^media\/g_/.test(m.poster.url||"")&&Date.now()-Date.parse(m.createdAt||0)<9e5?"https://raw.githubusercontent.com/Kalslami2013/shuhud/main/"+m.poster.url:mSrc(m.poster))}" controls playsinline preload="metadata"></video>`:`<video src="${esc(mSrc(f))}#t=2" controls playsinline preload="metadata"></video>`;
 function mediaHTML(m){
   const files=Array.isArray(m.files)?m.files:[];const isVid=f=>String(f.mime||"").startsWith("video/");
   let body="";
   const mdir=m.lang==="en"?"ltr":m.lang==="ar"?"rtl":(isEn()?"ltr":"rtl");
-  if(files.length>1)body=`<div class="md-car" dir="${mdir}">${files.map((f,k)=>isVid(f)?`<video src="${esc(mSrc(f))}" controls playsinline preload="metadata"></video>`:`<img src="${esc(mSrc(f))}" alt="${esc((m.title||"")+" "+(k+1))}" data-lb="${k}">`).join("")}</div><div class="md-n" dir="ltr">1 / ${files.length}</div><button dir="ltr" class="md-arw md-prev" type="button" data-step="-1" aria-label="${T("lbPrev")}">${mdir==="rtl"?"›":"‹"}</button><button dir="ltr" class="md-arw md-next" type="button" data-step="1" aria-label="${T("lbNext")}">${mdir==="rtl"?"‹":"›"}</button>`;
-  else if(files[0])body=isVid(files[0])?`<video src="${esc(mSrc(files[0]))}" controls playsinline preload="metadata"></video>`:`<img src="${esc(mSrc(files[0]))}" alt="${esc(m.title||"")}" loading="lazy" data-lb="0">`;
+  if(files.length>1)body=`<div class="md-car" dir="${mdir}">${files.map((f,k)=>isVid(f)?vidTag(m,f):`<img src="${esc(mSrc(f))}" alt="${esc((m.title||"")+" "+(k+1))}" data-lb="${k}">`).join("")}</div><div class="md-n" dir="ltr">1 / ${files.length}</div><button dir="ltr" class="md-arw md-prev" type="button" data-step="-1" aria-label="${T("lbPrev")}">${mdir==="rtl"?"›":"‹"}</button><button dir="ltr" class="md-arw md-next" type="button" data-step="1" aria-label="${T("lbNext")}">${mdir==="rtl"?"‹":"›"}</button>`;
+  else if(files[0])body=isVid(files[0])?vidTag(m,files[0]):`<img src="${esc(mSrc(files[0]))}" alt="${esc(m.title||"")}" loading="lazy" data-lb="0">`;
   const t=isEn()&&m.en&&m.en.title?m.en.title:m.title,c=isEn()&&m.en&&m.en.caption?m.en.caption:m.caption;
   return `<article class="md" data-mid="${esc(m.id)}"><div class="md-media">${body}</div><div class="md-bd">
     <span class="tag">${esc(T("mTypes")[m.type]||"")}</span>${t?`<h3>${esc(t)}</h3>`:""}${c?`<p>${esc(c)}</p>`:""}
@@ -2183,11 +2185,13 @@ const mMax=()=>(typeof ghMode==="function"&&ghMode()?45:20)*1024*1024;
 async function mediaPublish(type,title,caption,files,extra={}){
   if(files.some(f=>f.size>mMax()))throw {code:"too_big"};
   if(typeof ghMode==="function"&&ghMode()){await ghAdd(type,title,caption,files,extra);return}
+  const {posterFile,...ex}=extra;
   const up=[];for(const f of files){const u=await assets.upload(f);const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[""])[0].toLowerCase();up.push({id:u.id,url:u.url,mime:f.type||u.contentType||"",ext,name:f.name})}
-  await db.collection("media").add({type,title,caption,files:up,createdAt:new Date().toISOString(),...extra});
+  if(posterFile){try{const u=await assets.upload(posterFile);ex.poster={id:u.id,url:u.url,mime:"image/png",ext:".png",name:posterFile.name}}catch(_){}}
+  await db.collection("media").add({type,title,caption,files:up,createdAt:new Date().toISOString(),...ex});
 }
 /* the export studio's button: send what was just made straight to Media */
-function studioMediaBtn(act,type,getFiles){
+function studioMediaBtn(act,type,getFiles,getPoster){
   if(!stItem||stItem.id==="draft")return;
   /* standalone app not linked to GitHub yet (each browser and the home-screen app keep their own copy of the key) */
   if(!canAddMedia()&&typeof ghMode==="function"&&ghMode()&&!ghTok()){
@@ -2196,7 +2200,7 @@ function studioMediaBtn(act,type,getFiles){
   if(!canAddMedia())return;
   act.insertAdjacentHTML("beforeend",`<button class="btn export" type="button" id="st-media">${T("toMedia")}</button>`);
   const b=$("#st-media");b.onclick=async()=>{if(b.disabled)return;b.disabled=true;b.textContent=T("mSaving");
-    try{const i=L(stItem);const files=await getFiles();await mediaPublish(files.length>1&&type==="card"?"carousel":type,i.headline||"",i.crisis||i.angle||"",files,{pieceId:stItem.id,lang:isEn()&&stItem.en?"en":"ar"});
+    try{const i=L(stItem);const files=await getFiles();let posterFile=null;if(getPoster){try{posterFile=await getPoster()}catch(_){}}await mediaPublish(files.length>1&&type==="card"?"carousel":type,i.headline||"",i.crisis||i.angle||"",files,{pieceId:stItem.id,lang:isEn()&&stItem.en?"en":"ar",posterFile});
       b.textContent=T("toMediaDone");toast(T("mSaved")+(ghMode()?" · "+T("ghNote"):""))}
     catch(e){b.disabled=false;b.textContent=T("toMedia");toast(e&&e.code==="too_big"?T("mTooBig"):T("mFail"))}};
 }
@@ -2224,7 +2228,7 @@ Object.assign(DICT.en,{ghFirst:"Connect GitHub first: paste the token and press 
 if(window.SHUHUD_STANDALONE){Object.assign(DICT.ar,{mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تُرفع المادة إلى GitHub وتظهر للقرّاء بعد دقيقة أو دقيقتين."});Object.assign(DICT.en,{mFilesNote:"20 MB per file. For a carousel pick several images in order. The item goes to GitHub and readers see it within a minute or two."})}
 const GH={repo:"Kalslami2013/shuhud",list:"data/media-gh.json",plist:"data/partners-gh.json",key:"shuhud-gh-token"};
 /* Files just pushed to GitHub take a minute to reach Pages: fall back to the raw copy once. */
-addEventListener("error",e=>{const el=e.target;if(!el||!/^(IMG|VIDEO)$/.test(el.tagName)||el.dataset.raw)return;const m=(el.getAttribute("src")||"").match(/(?:^|\/)(media\/g_[\w.-]+)$/);if(!m)return;el.dataset.raw="1";el.src="https://raw.githubusercontent.com/"+GH.repo+"/main/"+m[1]},true);
+addEventListener("error",e=>{const el=e.target;if(!el||!/^(IMG|VIDEO)$/.test(el.tagName)||el.dataset.raw)return;const m=(el.getAttribute("src")||"").match(/(?:^|\/)(media\/g_[\w.-]+)(#[^#]*)?$/);if(!m)return;el.dataset.raw="1";el.src="https://raw.githubusercontent.com/"+GH.repo+"/main/"+m[1]+(m[2]||"")},true);
 const ghTok=()=>{try{return localStorage.getItem(GH.key)||""}catch(e){return ""}};
 const ghMode=()=>!!window.SHUHUD_STANDALONE&&!READER;
 const ghB64=s=>btoa(unescape(encodeURIComponent(s))),ghUnB64=s=>decodeURIComponent(escape(atob(String(s).replace(/\n/g,""))));
@@ -2234,7 +2238,9 @@ async function ghApi(path,method="GET",body){
   if(r.status===404&&method==="GET")return null;if(!r.ok)throw {code:r.status};return r.json()}
 async function ghList(path=GH.list){const j=await ghApi(path);return {sha:j&&j.sha,list:j?JSON.parse(ghUnB64(j.content)||"[]"):[]}}
 async function ghSaveList(change,msg,path=GH.list){for(let k=0;k<2;k++){const {sha,list}=await ghList(path);try{await ghApi(path,"PUT",{message:msg,content:ghB64(JSON.stringify(change(list))),...(sha?{sha}:{})});return}catch(e){if(e.code!==409||k)throw e}}}
-async function ghAdd(type,title,caption,files,extra={}){
+async function ghAdd(type,title,caption,files,ext0={}){
+  const {posterFile,...extra}=ext0;
+  if(posterFile){try{const pid="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);await ghApi("media/"+pid+".png","PUT",{message:"Media: add cover "+posterFile.name,content:await fileB64(posterFile)});extra.poster={id:pid,url:"media/"+pid+".png",mime:"image/png",ext:".png",name:posterFile.name}}catch(_){}}
   const up=[];for(const f of files){const id="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[".jpg"])[0].toLowerCase();
     await ghApi("media/"+id+ext,"PUT",{message:"Media: add "+f.name,content:await fileB64(f)});up.push({id,url:"media/"+id+ext,mime:f.type||"",ext,name:f.name})}
   const item={id:"g_"+Date.now().toString(36),type,title,caption,files:up,createdAt:new Date().toISOString(),...extra};
