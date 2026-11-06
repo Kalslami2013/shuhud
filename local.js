@@ -10,6 +10,8 @@
   const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 
   const FILES={dispatches:["data/pieces.json"],monitor:["data/monitor.json","data/feed.json"],species:["data/species.json"]};
+  /* the public reader page shows only the tracker items Kamal chose (data/monitor.json), not the unsorted hourly feed */
+  if(window.SHUHUD_READER)FILES.monitor=["data/monitor.json"];
   const remote={dispatches:[],monitor:[],species:[]},subs=[];let remoteAt={};
   async function loadRemote(col){const parts=await Promise.all(FILES[col].map(async f=>{try{const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"});return r.ok?await r.json():null}catch(e){return null}}));if(parts.some(Boolean)){remote[col]=parts.filter(Boolean).flat();remoteAt[col]=new Date()}}
   async function merged(col){
