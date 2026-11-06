@@ -258,6 +258,17 @@ body:not(.en) .sp .sci{text-align:right}
 .md-media img,.md-media video{display:block;width:100%;max-height:520px;object-fit:contain;background:#07120d}
 .md-car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}
 .md-car>*{flex:0 0 100%;scroll-snap-align:center}
+.md-media img[data-lb]{cursor:zoom-in}
+.md-arw{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.55);color:#fff;font-size:24px;line-height:1;display:grid;place-items:center;cursor:pointer;padding:0}
+.md-arw:hover{background:rgba(0,0,0,.8)}
+.md-car[dir="rtl"]~.md-prev,.md-car[dir="ltr"]~.md-next{right:10px}.md-car[dir="rtl"]~.md-next,.md-car[dir="ltr"]~.md-prev{left:10px}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(4,10,7,.94);display:grid;place-items:center;padding:56px 12px}
+.lb img{max-width:min(100%,1100px);max-height:calc(100vh - 112px);object-fit:contain;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.lb-x{position:absolute;top:12px;inset-inline-end:12px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.5);color:#fff;font-size:20px;cursor:pointer}
+.lb-arw{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.5);color:#fff;font-size:34px;line-height:1;cursor:pointer;padding:0}
+.lb-arw:disabled{opacity:.25;cursor:default}
+.lb[dir="rtl"] .lb-prev,.lb[dir="ltr"] .lb-next{right:14px}.lb[dir="rtl"] .lb-next,.lb[dir="ltr"] .lb-prev{left:14px}
+.lb-n{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);color:#fff;background:rgba(0,0,0,.5);border-radius:999px;padding:4px 14px;font-size:14px}
 .md-n{position:absolute;top:10px;inset-inline-end:10px;background:rgba(0,0,0,.6);color:var(--parchment);border-radius:999px;padding:2px 10px;font-size:12px}
 .md-bd{padding:12px 16px 14px;display:grid;gap:6px}
 .md-bd h3{font-family:var(--f-display);font-size:21px;margin:0;line-height:1.35}
@@ -454,8 +465,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793969927"</script>
-<script src="local.js?v=1793969927"></script>
+<script>window.SHUHUD_BUILD="1793985745"</script>
+<script src="local.js?v=1793985745"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2020,7 +2031,7 @@ Object.assign(DICT.ar,{
   mAddBtn:"➕ أضف مادة",mAddTitle:"أضف مادة إلى ميديا",mType:"النوع",mTitle:"العنوان",mCaption:"وصف قصير (اختياري)",mFiles:"الملفات (صورة أو أكثر، أو فيديو)",
   mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تظهر المادة في الصفحة العامة بعد «زامن النسخة المستقلة».",
   mSave:"انشر في ميديا",mSaving:"تُرفع الملفات…",mSaved:"نُشرت في ميديا",mFail:"تعذر النشر",mNeed:"اختر ملفاً وأضف عنواناً",mTooBig:"ملف أكبر من 20 ميغابايت",
-  toMedia:"📤 أضف إلى ميديا",toMediaDone:"✓ أضيفت إلى ميديا",
+  lbPrev:"السابق",lbNext:"التالي",toMedia:"📤 أضف إلى ميديا",toMediaDone:"✓ أضيفت إلى ميديا",
   mEmpty:"لا مواد هنا بعد.",mDel:"حذف",mDelConfirm:"تأكيد الحذف",mDeleted:"حُذفت المادة",mOpen:"افتح",
   aboutHTML:`<h3>منصة شهود</h3>
 <p class="lead">منصة صحفية تروي أزمات العالم من زاويتها البيئية، بلسان الكائنات التي تعيش في قلبها.</p>
@@ -2049,7 +2060,7 @@ Object.assign(DICT.en,{
   mAddBtn:"➕ Add an item",mAddTitle:"Add to Media",mType:"Type",mTitle:"Title",mCaption:"Short description (optional)",mFiles:"Files (one or more images, or a video)",
   mFilesNote:"20 MB per file. For a carousel pick several images in order. Items reach the public page after “Sync the standalone copy”.",
   mSave:"Publish to Media",mSaving:"Uploading…",mSaved:"Published to Media",mFail:"Couldn't publish",mNeed:"Pick a file and add a title",mTooBig:"A file is larger than 20 MB",
-  toMedia:"📤 Add to Media",toMediaDone:"✓ Added to Media",
+  lbPrev:"Previous",lbNext:"Next",toMedia:"📤 Add to Media",toMediaDone:"✓ Added to Media",
   mEmpty:"Nothing here yet.",mDel:"Delete",mDelConfirm:"Confirm delete",mDeleted:"Item deleted",mOpen:"Open",
   aboutHTML:`<h3>Shuhud</h3>
 <p class="lead">A journalism platform that tells the world's crises from their environmental side, in the voices of the creatures living at their heart.</p>
@@ -2081,8 +2092,8 @@ function mediaHTML(m){
   const files=Array.isArray(m.files)?m.files:[];const isVid=f=>String(f.mime||"").startsWith("video/");
   let body="";
   const mdir=m.lang==="en"?"ltr":m.lang==="ar"?"rtl":(isEn()?"ltr":"rtl");
-  if(files.length>1)body=`<div class="md-car" dir="${mdir}">${files.map((f,k)=>isVid(f)?`<video src="${esc(mSrc(f))}" controls playsinline preload="metadata"></video>`:`<img src="${esc(mSrc(f))}" alt="${esc((m.title||"")+" "+(k+1))}">`).join("")}</div><div class="md-n" dir="ltr">1 / ${files.length}</div>`;
-  else if(files[0])body=isVid(files[0])?`<video src="${esc(mSrc(files[0]))}" controls playsinline preload="metadata"></video>`:`<a href="${esc(mSrc(files[0]))}" target="_blank" rel="noopener"><img src="${esc(mSrc(files[0]))}" alt="${esc(m.title||"")}" loading="lazy"></a>`;
+  if(files.length>1)body=`<div class="md-car" dir="${mdir}">${files.map((f,k)=>isVid(f)?`<video src="${esc(mSrc(f))}" controls playsinline preload="metadata"></video>`:`<img src="${esc(mSrc(f))}" alt="${esc((m.title||"")+" "+(k+1))}" data-lb="${k}">`).join("")}</div><div class="md-n" dir="ltr">1 / ${files.length}</div><button dir="ltr" class="md-arw md-prev" type="button" data-step="-1" aria-label="${T("lbPrev")}">${mdir==="rtl"?"›":"‹"}</button><button dir="ltr" class="md-arw md-next" type="button" data-step="1" aria-label="${T("lbNext")}">${mdir==="rtl"?"‹":"›"}</button>`;
+  else if(files[0])body=isVid(files[0])?`<video src="${esc(mSrc(files[0]))}" controls playsinline preload="metadata"></video>`:`<img src="${esc(mSrc(files[0]))}" alt="${esc(m.title||"")}" loading="lazy" data-lb="0">`;
   const t=isEn()&&m.en&&m.en.title?m.en.title:m.title,c=isEn()&&m.en&&m.en.caption?m.en.caption:m.caption;
   return `<article class="md" data-mid="${esc(m.id)}"><div class="md-media">${body}</div><div class="md-bd">
     <span class="tag">${esc(T("mTypes")[m.type]||"")}</span>${t?`<h3>${esc(t)}</h3>`:""}${c?`<p>${esc(c)}</p>`:""}
@@ -2098,10 +2109,29 @@ function renderMedia(){
   /* every carousel opens on its first card (the title card), and the counter follows the swipe */
   g.querySelectorAll(".md-car").forEach(c=>{const n=c.parentElement.querySelector(".md-n"),tot=c.children.length;
     const start=()=>{c.scrollLeft=0};start();requestAnimationFrame(start);c.querySelectorAll("img").forEach(im=>im.addEventListener("load",()=>{if(!c.dataset.moved)start()},{once:true}));
-    c.addEventListener("scroll",()=>{c.dataset.moved="1";const k=Math.round(Math.abs(c.scrollLeft)/Math.max(1,c.clientWidth))+1;if(n)n.textContent=Math.min(tot,k)+" / "+tot},{passive:true})});
+    c.addEventListener("scroll",()=>{c.dataset.moved="1";const k=Math.round(Math.abs(c.scrollLeft)/Math.max(1,c.clientWidth))+1;c.dataset.k=Math.min(tot,k)-1;if(n)n.textContent=Math.min(tot,k)+" / "+tot},{passive:true});
+    c.parentElement.querySelectorAll(".md-arw").forEach(b=>b.onclick=e=>{e.stopPropagation();const cur=+(c.dataset.k||0),to=Math.max(0,Math.min(tot-1,cur+(+b.dataset.step)));c.scrollTo({left:(c.dir==="rtl"?-1:1)*to*c.clientWidth,behavior:"smooth"});c.dataset.k=to;if(n)n.textContent=(to+1)+" / "+tot})});
   const sel=$("#m-type");if(sel&&!sel.options.length)sel.innerHTML=M_TYPES.map(t=>`<option value="${t}"></option>`).join("");
   if(sel)[...sel.options].forEach(o=>o.textContent=T("mTypes")[o.value]);
 }
+/* full-screen viewer: click any media image; arrows, keyboard and swipe move between cards */
+let lb=null;
+function lbOpen(m,k){
+  const files=(m.files||[]).filter(f=>!String(f.mime||"").startsWith("video/"));if(!files.length)return;
+  const dir=m.lang==="en"?"ltr":m.lang==="ar"?"rtl":(isEn()?"ltr":"rtl");
+  lb={files,k:Math.max(0,Math.min(files.length-1,k)),dir};
+  let box=$("#lb");if(!box){box=document.createElement("div");box.id="lb";box.className="lb";box.setAttribute("role","dialog");box.setAttribute("aria-modal","true");document.body.appendChild(box);
+    box.addEventListener("click",e=>{const b=e.target.closest("[data-lbs]");if(b){lbGo(+b.dataset.lbs);return}if(e.target.closest("[data-lbx]")||e.target===box)lbClose()});
+    let x0=null;box.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
+    box.addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)<40)return;const fwd=lb.dir==="rtl"?dx>0:dx<0;lbGo(fwd?1:-1)},{passive:true})}
+  box.dir=lb.dir;box.hidden=false;document.body.style.overflow="hidden";lbDraw();
+}
+function lbDraw(){const box=$("#lb");if(!box||!lb)return;const f=lb.files[lb.k],n=lb.files.length;
+  box.innerHTML=`<button class="lb-x" type="button" data-lbx aria-label="${T("close")}">✕</button><img src="${esc(mSrc(f))}" alt="${lb.k+1} / ${n}">${n>1?`<button dir="ltr" class="lb-arw lb-prev" type="button" data-lbs="-1" aria-label="${T("lbPrev")}" ${lb.k===0?"disabled":""}>${lb.dir==="rtl"?"›":"‹"}</button><button dir="ltr" class="lb-arw lb-next" type="button" data-lbs="1" aria-label="${T("lbNext")}" ${lb.k===n-1?"disabled":""}>${lb.dir==="rtl"?"‹":"›"}</button>`:""}<div class="lb-n" dir="ltr">${lb.k+1} / ${n}</div>`}
+function lbGo(d){if(!lb)return;const k=lb.k+d;if(k<0||k>=lb.files.length)return;lb.k=k;lbDraw()}
+function lbClose(){const box=$("#lb");if(box)box.hidden=true;lb=null;document.body.style.overflow=""}
+addEventListener("keydown",e=>{if(!lb)return;if(e.key==="Escape")lbClose();else if(e.key==="ArrowLeft")lbGo(lb.dir==="rtl"?1:-1);else if(e.key==="ArrowRight")lbGo(lb.dir==="rtl"?-1:1)});
+$("#media-grid").addEventListener("click",e=>{const im=e.target.closest("[data-lb]");if(!im)return;const m=media.find(x=>x.id===im.closest(".md").dataset.mid);if(m){const imgs=(m.files||[]).filter(f=>!String(f.mime||"").startsWith("video/"));lbOpen(m,Math.min(+im.dataset.lb,imgs.length-1))}});
 $("#media-chips").addEventListener("click",e=>{const b=e.target.closest("[data-mt]");if(!b)return;mType=b.dataset.mt;renderMedia()});
 $("#media-add-btn").onclick=()=>{$("#media-add").hidden=!$("#media-add").hidden};
 $("#media-grid").addEventListener("click",async e=>{const b=e.target.closest("[data-md]");if(!b)return;const id=b.closest(".md").dataset.mid;const m=media.find(x=>x.id===id);if(!m)return;
