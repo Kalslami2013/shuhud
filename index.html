@@ -258,6 +258,22 @@ body:not(.en) .sp .sci{text-align:right}
 .md-media img,.md-media video{display:block;width:100%;max-height:520px;object-fit:contain;background:#07120d}
 .md-car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}
 .md-car>*{flex:0 0 100%;scroll-snap-align:center}
+.site-foot{margin-top:40px;padding:28px 0 calc(28px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.pf-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.pf-head h3{font-family:var(--f-display);font-size:24px;margin:0;color:var(--amber);text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.pf-head .note{margin:4px 0 0;color:var(--dim)}
+.pt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.pt{position:relative;background:var(--bark);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(8px);transition:border-color .15s}
+.pt:hover{border-color:var(--amber)}
+.pt>a,.pt>div{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px 12px;color:inherit;text-decoration:none;text-align:center}
+.pt-logo{width:100%;height:64px;display:grid;place-items:center;background:#f4efe3;border-radius:10px;padding:8px;box-sizing:border-box}
+.pt-logo img{max-width:100%;max-height:48px;object-fit:contain;filter:grayscale(1);opacity:.85;transition:filter .2s,opacity .2s}
+.pt:hover .pt-logo img{filter:none;opacity:1}
+.pt-logo b{color:#1d1406;font-size:14px}
+.pt-name{font-size:13px;font-weight:600;line-height:1.4}
+.pt-type{font-size:11.5px;color:var(--amber)}
+.pt-del{position:absolute;top:6px;inset-inline-end:6px;padding:2px 8px;font-size:11px}
+.foot-rights{text-align:center;color:var(--faint);font-size:12px;margin:24px 0 0}
 .md-media img[data-lb]{cursor:zoom-in}
 .md-arw{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.55);color:#fff;font-size:24px;line-height:1;display:grid;place-items:center;cursor:pointer;padding:0}
 .md-arw:hover{background:rgba(0,0,0,.8)}
@@ -450,6 +466,20 @@ body.reader .rc .cnt.none{visibility:hidden}
     <p class="manifesto" data-i18n="manifesto">نحن لا نقرأ الصحف. نقرأ الماء حين يجف، والسماء حين تحترق، والأرض حين ترتجف قبل أن تشعروا بها. هؤلاء مراسلونا.</p>
     <div class="roster" id="roster"></div>
   </section>
+
+  <footer class="site-foot">
+    <div id="p-wrap">
+      <div class="pf-head"><div><h3 data-i18n="pTitle">شركاؤنا</h3><p class="note" data-i18n="pSub"></p></div><button class="btn export" type="button" id="p-add-btn" hidden data-i18n="pAdd">➕ أضف شريكاً</button></div>
+      <div class="panel" id="p-form" hidden style="margin-bottom:14px">
+        <div class="row2"><div><label class="l" for="p-name" data-i18n="pName">اسم الجهة</label><input type="text" id="p-name"></div><div><label class="l" for="p-name-en" data-i18n="pNameEn">الاسم بالإنجليزية</label><input type="text" id="p-name-en" dir="ltr"></div></div>
+        <div class="row2"><div><label class="l" for="p-type" data-i18n="pType">نوع الشراكة</label><select id="p-type"></select></div><div><label class="l" for="p-url" data-i18n="pLink">رابط موقعها</label><input type="url" id="p-url" placeholder="https://" dir="ltr"></div></div>
+        <div><label class="l" for="p-logo" data-i18n="pLogo">الشعار</label><input type="file" id="p-logo" accept="image/*"></div>
+        <div><button class="btn primary" type="button" id="p-save" data-i18n="pSave">أضف الشريك</button></div>
+      </div>
+      <div class="pt-grid" id="partners"></div>
+    </div>
+    <p class="foot-rights" data-i18n="footRights">© 2026 شهود</p>
+  </footer>
 </div>
 
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
@@ -465,8 +495,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1793986333"</script>
-<script src="local.js?v=1793986333"></script>
+<script>window.SHUHUD_BUILD="1793986973"</script>
+<script src="local.js?v=1793986973"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -613,7 +643,7 @@ function applyStatic(){
   
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
 }
-function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();renderCats();renderFeed();renderRoster();updateStatus();if(typeof renderSpecies==="function")renderSpecies();if(typeof renderMedia==="function")renderMedia();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
+function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();renderCats();renderFeed();renderRoster();updateStatus();if(typeof renderSpecies==="function")renderSpecies();if(typeof renderMedia==="function")renderMedia();if(typeof renderPartners==="function")renderPartners();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
 
 const ROSTER={
   oryx:{e:"🦌",n:"المها العربي",b:"صحراء الربع الخالي",r:"arabia"},
@@ -2180,7 +2210,7 @@ Object.assign(DICT.en,{ghFirst:"Connect GitHub first: paste the token and press 
   ghHelp:"Create it on GitHub: Settings → Developer settings → Fine-grained tokens → Generate new token. Pick only the Kalslami2013/shuhud repo and Contents: Read and write. It is stored in this browser only, so use it on your own device.",
   ghNote:"Readers see the item within a minute or two."});
 if(window.SHUHUD_STANDALONE){Object.assign(DICT.ar,{mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تُرفع المادة إلى GitHub وتظهر للقرّاء بعد دقيقة أو دقيقتين."});Object.assign(DICT.en,{mFilesNote:"20 MB per file. For a carousel pick several images in order. The item goes to GitHub and readers see it within a minute or two."})}
-const GH={repo:"Kalslami2013/shuhud",list:"data/media-gh.json",key:"shuhud-gh-token"};
+const GH={repo:"Kalslami2013/shuhud",list:"data/media-gh.json",plist:"data/partners-gh.json",key:"shuhud-gh-token"};
 const ghTok=()=>{try{return localStorage.getItem(GH.key)||""}catch(e){return ""}};
 const ghMode=()=>!!window.SHUHUD_STANDALONE&&!READER;
 const ghB64=s=>btoa(unescape(encodeURIComponent(s))),ghUnB64=s=>decodeURIComponent(escape(atob(String(s).replace(/\n/g,""))));
@@ -2188,8 +2218,8 @@ const fileB64=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(
 async function ghApi(path,method="GET",body){
   const r=await fetch("https://api.github.com/repos/"+GH.repo+"/contents/"+path,{method,headers:{Authorization:"Bearer "+ghTok(),Accept:"application/vnd.github+json",...(body?{"Content-Type":"application/json"}:{})},body:body?JSON.stringify(body):undefined});
   if(r.status===404&&method==="GET")return null;if(!r.ok)throw {code:r.status};return r.json()}
-async function ghList(){const j=await ghApi(GH.list);return {sha:j&&j.sha,list:j?JSON.parse(ghUnB64(j.content)||"[]"):[]}}
-async function ghSaveList(change,msg){for(let k=0;k<2;k++){const {sha,list}=await ghList();try{await ghApi(GH.list,"PUT",{message:msg,content:ghB64(JSON.stringify(change(list))),...(sha?{sha}:{})});return}catch(e){if(e.code!==409||k)throw e}}}
+async function ghList(path=GH.list){const j=await ghApi(path);return {sha:j&&j.sha,list:j?JSON.parse(ghUnB64(j.content)||"[]"):[]}}
+async function ghSaveList(change,msg,path=GH.list){for(let k=0;k<2;k++){const {sha,list}=await ghList(path);try{await ghApi(path,"PUT",{message:msg,content:ghB64(JSON.stringify(change(list))),...(sha?{sha}:{})});return}catch(e){if(e.code!==409||k)throw e}}}
 async function ghAdd(type,title,caption,files,extra={}){
   const up=[];for(const f of files){const id="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[".jpg"])[0].toLowerCase();
     await ghApi("media/"+id+ext,"PUT",{message:"Media: add "+f.name,content:await fileB64(f)});up.push({id,url:"media/"+id+ext,mime:f.type||"",ext,name:f.name})}
@@ -2204,18 +2234,58 @@ async function ghDel(m){
 }
 function renderGh(){const box=$("#gh-box"),btn=$("#gh-link");if(!box)return;const on=ghMode();btn.hidden=!on||!!ghTok();$("#gh-unlink").hidden=!on||!ghTok();if(!on)box.hidden=true}
 $("#gh-link").onclick=()=>{$("#gh-box").hidden=!$("#gh-box").hidden};
-$("#gh-unlink").onclick=()=>{try{localStorage.removeItem(GH.key)}catch(e){}renderMedia()};
+$("#gh-unlink").onclick=()=>{try{localStorage.removeItem(GH.key)}catch(e){}renderMedia();renderPartners()};
 $("#gh-save").onclick=async()=>{const t=$("#gh-tok").value.trim();if(!t)return;try{localStorage.setItem(GH.key,t)}catch(e){}
   try{const r=await fetch("https://api.github.com/repos/"+GH.repo,{headers:{Authorization:"Bearer "+t,Accept:"application/vnd.github+json"}});const j=r.ok?await r.json():null;if(!j||!j.permissions||!j.permissions.push)throw 0;
-    $("#gh-tok").value="";$("#gh-box").hidden=true;toast(T("ghSaved"));renderMedia()}
+    $("#gh-tok").value="";$("#gh-box").hidden=true;toast(T("ghSaved"));renderMedia();renderPartners()}
   catch(e){try{localStorage.removeItem(GH.key)}catch(_){}toast(T("ghBad"))}};
+/* ---------- partners: a logo band at the foot of every page ---------- */
+Object.assign(DICT.ar,{pTitle:"شركاؤنا",pSub:"جهات تدعم «شهود» بالتمويل أو المعرفة أو النشر.",pAdd:"➕ أضف شريكاً",pName:"اسم الجهة",pNameEn:"الاسم بالإنجليزية (اختياري)",pType:"نوع الشراكة",pLink:"رابط موقعها",pLogo:"الشعار (صورة)",
+  pTypes:{funding:"شريك تمويل",knowledge:"شريك معرفة",media:"شريك إعلامي",tech:"شريك تقني"},pSave:"أضف الشريك",pSaved:"أُضيف الشريك",pNeed:"اكتب اسم الجهة واختر شعارها",pEmpty:"لا شركاء بعد. أضف أول شريك.",pDel:"حذف",pDelConfirm:"تأكيد الحذف",pDeleted:"حُذف الشريك",
+  footRights:"© 2026 شهود · أزمات البشر كما تعيشها الكائنات الأخرى"});
+Object.assign(DICT.en,{pTitle:"Our partners",pSub:"Organisations supporting Shuhud with funding, knowledge or distribution.",pAdd:"➕ Add a partner",pName:"Organisation name",pNameEn:"Name in English (optional)",pType:"Partnership type",pLink:"Website link",pLogo:"Logo (image)",
+  pTypes:{funding:"Funding partner",knowledge:"Knowledge partner",media:"Media partner",tech:"Technology partner"},pSave:"Add partner",pSaved:"Partner added",pNeed:"Enter the name and pick a logo",pEmpty:"No partners yet. Add the first one.",pDel:"Delete",pDelConfirm:"Confirm delete",pDeleted:"Partner removed",
+  footRights:"© 2026 Shuhud · Human crises, as the other species live them"});
+let partners=[],pArmed=null,pBusy=false;
+const P_TYPES=["funding","knowledge","media","tech"];
+const canEditPartners=()=>typeof canAddMedia==="function"&&canAddMedia();
+const canDelPartner=p=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE)||(typeof ghMode==="function"&&ghMode()&&!!ghTok()&&String(p.id).startsWith("g_"));
+function renderPartners(){
+  const box=$("#partners");if(!box)return;const edit=canEditPartners();
+  $("#p-add-btn").hidden=!edit;if(!edit)$("#p-form").hidden=true;
+  const sel=$("#p-type");if(sel&&!sel.options.length)sel.innerHTML=P_TYPES.map(t=>`<option value="${t}"></option>`).join("");if(sel)[...sel.options].forEach(o=>o.textContent=T("pTypes")[o.value]);
+  $("#p-wrap").hidden=!partners.length&&!edit;
+  const list=[...partners].sort((a,b)=>P_TYPES.indexOf(a.type)-P_TYPES.indexOf(b.type)||String(a.createdAt).localeCompare(String(b.createdAt)));
+  box.innerHTML=list.length?list.map(p=>{const name=isEn()&&p.nameEn?p.nameEn:p.name,logo=p.logo?mSrc(p.logo):"";
+    const inner=`<span class="pt-logo">${logo?`<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy">`:`<b>${esc(name)}</b>`}</span><span class="pt-name">${esc(name)}</span><span class="pt-type">${esc(T("pTypes")[p.type]||"")}</span>`;
+    return `<div class="pt" data-pid="${esc(p.id)}">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div>${inner}</div>`}${canDelPartner(p)?`<button class="btn danger pt-del" type="button" data-pd>${pArmed===p.id?T("pDelConfirm"):T("pDel")}</button>`:""}</div>`}).join(""):(edit?`<p class="note">${T("pEmpty")}</p>`:"");
+}
+$("#p-add-btn").onclick=()=>{$("#p-form").hidden=!$("#p-form").hidden};
+$("#partners").addEventListener("click",async e=>{const b=e.target.closest("[data-pd]");if(!b)return;e.preventDefault();const id=b.closest(".pt").dataset.pid,p=partners.find(x=>x.id===id);if(!p)return;
+  if(pArmed!==id){pArmed=id;renderPartners();setTimeout(()=>{if(pArmed===id){pArmed=null;renderPartners()}},4000);return}
+  pArmed=null;try{if(typeof ghMode==="function"&&ghMode()){await ghSaveList(l=>l.filter(x=>x.id!==id),"Partners: remove "+(p.name||id),GH.plist);if(p.logo){try{const j=await ghApi(p.logo.url);if(j)await ghApi(p.logo.url,"DELETE",{message:"Partners: remove logo",sha:j.sha})}catch(_){}}try{await db.collection("partners").doc(id).delete()}catch(_){}}
+    else{await db.collection("partners").doc(id).delete();if(p.logo&&p.logo.id){try{await assets.delete(p.logo.id)}catch(_){}}}toast(T("pDeleted"))}catch(err){toast(T("mFail"))}});
+$("#p-save").onclick=async()=>{
+  if(pBusy||!canEditPartners())return;const f=$("#p-logo").files[0],name=$("#p-name").value.trim();
+  if(!f||!name){toast(T("pNeed"));return}if(f.size>5*1024*1024){toast(T("mTooBig"));return}
+  pBusy=true;const b=$("#p-save");b.disabled=true;b.textContent=T("mSaving");
+  const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[".png"])[0].toLowerCase();
+  const rec={name,nameEn:$("#p-name-en").value.trim(),type:$("#p-type").value,url:$("#p-url").value.trim(),createdAt:new Date().toISOString()};
+  try{
+    if(typeof ghMode==="function"&&ghMode()){const id="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+      await ghApi("media/"+id+ext,"PUT",{message:"Partners: add logo "+name,content:await fileB64(f)});
+      const item={id:"g_p"+Date.now().toString(36),...rec,logo:{id,url:"media/"+id+ext,ext,mime:f.type||""}};
+      await ghSaveList(l=>[...l,item],"Partners: add "+name,GH.plist);try{const {id:pid,...rest}=item;await db.collection("partners").doc(pid).set(rest)}catch(_){}}
+    else{const u=await assets.upload(f);await db.collection("partners").add({...rec,logo:{id:u.id,url:u.url,ext,mime:f.type||u.contentType||""}})}
+    toast(T("pSaved")+(typeof ghMode==="function"&&ghMode()?" · "+T("ghNote"):""));["#p-name","#p-name-en","#p-url"].forEach(s=>$(s).value="");$("#p-logo").value="";$("#p-form").hidden=true}
+  catch(err){toast(T("mFail"))}finally{pBusy=false;b.disabled=false;b.textContent=T("pSave")}};
 /* ---------- capabilities ---------- */
-applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrack();renderSpecies();renderMedia();
+applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrack();renderSpecies();renderMedia();renderPartners();
 (async()=>{
   const c=window.claude;
   if(!c?.use){statusMsg="openInClaude";dbReady=true;updateStatus();renderFeed();return}
   c.use("sample").then(s=>{sample=s;if(!s)$("#d-note").textContent=T("sampleOff");renderFeed();renderSpecies()});
-  c.use("assets").then(a=>{assets=a;renderSpecies();renderMedia()});
+  c.use("assets").then(a=>{assets=a;renderSpecies();renderMedia();renderPartners()});
   c.use("downloads").then(d=>{downloads=d;if(!$("#studio").hidden)renderStudio()});
   c.use("mcp").then(m=>{mcp=m;const on=!!m&&!window.SHUHUD_STANDALONE;$("#run-track").hidden=!on;$("#run-live").hidden=!on;runNotes()}).catch(()=>{});
   db=await c.use("db");
@@ -2224,6 +2294,7 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
     dbReady=true;items=snap.docs.map(d=>({id:d.id,...d.data()}));
     updateStatus();renderCats();renderFeed();renderRoster();renderTrack();renderSpecies();
   },()=>{dbReady=true;statusMsg="feedFail";updateStatus();renderFeed()});
+  db.collection("partners").onSnapshot(snap=>{partners=snap.docs.map(d=>({id:d.id,...d.data()}));renderPartners()},()=>{});
   db.collection("media").orderBy("createdAt","desc").limit(300).onSnapshot(snap=>{media=snap.docs.map(d=>({id:d.id,...d.data()}));renderMedia()},()=>{});
   db.collection("species").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{const x=d.data();m[x.key||d.id]=x});spDocs=m;spLoaded=true;renderSpecies()},()=>{});
   db.collection("monitor").orderBy("at","desc").limit(300).onSnapshot(snap=>{track=snap.docs.map(d=>({id:d.id,...d.data()}));renderTrack()},()=>{});
