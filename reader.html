@@ -3,6 +3,7 @@
 <link rel="manifest" href="reader.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 </head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>الشهود</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -496,8 +497,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1793989352"</script>
-<script src="local.js?v=1793989352"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1793993016"</script>
+<script src="local.js?v=1793993016"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2214,6 +2215,8 @@ Object.assign(DICT.en,{ghFirst:"Connect GitHub first: paste the token and press 
   ghNote:"Readers see the item within a minute or two."});
 if(window.SHUHUD_STANDALONE){Object.assign(DICT.ar,{mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تُرفع المادة إلى GitHub وتظهر للقرّاء بعد دقيقة أو دقيقتين."});Object.assign(DICT.en,{mFilesNote:"20 MB per file. For a carousel pick several images in order. The item goes to GitHub and readers see it within a minute or two."})}
 const GH={repo:"Kalslami2013/shuhud",list:"data/media-gh.json",plist:"data/partners-gh.json",key:"shuhud-gh-token"};
+/* Files just pushed to GitHub take a minute to reach Pages: fall back to the raw copy once. */
+addEventListener("error",e=>{const el=e.target;if(!el||!/^(IMG|VIDEO)$/.test(el.tagName)||el.dataset.raw)return;const m=(el.getAttribute("src")||"").match(/(?:^|\/)(media\/g_[\w.-]+)$/);if(!m)return;el.dataset.raw="1";el.src="https://raw.githubusercontent.com/"+GH.repo+"/main/"+m[1]},true);
 const ghTok=()=>{try{return localStorage.getItem(GH.key)||""}catch(e){return ""}};
 const ghMode=()=>!!window.SHUHUD_STANDALONE&&!READER;
 const ghB64=s=>btoa(unescape(encodeURIComponent(s))),ghUnB64=s=>decodeURIComponent(escape(atob(String(s).replace(/\n/g,""))));
@@ -2482,4 +2485,6 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
 })();
 
 </script>
+
+</body></html>
 </body></html>
