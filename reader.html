@@ -272,6 +272,7 @@ body:not(.en) .sp .sci{text-align:right}
 .pt-logo b{color:#1d1406;font-size:14px}
 .pt-name{font-size:13px;font-weight:600;line-height:1.4}
 .pt-type{font-size:11.5px;color:var(--amber)}
+.pt-visit{font-size:11px;color:var(--leaf);margin-top:2px}.pt>a:hover .pt-visit{text-decoration:underline}
 .pt-del{position:absolute;top:6px;inset-inline-end:6px;padding:2px 8px;font-size:11px}
 .foot-rights{text-align:center;color:var(--faint);font-size:12px;margin:24px 0 0}
 .md-media img[data-lb]{cursor:zoom-in}
@@ -495,8 +496,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1793987553"</script>
-<script src="local.js?v=1793987553"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1793987825"</script>
+<script src="local.js?v=1793987825"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2243,10 +2244,10 @@ $("#gh-save").onclick=async()=>{const t=$("#gh-tok").value.trim();if(!t)return;t
   catch(e){try{localStorage.removeItem(GH.key)}catch(_){}toast(T("ghBad"))}};
 /* ---------- partners: a logo band at the foot of every page ---------- */
 Object.assign(DICT.ar,{pTitle:"شركاؤنا",pSub:"جهات تدعم «شهود» بالتمويل أو المعرفة أو النشر.",pAdd:"➕ أضف شريكاً",pName:"اسم الجهة",pNameEn:"الاسم بالإنجليزية (اختياري)",pType:"نوع الشراكة",pLink:"رابط موقعها",pLogo:"الشعار (صورة)",
-  pTypes:{funding:"شريك تمويل",knowledge:"شريك معرفة",media:"شريك إعلامي",tech:"شريك تقني"},pSave:"أضف الشريك",pSaved:"أُضيف الشريك",pNeed:"اكتب اسم الجهة واختر شعارها",pEmpty:"لا شركاء بعد. أضف أول شريك.",pDel:"حذف",pDelConfirm:"تأكيد الحذف",pDeleted:"حُذف الشريك",
+  pTypes:{funding:"شريك تمويل",knowledge:"شريك معرفة",media:"شريك إعلامي",tech:"شريك تقني"},pVisit:"زيارة الموقع",pSave:"أضف الشريك",pSaved:"أُضيف الشريك",pNeed:"اكتب اسم الجهة واختر شعارها",pEmpty:"لا شركاء بعد. أضف أول شريك.",pDel:"حذف",pDelConfirm:"تأكيد الحذف",pDeleted:"حُذف الشريك",
   footRights:"© 2026 شهود · أزمات البشر كما تعيشها الكائنات الأخرى"});
 Object.assign(DICT.en,{pTitle:"Our partners",pSub:"Organisations supporting Shuhud with funding, knowledge or distribution.",pAdd:"➕ Add a partner",pName:"Organisation name",pNameEn:"Name in English (optional)",pType:"Partnership type",pLink:"Website link",pLogo:"Logo (image)",
-  pTypes:{funding:"Funding partner",knowledge:"Knowledge partner",media:"Media partner",tech:"Technology partner"},pSave:"Add partner",pSaved:"Partner added",pNeed:"Enter the name and pick a logo",pEmpty:"No partners yet. Add the first one.",pDel:"Delete",pDelConfirm:"Confirm delete",pDeleted:"Partner removed",
+  pTypes:{funding:"Funding partner",knowledge:"Knowledge partner",media:"Media partner",tech:"Technology partner"},pVisit:"Visit website",pSave:"Add partner",pSaved:"Partner added",pNeed:"Enter the name and pick a logo",pEmpty:"No partners yet. Add the first one.",pDel:"Delete",pDelConfirm:"Confirm delete",pDeleted:"Partner removed",
   footRights:"© 2026 Shuhud · Human crises, as the other species live them"});
 let partners=[],pArmed=null,pBusy=false;
 const P_TYPES=["funding","knowledge","media","tech"];
@@ -2259,7 +2260,7 @@ function renderPartners(){
   $("#p-wrap").hidden=!partners.length&&!edit;
   const list=[...partners].sort((a,b)=>P_TYPES.indexOf(a.type)-P_TYPES.indexOf(b.type)||String(a.createdAt).localeCompare(String(b.createdAt)));
   box.innerHTML=list.length?list.map(p=>{const name=isEn()&&p.nameEn?p.nameEn:p.name,logo=p.logo?mSrc(p.logo):"";
-    const inner=`<span class="pt-logo">${logo?`<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy">`:`<b>${esc(name)}</b>`}</span><span class="pt-name">${esc(name)}</span><span class="pt-type">${esc(T("pTypes")[p.type]||"")}</span>`;
+    const inner=`<span class="pt-logo">${logo?`<img src="${esc(logo)}" alt="${esc(name)}" loading="lazy">`:`<b>${esc(name)}</b>`}</span><span class="pt-name">${esc(name)}</span><span class="pt-type">${esc(T("pTypes")[p.type]||"")}</span>${p.url?`<span class="pt-visit">${T("pVisit")} ↗</span>`:""}`;
     return `<div class="pt" data-pid="${esc(p.id)}">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener">${inner}</a>`:`<div>${inner}</div>`}${canDelPartner(p)?`<button class="btn danger pt-del" type="button" data-pd>${pArmed===p.id?T("pDelConfirm"):T("pDel")}</button>`:""}</div>`}).join(""):(edit?`<p class="note">${T("pEmpty")}</p>`:"");
 }
 $("#p-add-btn").onclick=()=>{$("#p-form").hidden=!$("#p-form").hidden};
