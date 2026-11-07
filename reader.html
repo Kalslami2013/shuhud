@@ -508,8 +508,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794061932"</script>
-<script src="local.js?v=1794061932"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794062152"</script>
+<script src="local.js?v=1794062152"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -828,7 +828,7 @@ $("#feed").addEventListener("click",async e=>{
   if(act==="say"){if(NARR.playing&&b.textContent===T("nStop")){stopNarration();return}stopNarration();const lang=i._missing||!isEn()?"ar":"en";const card=b.closest(".card");const bar=narrBar(card,i,lang);b.textContent=T("nStop");playNarration(i,lang,bar)}
   if(act==="del"){
     if(armed!==id){armed=id;renderFeed();setTimeout(()=>{if(armed===id){armed=null;renderFeed()}},4000);return}
-    armed=null;stopNarration();try{await db.collection("dispatches").doc(id).delete();toast(T("deleted"))}catch(err){toast(T("delFail"))}
+    armed=null;stopNarration();try{if(typeof ghMode==="function"&&ghMode()&&ghTok()&&String(id).startsWith("g_"))await ghSaveList(l=>l.filter(x=>x.id!==id),"Piece: remove "+(raw.headline||id),GH.pieces);await db.collection("dispatches").doc(id).delete();toast(T("deleted"))}catch(err){toast(T("delFail"))}
   }
 });
 async function copy(t){try{await navigator.clipboard.writeText(t);toast(T("copied"))}catch(e){const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast(T("copied"))}catch(_){}ta.remove()}}
@@ -1151,6 +1151,18 @@ async function publishDraft(){
     sources:srcName||srcUrl?[{name:srcName||T("source"),url:srcUrl}]:[],createdAt:new Date().toISOString()};
   if(draft.en)doc.en={...draft.en,sources:doc.sources};
   const img=att.find(a=>a.kind==="image");
+  /* standalone app: publish straight to the public site through GitHub, so the platform runs without Claude */
+  if(typeof ghMode==="function"&&ghMode()){
+    if(!ghTok()){b.disabled=false;b.textContent=T("publish");location.hash="media";show("media");$("#gh-box").hidden=false;toast(T("ghFirstPub"));return}
+    try{const id="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+      if(img){const ext=((img.file.name||"").match(/\.[a-z0-9]{2,5}$/i)||[".jpg"])[0].toLowerCase(),fid="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+        await ghApi("media/"+fid+ext,"PUT",{message:"Piece photo: "+(doc.headline||id),content:await fileB64(img.file)});doc.imageUrl="media/"+fid+ext}
+      await ghSaveList(l=>[{id,...doc},...l.filter(x=>x.id!==id)],"Piece: "+(doc.headline||id),GH.pieces);
+      try{await db.collection("dispatches").doc(id).set(doc)}catch(_){}
+      if(fromTrack){try{await db.collection("monitor").doc(fromTrack).update({pieceId:id})}catch(_){}fromTrack=null}
+      toast(T("published")+" · "+T("ghNote"));draft=null;att=[];renderFiles();$("#d-out").innerHTML="";cat="الكل";location.hash="live";show("live")}
+    catch(e){b.disabled=false;b.textContent=T("publish");toast(e&&e.code===401?T("ghBad"):T("pubFail"))}
+    return}
   if(img&&assets){try{const u=await assets.upload(img.file);doc.imageUrl=u.url;doc.imageId=u.id}catch(e){}}
   try{const ref=await db.collection("dispatches").add(doc);if(fromTrack){try{await db.collection("monitor").doc(fromTrack).update({pieceId:ref.id})}catch(e){}fromTrack=null}toast(T("published"));draft=null;att=[];renderFiles();$("#d-out").innerHTML="";cat="الكل";location.hash="live";show("live")}
   catch(e){b.disabled=false;b.textContent=T("publish");toast(T("pubFail"))}
@@ -2234,14 +2246,14 @@ $("#m-save").onclick=async()=>{
   catch(err){toast(T("mFail"))}
   finally{mBusy=false;b.disabled=false;b.textContent=T("mSave")}};
 /* ---------- media from the standalone app: straight to the GitHub repo, with Kamal's own token kept in this browser ---------- */
-Object.assign(DICT.ar,{ghFirst:"اربط GitHub أولاً: الصق المفتاح واضغط «احفظ»، ثم ارجع إلى التصدير",ghLink:"🔑 اربط GitHub لإضافة المواد",ghLbl:"مفتاح GitHub (Fine-grained token)",ghSave:"احفظ",ghUnlink:"افصل GitHub",ghSaved:"حُفظ المفتاح في هذا المتصفح",ghBad:"المفتاح لا يعمل. تأكد أنه لمستودع shuhud ومعه صلاحية Contents: Read and write",
+Object.assign(DICT.ar,{ghFirstPub:"اربط GitHub أولاً حتى تُنشر القطعة للقرّاء: الصق المفتاح واضغط «احفظ»، ثم ارجع إلى غرفة التحرير واضغط «انشر»",ghFirst:"اربط GitHub أولاً: الصق المفتاح واضغط «احفظ»، ثم ارجع إلى التصدير",ghLink:"🔑 اربط GitHub لإضافة المواد",ghLbl:"مفتاح GitHub (Fine-grained token)",ghSave:"احفظ",ghUnlink:"افصل GitHub",ghSaved:"حُفظ المفتاح في هذا المتصفح",ghBad:"المفتاح لا يعمل. تأكد أنه لمستودع shuhud ومعه صلاحية Contents: Read and write",
   ghHelp:"أنشئه من GitHub: Settings ← Developer settings ← Fine-grained tokens ← Generate new token. اختر المستودع Kalslami2013/shuhud فقط، ثم صلاحية Contents: Read and write. يُحفظ المفتاح في هذا المتصفح فقط، فلا تضعه إلا على جهازك.",
   ghNote:"تظهر المادة للقرّاء بعد دقيقة أو دقيقتين."});
-Object.assign(DICT.en,{ghFirst:"Connect GitHub first: paste the token and press Save, then go back to Export",ghLink:"🔑 Connect GitHub to add items",ghLbl:"GitHub fine-grained token",ghSave:"Save",ghUnlink:"Disconnect GitHub",ghSaved:"Token saved in this browser",ghBad:"The token doesn't work. Make sure it is for the shuhud repo with Contents: Read and write",
+Object.assign(DICT.en,{ghFirstPub:"Connect GitHub first so the piece reaches readers: paste the token and press Save, then go back to the newsroom and press Publish",ghFirst:"Connect GitHub first: paste the token and press Save, then go back to Export",ghLink:"🔑 Connect GitHub to add items",ghLbl:"GitHub fine-grained token",ghSave:"Save",ghUnlink:"Disconnect GitHub",ghSaved:"Token saved in this browser",ghBad:"The token doesn't work. Make sure it is for the shuhud repo with Contents: Read and write",
   ghHelp:"Create it on GitHub: Settings → Developer settings → Fine-grained tokens → Generate new token. Pick only the Kalslami2013/shuhud repo and Contents: Read and write. It is stored in this browser only, so use it on your own device.",
   ghNote:"Readers see the item within a minute or two."});
 if(window.SHUHUD_STANDALONE){Object.assign(DICT.ar,{mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تُرفع المادة إلى GitHub وتظهر للقرّاء بعد دقيقة أو دقيقتين."});Object.assign(DICT.en,{mFilesNote:"20 MB per file. For a carousel pick several images in order. The item goes to GitHub and readers see it within a minute or two."})}
-const GH={repo:"Kalslami2013/shuhud",list:"data/media-gh.json",plist:"data/partners-gh.json",key:"shuhud-gh-token"};
+const GH={repo:"Kalslami2013/shuhud",list:"data/media-gh.json",plist:"data/partners-gh.json",pieces:"data/pieces-gh.json",key:"shuhud-gh-token"};
 /* Files just pushed to GitHub take a minute to reach Pages: fall back to the raw copy once. */
 addEventListener("error",e=>{const el=e.target;if(!el||!/^(IMG|VIDEO)$/.test(el.tagName)||el.dataset.raw)return;const m=(el.getAttribute("src")||"").match(/(?:^|\/)(media\/g_[\w.-]+)(#[^#]*)?$/);if(!m)return;el.dataset.raw="1";el.src="https://raw.githubusercontent.com/"+GH.repo+"/main/"+m[1]+(m[2]||"")},true);
 const ghTok=()=>{try{return localStorage.getItem(GH.key)||""}catch(e){return ""}};
