@@ -100,9 +100,10 @@ nav.main{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex
 nav.main button{flex:1;border:1px solid var(--line);background:var(--bark);color:var(--dim);border-radius:12px;padding:10px 8px;font-size:14px;font-weight:500}
 nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchment);border-color:var(--leaf)}
 
-.cats{display:flex;flex-wrap:wrap;gap:6px;padding-block:4px 12px}
+.cats{display:flex;flex-wrap:wrap;gap:5px;padding-block:4px 12px}
+@media (max-width:700px){.cats{display:grid;grid-auto-flow:column;grid-template-rows:auto auto;justify-content:start;overflow-x:auto;scrollbar-width:none}.cats::-webkit-scrollbar{display:none}}
 .cats::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line);background:var(--bark);color:var(--dim);border-radius:999px;padding:6px 13px;font-size:13px;white-space:nowrap}
+.chip{flex:none;border:1px solid var(--line);background:var(--bark);color:var(--dim);border-radius:999px;padding:4px 10px;font-size:12.5px;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--amber);color:#1d1406;border-color:var(--amber);font-weight:600}
 .chip .n{opacity:.7;font-variant-numeric:tabular-nums;margin-inline-start:4px}
 
@@ -537,8 +538,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794078603"</script>
-<script src="local.js?v=1794078603"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794078848"</script>
+<script src="local.js?v=1794078848"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -783,7 +784,7 @@ $("#d-text").addEventListener("input",e=>e.target.dataset.touched="1");
 function renderCats(){
   const counts={};items.forEach(i=>counts[i.category]=(counts[i.category]||0)+1);
   const extra=[...new Set(items.map(i=>i.category).filter(c=>c&&!CATS.includes(c)))];
-  $("#cats").innerHTML=[...CATS,...extra].map(c=>{const n=c==="الكل"?items.length:(counts[c]||0);return `<button class="chip" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(catName(c))}${n?`<span class="n">${n}</span>`:""}</button>`}).join("");
+  $("#cats").innerHTML=[...CATS,...extra].filter(c=>c==="الكل"||c===cat||counts[c]).map(c=>{const n=c==="الكل"?items.length:(counts[c]||0);return `<button class="chip" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(catName(c))}${n?`<span class="n">${n}</span>`:""}</button>`}).join("");
   $("#cats").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{cat=b.dataset.c;openId=null;shown=13;renderCats();renderFeed()});
 }
 const EMOJI_SAFE={"🦭":"🐟","🪸":"🐚","🫏":"🐴","🐻‍❄️":"🐻","🦬":"🐂","🪼":"🐙","🪲":"🐞"};const safeE=e=>EMOJI_SAFE[e]||e;
