@@ -96,12 +96,29 @@ nav.main{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex
 nav.main button{flex:1;border:1px solid var(--line);background:var(--bark);color:var(--dim);border-radius:12px;padding:10px 8px;font-size:14px;font-weight:500}
 nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchment);border-color:var(--leaf)}
 
-.cats{display:flex;gap:6px;overflow-x:auto;padding-block:4px 12px;scrollbar-width:none}
+.cats{display:flex;flex-wrap:wrap;gap:6px;padding-block:4px 12px}
 .cats::-webkit-scrollbar{display:none}
 .chip{flex:none;border:1px solid var(--line);background:var(--bark);color:var(--dim);border-radius:999px;padding:6px 13px;font-size:13px;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--amber);color:#1d1406;border-color:var(--amber);font-weight:600}
 .chip .n{opacity:.7;font-variant-numeric:tabular-nums;margin-inline-start:4px}
 
+.feed{grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.feed{grid-template-columns:repeat(2,minmax(0,1fr))}.feed>.card,.feed>.lead,.feed>.more,.feed>.empty{grid-column:1/-1}}
+.tz{background:var(--bark);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;text-align:start;color:inherit;font:inherit;padding:0;backdrop-filter:blur(8px);transition:border-color .15s,transform .15s;min-width:0}
+.tz:hover,.tz:focus-visible{border-color:var(--th,var(--leaf));transform:translateY(-2px)}
+.tz-img{aspect-ratio:16/9;width:100%;background:#0d1a14;position:relative;overflow:hidden;display:grid;place-items:center;font-size:54px}
+.tz-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tz-b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:7px;flex:1}
+.tz-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--faint)}
+.tz h3{font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.4;margin:0;text-wrap:balance}
+.tz p{margin:0;color:var(--dim);font-size:14px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tz-f{margin-top:auto;padding-top:6px;display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--dim)}
+.tz-f .go{color:var(--th,var(--leaf));font-weight:600}
+.lead .tz-img{aspect-ratio:21/9}.lead h3{font-size:clamp(24px,3.2vw,32px)}.lead p{-webkit-line-clamp:4;font-size:15.5px}
+@media (min-width:900px){.lead{flex-direction:row}.lead .tz-img{aspect-ratio:auto;flex:1.25;min-height:300px}.lead .tz-b{flex:1;padding:22px 24px;justify-content:center}}
+.more{justify-self:center;margin-top:4px}
+#feed .card,#feed .tz{scroll-margin-top:140px}
+.card .close-row{display:flex;justify-content:flex-end;margin:-6px 0 -4px}
 .status{font-size:12px;color:var(--faint);margin-bottom:12px}
 .feed{display:grid;gap:16px}
 .card{background:var(--bark);border:1px solid var(--line);border-radius:18px;padding:18px;backdrop-filter:blur(8px);display:grid;gap:12px;min-width:0}
@@ -516,8 +533,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794077856"</script>
-<script src="local.js?v=1794077856"></script>
+<script>window.SHUHUD_BUILD="1794078603"</script>
+<script src="local.js?v=1794078603"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -581,7 +598,7 @@ ar:{
   readThem:"اقرأها",writeAs:"اكتب بلسانه",piecesBy:n=>"قطع بلسان "+n,showAll:"عرض الكل",writeFirst:n=>"لا قطع بلسان "+n+" بعد. اكتب أولها من هنا.",
   sceneAdd:"أضف صورة لهذا المشهد",sceneChange:"غيّر صورة المشهد",sceneRemove:"أزل صورة المشهد",sceneFind:"ابحث عن صورة مناسبة",sceneHint:"📷 أضف صورة لأي مشهد تريده، اختيارياً. تُلوَّن الصورة تلقائياً بطابع المادة وتذوب في خلفية البطاقة، وفي الفيديو تنتقل المشاهد بينها بسلاسة. يكفي أربع إلى ست صور للمادة.",
   changePhotoShort:"📷 غيّر الصورة",removePhotoShort:"🗑 احذف الصورة",confirmRemovePhoto:"تأكيد حذف الصورة",photoRemoved:"حُذفت الصورة",
-  photo:"📷 صورة",addPhoto:"أضف صورة",changePhoto:"غيّر الصورة",removePhoto:"بلا صورة",findPhoto:"ابحث عن صورة للكائن",photoSaved:"حُفظت الصورة مع القطعة",photoFail:"تعذر رفع الصورة",uploading:"تُرفع الصورة…",credit:"حقوق الصورة",creditPh:"مثال: اسم المصوّر / CC BY-SA",photoLocal:"الصورة في هذا التصدير فقط، ولم تُحفظ مع القطعة",photoHint:"صورة الكائن تظهر في الغلاف والإنفوجراف.",
+  readFull:"اقرأ الشهادة ←",closePiece:"✕ إغلاق",showMore:"عرض المزيد",photo:"📷 صورة",addPhoto:"أضف صورة",changePhoto:"غيّر الصورة",removePhoto:"بلا صورة",findPhoto:"ابحث عن صورة للكائن",photoSaved:"حُفظت الصورة مع القطعة",photoFail:"تعذر رفع الصورة",uploading:"تُرفع الصورة…",credit:"حقوق الصورة",creditPh:"مثال: اسم المصوّر / CC BY-SA",photoLocal:"الصورة في هذا التصدير فقط، ولم تُحفظ مع القطعة",photoHint:"صورة الكائن تظهر في الغلاف والإنفوجراف.",
   swipe:"اسحب للمزيد ←",voiceOf:n=>"بلسان "+n,card:k=>"البطاقة "+k,infoAlt:"الإنفوجراف"
 },
 en:{
@@ -642,7 +659,7 @@ en:{
   readThem:"read them",writeAs:"Write in its voice",piecesBy:n=>"Pieces told by the "+n,showAll:"Show all",writeFirst:n=>"No pieces by the "+n+" yet. Write the first one here.",
   sceneAdd:"Add a photo to this scene",sceneChange:"Change scene photo",sceneRemove:"Remove scene photo",sceneFind:"Find a fitting photo",sceneHint:"📷 Add a photo to any scene you like, it is optional. Photos are tinted to the piece's theme and melt into the card; in the video, scenes dissolve smoothly between them. Four to six photos per piece is plenty.",
   changePhotoShort:"📷 Change photo",removePhotoShort:"🗑 Remove photo",confirmRemovePhoto:"Confirm removing photo",photoRemoved:"Photo removed",
-  photo:"📷 Photo",addPhoto:"Add photo",changePhoto:"Change photo",removePhoto:"No photo",findPhoto:"Find a photo of the species",photoSaved:"Photo saved with the piece",photoFail:"Couldn't upload the photo",uploading:"Uploading photo…",credit:"Photo credit",creditPh:"e.g. Photographer / CC BY-SA",photoLocal:"Photo used in this export only, not saved with the piece",photoHint:"The species photo appears on the cover and the infographic.",
+  readFull:"Read the testimony →",closePiece:"✕ Close",showMore:"Show more",photo:"📷 Photo",addPhoto:"Add photo",changePhoto:"Change photo",removePhoto:"No photo",findPhoto:"Find a photo of the species",photoSaved:"Photo saved with the piece",photoFail:"Couldn't upload the photo",uploading:"Uploading photo…",credit:"Photo credit",creditPh:"e.g. Photographer / CC BY-SA",photoLocal:"Photo used in this export only, not saved with the piece",photoHint:"The species photo appears on the cover and the infographic.",
   swipe:"Swipe for more →",voiceOf:n=>"Told by the "+n.replace(/^the /i,""),card:k=>"Card "+k,infoAlt:"Infographic"
 }};
 const CAT_EN={"الكل":"All","الحروب والبيئة":"War & environment","التقنية والذكاء الاصطناعي":"Tech & AI","التلوث":"Pollution","المياه":"Water","الطاقة":"Energy","كوارث طبيعية":"Natural disasters","كوارث بشرية":"Human-made disasters","الغابات":"Forests","المناخ":"Climate","البحار والمحيطات":"Seas & oceans","الميكروبات والأوبئة":"Microbes & epidemics","الانقراض":"Extinction","الكون":"Cosmos","المدن":"Cities","الغذاء والزراعة":"Food & farming","الهجرة والنزوح":"Migration & displacement"};
@@ -739,7 +756,9 @@ const CATS=["الكل","الحروب والبيئة","التقنية والذك�
 /* reader mode: the public page for readers, with no newsroom and no controls */
 const READER=!!window.SHUHUD_READER;if(READER)document.body.classList.add("reader");
 /* photos stored inside Claude (/_blob/) can't load on the public site */
-const pubImg=u=>!u?"":window.SHUHUD_STANDALONE&&String(u).startsWith("/_blob/")?"media/"+String(u).slice(7).replace(/[^\w-]/g,"")+".jpg":u;
+const pubImg=u=>u&&!(window.SHUHUD_STANDALONE&&String(u).startsWith("/_blob/"))?u:"";
+/* piece photos from Claude are copied by the sync to media/<id>.jpg */
+const pieceImg=u=>!u?"":window.SHUHUD_STANDALONE&&String(u).startsWith("/_blob/")?"media/"+String(u).slice(7).replace(/[^\w-]/g,"")+".jpg":u;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let byAnimal=null,armedPhoto=null,db=null,sample=null,assets=null,items=[],cat="الكل",chosen="auto",att=[],draft=null,armed=null,dbReady=false,translatingId=null,statusMsg="";
 const isWarn=s=>/تحقق|verif/i.test(s||"");
@@ -761,7 +780,7 @@ function renderCats(){
   const counts={};items.forEach(i=>counts[i.category]=(counts[i.category]||0)+1);
   const extra=[...new Set(items.map(i=>i.category).filter(c=>c&&!CATS.includes(c)))];
   $("#cats").innerHTML=[...CATS,...extra].map(c=>{const n=c==="الكل"?items.length:(counts[c]||0);return `<button class="chip" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(catName(c))}${n?`<span class="n">${n}</span>`:""}</button>`}).join("");
-  $("#cats").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{cat=b.dataset.c;renderCats();renderFeed()});
+  $("#cats").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{cat=b.dataset.c;openId=null;shown=13;renderCats();renderFeed()});
 }
 const EMOJI_SAFE={"🦭":"🐟","🪸":"🐚","🫏":"🐴","🐻‍❄️":"🐻","🦬":"🐂","🪼":"🐙","🪲":"🐞"};const safeE=e=>EMOJI_SAFE[e]||e;
 function who(i){const r=ROSTER[i.animal];return{e:safeE(i.animalEmoji||r?.e||"🐾"),n:i.animalName||(r?rName(i.animal):T("witness")),b:i.animalHabitat||(r?rBio(i.animal):"")}}
@@ -776,7 +795,7 @@ function richHTML(i,editable){
   return `${i.crisis?`<div class="crisis"><b${ce("crisis")}>${esc(i.crisis)}</b></div>`:""}
     <h2${ce("headline")}>${esc(i.headline)}</h2>
     ${i.angle?`<p class="angle"${ce("angle")}>${esc(i.angle)}</p>`:""}
-    ${pubImg(i.imageUrl)?`<div class="att-wrap"><img class="att-bg" src="${esc(pubImg(i.imageUrl))}" alt="" aria-hidden="true"><img class="att" onerror="this.parentNode.hidden=true" src="${esc(pubImg(i.imageUrl))}" alt=""></div>${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
+    ${pieceImg(i.imageUrl)?`<div class="att-wrap"><img class="att-bg" src="${esc(pieceImg(i.imageUrl))}" alt="" aria-hidden="true"><img class="att" onerror="this.parentNode.hidden=true" src="${esc(pieceImg(i.imageUrl))}" alt=""></div>${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
     <p class="voice"${ce("dispatch")}>${esc(i.dispatch)}</p>
     ${chain.length?`<div class="chain"><div class="lbl">${T("chain")}</div><ol>${chain.map(c=>`<li>${esc(c)}</li>`).join("")}</ol></div>`:""}
     ${figs.length?`<div class="figs"><div class="lbl">${T("figures")}</div><div class="grid">${figs.map(f=>{const warn=isWarn(f.source);return `<div class="fig${warn?" warn":""}"><div class="v">${esc(f.value)}</div><div class="t">${esc(f.label)}</div>${f.source?`<div class="s">${esc(f.source)}</div>`:""}</div>`}).join("")}</div></div>`:""}
@@ -806,6 +825,16 @@ function plain(i){
   const srcs=(i.sources||[]).map(s=>`${s.name}${s.url?" "+s.url:""}`).join("\n")||(i.source||"");
   return [i.crisis?T("crisis")+": "+i.crisis:"",i.headline,i.angle,i.dispatch,chain?T("chain")+":\n"+chain:"",figs?T("figures")+":\n"+figs:"",i.fact?T("fact")+": "+i.fact:"",i.question?T("question")+": "+i.question:"",srcs?T("sources")+":\n"+srcs:""].filter(Boolean).join("\n\n");
 }
+let openId=null,shown=13;
+function teaserHTML(raw,lead){
+  const i=L(raw),r=who(i);let img=pieceImg(raw.imageUrl);if(!img){try{img=spInfo(spKey(raw)).img||""}catch(e){img=""}}
+  return `<article class="tz${lead?" lead":""}" style="--th:${THEMES[themeOf(raw)].ui}" data-open="${esc(raw.id)}" tabindex="0" role="link" aria-label="${esc(i.headline)}">
+    <div class="tz-img">${img?`<img src="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="this.remove()">`:""}<span aria-hidden="true">${r.e}</span></div>
+    <div class="tz-b"><div class="tz-meta"><span class="tag">${esc(catName(raw.category||""))}</span><span>${fmtDate(i.eventDate||i.createdAt)}</span></div>
+      <h3>${esc(i.headline)}</h3>${i.angle?`<p>${esc(i.angle)}</p>`:""}
+      <div class="tz-f"><span>${r.e} ${esc(r.n)}</span><span class="go">${T("readFull")}</span></div></div>
+  </article>`;
+}
 function renderFeed(){
   try{if(NARR.playing)stopNarration()}catch(e){}
   let list=cat==="الكل"?items:items.filter(i=>i.category===cat);
@@ -814,8 +843,12 @@ function renderFeed(){
   const feed=$("#feed");
   if(!dbReady&&!items.length){feed.innerHTML=`<div class="card empty"><div class="big">🔥</div>${T("emptyLoading")}</div>`;return}
   if(!list.length){feed.innerHTML=`<div class="card empty"><div class="big">🌙</div>${items.length?T("emptyCat"):T("emptyAll")}</div>`;return}
-  feed.innerHTML=list.map(cardHTML).join("");
+  const vis=list.slice(0,Math.max(shown,openId?list.findIndex(x=>x.id===openId)+1:0));
+  feed.innerHTML=vis.map((raw,k)=>raw.id===openId?cardHTML(raw).replace('<div class="who">',`<div class="close-row"><button class="btn" type="button" data-act="close">${T("closePiece")}</button></div><div class="who">`):teaserHTML(raw,k===0)).join("")+(list.length>vis.length?`<button class="btn more" type="button" data-more>${T("showMore")} (${list.length-vis.length})</button>`:"");
 }
+function openPiece(id){openId=openId===id?null:id;renderFeed();if(openId){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({behavior:"smooth",block:"start"})}}
+$("#feed").addEventListener("click",e=>{if(e.target.closest("[data-more]")){shown+=12;renderFeed();return}const t=e.target.closest("[data-open]");if(t)openPiece(t.dataset.open)});
+$("#feed").addEventListener("keydown",e=>{const t=e.target.closest&&e.target.closest("[data-open]");if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openPiece(t.dataset.open)}});
 function updateStatus(){
   if(statusMsg){$("#status").textContent=T(statusMsg);return}
   if(!dbReady){$("#status").textContent=T("loadingStatus");return}
@@ -826,6 +859,7 @@ $("#feed").addEventListener("click",async e=>{
   const b=e.target.closest("[data-act]");if(!b)return;
   const id=b.closest(".card").dataset.id;const raw=items.find(x=>x.id===id);if(!raw)return;const i=L(raw);
   const act=b.dataset.act;
+  if(act==="close"){const tz=id;openId=null;stopNarration&&stopNarration();renderFeed();const el=$(`#feed [data-open="${CSS.escape(tz)}"]`);if(el)el.scrollIntoView({block:"center"});return}
   if(act==="copy")copy(plain(i));
   if(act==="export")openStudio(raw);
   if(act==="photo")pickPhoto(raw.id);
@@ -1994,7 +2028,7 @@ function spInfo(k){
   if(d.st&&(!b.st||b.st==="NE"&&!ROSTER[k]))b.st=d.st;
   const info=(d.info&&(d.info[isEn()?"en":"ar"]||d.info.ar))||{};
   b.about=info.about||"";b.pop=info.pop||"";if(!b.threat)b.threat=info.threats||"";
-  const withImg=spItems(k).find(i=>pubImg(i.imageUrl)),feedImg=withImg?pubImg(withImg.imageUrl):"";
+  const withImg=spItems(k).find(i=>pieceImg(i.imageUrl)),feedImg=withImg?pieceImg(withImg.imageUrl):"";
   b.img=pubImg(d.imageUrl)||feedImg||d.extImg||"";b.credit=feedImg&&b.img===feedImg?(withImg.imageCredit||""):(d.credit||"");
   b.filled=!!d.info;
   if(!b.img){const w=spWiki[k];if(w&&w.img){b.img=w.img;b.credit="Wikipedia"}else spWikiFetch(k,b)}
