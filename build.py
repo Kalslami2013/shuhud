@@ -11,9 +11,9 @@ head='''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><me
 BUILD=str(int(time.time()))
 open('version.txt','w').write(BUILD)
 src=src.replace('\n<script>\n','\n<script>window.SHUHUD_BUILD="'+BUILD+'"</script>\n<script src="local.js?v='+BUILD+'"></script>\n<script>\n',1)
-open(sys.argv[2],'w',encoding='utf8').write(head.replace('</head>','<meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://kalslami2013.github.io/shuhud/reader.html">\n</head>')+src+'\n</body></html>\n')
+open(sys.argv[2],'w',encoding='utf8').write(head.replace('</head>','<meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://alshuhud.org/reader.html">\n</head>')+src+'\n</body></html>\n')
 # reader page: the same page with no newsroom and no controls, for the public
-BASE="https://kalslami2013.github.io/shuhud/"
+BASE="https://alshuhud.org/"
 DESC_AR="الشهود: منصة صحفية بالعربية والإنجليزية تروي أزمات العالم من زاويتها البيئية بلسان الكائنات التي تعيشها، من الحروب والتلوث إلى الجفاف والزلازل، مع الأرقام ومصادرها."
 DESC_EN="Al-Shuhud (The Witnesses): an Arabic-English journalism platform telling the world's crises from their environmental side, in the voices of the species living them."
 seo=f'''<title>الشهود | أزمات العالم بلسان الكائنات التي تعيشها — Al-Shuhud</title>
