@@ -545,8 +545,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794089168"</script>
-<script src="local.js?v=1794089168"></script>
+<script>window.SHUHUD_BUILD="1794089811"</script>
+<script src="local.js?v=1794089811"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2421,10 +2421,12 @@ $("#s-save").onclick=async()=>{
 Object.assign(DICT.ar,{instBtn:"📲 ثبّت التطبيق",instTitle:"ثبّت تطبيق الشهود",instDone:"ثُبّت التطبيق على جهازك",
   instIOS:"<ol><li>اضغط زر المشاركة <b>⬆︎</b> أسفل Safari</li><li>اختر <b>«إضافة إلى الشاشة الرئيسية»</b></li><li>اضغط <b>«إضافة»</b></li></ol><p>يظهر الشهود على شاشتك ويفتح كتطبيق كامل، مجاناً.</p>",
   instIOSOther:"<ol><li>افتح الموقع في متصفح <b>Safari</b></li><li>اضغط زر المشاركة <b>⬆︎</b></li><li>اختر <b>«إضافة إلى الشاشة الرئيسية»</b></li></ol>",
+  instSamsung:"<ol><li>اضغط أيقونة التثبيت <b>⤓</b> في شريط العنوان إن ظهرت، أو افتح القائمة <b>≡</b></li><li>اختر <b>«إضافة الصفحة إلى»</b> ثم <b>«الشاشة الرئيسية»</b></li><li>اضغط <b>«إضافة»</b></li></ol><p>أو افتح الموقع في <b>Chrome</b> واضغط الزر مرة أخرى.</p>",
   instOther:"<ol><li>افتح قائمة المتصفح <b>⋮</b> أعلى الشاشة</li><li>اختر <b>«تثبيت التطبيق»</b> أو <b>«إضافة إلى الشاشة الرئيسية»</b></li><li>اضغط <b>«تثبيت»</b></li></ol><p>على الكمبيوتر: اضغط أيقونة التثبيت في شريط العنوان. يظهر الشهود كتطبيق كامل، مجاناً.</p>"});
 Object.assign(DICT.en,{instBtn:"📲 Install the app",instTitle:"Install the Shuhud app",instDone:"The app is installed on your device",
   instIOS:"<ol><li>Tap the Share button <b>⬆︎</b> in Safari</li><li>Choose <b>“Add to Home Screen”</b></li><li>Tap <b>“Add”</b></li></ol><p>Shuhud appears on your screen and opens as a full app, for free.</p>",
   instIOSOther:"<ol><li>Open this site in <b>Safari</b></li><li>Tap the Share button <b>⬆︎</b></li><li>Choose <b>“Add to Home Screen”</b></li></ol>",
+  instSamsung:"<ol><li>Tap the install icon <b>⤓</b> in the address bar if you see it, or open the menu <b>≡</b></li><li>Choose <b>“Add page to”</b> then <b>“Home screen”</b></li><li>Tap <b>“Add”</b></li></ol><p>Or open the site in <b>Chrome</b> and tap the button again.</p>",
   instOther:"<ol><li>Open the browser menu <b>⋮</b></li><li>Choose <b>“Install app”</b> or <b>“Add to Home screen”</b></li><li>Tap <b>“Install”</b></li></ol><p>On a computer, click the install icon in the address bar. Shuhud opens as a full app, for free.</p>"});
 (function(){
   const btn=$("#inst-btn"),sheet=$("#inst-sheet");if(!btn||!sheet||!window.SHUHUD_STANDALONE)return;
@@ -2434,7 +2436,7 @@ Object.assign(DICT.en,{instBtn:"📲 Install the app",instTitle:"Install the Shu
   addEventListener("beforeinstallprompt",e=>{e.preventDefault();ev=e});
   addEventListener("appinstalled",()=>{btn.hidden=true;sheet.hidden=true;ev=null;toast(T("instDone"))});
   btn.onclick=async()=>{if(ev){const e=ev;ev=null;e.prompt();try{const r=await e.userChoice;if(r&&r.outcome==="accepted")btn.hidden=true}catch(_){}return}
-    sheet.querySelector(".inst-body").innerHTML=ios?(safari?T("instIOS"):T("instIOSOther")):T("instOther");sheet.hidden=false};
+    sheet.querySelector(".inst-body").innerHTML=ios?(safari?T("instIOS"):T("instIOSOther")):/SamsungBrowser/i.test(ua)?T("instSamsung"):T("instOther");sheet.hidden=false};
   sheet.addEventListener("click",e=>{if(e.target===sheet||e.target.closest("[data-x]"))sheet.hidden=true});
   addEventListener("keydown",e=>{if(e.key==="Escape")sheet.hidden=true});
 })();
