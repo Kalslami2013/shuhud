@@ -115,7 +115,8 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .tag{color:var(--amber);border:1px solid rgba(242,184,75,.35);border-radius:999px;padding:1px 8px}
 .card h2{font-family:var(--f-display);font-weight:700;font-size:26px;line-height:1.35;margin:0;text-wrap:balance}
 .voice{margin:0;font-size:16px;line-height:1.95;white-space:pre-line;text-wrap:pretty}
-.card img.att{border-radius:12px;max-height:320px;object-fit:cover;width:100%}
+.att-wrap{position:relative;overflow:hidden;border-radius:12px;background:#0b1712}.att-wrap .att-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(18px) brightness(.5);transform:scale(1.15)}
+.card img.att{position:relative;display:block;width:100%;height:auto;max-height:460px;object-fit:contain;border-radius:0}
 .fact{border-inline-start:3px solid var(--leaf);padding:8px 12px;background:rgba(156,199,122,.07);border-radius:4px 10px 10px 4px;font-size:13.5px;color:var(--dim)}
 .fact b{display:block;color:var(--leaf);font-size:12px;font-weight:600;margin-bottom:2px}
 .q{font-family:var(--f-display);font-size:18px;color:var(--amber);margin:0}
@@ -503,8 +504,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794006321"</script>
-<script src="local.js?v=1794006321"></script>
+<script>window.SHUHUD_BUILD="1794052722"</script>
+<script src="local.js?v=1794052722"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -763,7 +764,7 @@ function richHTML(i,editable){
   return `${i.crisis?`<div class="crisis"><b${ce("crisis")}>${esc(i.crisis)}</b></div>`:""}
     <h2${ce("headline")}>${esc(i.headline)}</h2>
     ${i.angle?`<p class="angle"${ce("angle")}>${esc(i.angle)}</p>`:""}
-    ${pubImg(i.imageUrl)?`<img class="att" src="${esc(i.imageUrl)}" alt="">${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
+    ${pubImg(i.imageUrl)?`<div class="att-wrap"><img class="att-bg" src="${esc(i.imageUrl)}" alt="" aria-hidden="true"><img class="att" src="${esc(i.imageUrl)}" alt=""></div>${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
     <p class="voice"${ce("dispatch")}>${esc(i.dispatch)}</p>
     ${chain.length?`<div class="chain"><div class="lbl">${T("chain")}</div><ol>${chain.map(c=>`<li>${esc(c)}</li>`).join("")}</ol></div>`:""}
     ${figs.length?`<div class="figs"><div class="lbl">${T("figures")}</div><div class="grid">${figs.map(f=>{const warn=isWarn(f.source);return `<div class="fig${warn?" warn":""}"><div class="v">${esc(f.value)}</div><div class="t">${esc(f.label)}</div>${f.source?`<div class="s">${esc(f.source)}</div>`:""}</div>`}).join("")}</div></div>`:""}
