@@ -1,0 +1,31 @@
+name: Piece pages
+# Free GitHub job (no Claude): rebuilds p/<id>.html, p/index.html and sitemap.xml whenever pieces change.
+on:
+  push:
+    branches: [main]
+    paths:
+      - data/pieces.json
+      - data/pieces-gh.json
+      - data/species.json
+      - scripts/pages.py
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: data-writes
+  cancel-in-progress: false
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/pages.py
+      - name: Commit if changed
+        run: |
+          git config user.name "shuhud-bot"
+          git config user.email "shuhud-bot@users.noreply.github.com"
+          git add -A p sitemap.xml
+          git diff --cached --quiet && exit 0
+          git commit -m "Piece pages: rebuild"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1
