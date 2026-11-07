@@ -18,8 +18,9 @@ def load(f):
 pieces = {}
 for f in ("data/pieces.json", "data/pieces-gh.json"):
     for p in load(f):
-        if isinstance(p, dict) and p.get("id") and p.get("headline"):
-            pieces[p["id"]] = p
+        if isinstance(p, dict) and p.get("id"):
+            pieces[p["id"]] = {**pieces.get(p["id"], {}), **p}
+pieces = {k: v for k, v in pieces.items() if v.get("headline")}
 species = {}
 for s in load("data/species.json"):
     for k in (s.get("id"), s.get("key")):
@@ -49,6 +50,8 @@ def image_of(p):
     u = str(p.get("imageUrl") or "")
     if u.startswith("http"):
         return u, p.get("imageCredit") or ""
+    if u.startswith("/_blob/"):
+        u = "media/" + re.sub(r"[^\w-]", "", u[7:]) + ".jpg"
     if u.startswith("media/") and os.path.exists(u):
         return BASE + u, p.get("imageCredit") or ""
     s = species.get(p.get("animal"))

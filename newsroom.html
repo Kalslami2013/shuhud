@@ -516,8 +516,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794076711"</script>
-<script src="local.js?v=1794076711"></script>
+<script>window.SHUHUD_BUILD="1794077856"</script>
+<script src="local.js?v=1794077856"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -739,7 +739,7 @@ const CATS=["الكل","الحروب والبيئة","التقنية والذك�
 /* reader mode: the public page for readers, with no newsroom and no controls */
 const READER=!!window.SHUHUD_READER;if(READER)document.body.classList.add("reader");
 /* photos stored inside Claude (/_blob/) can't load on the public site */
-const pubImg=u=>u&&!(window.SHUHUD_STANDALONE&&String(u).startsWith("/_blob/"))?u:"";
+const pubImg=u=>!u?"":window.SHUHUD_STANDALONE&&String(u).startsWith("/_blob/")?"media/"+String(u).slice(7).replace(/[^\w-]/g,"")+".jpg":u;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let byAnimal=null,armedPhoto=null,db=null,sample=null,assets=null,items=[],cat="الكل",chosen="auto",att=[],draft=null,armed=null,dbReady=false,translatingId=null,statusMsg="";
 const isWarn=s=>/تحقق|verif/i.test(s||"");
@@ -776,7 +776,7 @@ function richHTML(i,editable){
   return `${i.crisis?`<div class="crisis"><b${ce("crisis")}>${esc(i.crisis)}</b></div>`:""}
     <h2${ce("headline")}>${esc(i.headline)}</h2>
     ${i.angle?`<p class="angle"${ce("angle")}>${esc(i.angle)}</p>`:""}
-    ${pubImg(i.imageUrl)?`<div class="att-wrap"><img class="att-bg" src="${esc(i.imageUrl)}" alt="" aria-hidden="true"><img class="att" src="${esc(i.imageUrl)}" alt=""></div>${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
+    ${pubImg(i.imageUrl)?`<div class="att-wrap"><img class="att-bg" src="${esc(pubImg(i.imageUrl))}" alt="" aria-hidden="true"><img class="att" onerror="this.parentNode.hidden=true" src="${esc(pubImg(i.imageUrl))}" alt=""></div>${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
     <p class="voice"${ce("dispatch")}>${esc(i.dispatch)}</p>
     ${chain.length?`<div class="chain"><div class="lbl">${T("chain")}</div><ol>${chain.map(c=>`<li>${esc(c)}</li>`).join("")}</ol></div>`:""}
     ${figs.length?`<div class="figs"><div class="lbl">${T("figures")}</div><div class="grid">${figs.map(f=>{const warn=isWarn(f.source);return `<div class="fig${warn?" warn":""}"><div class="v">${esc(f.value)}</div><div class="t">${esc(f.label)}</div>${f.source?`<div class="s">${esc(f.source)}</div>`:""}</div>`}).join("")}</div></div>`:""}
@@ -831,7 +831,7 @@ $("#feed").addEventListener("click",async e=>{
   if(act==="photo")pickPhoto(raw.id);
   if(act==="unphoto"){
     if(armedPhoto!==id){armedPhoto=id;renderFeed();setTimeout(()=>{if(armedPhoto===id){armedPhoto=null;renderFeed()}},4000);return}
-    armedPhoto=null;try{const oldId=raw.imageId;await db.collection("dispatches").doc(id).update({imageUrl:"",imageId:"",imageCredit:""});if(oldId&&assets){try{await assets.delete(oldId)}catch(e){}}toast(T("photoRemoved"))}catch(e){toast(T("photoFail"))}}
+    armedPhoto=null;try{const oldId=raw.imageId;if(typeof ghMode==="function"&&ghMode()&&ghTok())await ghSetPiecePhoto(id,"");await db.collection("dispatches").doc(id).update({imageUrl:"",imageId:"",imageCredit:""});if(oldId&&assets){try{await assets.delete(oldId)}catch(e){}}toast(T("photoRemoved"))}catch(e){toast(T("photoFail"))}}
   if(act==="tr")translateItem(raw);
   if(act==="say"){if(NARR.playing&&b.textContent===T("nStop")){stopNarration();return}stopNarration();const lang=i._missing||!isEn()?"ar":"en";const card=b.closest(".card");const bar=narrBar(card,i,lang);b.textContent=T("nStop");playNarration(i,lang,bar)}
   if(act==="del"){
@@ -1766,6 +1766,9 @@ function pickPhoto(id){photoTarget=id;$("#photo-in").click()}
 async function savePhotoTo(id,file){
   if(!assets||!db||id==="draft")return null;
   toast(T("uploading"));
+  if(typeof ghMode==="function"&&ghMode()&&ghTok()){try{const fid="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const ext=(file.name.match(/\.[a-z0-9]{2,5}$/i)||[".jpg"])[0].toLowerCase();
+    await ghApi("media/"+fid+ext,"PUT",{message:"Piece photo: "+id,content:await fileB64(file)});const url="media/"+fid+ext;
+    await ghSetPiecePhoto(id,url);await db.collection("dispatches").doc(id).update({imageUrl:url,imageId:""});toast(T("photoSaved")+" · "+T("ghNote"));return url}catch(e){toast(T("photoFail"));return null}}
   try{const up=await assets.upload(file);await db.collection("dispatches").doc(id).update({imageUrl:up.url,imageId:up.id});toast(T("photoSaved"));return up.url}
   catch(e){toast(T("photoFail"));return null}
 }
@@ -1991,7 +1994,7 @@ function spInfo(k){
   if(d.st&&(!b.st||b.st==="NE"&&!ROSTER[k]))b.st=d.st;
   const info=(d.info&&(d.info[isEn()?"en":"ar"]||d.info.ar))||{};
   b.about=info.about||"";b.pop=info.pop||"";if(!b.threat)b.threat=info.threats||"";
-  const withImg=spItems(k).find(i=>pubImg(i.imageUrl)),feedImg=withImg?withImg.imageUrl:"";
+  const withImg=spItems(k).find(i=>pubImg(i.imageUrl)),feedImg=withImg?pubImg(withImg.imageUrl):"";
   b.img=pubImg(d.imageUrl)||feedImg||d.extImg||"";b.credit=feedImg&&b.img===feedImg?(withImg.imageCredit||""):(d.credit||"");
   b.filled=!!d.info;
   if(!b.img){const w=spWiki[k];if(w&&w.img){b.img=w.img;b.credit="Wikipedia"}else spWikiFetch(k,b)}
@@ -2287,6 +2290,8 @@ async function ghDel(m){
   for(const f of m.files||[]){try{const j=await ghApi(f.url);if(j)await ghApi(f.url,"DELETE",{message:"Media: remove file",sha:j.sha})}catch(e){}}
   try{await db.collection("media").doc(m.id).delete()}catch(e){}
 }
+/* a photo added in the standalone newsroom to a piece that came from Claude: kept in pieces-gh.json as a small overlay {id,imageUrl,_photo} (local.js merges it over the piece) */
+async function ghSetPiecePhoto(id,url){await ghSaveList(l=>{const k=l.findIndex(x=>x.id===id);if(k>=0){l[k]={...l[k],imageUrl:url};return l}return [...l,{id,imageUrl:url,_photo:true}]},(url?"Piece photo: ":"Piece photo removed: ")+id,GH.pieces)}
 function renderGh(){const box=$("#gh-box"),btn=$("#gh-link");if(!box)return;const on=ghMode();btn.hidden=!on||!!ghTok();$("#gh-unlink").hidden=!on||!ghTok();if(!on)box.hidden=true}
 $("#gh-link").onclick=()=>{$("#gh-box").hidden=!$("#gh-box").hidden};
 $("#gh-unlink").onclick=()=>{try{localStorage.removeItem(GH.key)}catch(e){}renderMedia();renderPartners()};
