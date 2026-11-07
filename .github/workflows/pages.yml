@@ -7,6 +7,9 @@ on:
       - data/pieces.json
       - data/pieces-gh.json
       - data/species.json
+      - data/partners.json
+      - data/partners-gh.json
+      - scripts/social_icons.json
       - scripts/pages.py
   workflow_dispatch:
 permissions:

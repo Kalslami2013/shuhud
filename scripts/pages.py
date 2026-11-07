@@ -26,6 +26,15 @@ for s in load("data/species.json"):
         if k:
             species[k] = s
 
+ICONS = json.load(open("scripts/social_icons.json", encoding="utf8"))
+ORDER = ["x","facebook","instagram","youtube","tiktok","telegram","whatsapp","linkedin","threads","bluesky","email","web"]
+socials = [x for f in ("data/partners.json", "data/partners-gh.json") for x in load(f) if isinstance(x, dict) and x.get("type") == "social" and x.get("url")]
+socials.sort(key=lambda x: (ORDER.index(x.get("platform")) if x.get("platform") in ORDER else 99, str(x.get("createdAt") or "")))
+def href(x):
+    u = str(x["url"]).strip()
+    if x.get("platform") == "email" and not u.lower().startswith("mailto:"): return "mailto:" + u
+    return u if re.match(r"^(https?:|mailto:)", u, re.I) else "https://" + u
+
 e = lambda s: html.escape(str(s or ""), quote=True)
 SAFE = re.compile(r"^[A-Za-z0-9_-]{1,120}$")
 
@@ -77,7 +86,8 @@ ul{padding-inline-start:22px}.q{border-inline-start:4px solid var(--acc);padding
 .en{direction:ltr;text-align:left;font-family:Georgia,"Segoe UI",system-ui,serif;border-top:1px solid var(--line);margin-top:34px}
 .cta{display:inline-block;background:var(--acc);color:var(--bg);text-decoration:none;padding:10px 18px;border-radius:999px;font-weight:700;margin:20px 0}
 footer{border-top:1px solid var(--line);color:var(--mute);font-size:14px;padding:18px 0 40px;margin-top:30px}
-.list{list-style:none;padding:0}.list li{border-bottom:1px solid var(--line);padding:14px 0}.list a{text-decoration:none;color:var(--ink);font-weight:700;font-size:19px}.list small{display:block;color:var(--mute)}"""
+.list{list-style:none;padding:0}.list li{border-bottom:1px solid var(--line);padding:14px 0}.list a{text-decoration:none;color:var(--ink);font-weight:700;font-size:19px}.list small{display:block;color:var(--mute)}
+.sc{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}.sc a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);color:var(--ink)}.sc svg{width:19px;height:19px;fill:currentColor}"""
 
 def head(title, desc, url, img, extra=""):
     img = img or BASE + "og.jpg"
@@ -90,7 +100,8 @@ def head(title, desc, url, img, extra=""):
 <header class="top"><div class="wrap"><a class="brand" href="{BASE}"><img src="{BASE}icon-192.png" alt="">الشهود</a><nav><a href="{BASE}p/">كل القطع</a><a href="{BASE}#about">من نحن</a></nav></div></header>
 """
 
-FOOT = f"""<footer><div class="wrap">الشهود · Al-Shuhud — أزمات العالم بلسان الكائنات التي تعيشها. <a href="{BASE}">alshuhud.org</a></div></footer>
+SC = ('<div class="sc">' + "".join(f'<a href="{e(href(x))}" target="_blank" rel="noopener me" title="{e(x.get("name") or x.get("platform"))}" aria-label="{e(x.get("name") or x.get("platform"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="{ICONS.get(x.get("platform"), ICONS["web"])}"/></svg></a>' for x in socials) + "</div>") if socials else ""
+FOOT = f"""<footer><div class="wrap">{SC}الشهود · Al-Shuhud — أزمات العالم بلسان الكائنات التي تعيشها. <a href="{BASE}">alshuhud.org</a></div></footer>
 </body></html>
 """
 
