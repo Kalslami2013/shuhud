@@ -117,16 +117,17 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 @media (min-width:760px){.feed{grid-template-columns:repeat(2,minmax(0,1fr))}.feed>.card,.feed>.lead,.feed>.more,.feed>.empty{grid-column:1/-1}}
 .tz{background:var(--bark);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;text-align:start;color:inherit;font:inherit;padding:0;backdrop-filter:blur(8px);transition:border-color .15s,transform .15s;min-width:0}
 .tz:hover,.tz:focus-visible{border-color:var(--th,var(--leaf));transform:translateY(-2px)}
-.tz-img{aspect-ratio:16/9;width:100%;background:#0d1a14;position:relative;overflow:hidden;display:grid;place-items:center;font-size:54px}
-.tz-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tz-img{width:100%;background:#0d1a14;position:relative;overflow:hidden;display:grid;place-items:center;font-size:54px}
+.tz-img.noimg{aspect-ratio:16/9}.tz-img:not(.noimg)>span{display:none}
+.tz-img img{display:block;width:100%;height:auto;max-height:460px;object-fit:contain}
 .tz-b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:7px;flex:1}
 .tz-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--faint)}
 .tz h3{font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.4;margin:0;text-wrap:balance}
 .tz p{margin:0;color:var(--dim);font-size:14px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .tz-f{margin-top:auto;padding-top:6px;display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--dim)}
 .tz-f .go{color:var(--th,var(--leaf));font-weight:600}
-.lead .tz-img{aspect-ratio:21/9}.lead h3{font-size:clamp(24px,3.2vw,32px)}.lead p{-webkit-line-clamp:4;font-size:15.5px}
-@media (min-width:900px){.lead{flex-direction:row}.lead .tz-img{aspect-ratio:auto;flex:1.25;min-height:300px}.lead .tz-b{flex:1;padding:22px 24px;justify-content:center}}
+.lead .tz-img.noimg{aspect-ratio:21/9}.lead .tz-img img{max-height:520px}.lead h3{font-size:clamp(24px,3.2vw,32px)}.lead p{-webkit-line-clamp:4;font-size:15.5px}
+@media (min-width:900px){.lead{flex-direction:row}.lead .tz-img{flex:1.25;align-self:center}.lead .tz-img.noimg{min-height:300px;align-self:stretch}.lead .tz-b{flex:1;padding:22px 24px;justify-content:center}}
 .more{justify-self:center;margin-top:4px}
 #feed .card,#feed .tz{scroll-margin-top:140px}
 .card .close-row{display:flex;justify-content:flex-end;margin:-6px 0 -4px}
@@ -545,8 +546,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794127027"</script>
-<script src="local.js?v=1794127027"></script>
+<script>window.SHUHUD_BUILD="1794128205"</script>
+<script src="local.js?v=1794128205"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -841,7 +842,7 @@ let openId=null,shown=13;
 function teaserHTML(raw,lead){
   const i=L(raw),r=who(i);let img=pieceImg(raw.imageUrl);if(!img){try{img=spInfo(spKey(raw)).img||""}catch(e){img=""}}
   return `<article class="tz${lead?" lead":""}" style="--th:${THEMES[themeOf(raw)].ui}" data-open="${esc(raw.id)}" tabindex="0" role="link" aria-label="${esc(i.headline)}">
-    <div class="tz-img">${img?`<img src="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="this.remove()">`:""}<span aria-hidden="true">${r.e}</span></div>
+    <div class="tz-img${img?"":" noimg"}">${img?`<img src="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="this.parentNode.classList.add('noimg');this.remove()">`:""}<span aria-hidden="true">${r.e}</span></div>
     <div class="tz-b"><div class="tz-meta"><span class="tag">${esc(catName(raw.category||""))}</span><span>${fmtDate(i.eventDate||i.createdAt)}</span></div>
       <h3>${esc(i.headline)}</h3>${i.angle?`<p>${esc(i.angle)}</p>`:""}
       <div class="tz-f"><span>${r.e} ${esc(r.n)}</span><span class="go">${T("readFull")}</span></div></div>
