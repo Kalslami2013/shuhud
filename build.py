@@ -1,5 +1,5 @@
 # Builds newsroom.html (Kamal's standalone app, pass it as argv[2]) and the public index.html/reader.html from the shared page source (shuhud.html).
-import re,sys,time
+import re,sys,time,json
 src=open(sys.argv[1],encoding='utf8').read()
 src=re.sub(r'<link rel="apple-touch-icon"[^>]*>\n?','',src); src=re.sub(r'<link rel="icon"[^>]*>\n?','',src)
 head='''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -25,6 +25,7 @@ seo=f'''<title>شهود | أزمات العالم بلسان الكائنات ا
 rhead=head.replace('href="manifest.webmanifest"','href="reader.webmanifest"').replace('</head>',seo+'</head>')
 rsrc=src.replace('<script>window.SHUHUD_BUILD=','<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD=',1).replace('<title>شهود</title>','',1)
 # the public page carries none of the newsroom's tools: their markup is cut out, and lookups of the removed elements get a harmless stand-in
+CUT_IDS = set()
 def cut(html, tag, attr):
     i = html.find(attr)
     if i < 0: return html
@@ -34,15 +35,16 @@ def cut(html, tag, attr):
     for m in rx.finditer(html, a):
         depth += -1 if m.group(1) else 1
         if depth == 0:
+            CUT_IDS.update(re.findall(r'\bid="([\w-]+)"', html[a:m.end()]))
             return html[:a] + html[m.end():]
     return html
 for tag, attr in (('section','id="v-track"'),('section','id="v-desk"'),('div','id="gh-box"'),('div','id="media-add"'),('div','id="s-form"'),('div','id="p-form"'),('div','id="studio"'),
                   ('button','id="media-add-btn"'),('button','id="gh-link"'),('button','id="gh-unlink"'),('button','id="s-add-btn"'),('button','id="p-add-btn"'),
                   ('button','role="tab" data-view="track"'),('button','role="tab" data-view="desk"')):
     rsrc = cut(rsrc, tag, attr)
-NIL = 'const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});\nconst $=s=>document.querySelector(s)||__nil;'
+NIL = 'const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});\nconst __CUT=new Set(%s);\nconst $=s=>{const e=document.querySelector(s);if(e)return e;const m=/^#([\\w-]+)/.exec(s);return m&&__CUT.has(m[1])?__nil:null};'
 assert rsrc.count('const $=s=>document.querySelector(s);')==1
-rsrc = rsrc.replace('const $=s=>document.querySelector(s);', NIL, 1)
+rsrc = rsrc.replace('const $=s=>document.querySelector(s);', NIL.replace('%s', json.dumps(sorted(CUT_IDS))), 1)
 # and the wording of the newsroom-only labels (API key, GitHub token, studio, desk) is blanked in its translations
 rsrc = re.sub(r'\b((?:key|gh|st|desk|nav(?:Desk|Track)|run)[A-Z]\w*|keyLbl|ghLbl):"(?:[^"\\]|\\.)*"', r'\1:""', rsrc)
 # the public page is the site's front page (alshuhud.org/); reader.html stays for old links
