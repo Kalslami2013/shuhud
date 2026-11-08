@@ -96,7 +96,7 @@ def head(title, desc, url, img, extra=""):
     img = img or BASE + "og.jpg"
     return f"""<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><link rel="canonical" href="{e(url)}"><meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#0b1712"><link rel="icon" href="{BASE}icon-192.png"><link rel="apple-touch-icon" href="{BASE}icon-180.png">
+<meta name="theme-color" content="#0b1712"><link rel="icon" href="{BASE}favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="96x96" href="{BASE}icon-96.png"><link rel="icon" type="image/png" sizes="192x192" href="{BASE}icon-192.png"><link rel="apple-touch-icon" href="{BASE}icon-180.png">
 <meta property="og:site_name" content="الشهود · Al-Shuhud"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{e(img)}"><meta property="og:locale" content="ar_AR"><meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(title)}"><meta name="twitter:description" content="{e(desc)}"><meta name="twitter:image" content="{e(img)}">
 {extra}<style>{CSS}</style></head><body>
