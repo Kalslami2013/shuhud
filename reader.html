@@ -550,8 +550,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794128205"</script>
-<script src="local.js?v=1794128205"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794128345"</script>
+<script src="local.js?v=1794128345"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2463,7 +2463,7 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
   },()=>{dbReady=true;statusMsg="feedFail";updateStatus();renderFeed()});
   db.collection("partners").onSnapshot(snap=>{partners=snap.docs.map(d=>({id:d.id,...d.data()}));renderPartners()},()=>{});
   db.collection("media").orderBy("createdAt","desc").limit(300).onSnapshot(snap=>{media=snap.docs.map(d=>({id:d.id,...d.data()}));renderMedia()},()=>{});
-  db.collection("species").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{const x=d.data();m[x.key||d.id]=x});spDocs=m;spLoaded=true;renderSpecies()},()=>{});
+  db.collection("species").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{const x=d.data();m[x.key||d.id]=x});spDocs=m;spLoaded=true;renderSpecies();try{if(!NARR.playing&&!openId)renderFeed()}catch(_){}},()=>{});
   db.collection("monitor").orderBy("at","desc").limit(300).onSnapshot(snap=>{track=snap.docs.map(d=>({id:d.id,...d.data()}));renderTrack()},()=>{});
 })();
 
