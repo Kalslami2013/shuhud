@@ -363,8 +363,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 
   <nav class="main" role="tablist">
     <button role="tab" data-view="live" aria-selected="true" data-i18n="navLive">النشرة الحية</button>
-    <button role="tab" data-view="track" aria-selected="false" data-i18n="navTrack">الرصد</button>
-    <button role="tab" data-view="desk" aria-selected="false" data-i18n="navDesk">غرفة التحرير</button>
+    
+    
     <button role="tab" data-view="corr" aria-selected="false" data-i18n="navCorr">المراسلون</button>
     <button role="tab" data-view="ids" aria-selected="false" data-i18n="navIds">بطاقات الكائنات</button>
     <button role="tab" data-view="red" aria-selected="false" data-i18n="navRed">مهددة بالانقراض</button>
@@ -380,96 +380,9 @@ body.reader .rc .cnt.none{visibility:hidden}
     <div class="feed" id="feed"></div>
   </section>
 
-  <section id="v-track" hidden>
-    <div class="track-head"><p class="note" data-i18n="trackIntro">تطورات البيئة والأزمات المرتبطة بها كما تصل، وتتحدث كل ساعتين.</p><span style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button class="btn" id="tr-all" type="button" hidden></button><button class="btn" id="tr-order" type="button"></button></span></div>
-    <div class="runbar" id="run-track" hidden><button class="btn run" type="button" data-run="monitor" data-i18n="runMonitor">🔍 ارصد الآن</button><button class="btn" type="button" data-run="sync" data-i18n="runSync">↻ زامن النسخة المستقلة</button><span class="note" data-note="monitor"></span><span class="note" data-note="sync"></span></div>
-    <div class="status" id="tr-status"></div>
-    <ul class="track" id="track"></ul>
-  </section>
+  
 
-  <section id="v-desk" hidden>
-    <div class="panel">
-      <div>
-        <h3 data-i18n="deskTitle">غرفة التحرير</h3>
-        <p class="sub" data-i18n="deskSub">أعطِ الشهود خبراً، واختر من يرويه، أو دع الغابة تختار.</p>
-      </div>
-      <div>
-        <label class="l" for="d-text" data-i18n="dText">الأزمة أو الخبر والمادة الخام</label>
-        <textarea id="d-text" data-i18n-ph="dTextPh" placeholder="الصق الخبر أو التقرير، أو صف الأزمة، أو أرفق ملفاً بالأسفل…"></textarea>
-        <div class="note" data-i18n="dSampleNote">مثال جاهز للتجربة، استبدله بمادتك. كلما وضعت أرقاماً ومصادر أكثر، جاءت القراءة أدق.</div>
-      </div>
-      <div>
-        <label class="l" for="d-angle" data-i18n="dAngle">الزاوية البيئية التي تريدها (اختياري)</label>
-        <input type="text" id="d-angle" data-i18n-ph="dAnglePh" placeholder="مثلاً: أثر الطلب على المياه على غابات الصنوبر الطويل وطيورها">
-      </div>
-      <div class="row2">
-        <div><label class="l" for="d-src" data-i18n="dSrc">اسم المصدر</label><input type="text" id="d-src" data-i18n-ph="dSrcPh" placeholder="رويترز، الأناضول…"></div>
-        <div><label class="l" for="d-url" data-i18n="dUrl">رابط المصدر</label><input type="url" id="d-url" placeholder="https://"></div>
-      </div>
-      <div>
-        <label class="l" data-i18n="dNarr">الكائن الراوي</label>
-        <select id="d-narr" aria-label="الكائن الراوي"></select>
-      </div>
-      <div class="row2">
-        <div><label class="l" for="d-tone" data-i18n="dTone">النبرة</label>
-          <select id="d-tone"><option></option><option></option><option></option><option></option><option></option><option></option><option></option><option></option><option></option><option></option><option></option><option></option><option></option><option></option><option></option></select></div>
-        <div><label class="l" for="d-len" data-i18n="dLen">الطول</label>
-          <select id="d-len"><option value="120-160">قصير</option><option value="200-260" selected>متوسط</option><option value="350-450">طويل</option></select></div>
-      </div>
-      <div>
-        <label class="l" data-i18n="dAtt">المرفقات</label>
-        <div class="drop" id="drop">
-          <span data-i18n="dDrop">اسحب الملفات هنا: صور، أصوات، مستندات (PDF، Word، نص)</span>
-          <div class="btns">
-            <button class="btn" type="button" data-pick="image/*" data-i18n="aImg">🖼 صورة</button>
-            <button class="btn" type="button" data-pick="audio/*" data-i18n="aAud">🎙 صوت أو تسجيل</button>
-            <button class="btn" type="button" data-pick=".pdf,.docx,.txt,.md,.csv,.html,.json" data-i18n="aDoc">📄 مستند</button>
-          </div>
-          <input type="file" id="d-file" multiple hidden><input type="file" id="photo-in" accept="image/*" hidden><input type="file" id="scene-in" accept="image/*" hidden>
-        </div>
-        <div class="files" id="files" style="margin-top:10px"></div>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-        <button class="btn primary" id="d-go" type="button" data-i18n="dGo">اقرأ الأزمة بعين الكائن</button>
-        <button class="btn" id="d-manual" type="button" data-i18n="manualBtn">✍️ اكتب يدوياً</button>
-        <button class="btn" id="d-bridge" type="button" data-i18n="bridgeBtn">📋 عبر محادثة Claude</button>
-        <span class="note" id="d-note"></span>
-      </div>
-      <div class="manual" id="d-bridge-box" hidden>
-        <p class="note" data-i18n="bridgeHelp">انسخ الطلب، والصقه في أي محادثة مع Claude، ثم الصق رده هنا.</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="button" id="b-copy" data-i18n="bridgeCopy">انسخ الطلب</button></div>
-        <textarea id="b-paste" data-i18n-ph="bridgePastePh" placeholder="الصق رد Claude هنا…" style="min-height:90px"></textarea>
-        <div><button class="btn primary" type="button" id="b-use" data-i18n="bridgeUse">استعمل الرد</button></div>
-      </div>
-      <div class="manual" id="d-manual-box" hidden>
-        <p class="note" data-i18n="manualHelp">اكتب المادة بنفسك. الحقول الفارغة لا تظهر في المادة.</p>
-        <div class="row2"><div><label class="l" for="m-name" data-i18n="mName">اسم الكائن الراوي</label><input type="text" id="m-name"></div><div><label class="l" for="m-emoji" data-i18n="mEmoji">رمزه (إيموجي)</label><input type="text" id="m-emoji" placeholder="🐢"></div></div>
-        <div><label class="l" for="m-hab" data-i18n="mHab">موطنه</label><input type="text" id="m-hab"></div>
-        <div><label class="l" for="m-headline" data-i18n="mHeadline">العنوان</label><input type="text" id="m-headline"></div>
-        <div class="row2"><div><label class="l" for="m-crisis" data-i18n="crisis">الأزمة</label><input type="text" id="m-crisis"></div><div><label class="l" for="m-place" data-i18n="mPlace">المكان</label><input type="text" id="m-place"></div></div>
-        <div><label class="l" for="m-cat" data-i18n="mCat">الباب</label><select id="m-cat"></select></div>
-        <div><label class="l" for="m-angle" data-i18n="angle">الزاوية البيئية</label><textarea id="m-angle" style="min-height:70px"></textarea></div>
-        <div><label class="l" for="m-dispatch" data-i18n="mDispatch">الرواية بلسان الكائن (افصل الفقرات بسطر فارغ)</label><textarea id="m-dispatch" style="min-height:160px"></textarea></div>
-        <div><label class="l" for="m-impacts" data-i18n="mImpacts">سلسلة الأثر (حلقة في كل سطر)</label><textarea id="m-impacts" style="min-height:90px"></textarea></div>
-        <div><label class="l" for="m-figures" data-i18n="mFigures">الأرقام (في كل سطر: الرقم | ماذا يقيس | المصدر)</label><textarea id="m-figures" style="min-height:90px" placeholder="90 كم | امتداد البقعة النفطية | رويترز"></textarea></div>
-        <div><label class="l" for="m-fact" data-i18n="fact">ما حدث عند البشر</label><textarea id="m-fact" style="min-height:60px"></textarea></div>
-        <div><label class="l" for="m-question" data-i18n="question">سؤال مفتوح</label><input type="text" id="m-question"></div>
-        <div><button class="btn primary" type="button" id="m-preview" data-i18n="mPreview">اعرض المسودة</button></div>
-      </div>
-      <div class="manual" id="d-az-box" hidden>
-        <label class="l" data-i18n="azLbl">الأصوات الطبيعية (Azure Speech)</label>
-        <div class="row2"><div><input type="password" id="az-key" placeholder="Key 1" aria-label="Azure key"></div><div><input type="text" id="az-region" placeholder="westeurope" aria-label="Azure region"></div></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn" type="button" id="az-save" data-i18n="azSave">احفظ وجرّب</button><span class="note" id="az-note"></span></div>
-        <p class="note" data-i18n="azHelp">المفتاح والمنطقة من صفحة «Keys and Endpoint» في خدمة Speech على Azure. يُحفظان في هذا المتصفح فقط.</p>
-      </div>
-      <div class="manual" id="d-key-box" hidden>
-        <label class="l" for="k-key" data-i18n="keyLbl">مفتاح Anthropic API للكتابة الآلية (اختياري)</label>
-        <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="password" id="k-key" placeholder="sk-ant-…" style="flex:1;min-width:200px"><button class="btn" type="button" id="k-save" data-i18n="keySave">احفظ</button></div>
-        <p class="note" data-i18n="keyHelp">يُحفظ في هذا المتصفح فقط. رصيده منفصل عن اشتراك Claude، والمادة الواحدة تكلّف سنتات قليلة.</p>
-      </div>
-      <div id="d-out"></div>
-    </div>
-  </section>
+  
 
   <section id="v-ids" hidden>
     <p class="manifesto" data-i18n="idsIntro">بطاقة تعريف لكل كائن ظهر في مادة.</p>
@@ -479,19 +392,9 @@ body.reader .rc .cnt.none{visibility:hidden}
 
   <section id="v-media" hidden>
     <p class="manifesto" data-i18n="mediaIntro">ما تنتجه منصة شهود.</p>
-    <div class="sp-head"><div class="cats" id="media-chips" role="toolbar" style="flex:1;min-width:0"></div><button class="btn export" type="button" id="media-add-btn" hidden data-i18n="mAddBtn">➕ أضف مادة</button><button class="btn" type="button" id="gh-link" hidden data-i18n="ghLink">🔑 اربط GitHub</button><button class="btn" type="button" id="gh-unlink" hidden data-i18n="ghUnlink">افصل GitHub</button></div>
-    <div class="panel" id="gh-box" hidden style="margin-bottom:14px">
-      <label class="l" for="gh-tok" data-i18n="ghLbl">مفتاح GitHub</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="password" id="gh-tok" placeholder="github_pat_…" style="flex:1;min-width:200px"><button class="btn" type="button" id="gh-save" data-i18n="ghSave">احفظ</button></div>
-      <p class="note" data-i18n="ghHelp"></p>
-    </div>
-    <div class="panel" id="media-add" hidden style="margin-bottom:14px">
-      <h3 data-i18n="mAddTitle">أضف مادة إلى ميديا</h3>
-      <div class="row2"><div><label class="l" for="m-type" data-i18n="mType">النوع</label><select id="m-type"></select></div><div><label class="l" for="m-title" data-i18n="mTitle">العنوان</label><input type="text" id="m-title"></div></div>
-      <div><label class="l" for="m-caption" data-i18n="mCaption">وصف قصير</label><textarea id="m-caption" style="min-height:70px"></textarea></div>
-      <div><label class="l" for="m-files" data-i18n="mFiles">الملفات</label><input type="file" id="m-files" multiple accept="image/*,video/*"><p class="note" data-i18n="mFilesNote"></p></div>
-      <div><button class="btn primary" type="button" id="m-save" data-i18n="mSave">انشر في ميديا</button></div>
-    </div>
+    <div class="sp-head"><div class="cats" id="media-chips" role="toolbar" style="flex:1;min-width:0"></div></div>
+    
+    
     <div class="md-grid" id="media-grid"></div>
   </section>
 
@@ -515,22 +418,14 @@ body.reader .rc .cnt.none{visibility:hidden}
 
   <footer class="site-foot">
     <div id="s-wrap" hidden>
-      <div class="sc-head"><h3 data-i18n="sTitle">تابعونا</h3><button class="btn export" type="button" id="s-add-btn" hidden data-i18n="sAdd">➕ أضف حساباً</button></div>
-      <div class="panel" id="s-form" hidden style="margin-bottom:14px">
-        <div class="row2"><div><label class="l" for="s-plat" data-i18n="sPlat">المنصة</label><select id="s-plat"></select></div><div><label class="l" for="s-url" data-i18n="sUrl">رابط الحساب</label><input type="url" id="s-url" placeholder="https://" dir="ltr"></div></div>
-        <div><button class="btn primary" type="button" id="s-save" data-i18n="sSave">أضف الحساب</button></div>
-      </div>
+      <div class="sc-head"><h3 data-i18n="sTitle">تابعونا</h3></div>
+      
       <div class="sc-row" id="socials"></div>
       <p class="note" id="s-note" hidden data-i18n="sNote"></p>
     </div>
     <div id="p-wrap">
-      <div class="pf-head"><div><h3 data-i18n="pTitle">شركاؤنا</h3><p class="note" data-i18n="pSub"></p></div><button class="btn export" type="button" id="p-add-btn" hidden data-i18n="pAdd">➕ أضف شريكاً</button></div>
-      <div class="panel" id="p-form" hidden style="margin-bottom:14px">
-        <div class="row2"><div><label class="l" for="p-name" data-i18n="pName">اسم الجهة</label><input type="text" id="p-name"></div><div><label class="l" for="p-name-en" data-i18n="pNameEn">الاسم بالإنجليزية</label><input type="text" id="p-name-en" dir="ltr"></div></div>
-        <div class="row2"><div><label class="l" for="p-type" data-i18n="pType">نوع الشراكة</label><select id="p-type"></select></div><div><label class="l" for="p-url" data-i18n="pLink">رابط موقعها</label><input type="url" id="p-url" placeholder="https://" dir="ltr"></div></div>
-        <div><label class="l" for="p-logo" data-i18n="pLogo">الشعار</label><input type="file" id="p-logo" accept="image/*"></div>
-        <div><button class="btn primary" type="button" id="p-save" data-i18n="pSave">أضف الشريك</button></div>
-      </div>
+      <div class="pf-head"><div><h3 data-i18n="pTitle">شركاؤنا</h3><p class="note" data-i18n="pSub"></p></div></div>
+      
       <div class="pt-grid" id="partners"></div>
     </div>
     <p class="foot-rights" data-i18n="footRights">© 2026 شهود</p>
@@ -538,22 +433,13 @@ body.reader .rc .cnt.none{visibility:hidden}
 </div>
 
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
-<div class="studio" id="studio" hidden role="dialog" aria-modal="true" aria-labelledby="st-title">
-  <div class="st-panel">
-    <div class="st-head"><h3 id="st-title" data-i18n="stTitle">استوديو التصدير</h3><button class="btn" id="st-close" type="button" data-i18n="close">إغلاق</button></div>
-    <div class="st-tabs" role="tablist"><button type="button" role="tab" data-m="cards" aria-selected="true" data-i18n="tCards">بطاقات سوشيال</button><button type="button" role="tab" data-m="info" aria-selected="false" data-i18n="tInfo">إنفوجراف</button><button type="button" role="tab" data-m="video" aria-selected="false" data-i18n="tVideo">فيديو</button></div>
-    <div class="st-opts"><label id="st-size-w"><span data-i18n="size">المقاس</span> <select id="st-size" class="mini"></select></label><label id="st-theme-w"><span data-i18n="themeLbl">الطابع</span> <select id="st-theme" class="mini"><option value="auto">auto</option><option value="forest">forest</option><option value="river">river</option><option value="fields">fields</option><option value="ocean">ocean</option><option value="desert">desert</option><option value="ice">ice</option><option value="war">war</option><option value="city">city</option><option value="cosmos">cosmos</option><option value="lab">lab</option></select></label><label id="st-tone-w"><span data-i18n="toneLbl">الخلفية</span> <select id="st-tone" class="mini"><option value="dark">dark</option><option value="light">light</option></select></label><label id="st-res-w"><span data-i18n="res">الدقة</span> <select id="st-res" class="mini"><option value="2">×2</option><option value="1">×1</option><option value="3">×3</option></select></label><label id="st-audio-w" hidden><span data-i18n="music">الموسيقى</span> <select id="st-music" class="mini"></select></label><label id="st-amb-w" hidden><span data-i18n="ambLbl">أصوات الخلفية</span> <select id="st-amb" class="mini"></select><button class="btn" type="button" id="st-mprev" data-i18n="listen">استمع</button></label><label id="st-motion-w" hidden><span data-i18n="motionLbl">حركة الصور</span> <select id="st-motion" class="mini"></select></label><label id="st-dur-w" hidden><span data-i18n="durLbl">المدة</span> <select id="st-dur" class="mini"><option value="0">auto</option><option value="45">45</option><option value="60">60</option><option value="90">90</option><option value="120">120</option></select></label></div>
-    <div class="st-photo" id="st-photo"></div>
-    <div id="st-body"></div>
-    <div class="st-actions" id="st-actions"></div>
-    <p class="note" id="st-note"></p>
-  </div>
-</div>
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794141063"</script>
-<script src="local.js?v=1794141063"></script>
+
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794146004"</script>
+<script src="local.js?v=1794146004"></script>
 <script>
-const $=s=>document.querySelector(s);
+const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
+const $=s=>document.querySelector(s)||__nil;
 /* ---------- language ---------- */
 const DICT={
 ar:{
@@ -564,10 +450,10 @@ ar:{
   dawn:"فجر",day:"نهار",dusk:"غروب",night:"ليل",spring:"ربيع",summer:"صيف",autumn:"خريف",winter:"شتاء",tropic:"موسم استوائي",moon:"القمر",
   moonNames:["محاق","هلال","تربيع أول","أحدب متزايد","بدر","أحدب متناقص","تربيع ثانٍ","هلال أخير"],
   navTrack:"الرصد",trackIntro:"تطورات البيئة والأزمات المرتبطة بها. الرصد يدوي: لا يعمل إلا حين تضغط «ارصد الآن».",toPiece:"حوّل إلى مادة",trTrack:"ترجم",trTrackBack:"الأصل",trTrackIng:"يترجم…",trTrackFail:"تعذّرت الترجمة، حاول بعد قليل",trAll:n=>`ترجم الإنجليزي (${n.toLocaleString("ar")})`,converted:"✓ صارت مادة",newestFirst:"الأحدث أولاً",oldestFirst:"الأقدم أولاً",trackEmpty:"لم يصل شيء إلى الرصد بعد. اضغط «ارصد الآن» لتبدأ جولة رصد.",lastScan:"آخر رصد",trackCount:n=>`${n.toLocaleString("ar")} تطوراً مرصوداً`,
-  runMonitor:"🔍 ارصد الآن",runSync:"↻ زامن النسخة المستقلة",runNoMcp:"الزر لا يعمل في هذا التطبيق أو المتصفح. افتح الشهود من متصفح الكمبيوتر، أو اكتب لـClaude في المحادثة: «اكتب قطع اليوم».",runDaily:"✨ اكتب قطع اليوم الآن",runSending:"يبدأ…",runStarted:"بدأ. تصل النتائج خلال دقائق، ثم يتوقف وحده.",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"وافق على طلب الإذن ثم اضغط مرة أخرى.",runDenied:"لم يُسمح للصفحة بتشغيل المهام. فعّلها من قائمة الأذونات أعلى الصفحة.",runFail:"لم يبدأ. جرّب بعد دقيقة.",runLast:"آخر تشغيل",
+  runMonitor:"",runSync:"",runNoMcp:"",runDaily:"",runSending:"",runStarted:"",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"",runDenied:"",runFail:"",runLast:"",
   navLive:"النشرة الحية",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
   loadingStatus:"تتجمع الحيوانات حول النار…",all:"الكل",
-  deskTitle:"غرفة التحرير",deskSub:"أعطِ الشهود أزمة، واختر من يرويها، أو دع الغابة تختار.",
+  deskTitle:"",deskSub:"",
   dText:"الأزمة أو الخبر والمادة الخام",dTextPh:"الصق الخبر هنا…",
   dSample:"تتوسع شركات التقنية في بناء مراكز بيانات للذكاء الاصطناعي في ولاية جورجيا الأمريكية. تصنيف لموقع Outforia نشرته نيوزويك في يوليو 2026 وضع جورجيا ثانية بين الولايات الأكثر ضغطاً بيئياً بسبب مراكز البيانات، مع 134 مشروعاً و77 نوعاً مهدداً بالانقراض. وتستهلك منشأة غوغل في مقاطعة دوغلاس بالولاية نحو 834.9 مليون غالون من المياه سنوياً.",
   dSampleNote:"مثال: تسرب نفطي قرب سواحل أم القيوين يهدد مراعي الأطوم.",
@@ -597,7 +483,7 @@ ar:{
   translate:"ترجم إلى الإنجليزية",translating:"تُترجم…",translated:"أضيفت النسخة الإنجليزية",trFail:"تعذرت الترجمة",
   notTranslated:"هذه القطعة بلا نسخة إنجليزية بعد.",
   /* studio */
-  stTitle:"استوديو التصدير",close:"إغلاق",tCards:"بطاقات سوشيال",tInfo:"إنفوجراف",tVideo:"فيديو",size:"المقاس",audio:"خلفية صوتية من الغابة",
+  stTitle:"",close:"إغلاق",tCards:"بطاقات سوشيال",tInfo:"إنفوجراف",tVideo:"فيديو",size:"المقاس",audio:"خلفية صوتية من الغابة",
   sizes:{"long":"طولي حسب المحتوى","4x5":"عمودي 4:5","1x1":"مربع 1:1","9x16":"ستوري 9:16","16x9":"أفقي 16:9","a4":"ورقة A4"},res:"الدقة",resOpts:{"1":"عادية","2":"عالية ×2","3":"فائقة ×3 (4K)"},drawing:"نرسم…",
   noSave:"الحفظ غير متاح في هذا العرض. اضغط مطولاً على الصورة لحفظها.",save:"حفظ",saveZip:"حفظ كل البطاقات (ZIP)",zipping:"نجمع البطاقات…",zipFail:"تعذر تجهيز الملف المضغوط",
   savePng:"حفظ الإنفوجراف (PNG)",preview:"معاينة",makeVideo:s=>`صناعة الفيديو (${s} ثانية)`,recording:"يُسجَّل الفيديو الآن، أبقِ الصفحة مفتوحة…",
@@ -609,7 +495,7 @@ ar:{
   music:"الموسيقى",mtracks:{auto:"تلقائي حسب المادة",forest:"غابة الفجر",deep:"أعماق البحر",desert:"رمال الحجاز",ice:"الجليد الصامت",ash:"رماد الحرب",city:"نبض المدينة",nebula:"سديم",lab:"المختبر",rain:"مطر",elegy:"مرثية",hope:"أمل",tension:"توتر",nature:"أصوات الطبيعة فقط",none:"بلا صوت"},mstop:"أوقف",
   toneLbl:"الخلفية",tones2:{dark:"داكنة",light:"فاتحة"},
   themeLbl:"الطابع",themes:{auto:"تلقائي حسب الموضوع",river:"نهر وأراضٍ رطبة",fields:"حقول وزراعة",forest:"غابة",ocean:"بحر",desert:"صحراء",ice:"جليد",war:"حرب ونار",city:"مدينة",cosmos:"فضاء",lab:"مختبر"},
-  manualBtn:"✍️ اكتب يدوياً",bridgeBtn:"📋 عبر محادثة Claude",bridgeHelp:"انسخ الطلب، والصقه في أي محادثة مع Claude، ثم الصق رده هنا.",bridgeCopy:"انسخ الطلب",bridgePastePh:"الصق رد Claude هنا…",bridgeUse:"استعمل الرد",bridgeBad:"لم أجد في الرد مادة صالحة. الصق الرد كاملاً.",manualHelp:"اكتب المادة بنفسك. الحقول الفارغة لا تظهر في المادة.",mName:"اسم الكائن الراوي",mEmoji:"رمزه (إيموجي)",mHab:"موطنه",mHeadline:"العنوان",mPlace:"المكان",mCat:"الباب",mDispatch:"الرواية بلسان الكائن (افصل الفقرات بسطر فارغ)",mImpacts:"سلسلة الأثر (حلقة في كل سطر)",mFigures:"الأرقام (في كل سطر: الرقم | ماذا يقيس | المصدر)",mPreview:"اعرض المسودة",keyLbl:"مفتاح Anthropic API للكتابة الآلية (اختياري)",keySave:"احفظ",keyHelp:"يُحفظ في هذا المتصفح فقط. رصيده منفصل عن اشتراك Claude، والمادة الواحدة تكلّف سنتات قليلة.",needKey:"الكتابة الآلية هنا تحتاج مفتاح API (بالأسفل). أو اكتب يدوياً، أو استعمل «عبر محادثة Claude».",
+  manualBtn:"✍️ اكتب يدوياً",bridgeBtn:"📋 عبر محادثة Claude",bridgeHelp:"انسخ الطلب، والصقه في أي محادثة مع Claude، ثم الصق رده هنا.",bridgeCopy:"انسخ الطلب",bridgePastePh:"الصق رد Claude هنا…",bridgeUse:"استعمل الرد",bridgeBad:"لم أجد في الرد مادة صالحة. الصق الرد كاملاً.",manualHelp:"اكتب المادة بنفسك. الحقول الفارغة لا تظهر في المادة.",mName:"اسم الكائن الراوي",mEmoji:"رمزه (إيموجي)",mHab:"موطنه",mHeadline:"العنوان",mPlace:"المكان",mCat:"الباب",mDispatch:"الرواية بلسان الكائن (افصل الفقرات بسطر فارغ)",mImpacts:"سلسلة الأثر (حلقة في كل سطر)",mFigures:"الأرقام (في كل سطر: الرقم | ماذا يقيس | المصدر)",mPreview:"اعرض المسودة",keyLbl:"",keySave:"",keyHelp:"",needKey:"الكتابة الآلية هنا تحتاج مفتاح API (بالأسفل). أو اكتب يدوياً، أو استعمل «عبر محادثة Claude».",
   azLbl:"الأصوات الطبيعية (Azure Speech)",azSave:"احفظ وجرّب",azHelp:"المفتاح (Key 1) والمنطقة (Location/Region) من صفحة «Keys and Endpoint» في خدمة Speech على Azure. يُحفظان في هذا المتصفح فقط.",azTesting:"نجرّب الصوت…",azOk:"✓ تعمل. ستُقرأ المواد الآن بأصوات طبيعية.",azFail:"تعذّر الاتصال بـ Azure. تحقق من المفتاح والمنطقة.",azOff:"أُلغيت الأصوات الطبيعية، وعادت أصوات الجهاز.",
   nNoFemale:"لا يوجد على جهازك صوت عربي نسائي. على الآيفون يمكنك تحميل صوت آخر من إعدادات المحتوى المنطوق.",nNoMale:"لا يوجد على جهازك صوت عربي رجالي.",nStopAll:"إيقاف القراءة",nStop:"إيقاف",nMale:"صوت رجل",nFemale:"صوت امرأة",nVoice:"الصوت",nRate:"السرعة",nSlow:"أبطأ",nNormal:"عادية",nFast:"أسرع",nTip:"لصوت أكثر طبيعية على الآيفون: الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات ← العربية، وحمّل صوتاً بنسخته «المحسّنة». وعلى الحاسوب يعطي متصفح Edge أصواتاً عربية طبيعية.",
   readThem:"اقرأها",writeAs:"اكتب بلسانه",piecesBy:n=>"قطع بلسان "+n,showAll:"عرض الكل",writeFirst:n=>"لا قطع بلسان "+n+" بعد. اكتب أولها من هنا.",
@@ -626,10 +512,10 @@ en:{
   dawn:"Dawn",day:"Day",dusk:"Dusk",night:"Night",spring:"Spring",summer:"Summer",autumn:"Autumn",winter:"Winter",tropic:"Tropical season",moon:"Moon",
   moonNames:["new","waxing crescent","first quarter","waxing gibbous","full","waning gibbous","last quarter","waning crescent"],
   navTrack:"Tracker",trackIntro:"Environmental developments and related crises. Tracking is manual: it only runs when you press “Track now”.",toPiece:"Turn into a piece",trTrack:"Translate",trTrackBack:"Original",trTrackIng:"Translating…",trTrackFail:"Translation failed, try again shortly",trAll:n=>`Translate English (${n})`,converted:"✓ Turned into a piece",newestFirst:"Newest first",oldestFirst:"Oldest first",trackEmpty:"Nothing in the tracker yet. Press “Track now” to start a scan.",lastScan:"Last scan",trackCount:n=>`${n} ${n===1?"development":"developments"} tracked`,
-  runMonitor:"🔍 Track now",runSync:"↻ Sync the standalone copy",runNoMcp:"This button doesn't work in this app or browser. Open Shuhud in a desktop browser, or ask Claude in the chat: “write today's pieces”.",runDaily:"✨ Write today's pieces now",runSending:"Starting…",runStarted:"Started. Results arrive in a few minutes, then it stops on its own.",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"Approve the permission prompt, then press again.",runDenied:"This page isn't allowed to run tasks. Turn it on from the page's permissions menu.",runFail:"Didn't start. Try again in a minute.",runLast:"Last run",
+  runMonitor:"",runSync:"",runNoMcp:"",runDaily:"",runSending:"",runStarted:"",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"",runDenied:"",runFail:"",runLast:"",
   navLive:"Live feed",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
   loadingStatus:"The animals are gathering around the fire…",all:"All",
-  deskTitle:"Newsroom",deskSub:"Give the witnesses a crisis, pick who tells it, or let the forest choose.",
+  deskTitle:"",deskSub:"",
   dText:"The crisis, news item or raw material",dTextPh:"Paste the story here…",
   dSample:"Tech companies are expanding AI data center construction in the US state of Georgia. An Outforia ranking published by Newsweek in July 2026 placed Georgia second among states facing the most environmental pressure from data centers, with 134 projects and 77 endangered species. Google's facility in Douglas County uses about 834.9 million gallons of water a year.",
   dSampleNote:"Example: an oil spill off Umm Al Quwain threatens the dugongs' seagrass.",
@@ -658,7 +544,7 @@ en:{
   publish:"Publish to the feed",again:"Read again",publishing:"Publishing…",published:"Published to the live feed",pubFail:"Couldn't publish",needSignIn:"Publishing needs you signed in to Claude",
   translate:"Translate to English",translating:"Translating…",translated:"English version added",trFail:"Couldn't translate",
   notTranslated:"This piece has no English version yet.",
-  stTitle:"Export studio",close:"Close",tCards:"Social cards",tInfo:"Infographic",tVideo:"Video",size:"Size",audio:"Forest soundscape",
+  stTitle:"",close:"Close",tCards:"Social cards",tInfo:"Infographic",tVideo:"Video",size:"Size",audio:"Forest soundscape",
   sizes:{"long":"Long (fits content)","4x5":"Portrait 4:5","1x1":"Square 1:1","9x16":"Story 9:16","16x9":"Landscape 16:9","a4":"A4 page"},res:"Resolution",resOpts:{"1":"Standard","2":"High ×2","3":"Ultra ×3 (4K)"},drawing:"Drawing…",
   noSave:"Saving isn't available in this view. Long-press the image to save it.",save:"Save",saveZip:"Save all cards (ZIP)",zipping:"Packing the cards…",zipFail:"Couldn't build the ZIP file",
   savePng:"Save infographic (PNG)",preview:"Preview",makeVideo:s=>`Make the video (${s} seconds)`,recording:"Recording the video now. Keep this page open…",
@@ -670,7 +556,7 @@ en:{
   music:"Music",mtracks:{auto:"Auto, by piece",forest:"Forest dawn",deep:"The deep",desert:"Hijaz sands",ice:"Silent ice",ash:"Ashes of war",city:"City pulse",nebula:"Nebula",lab:"The lab",rain:"Rain",elegy:"Elegy",hope:"Hope",tension:"Tension",nature:"Nature sounds only",none:"Silent"},mstop:"Stop",
   toneLbl:"Background",tones2:{dark:"Dark",light:"Light"},
   themeLbl:"Theme",themes:{auto:"Auto, by subject",river:"River & wetland",fields:"Fields & farming",forest:"Forest",ocean:"Sea",desert:"Desert",ice:"Ice",war:"War & fire",city:"City",cosmos:"Space",lab:"Lab"},
-  manualBtn:"✍️ Write it myself",bridgeBtn:"📋 Via a Claude chat",bridgeHelp:"Copy the request, paste it into any Claude chat, then paste the reply here.",bridgeCopy:"Copy the request",bridgePastePh:"Paste Claude's reply here…",bridgeUse:"Use the reply",bridgeBad:"No usable piece found in the reply. Paste the whole reply.",manualHelp:"Write the piece yourself. Empty fields are left out.",mName:"Narrator species",mEmoji:"Its emoji",mHab:"Its habitat",mHeadline:"Headline",mPlace:"Place",mCat:"Section",mDispatch:"The story in the creature's voice (blank line between paragraphs)",mImpacts:"Chain of impact (one link per line)",mFigures:"Figures (each line: number | what it measures | source)",mPreview:"Show the draft",keyLbl:"Anthropic API key for automatic writing (optional)",keySave:"Save",keyHelp:"Stored in this browser only. Billed separately from the Claude plan; a piece costs a few cents.",needKey:"Automatic writing here needs an API key (below). Or write it yourself, or use “Via a Claude chat”.",
+  manualBtn:"✍️ Write it myself",bridgeBtn:"📋 Via a Claude chat",bridgeHelp:"Copy the request, paste it into any Claude chat, then paste the reply here.",bridgeCopy:"Copy the request",bridgePastePh:"Paste Claude's reply here…",bridgeUse:"Use the reply",bridgeBad:"No usable piece found in the reply. Paste the whole reply.",manualHelp:"Write the piece yourself. Empty fields are left out.",mName:"Narrator species",mEmoji:"Its emoji",mHab:"Its habitat",mHeadline:"Headline",mPlace:"Place",mCat:"Section",mDispatch:"The story in the creature's voice (blank line between paragraphs)",mImpacts:"Chain of impact (one link per line)",mFigures:"Figures (each line: number | what it measures | source)",mPreview:"Show the draft",keyLbl:"",keySave:"",keyHelp:"",needKey:"Automatic writing here needs an API key (below). Or write it yourself, or use “Via a Claude chat”.",
   azLbl:"Natural voices (Azure Speech)",azSave:"Save and test",azHelp:"Key 1 and Location/Region from the “Keys and Endpoint” page of your Speech resource on Azure. Stored in this browser only.",azTesting:"Testing the voice…",azOk:"✓ Working. Pieces will now be read with natural voices.",azFail:"Couldn't reach Azure. Check the key and region.",azOff:"Natural voices turned off; back to device voices.",
   nNoFemale:"There is no female voice for this language on your device.",nNoMale:"There is no male voice for this language on your device.",nStopAll:"Stop reading",nStop:"Stop",nMale:"Male voice",nFemale:"Female voice",nVoice:"Voice",nRate:"Speed",nSlow:"Slower",nNormal:"Normal",nFast:"Faster",nTip:"For a more natural voice on iPhone: Settings → Accessibility → Spoken Content → Voices, and download an “Enhanced” voice. On a computer, Microsoft Edge offers natural voices.",
   readThem:"read them",writeAs:"Write in its voice",piecesBy:n=>"Pieces told by the "+n,showAll:"Show all",writeFirst:n=>"No pieces by the "+n+" yet. Write the first one here.",
@@ -1966,7 +1852,7 @@ Object.assign(DICT.ar,{
   spCount:n=>`${n.toLocaleString("ar")} كائناً`,spPop:"العدد",spThreat:"الخطر",spAbout:"عنه",spFromShuhud:"من مراسلي الشهود",
   spAngle:n=>`بلسان ${n}، الكائن المهدد بالانقراض`,spNeedEdit:"رفع الصور يحتاج صلاحية تحرير",
   st:{CR:"مهدد بشدة بالانقراض",EN:"مهدد بالانقراض",VU:"معرّض للخطر",NT:"قريب من التهديد",LC:"غير مهدد",DD:"بيانات ناقصة",NE:"غير مُقيَّم",DOM:"حيوان مستأنس"},
-  stAll:"الكل"
+  stAll:""
 });
 Object.assign(DICT.en,{
   navIds:"Species cards",navRed:"Endangered",
@@ -1979,7 +1865,7 @@ Object.assign(DICT.en,{
   spCount:n=>`${n} ${n===1?"species":"species"}`,spPop:"Population",spThreat:"Threat",spAbout:"About",spFromShuhud:"Shuhud correspondent",
   spAngle:n=>`Told by the ${n}, a threatened species`,spNeedEdit:"Uploading photos needs edit access",
   st:{CR:"Critically Endangered",EN:"Endangered",VU:"Vulnerable",NT:"Near Threatened",LC:"Least Concern",DD:"Data Deficient",NE:"Not Evaluated",DOM:"Domesticated"},
-  stAll:"All"
+  stAll:""
 });
 if(window.SHUHUD_STANDALONE){
   Object.assign(DICT.ar,{trackIntro:"تطورات البيئة والأزمات المرتبطة بها كما تصل."});
@@ -2310,12 +2196,12 @@ $("#m-save").onclick=async()=>{
   catch(err){toast(T("mFail"))}
   finally{mBusy=false;b.disabled=false;b.textContent=T("mSave")}};
 /* ---------- media from the standalone app: straight to the GitHub repo, with Kamal's own token kept in this browser ---------- */
-Object.assign(DICT.ar,{ghFirstPub:"اربط GitHub أولاً حتى تُنشر القطعة للقرّاء: الصق المفتاح واضغط «احفظ»، ثم ارجع إلى غرفة التحرير واضغط «انشر»",ghFirst:"اربط GitHub أولاً: الصق المفتاح واضغط «احفظ»، ثم ارجع إلى التصدير",ghLink:"🔑 اربط GitHub لإضافة المواد",ghLbl:"مفتاح GitHub (Fine-grained token)",ghSave:"احفظ",ghUnlink:"افصل GitHub",ghSaved:"حُفظ المفتاح في هذا المتصفح",ghBad:"المفتاح لا يعمل. تأكد أنه لمستودع shuhud ومعه صلاحية Contents: Read and write",
-  ghHelp:"أنشئه من GitHub: Settings ← Developer settings ← Fine-grained tokens ← Generate new token. اختر المستودع Kalslami2013/shuhud فقط، ثم صلاحية Contents: Read and write. يُحفظ المفتاح في هذا المتصفح فقط، فلا تضعه إلا على جهازك.",
-  ghNote:"تظهر المادة للقرّاء بعد دقيقة أو دقيقتين."});
-Object.assign(DICT.en,{ghFirstPub:"Connect GitHub first so the piece reaches readers: paste the token and press Save, then go back to the newsroom and press Publish",ghFirst:"Connect GitHub first: paste the token and press Save, then go back to Export",ghLink:"🔑 Connect GitHub to add items",ghLbl:"GitHub fine-grained token",ghSave:"Save",ghUnlink:"Disconnect GitHub",ghSaved:"Token saved in this browser",ghBad:"The token doesn't work. Make sure it is for the shuhud repo with Contents: Read and write",
-  ghHelp:"Create it on GitHub: Settings → Developer settings → Fine-grained tokens → Generate new token. Pick only the Kalslami2013/shuhud repo and Contents: Read and write. It is stored in this browser only, so use it on your own device.",
-  ghNote:"Readers see the item within a minute or two."});
+Object.assign(DICT.ar,{ghFirstPub:"",ghFirst:"",ghLink:"",ghLbl:"",ghSave:"",ghUnlink:"",ghSaved:"",ghBad:"",
+  ghHelp:"",
+  ghNote:""});
+Object.assign(DICT.en,{ghFirstPub:"",ghFirst:"",ghLink:"",ghLbl:"",ghSave:"",ghUnlink:"",ghSaved:"",ghBad:"",
+  ghHelp:"",
+  ghNote:""});
 if(window.SHUHUD_STANDALONE){Object.assign(DICT.ar,{mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تُرفع المادة إلى GitHub وتظهر للقرّاء بعد دقيقة أو دقيقتين."});Object.assign(DICT.en,{mFilesNote:"20 MB per file. For a carousel pick several images in order. The item goes to GitHub and readers see it within a minute or two."})}
 const GH={repo:"Kalslami2013/shuhud",list:"data/media-gh.json",plist:"data/partners-gh.json",pieces:"data/pieces-gh.json",key:"shuhud-gh-token"};
 /* Files just pushed to GitHub take a minute to reach Pages: fall back to the raw copy once. */

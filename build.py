@@ -24,5 +24,26 @@ seo=f'''<title>الشهود | أزمات العالم بلسان الكائنا�
 '''
 rhead=head.replace('href="manifest.webmanifest"','href="reader.webmanifest"').replace('</head>',seo+'</head>')
 rsrc=src.replace('<script>window.SHUHUD_BUILD=','<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD=',1).replace('<title>الشهود</title>','',1)
+# the public page carries none of the newsroom's tools: their markup is cut out, and lookups of the removed elements get a harmless stand-in
+def cut(html, tag, attr):
+    i = html.find(attr)
+    if i < 0: return html
+    a = html.rfind('<'+tag, 0, i)
+    depth, j = 0, a
+    rx = re.compile(r'<(/?)'+tag+r'\b[^>]*>')
+    for m in rx.finditer(html, a):
+        depth += -1 if m.group(1) else 1
+        if depth == 0:
+            return html[:a] + html[m.end():]
+    return html
+for tag, attr in (('section','id="v-track"'),('section','id="v-desk"'),('div','id="gh-box"'),('div','id="media-add"'),('div','id="s-form"'),('div','id="p-form"'),('div','id="studio"'),
+                  ('button','id="media-add-btn"'),('button','id="gh-link"'),('button','id="gh-unlink"'),('button','id="s-add-btn"'),('button','id="p-add-btn"'),
+                  ('button','role="tab" data-view="track"'),('button','role="tab" data-view="desk"')):
+    rsrc = cut(rsrc, tag, attr)
+NIL = 'const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});\nconst $=s=>document.querySelector(s)||__nil;'
+assert rsrc.count('const $=s=>document.querySelector(s);')==1
+rsrc = rsrc.replace('const $=s=>document.querySelector(s);', NIL, 1)
+# and the wording of the newsroom-only labels (API key, GitHub token, studio, desk) is blanked in its translations
+rsrc = re.sub(r'\b((?:key|gh|st|desk|nav(?:Desk|Track)|run)[A-Z]\w*|keyLbl|ghLbl):"(?:[^"\\]|\\.)*"', r'\1:""', rsrc)
 # the public page is the site's front page (alshuhud.org/); reader.html stays for old links
 for f in ('index.html','reader.html'):open(f,'w',encoding='utf8').write(rhead+rsrc+'\n</body></html>\n')
