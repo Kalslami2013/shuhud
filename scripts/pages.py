@@ -97,14 +97,14 @@ def head(title, desc, url, img, extra=""):
     return f"""<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><link rel="canonical" href="{e(url)}"><meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#0b1712"><link rel="icon" href="{BASE}favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="96x96" href="{BASE}icon-96.png"><link rel="icon" type="image/png" sizes="192x192" href="{BASE}icon-192.png"><link rel="apple-touch-icon" href="{BASE}icon-180.png">
-<meta property="og:site_name" content="الشهود · Al-Shuhud"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{e(img)}"><meta property="og:locale" content="ar_AR"><meta property="og:locale:alternate" content="en_GB">
+<meta property="og:site_name" content="شهود · Shuhud"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{e(img)}"><meta property="og:locale" content="ar_AR"><meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(title)}"><meta name="twitter:description" content="{e(desc)}"><meta name="twitter:image" content="{e(img)}">
 {extra}<style>{CSS}</style></head><body>
-<header class="top"><div class="wrap"><a class="brand" href="{BASE}"><img src="{BASE}icon-192.png" alt="">الشهود</a><nav><a href="{BASE}p/">كل القطع</a><a href="{BASE}#about">من نحن</a></nav></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="{BASE}"><img src="{BASE}icon-192.png" alt="">شهود</a><nav><a href="{BASE}p/">كل القطع</a><a href="{BASE}#about">من نحن</a></nav></div></header>
 """
 
 SC = ('<div class="sc">' + "".join(f'<a href="{e(href(x))}" target="_blank" rel="noopener me" title="{e(x.get("name") or x.get("platform"))}" aria-label="{e(x.get("name") or x.get("platform"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="{ICONS.get(x.get("platform"), ICONS["web"])}"/></svg></a>' for x in socials) + "</div>") if socials else ""
-FOOT = f"""<footer><div class="wrap">{SC}الشهود · Al-Shuhud — أزمات العالم بلسان الكائنات التي تعيشها. <a href="{BASE}">alshuhud.org</a></div></footer>
+FOOT = f"""<footer><div class="wrap">{SC}شهود · Shuhud — أزمات العالم بلسان الكائنات التي تعيشها. <a href="{BASE}">alshuhud.org</a></div></footer>
 </body></html>
 """
 
@@ -139,12 +139,12 @@ for p in items:
     d = date_of(p)
     img, credit = image_of(p)
     en = p.get("en") if isinstance(p.get("en"), dict) else {}
-    title = f'{p["headline"]} | الشهود'
+    title = f'{p["headline"]} | شهود'
     desc = short(p.get("angle") or p.get("fact") or p.get("dispatch"))
     ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": short(p["headline"], 110),
           "description": desc, "inLanguage": ["ar", "en"] if en else "ar", "mainEntityOfPage": url,
           "author": {"@type": "Person", "name": "Kamal Al-Salami", "alternateName": "كمال السلامي"},
-          "publisher": {"@type": "NewsMediaOrganization", "name": "الشهود", "alternateName": "Al-Shuhud", "url": BASE, "logo": {"@type": "ImageObject", "url": BASE + "icon-512.png"}}}
+          "publisher": {"@type": "NewsMediaOrganization", "name": "شهود", "alternateName": "Shuhud", "url": BASE, "logo": {"@type": "ImageObject", "url": BASE + "icon-512.png"}}}
     if d: ld["datePublished"] = str(p.get("createdAt") or d)[:25]
     if img: ld["image"] = [img]
     if en.get("headline"): ld["alternativeHeadline"] = short(en["headline"], 110)
@@ -159,7 +159,7 @@ for p in items:
     if en.get("headline"):
         en_full = {**en, "figures": en.get("figures") or [], "sources": en.get("sources") or p.get("sources")}
         body.append(f'<section class="en" lang="en" dir="ltr"><h1>{e(en["headline"])}</h1><div class="meta">{nice(d, False) if d else ""}{" · " if d else ""}{e(en.get("crisis"))}</div>{block(en_full, False)}</section>')
-    body.append(f'<a class="cta" href="{BASE}">اقرأ المزيد في الشهود ←</a></article></main>')
+    body.append(f'<a class="cta" href="{BASE}">اقرأ المزيد في شهود ←</a></article></main>')
     body.append(FOOT)
     with open(f"p/{pid}.html", "w", encoding="utf8") as fh:
         fh.write("\n".join(body))
@@ -177,8 +177,8 @@ for p in items:
     if p["id"] not in built: continue
     d = date_of(p)
     rows.append(f'<li><a href="{p["id"]}.html">{e(p["headline"])}</a><small>{p.get("animalEmoji","")} {e(p.get("animalName"))} · {nice(d) if d else ""}</small></li>')
-arch = head("كل القطع | الشهود — أزمات العالم بلسان الكائنات التي تعيشها",
-            "أرشيف قطع الشهود: أزمات العالم من زاويتها البيئية بلسان الكائنات التي تعيشها، بالعربية والإنجليزية.", BASE + "p/", "")
+arch = head("كل القطع | شهود — أزمات العالم بلسان الكائنات التي تعيشها",
+            "أرشيف قطع شهود: أزمات العالم من زاويتها البيئية بلسان الكائنات التي تعيشها، بالعربية والإنجليزية.", BASE + "p/", "")
 with open("p/index.html", "w", encoding="utf8") as fh:
     fh.write(arch + f'<main class="wrap"><article><h1>كل القطع</h1><div class="meta">{len(rows)} قطعة</div><ul class="list">' + "\n".join(rows) + "</ul></article></main>" + FOOT)
 
