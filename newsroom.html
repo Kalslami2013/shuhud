@@ -134,6 +134,11 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .mk-menu{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;width:100%}.mk-menu .btn{font-size:12.5px;padding:5px 11px}
 .card .close-row{display:flex;justify-content:flex-end;margin:-6px 0 -4px}
 .status{font-size:12px;color:var(--faint);margin-bottom:12px}
+/* text that sits straight on the sky stays readable on bright daytime skies: a soft dark chip behind it */
+.status,.track-head .note,.runbar .note,.sp-head>.note,section>.note{width:fit-content;max-width:100%;box-sizing:border-box;background:rgba(9,18,14,.62);color:#e3ebe5;padding:4px 11px;border-radius:12px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.status:empty,.runbar .note:empty,.track-head .note:empty{display:none}
+.track-head .btn,.runbar .btn:not(.run),.sp-head .btn:not(.export){background:rgba(9,18,14,.62);color:#e3ebe5;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.manifesto{text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 14px rgba(0,0,0,.35)}
 .feed{display:grid;gap:16px}
 .card{background:var(--bark);border:1px solid var(--line);border-radius:18px;padding:18px;backdrop-filter:blur(8px);display:grid;gap:12px;min-width:0}
 .card[style*="--th"]{border-top:3px solid var(--th)}
@@ -548,8 +553,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794228177"</script>
-<script src="local.js?v=1794228177"></script>
+<script>window.SHUHUD_BUILD="1794228514"</script>
+<script src="local.js?v=1794228514"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */

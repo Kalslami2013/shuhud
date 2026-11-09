@@ -138,6 +138,11 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .mk-menu{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;width:100%}.mk-menu .btn{font-size:12.5px;padding:5px 11px}
 .card .close-row{display:flex;justify-content:flex-end;margin:-6px 0 -4px}
 .status{font-size:12px;color:var(--faint);margin-bottom:12px}
+/* text that sits straight on the sky stays readable on bright daytime skies: a soft dark chip behind it */
+.status,.track-head .note,.runbar .note,.sp-head>.note,section>.note{width:fit-content;max-width:100%;box-sizing:border-box;background:rgba(9,18,14,.62);color:#e3ebe5;padding:4px 11px;border-radius:12px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.status:empty,.runbar .note:empty,.track-head .note:empty{display:none}
+.track-head .btn,.runbar .btn:not(.run),.sp-head .btn:not(.export){background:rgba(9,18,14,.62);color:#e3ebe5;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.manifesto{text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 14px rgba(0,0,0,.35)}
 .feed{display:grid;gap:16px}
 .card{background:var(--bark);border:1px solid var(--line);border-radius:18px;padding:18px;backdrop-filter:blur(8px);display:grid;gap:12px;min-width:0}
 .card[style*="--th"]{border-top:3px solid var(--th)}
@@ -437,8 +442,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794228177"</script>
-<script src="local.js?v=1794228177"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794228514"</script>
+<script src="local.js?v=1794228514"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-copy", "b-paste", "b-use", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-track"]);
