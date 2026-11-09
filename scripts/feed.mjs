@@ -2,23 +2,45 @@
 // Runs on GitHub Actions; needs no AI and no Claude credit.
 import { readFileSync, writeFileSync } from "node:fs";
 
+// [name, url, language, filter]: filter true = keep only environmental stories (general news feeds); a RegExp = keep titles matching it
 const FEEDS = [
+  // agencies and newspapers
   ["Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "en", true],
-  ["BBC", "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml", "en", false],
+  ["BBC", "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml", "en", true],
   ["The Guardian", "https://www.theguardian.com/environment/rss", "en", false],
-  ["Mongabay", "https://news.mongabay.com/feed/", "en", false],
-  ["Inside Climate News", "https://insideclimatenews.org/feed/", "en", false],
-  ["UN News", "https://news.un.org/feed/subscribe/en/news/topic/climate-change/feed/rss.xml", "en", false],
   ["Euronews", "https://www.euronews.com/rss?level=vertical&name=green", "en", false],
-  ["NASA Earth Observatory", "https://earthobservatory.nasa.gov/feeds/earth-observatory.rss", "en", false],
+  ["TASS", "https://tass.com/rss/v2.xml", "en", true],
   ["الجزيرة نت", "https://www.aljazeera.net/aljazeerarss/a7c186be-1baa-4bd4-9d80-a84db769f779/73d0e1b4-532f-45ef-b135-bfdff8b8cab9", "ar", true],
   ["BBC عربي", "https://feeds.bbci.co.uk/arabic/rss.xml", "ar", true],
   ["الشرق الأوسط", "https://aawsat.com/feed", "ar", true],
   ["الأناضول", "https://www.aa.com.tr/ar/rss/default?cat=guncel", "ar", true],
+  ["RT عربي", "https://arabic.rt.com/rss/", "ar", true],
+  // specialised environment and science outlets
+  ["Mongabay", "https://news.mongabay.com/feed/", "en", false],
+  ["Inside Climate News", "https://insideclimatenews.org/feed/", "en", false],
+  ["Carbon Brief", "https://www.carbonbrief.org/feed", "en", false],
+  ["Yale Environment 360", "https://e360.yale.edu/feed.xml", "en", false],
+  ["Climate Home News", "https://www.climatechangenews.com/feed/", "en", false],
+  ["Phys.org", "https://phys.org/rss-feed/earth-news/", "en", false],
+  ["Down To Earth", "https://www.downtoearth.org.in/rss/environment", "en", false],
+  // UN, international and government bodies; disaster monitors
+  ["UN News", "https://news.un.org/feed/subscribe/en/news/topic/climate-change/feed/rss.xml", "en", false],
+  ["أخبار الأمم المتحدة", "https://news.un.org/feed/subscribe/ar/news/topic/climate-change/feed/rss.xml", "ar", false],
+  ["UNEP", "https://www.unep.org/rss.xml", "en", false],
+  ["WMO", "https://wmo.int/rss.xml", "en", false],
+  ["WHO", "https://www.who.int/rss-feeds/news-english.xml", "en", true],
+  ["FAO", "https://www.fao.org/newsroom/rss/en", "en", true],
+  ["NASA Earth Observatory", "https://earthobservatory.nasa.gov/feeds/earth-observatory.rss", "en", false],
+  ["NOAA", "https://www.noaa.gov/rss.xml", "en", true],
+  ["ReliefWeb", "https://reliefweb.int/disasters/rss.xml", "en", false],
+  ["GDACS", "https://www.gdacs.org/xml/rss.xml", "en", /\b(orange|red)\b/i],
+  ["USGS", "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.atom", "en", false],
 ];
 
-// general feeds keep only stories with an environmental subject
-const KW = /climate|environment|pollut|oil spill|spill|wildfire|forest fire|deforest|flood|drought|heatwave|heat wave|cyclone|hurricane|typhoon|storm|earthquake|tsunami|volcano|glacier|ice sheet|sea ice|coral|reef|ocean|species|extinct|wildlife|biodiversity|endangered|emission|carbon|methane|fossil|renewable|data cent|water crisis|water shortage|famine|locust|bird flu|avian|ebola|outbreak|el niño|el nino|cop31|cop17|unep|iucn|wmo|مناخ|بيئ|تلوث|تسرب|حرائق|حريق غابات|غابات|فيضان|فيضانات|سيول|جفاف|موجة حر|إعصار|عاصفة|زلزال|تسونامي|بركان|جليد|شعاب|مرجان|انقراض|حياة برية|تنوع بيولوجي|انبعاثات|كربون|ميثان|نفط|طاقة متجددة|مراكز البيانات|شح المياه|أزمة المياه|مجاعة|جراد|إنفلونزا الطيور|إيبولا|تفشي|النينيو|التصحر|كوب31/i;
+// general feeds keep only stories with an environmental subject, and drop market and price news unless pollution or climate is the point
+const MARKET = /\b(stocks?|shares|prices?|markets?|gold|crude futures|brent|investors?)\b|أسعار|سعر|البورصة|الذهب|الأسهم|الدولار|برنت|العقود الآجلة|المستثمرين/i;
+const STRONG = /spill|pollut|emission|climate|wildlife|species|flood|drought|wildfire|earthquake|تسرب|تلوث|انبعاث|مناخ|حياة برية|فيضان|جفاف|حرائق|زلزال/i;
+const KW = /climate|environment|pollut|oil spill|spill|wildfire|forest fire|deforest|flood|drought|heatwave|heat wave|cyclone|hurricane|typhoon|storm|earthquake|tsunami|volcano|glacier|ice sheet|sea ice|coral|reef|ocean|species|extinct|wildlife|biodiversity|endangered|emission|carbon|methane|fossil fuel|renewable|oil spill|landslide|\bbees?\b|pollinat|butterfl|insect|\bbirds?\b|whale|shark|turtle|nature|wildlife trade|poaching|deforestation|desertification|air quality|smog|heat record|data cent|water crisis|water shortage|famine|locust|bird flu|avian|ebola|outbreak|el niño|el nino|cop31|cop17|unep|iucn|wmo|مناخ|بيئ|تلوث|تسرب|حرائق|حريق غابات|غابات|فيضان|فيضانات|سيول|جفاف|موجة حر|إعصار|عاصفة|زلزال|تسونامي|بركان|جليد|شعاب|مرجان|انقراض|حياة برية|تنوع بيولوجي|انبعاثات|كربون|ميثان|تسرب نفطي|بقعة نفطية|نحل|فراش|حشرات|طيور|حيتان|سلاحف|الطبيعة|طاقة متجددة|انهيار أرضي|انجراف|التصحر|جودة الهواء|ضباب دخاني|الصيد الجائر|مراكز البيانات|شح المياه|أزمة المياه|مجاعة|جراد|إنفلونزا الطيور|إيبولا|تفشي|النينيو|التصحر|كوب31/i;
 
 const CAT = [
   ["التلوث", /pollut|spill|plastic|تلوث|تسرب|نفايات/i],
@@ -52,7 +74,8 @@ export function parse(xml, [source, , lang, filter]) {
     const when = tag(b, "pubDate") || tag(b, "published") || tag(b, "updated") || tag(b, "dc:date");
     const d = new Date(when); const at = isNaN(d) ? new Date().toISOString() : d.toISOString();
     if (!title || !url) return null;
-    if (filter && !KW.test(title + " " + summary)) return null;
+    const txt = title + " " + summary;
+    if (filter instanceof RegExp ? !filter.test(title) : filter && (!KW.test(txt) || (MARKET.test(title) && !STRONG.test(title)))) return null;
     const category = CAT.find(([, re]) => re.test(title + " " + summary))[0];
     const item = { id: "r-" + hash(url), at, date: at.slice(0, 10), text: title, source, url, category, lang, rss: true, createdAt: new Date().toISOString() };
     if (lang === "en") item.en = { text: title, source };
@@ -92,7 +115,7 @@ async function main() {
   }
   writeFileSync("data/feed-status.json", JSON.stringify({ at: new Date().toISOString(), translated: tr, errors: trLog.slice(0, 5) }));
   console.log("translated", tr);
-  const all = [...seen.values()].sort((a, b) => (a.at < b.at ? 1 : -1)).slice(0, 400);
+  const all = [...seen.values()].sort((a, b) => (a.at < b.at ? 1 : -1)).slice(0, 500);
   writeFileSync(path, JSON.stringify(all));
   console.log("added", added, "total", all.length);
 }
