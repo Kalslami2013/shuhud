@@ -8,7 +8,7 @@ const FEEDS = [
   ["Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "en", true],
   ["BBC", "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml", "en", true],
   ["The Guardian", "https://www.theguardian.com/environment/rss", "en", false],
-  ["Euronews", "https://www.euronews.com/rss?level=vertical&name=green", "en", false],
+  ["Euronews", ["https://www.euronews.com/rss?level=vertical&name=green", "https://www.euronews.com/rss?format=mrss&level=vertical&name=green"], "en", false],
   ["TASS", "https://tass.com/rss/v2.xml", "en", true],
   ["الجزيرة نت", "https://www.aljazeera.net/aljazeerarss/a7c186be-1baa-4bd4-9d80-a84db769f779/73d0e1b4-532f-45ef-b135-bfdff8b8cab9", "ar", true],
   ["BBC عربي", "https://feeds.bbci.co.uk/arabic/rss.xml", "ar", true],
@@ -26,13 +26,13 @@ const FEEDS = [
   // UN, international and government bodies; disaster monitors
   ["UN News", "https://news.un.org/feed/subscribe/en/news/topic/climate-change/feed/rss.xml", "en", false],
   ["أخبار الأمم المتحدة", "https://news.un.org/feed/subscribe/ar/news/topic/climate-change/feed/rss.xml", "ar", false],
-  ["UNEP", "https://www.unep.org/rss.xml", "en", false],
-  ["WMO", "https://wmo.int/rss.xml", "en", false],
+  ["UNEP", ["https://www.unep.org/news-and-stories/rss.xml", "https://www.unep.org/rss/news", "https://www.unep.org/news-and-stories/press-release/rss.xml"], "en", false],
+  ["WMO", ["https://wmo.int/media/news/rss.xml", "https://wmo.int/news/rss.xml", "https://wmo.int/rss/news"], "en", false],
   ["WHO", "https://www.who.int/rss-feeds/news-english.xml", "en", true],
-  ["FAO", "https://www.fao.org/newsroom/rss/en", "en", true],
+  ["FAO", ["https://www.fao.org/news/rss-feed/en/", "https://www.fao.org/newsroom/en/rss", "https://www.fao.org/rss/en/"], "en", true],
   ["NASA Earth Observatory", "https://earthobservatory.nasa.gov/feeds/earth-observatory.rss", "en", false],
   ["NOAA", "https://www.noaa.gov/rss.xml", "en", true],
-  ["ReliefWeb", "https://reliefweb.int/disasters/rss.xml", "en", false],
+  ["ReliefWeb", ["https://reliefweb.int/headlines/rss.xml", "https://reliefweb.int/disasters/rss.xml"], "en", false],
   ["GDACS", "https://www.gdacs.org/xml/rss.xml", "en", /\b(orange|red)\b/i],
   ["USGS", "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.atom", "en", false],
 ];
@@ -93,8 +93,13 @@ async function main() {
   let added = 0;
   for (const f of FEEDS) {
     try {
-      const r = await fetch(f[1], { headers: { "user-agent": "Mozilla/5.0 (Shuhud tracker)" }, signal: AbortSignal.timeout(20000) });
-      if (!r.ok) { console.log("skip", f[0], r.status); continue; }
+      // a source may list several addresses: the first that answers is used
+      let r = null;
+      for (const u of [].concat(f[1])) {
+        try { r = await fetch(u, { headers: { "user-agent": "Mozilla/5.0 (compatible; ShuhudTracker/1.0; +https://alshuhud.org)", accept: "application/rss+xml, application/atom+xml, application/xml, text/xml, */*" }, signal: AbortSignal.timeout(20000) }); } catch { r = null; }
+        if (r && r.ok) break;
+      }
+      if (!r || !r.ok) { console.log("skip", f[0], r && r.status); continue; }
       const items = parse(await r.text(), f).filter((x) => new Date(x.at) > cutoff);
       for (const it of items) { const n = norm(it.text); if (seen.has(it.id) || titles.has(n)) continue; seen.set(it.id, it); titles.add(n); added++; }
       console.log("ok", f[0], items.length);
