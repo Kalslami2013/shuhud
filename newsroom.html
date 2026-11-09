@@ -130,6 +130,7 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 @media (min-width:900px){.lead{flex-direction:row}.lead .tz-img{flex:1.25;align-self:center}.lead .tz-img.noimg{min-height:300px;align-self:stretch}.lead .tz-b{flex:1;padding:22px 24px;justify-content:center}}
 .more{justify-self:center;margin-top:4px}
 #feed .card,#feed .tz{scroll-margin-top:140px}
+.ed{display:grid;gap:6px}.ed .ed-i{width:100%;box-sizing:border-box;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;color:inherit;font:inherit;padding:8px 10px}.ed textarea.ed-i{line-height:1.8;resize:vertical}.ed-list{display:grid;gap:6px}.ed-row{display:grid;grid-template-columns:1fr 2fr 1fr auto;gap:6px}.ed-row[data-row="src"]{grid-template-columns:1fr 2fr auto}@media(max-width:600px){.ed-row,.ed-row[data-row="src"]{grid-template-columns:1fr auto}.ed-row .ed-i{grid-column:1}}
 .card .close-row{display:flex;justify-content:flex-end;margin:-6px 0 -4px}
 .status{font-size:12px;color:var(--faint);margin-bottom:12px}
 .feed{display:grid;gap:16px}
@@ -546,8 +547,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794177414"</script>
-<script src="local.js?v=1794177414"></script>
+<script>window.SHUHUD_BUILD="1794214062"</script>
+<script src="local.js?v=1794214062"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -611,7 +612,7 @@ ar:{
   readThem:"اقرأها",writeAs:"اكتب بلسانه",piecesBy:n=>"قطع بلسان "+n,showAll:"عرض الكل",writeFirst:n=>"لا قطع بلسان "+n+" بعد. اكتب أولها من هنا.",
   sceneAdd:"أضف صورة لهذا المشهد",sceneChange:"غيّر صورة المشهد",sceneRemove:"أزل صورة المشهد",sceneFind:"ابحث عن صورة مناسبة",sceneHint:"📷 أضف صورة لأي مشهد تريده، اختيارياً. تُلوَّن الصورة تلقائياً بطابع المادة وتذوب في خلفية البطاقة، وفي الفيديو تنتقل المشاهد بينها بسلاسة. يكفي أربع إلى ست صور للمادة.",
   changePhotoShort:"📷 غيّر الصورة",removePhotoShort:"🗑 احذف الصورة",confirmRemovePhoto:"تأكيد حذف الصورة",photoRemoved:"حُذفت الصورة",
-  readFull:"اقرأ الشهادة ←",closePiece:"✕ إغلاق",showMore:"عرض المزيد",photo:"📷 صورة",addPhoto:"أضف صورة",changePhoto:"غيّر الصورة",removePhoto:"بلا صورة",findPhoto:"ابحث عن صورة للكائن",photoSaved:"حُفظت الصورة مع القطعة",photoFail:"تعذر رفع الصورة",uploading:"تُرفع الصورة…",credit:"حقوق الصورة",creditPh:"مثال: اسم المصوّر / CC BY-SA",photoLocal:"الصورة في هذا التصدير فقط، ولم تُحفظ مع القطعة",photoHint:"صورة الكائن تظهر في الغلاف والإنفوجراف.",
+  readFull:"اقرأ الشهادة ←",edBtn:"✏️ تعديل",edNote:"عدّل ما تشاء ثم اضغط «حفظ». يُحفظ التعديل في القطعة المنشورة.",edNoteEn:"تعدّل الآن النسخة الإنجليزية. للعربية بدّل اللغة إلى «عربي».",edHeadline:"العنوان",edCrisis:"الأزمة",edAngle:"الزاوية",edPlace:"المكان",edDate:"تاريخ الحدث",edDispatch:"الشهادة",edFigs:"الأرقام",edVal:"الرقم",edLbl:"ماذا يقيس",edSrc:"المصدر",edAddFig:"➕ رقم",edChain:"سلسلة الأثر (حلقة في كل سطر)",edFact:"ما حدث عند البشر",edQuestion:"سؤال مفتوح",edSources:"المصادر",edSrcName:"اسم المصدر",edAddSrc:"➕ مصدر",edSave:"💾 حفظ",edCancel:"إلغاء",edSaved:"حُفظ التعديل",edFail:"تعذر حفظ التعديل",edNeed:"العنوان لا يكون فارغاً",closePiece:"✕ إغلاق",showMore:"عرض المزيد",photo:"📷 صورة",addPhoto:"أضف صورة",changePhoto:"غيّر الصورة",removePhoto:"بلا صورة",findPhoto:"ابحث عن صورة للكائن",photoSaved:"حُفظت الصورة مع القطعة",photoFail:"تعذر رفع الصورة",uploading:"تُرفع الصورة…",credit:"حقوق الصورة",creditPh:"مثال: اسم المصوّر / CC BY-SA",photoLocal:"الصورة في هذا التصدير فقط، ولم تُحفظ مع القطعة",photoHint:"صورة الكائن تظهر في الغلاف والإنفوجراف.",
   swipe:"اسحب للمزيد ←",voiceOf:n=>"بلسان "+n,card:k=>"البطاقة "+k,infoAlt:"الإنفوجراف"
 },
 en:{
@@ -672,7 +673,7 @@ en:{
   readThem:"read them",writeAs:"Write in its voice",piecesBy:n=>"Pieces told by the "+n,showAll:"Show all",writeFirst:n=>"No pieces by the "+n+" yet. Write the first one here.",
   sceneAdd:"Add a photo to this scene",sceneChange:"Change scene photo",sceneRemove:"Remove scene photo",sceneFind:"Find a fitting photo",sceneHint:"📷 Add a photo to any scene you like, it is optional. Photos are tinted to the piece's theme and melt into the card; in the video, scenes dissolve smoothly between them. Four to six photos per piece is plenty.",
   changePhotoShort:"📷 Change photo",removePhotoShort:"🗑 Remove photo",confirmRemovePhoto:"Confirm removing photo",photoRemoved:"Photo removed",
-  readFull:"Read the testimony →",closePiece:"✕ Close",showMore:"Show more",photo:"📷 Photo",addPhoto:"Add photo",changePhoto:"Change photo",removePhoto:"No photo",findPhoto:"Find a photo of the species",photoSaved:"Photo saved with the piece",photoFail:"Couldn't upload the photo",uploading:"Uploading photo…",credit:"Photo credit",creditPh:"e.g. Photographer / CC BY-SA",photoLocal:"Photo used in this export only, not saved with the piece",photoHint:"The species photo appears on the cover and the infographic.",
+  readFull:"Read the testimony →",edBtn:"✏️ Edit",edNote:"Change what you need, then press Save. The edit is saved into the published piece.",edNoteEn:"You are editing the English version. Switch to «عربي» for the Arabic.",edHeadline:"Headline",edCrisis:"Crisis",edAngle:"Angle",edPlace:"Place",edDate:"Event date",edDispatch:"Testimony",edFigs:"Figures",edVal:"Value",edLbl:"What it measures",edSrc:"Source",edAddFig:"➕ Figure",edChain:"Chain of impact (one link per line)",edFact:"What happened among humans",edQuestion:"Open question",edSources:"Sources",edSrcName:"Source name",edAddSrc:"➕ Source",edSave:"💾 Save",edCancel:"Cancel",edSaved:"Edit saved",edFail:"Couldn't save the edit",edNeed:"The headline can't be empty",closePiece:"✕ Close",showMore:"Show more",photo:"📷 Photo",addPhoto:"Add photo",changePhoto:"Change photo",removePhoto:"No photo",findPhoto:"Find a photo of the species",photoSaved:"Photo saved with the piece",photoFail:"Couldn't upload the photo",uploading:"Uploading photo…",credit:"Photo credit",creditPh:"e.g. Photographer / CC BY-SA",photoLocal:"Photo used in this export only, not saved with the piece",photoHint:"The species photo appears on the cover and the infographic.",
   swipe:"Swipe for more →",voiceOf:n=>"Told by the "+n.replace(/^the /i,""),card:k=>"Card "+k,infoAlt:"Infographic"
 }};
 const CAT_EN={"الكل":"All","الحروب والبيئة":"War & environment","التقنية والذكاء الاصطناعي":"Tech & AI","التلوث":"Pollution","المياه":"Water","الطاقة":"Energy","كوارث طبيعية":"Natural disasters","كوارث بشرية":"Human-made disasters","الغابات":"Forests","المناخ":"Climate","البحار والمحيطات":"Seas & oceans","الميكروبات والأوبئة":"Microbes & epidemics","الانقراض":"Extinction","الكون":"Cosmos","المدن":"Cities","الغذاء والزراعة":"Food & farming","الهجرة والنزوح":"Migration & displacement"};
@@ -815,6 +816,43 @@ function richHTML(i,editable){
     ${i.fact?`<div class="fact"><b>${T("fact")}</b><span${ce("fact")}>${esc(i.fact)}</span></div>`:""}
     ${i.question?`<p class="q">${T("question")}: <span${ce("question")}>${esc(i.question)}</span></p>`:""}`;
 }
+/* ---------- editing a published piece: text, figures, chain and sources, in the language on screen ---------- */
+let editId=null,edBusy=false;
+const canEditPiece=()=>!READER&&((!!db&&!window.SHUHUD_STANDALONE)||(typeof ghMode==="function"&&ghMode()));
+function editHTML(raw){
+  const en=isEn()&&raw.en,t=en?raw.en:raw,v=k=>esc(t[k]==null?"":t[k]);
+  const fig=f=>`<div class="ed-row" data-row="fig"><input class="ed-i" data-c="value" placeholder="${T("edVal")}" value="${esc(f.value||"")}"><input class="ed-i" data-c="label" placeholder="${T("edLbl")}" value="${esc(f.label||"")}"><input class="ed-i" data-c="source" placeholder="${T("edSrc")}" value="${esc(f.source||"")}"><button class="btn danger" type="button" data-act="ed-del">✕</button></div>`;
+  const src=x=>`<div class="ed-row" data-row="src"><input class="ed-i" data-c="name" placeholder="${T("edSrcName")}" value="${esc(x.name||"")}"><input class="ed-i" data-c="url" dir="ltr" placeholder="https://" value="${esc(x.url||"")}"><button class="btn danger" type="button" data-act="ed-del">✕</button></div>`;
+  const f=(k,lbl,ta)=>`<label class="l">${T(lbl)}</label>${ta?`<textarea class="ed-i" data-k="${k}" rows="${ta}">${v(k)}</textarea>`:`<input class="ed-i" data-k="${k}" value="${v(k)}">`}`;
+  return `<div class="ed" data-ed>
+    <p class="note">${T(en?"edNoteEn":"edNote")}</p>
+    ${f("headline","edHeadline")}${f("crisis","edCrisis")}${f("angle","edAngle",2)}${f("place","edPlace")}
+    ${en?"":`<label class="l">${T("edDate")}</label><input class="ed-i" type="date" data-k="eventDate" dir="ltr" value="${esc(String(raw.eventDate||"").slice(0,10))}">`}
+    ${f("dispatch","edDispatch",12)}
+    <label class="l">${T("edFigs")}</label><div class="ed-list" data-list="fig">${(t.figures||[]).map(fig).join("")}</div><button class="btn" type="button" data-act="ed-addfig">${T("edAddFig")}</button>
+    <label class="l">${T("edChain")}</label><textarea class="ed-i" data-k="impacts" rows="5">${esc((t.impacts||[]).join("\n"))}</textarea>
+    ${f("fact","edFact",3)}${f("question","edQuestion",2)}
+    <label class="l">${T("edSources")}</label><div class="ed-list" data-list="src">${(t.sources||(en?raw.sources:[])||[]).map(src).join("")}</div><button class="btn" type="button" data-act="ed-addsrc">${T("edAddSrc")}</button>
+    <div class="foot" style="justify-content:flex-start"><button class="btn primary" type="button" data-act="ed-save">${T("edSave")}</button><button class="btn" type="button" data-act="ed-cancel">${T("edCancel")}</button></div>
+  </div>`;
+}
+function editCollect(box){
+  const patch={};box.querySelectorAll("[data-k]").forEach(el=>{const k=el.dataset.k,val=el.value.trim();patch[k]=k==="impacts"?val.split("\n").map(x=>x.trim()).filter(Boolean):val});
+  patch.figures=[...box.querySelectorAll('[data-list="fig"] .ed-row')].map(r=>{const o={};r.querySelectorAll("[data-c]").forEach(e=>o[e.dataset.c]=e.value.trim());return o}).filter(o=>o.value||o.label);
+  patch.sources=[...box.querySelectorAll('[data-list="src"] .ed-row')].map(r=>{const o={};r.querySelectorAll("[data-c]").forEach(e=>o[e.dataset.c]=e.value.trim());return o}).filter(o=>o.name||o.url);
+  return patch;
+}
+async function ghPatchPiece(id,patch){await ghSaveList(l=>{const k=l.findIndex(x=>x.id===id);if(k>=0){l[k]={...l[k],...patch};return l}return [...l,{id,...patch,_edit:true}]},"Piece edit: "+id,GH.pieces)}
+async function editSave(raw,box){
+  if(edBusy)return;const p=editCollect(box);if(!p.headline){toast(T("edNeed"));return}
+  const en=isEn()&&raw.en;let patch;
+  if(en){const {eventDate,...rest}=p;patch={en:{...raw.en,...rest}}}else{patch=p}
+  edBusy=true;try{
+    if(typeof ghMode==="function"&&ghMode()){if(!ghTok()){toast(T("ghFirstPub"));edBusy=false;return}await ghPatchPiece(raw.id,patch)}
+    await db.collection("dispatches").doc(raw.id).update(patch);
+    editId=null;toast(T("edSaved")+(typeof ghMode==="function"&&ghMode()?" · "+T("ghNote"):""));renderFeed(true)}
+  catch(e){toast(T("edFail"))}finally{edBusy=false}
+}
 function cardHTML(raw){
   const i=L(raw),r=who(i),src=srcList(i);
   const miss=i._missing?`<div class="trbar"><span>${T("notTranslated")}</span>${sample?`<button class="btn export" data-act="tr" ${translatingId===raw.id?"disabled":""}>${translatingId===raw.id?T("translating"):T("translate")}</button>`:""}</div>`:"";
@@ -822,9 +860,10 @@ function cardHTML(raw){
     ${miss}
     <div class="who"><div class="ava">${r.e}</div><div><div class="nm">${esc(r.n)}</div><div class="bt">${esc(r.b)}</div></div>
       <div class="tags"><span class="tag">${esc(catName(raw.category||""))}</span><span>${esc(i.place||"")}</span><span>${fmtDate(i.eventDate||i.createdAt)}</span></div></div>
-    ${richHTML(i,false)}
-    <div class="foot"><span class="src">${src?T("sources")+": "+src:""}${raw.kind==="desk"?" · "+T("fromDesk"):""}</span>
+    ${editId===raw.id?editHTML(raw):richHTML(i,false)}
+    <div class="foot"${editId===raw.id?" hidden":""}><span class="src">${src?T("sources")+": "+src:""}${raw.kind==="desk"?" · "+T("fromDesk"):""}</span>
       ${"speechSynthesis" in window?`<button class="btn" data-act="say">${T("listen")}</button>`:""}
+      ${canEditPiece()?`<button class="btn" data-act="edit">${T("edBtn")}</button>`:""}
       <button class="btn" data-act="photo">${raw.imageUrl?T("changePhotoShort"):T("photo")}</button>
       ${raw.imageUrl?`<button class="btn danger" data-act="unphoto">${armedPhoto===raw.id?T("confirmRemovePhoto"):T("removePhotoShort")}</button>`:""}
       <button class="btn export" data-act="export">${T("export")}</button>
@@ -848,7 +887,8 @@ function teaserHTML(raw,lead){
       <div class="tz-f"><span>${r.e} ${esc(r.n)}</span><span class="go">${T("readFull")}</span></div></div>
   </article>`;
 }
-function renderFeed(){
+function renderFeed(force){
+  if(!force&&editId&&document.querySelector("#feed [data-ed]"))return;
   try{if(NARR.playing)stopNarration()}catch(e){}
   let list=cat==="الكل"?items:items.filter(i=>i.category===cat);
   if(byAnimal)list=list.filter(i=>spKey(i)===byAnimal);
@@ -874,7 +914,12 @@ $("#feed").addEventListener("click",async e=>{
   const b=e.target.closest("[data-act]");if(!b)return;
   const id=b.closest(".card").dataset.id;const raw=items.find(x=>x.id===id);if(!raw)return;const i=L(raw);
   const act=b.dataset.act;
-  if(act==="close"){const tz=id;openId=null;stopNarration&&stopNarration();renderFeed();const el=$(`#feed [data-open="${CSS.escape(tz)}"]`);if(el)el.scrollIntoView({block:"center"});return}
+  if(act==="edit"){editId=id;renderFeed(true);return}
+  if(act==="ed-cancel"){editId=null;renderFeed(true);return}
+  if(act==="ed-save"){editSave(raw,b.closest("[data-ed]"));return}
+  if(act==="ed-del"){b.closest(".ed-row").remove();return}
+  if(act==="ed-addfig"||act==="ed-addsrc"){const tmp=document.createElement("div");tmp.innerHTML=editHTML({...raw,figures:[{}],sources:[{}],en:raw.en?{...raw.en,figures:[{}],sources:[{}]}:raw.en});const row=tmp.querySelector(`[data-list="${act==="ed-addfig"?"fig":"src"}"] .ed-row`);b.previousElementSibling.appendChild(row);row.querySelector("input").focus();return}
+  if(act==="close"){const tz=id;openId=null;editId=null;stopNarration&&stopNarration();renderFeed();const el=$(`#feed [data-open="${CSS.escape(tz)}"]`);if(el)el.scrollIntoView({block:"center"});return}
   if(act==="copy")copy(plain(i));
   if(act==="export")openStudio(raw);
   if(act==="photo")pickPhoto(raw.id);
