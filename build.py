@@ -11,7 +11,7 @@ head='''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><me
 BUILD=str(int(time.time()))
 open('version.txt','w').write(BUILD)
 src=src.replace('\n<script>\n','\n<script>window.SHUHUD_BUILD="'+BUILD+'"</script>\n<script src="local.js?v='+BUILD+'"></script>\n<script>\n',1)
-open(sys.argv[2],'w',encoding='utf8').write(head.replace('</head>','<meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://alshuhud.org/">\n</head>')+src+'\n</body></html>\n')
+open(sys.argv[2],'w',encoding='utf8').write(head.replace('</head>','<meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://alshuhud.org/">\n<meta property="og:type" content="website"><meta property="og:site_name" content="شهود · Shuhud"><meta property="og:title" content="شهود — أزمات العالم بلسان الكائنات التي تعيشها"><meta property="og:url" content="https://alshuhud.org/"><meta property="og:image" content="https://alshuhud.org/og.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://alshuhud.org/og.jpg">\n</head>')+src+'\n</body></html>\n')
 # reader page: the same page with no newsroom and no controls, for the public
 BASE="https://alshuhud.org/"
 DESC_AR="شهود: منصة صحفية بالعربية والإنجليزية تروي أزمات العالم من زاويتها البيئية بلسان الكائنات التي تعيشها، من الحروب والتلوث إلى الجفاف والزلازل، مع الأرقام ومصادرها."
