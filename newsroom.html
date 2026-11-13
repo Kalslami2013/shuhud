@@ -154,6 +154,7 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .voice{margin:0;font-size:16px;line-height:1.95;white-space:pre-line;text-wrap:pretty}
 .att-wrap{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0d1a14;margin-bottom:12px}
 .att-wrap .att-bg{display:none}
+.tz-img img.narr,.att-wrap img.narr{position:absolute;inset-inline-start:12px;bottom:12px;width:20%;max-width:104px;min-width:52px;height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid #f4efe2;box-shadow:0 4px 16px rgba(0,0,0,.55);z-index:2}
 .card .att-wrap img.att{width:100%;height:100%;max-height:none;max-width:none;object-fit:cover;object-position:50% 40%;border-radius:0}
 .card img.att{display:block;width:auto;height:auto;max-width:100%;max-height:520px;border-radius:12px}
 .fact{border-inline-start:3px solid var(--leaf);padding:8px 12px;background:rgba(156,199,122,.07);border-radius:4px 10px 10px 4px;font-size:13.5px;color:var(--dim)}
@@ -368,7 +369,7 @@ body.reader .rc .cnt.none{visibility:hidden}
   </header>
 
   <nav class="main" role="tablist">
-    <button role="tab" data-view="live" aria-selected="true" data-i18n="navLive">النشرة الحية</button>
+    <button role="tab" data-view="live" aria-selected="true" data-i18n="navLive">الرئيسية</button>
     <button role="tab" data-view="track" aria-selected="false" data-i18n="navTrack">الرصد</button>
     <button role="tab" data-view="desk" aria-selected="false" data-i18n="navDesk">غرفة التحرير</button>
     <button role="tab" data-view="corr" aria-selected="false" data-i18n="navCorr">المراسلون</button>
@@ -556,8 +557,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794547609"</script>
-<script src="local.js?v=1794547609"></script>
+<script>window.SHUHUD_BUILD="1794548647"</script>
+<script src="local.js?v=1794548647"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -571,7 +572,7 @@ ar:{
   moonNames:["محاق","هلال","تربيع أول","أحدب متزايد","بدر","أحدب متناقص","تربيع ثانٍ","هلال أخير"],
   navTrack:"الرصد",trackIntro:"تطورات البيئة والأزمات المرتبطة بها. الرصد يدوي: لا يعمل إلا حين تضغط «ارصد الآن».",toPiece:"حوّل إلى مادة",ghFirstKey:"احفظ مفتاح GitHub في هذا الجهاز أولاً: تبويب «ميديا» ← «🔑 اربط GitHub» ← الصق المفتاح ← «حفظ»، ثم أعد المحاولة",mkManual:"✍️ اكتبها يدوياً",mkBridge:"📋 عبر محادثة Claude الآن",mkQueue:"🗂️ أرسلها إلى Claude ليكتبها",mkQueued:"أُرسلت إلى Claude: يكتبها حين تضغط «اكتب قطع اليوم» في نسخة Claude، ثم «زامن»",mkWaiting:"⏳ بانتظار Claude",trTrack:"ترجم",trTrackBack:"الأصل",trTrackIng:"يترجم…",trTrackFail:"تعذّرت الترجمة، حاول بعد قليل",trAll:n=>`ترجم الإنجليزي (${n.toLocaleString("ar")})`,converted:"✓ صارت مادة",newestFirst:"الأحدث أولاً",oldestFirst:"الأقدم أولاً",trackEmpty:"لم يصل شيء إلى الرصد بعد. اضغط «ارصد الآن» لتبدأ جولة رصد.",lastScan:"آخر رصد",trackCount:n=>`${n.toLocaleString("ar")} تطوراً مرصوداً`,
   runMonitor:"🔍 ارصد الآن",runSync:"↻ زامن النسخة المستقلة",runNoMcp:"الزر لا يعمل في هذا التطبيق أو المتصفح. افتح شهود من متصفح الكمبيوتر، أو اكتب لـClaude في المحادثة: «اكتب قطع اليوم».",runDaily:"✨ اكتب قطع اليوم الآن",runSending:"يبدأ…",runStarted:"بدأ. تصل النتائج خلال دقائق، ثم يتوقف وحده.",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"وافق على طلب الإذن ثم اضغط مرة أخرى.",runDenied:"لم يُسمح للصفحة بتشغيل المهام. فعّلها من قائمة الأذونات أعلى الصفحة.",runFail:"لم يبدأ. جرّب بعد دقيقة.",runLast:"آخر تشغيل",
-  navLive:"النشرة الحية",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
+  navLive:"الرئيسية",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
   loadingStatus:"تتجمع الحيوانات حول النار…",all:"الكل",
   deskTitle:"غرفة التحرير",deskSub:"أعطِ شهود أزمة، واختر من يرويها، أو دع الغابة تختار.",
   dText:"الأزمة أو الخبر والمادة الخام",dTextPh:"الصق الخبر هنا…",
@@ -589,7 +590,7 @@ ar:{
   deleted:"حُذفت الرواية",delFail:"تعذر الحذف",copied:"نُسخ النص",witness:"شاهد",
   emptyLoading:"تتجمع الحيوانات حول النار، وستظهر النشرة بعد لحظات.",emptyCat:"لا قطع في هذا الباب بعد. اكتب واحدة من غرفة التحرير.",
   emptyAll:"الغابة صامتة الآن. اضغط «اكتب قطع اليوم الآن»، أو اكتب أول قطعة من غرفة التحرير.",
-  statusCount:n=>`${n.toLocaleString("ar")} قطعة في النشرة`,lastUpdate:"آخر تحديث من الغابة",
+  statusCount:n=>`${n.toLocaleString("ar")} شهادة منشورة`,lastUpdate:"آخر تحديث من الغابة",
   openInClaude:"افتح الصفحة داخل Claude لترى النشرة الحية.",signIn:"سجّل الدخول في Claude لترى النشرة الحية.",feedFail:"تعذر الوصول إلى النشرة الآن.",
   stories:n=>`${n} من الروايات`,
   reading:"يُقرأ…",readOk:n=>`قُرئ (${n.toLocaleString("ar")} حرفاً)`,readUnsupported:"نوع غير مدعوم للقراءة",readFail:"تعذرت قراءة الملف",
@@ -599,7 +600,7 @@ ar:{
   busy:"الكائنات مشغولة، حاول بعد دقيقة.",genFail:"لم تكتمل القراءة. جرّب مرة أخرى أو اختصر المادة.",sampleOff:"القراءة بعين الكائنات غير متاحة في هذا العرض.",
   verifyWarn:"بعض الأرقام مصدرها معرفة عامة وتحتاج تحققاً قبل النشر. تجدها بإطار برتقالي.",
   editNote:"العنوان والزاوية والرواية والوقائع قابلة للتعديل مباشرة قبل النشر.",
-  publish:"انشر في النشرة",again:"أعد القراءة",publishing:"يُنشر…",published:"نُشرت في النشرة الحية",pubFail:"تعذر النشر",needSignIn:"النشر يحتاج تسجيل الدخول في Claude",
+  publish:"انشر في النشرة",again:"أعد القراءة",publishing:"يُنشر…",published:"نُشرت في الموقع",pubFail:"تعذر النشر",needSignIn:"النشر يحتاج تسجيل الدخول في Claude",
   translate:"ترجم إلى الإنجليزية",translating:"تُترجم…",translated:"أضيفت النسخة الإنجليزية",trFail:"تعذرت الترجمة",
   notTranslated:"هذه القطعة بلا نسخة إنجليزية بعد.",
   /* studio */
@@ -633,7 +634,7 @@ en:{
   moonNames:["new","waxing crescent","first quarter","waxing gibbous","full","waning gibbous","last quarter","waning crescent"],
   navTrack:"Tracker",trackIntro:"Environmental developments and related crises. Tracking is manual: it only runs when you press “Track now”.",toPiece:"Turn into a piece",ghFirstKey:"Save your GitHub token on this device first: Media tab → «🔑 Connect GitHub» → paste the token → Save, then try again",mkManual:"✍️ Write it myself",mkBridge:"📋 Via a Claude chat now",mkQueue:"🗂️ Send it to Claude to write",mkQueued:"Sent to Claude: written when you press «Write today's pieces» in the Claude copy, then «Sync»",mkWaiting:"⏳ Waiting for Claude",trTrack:"Translate",trTrackBack:"Original",trTrackIng:"Translating…",trTrackFail:"Translation failed, try again shortly",trAll:n=>`Translate English (${n})`,converted:"✓ Turned into a piece",newestFirst:"Newest first",oldestFirst:"Oldest first",trackEmpty:"Nothing in the tracker yet. Press “Track now” to start a scan.",lastScan:"Last scan",trackCount:n=>`${n} ${n===1?"development":"developments"} tracked`,
   runMonitor:"🔍 Track now",runSync:"↻ Sync the standalone copy",runNoMcp:"This button doesn't work in this app or browser. Open Shuhud in a desktop browser, or ask Claude in the chat: “write today's pieces”.",runDaily:"✨ Write today's pieces now",runSending:"Starting…",runStarted:"Started. Results arrive in a few minutes, then it stops on its own.",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"Approve the permission prompt, then press again.",runDenied:"This page isn't allowed to run tasks. Turn it on from the page's permissions menu.",runFail:"Didn't start. Try again in a minute.",runLast:"Last run",
-  navLive:"Live feed",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
+  navLive:"Home",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
   loadingStatus:"The animals are gathering around the fire…",all:"All",
   deskTitle:"Newsroom",deskSub:"Give the witnesses a crisis, pick who tells it, or let the forest choose.",
   dText:"The crisis, news item or raw material",dTextPh:"Paste the story here…",
@@ -651,7 +652,7 @@ en:{
   deleted:"Story deleted",delFail:"Couldn't delete",copied:"Text copied",witness:"Witness",
   emptyLoading:"The animals are gathering around the fire. The feed will appear in a moment.",emptyCat:"Nothing in this section yet. Write one from the newsroom.",
   emptyAll:"The forest is quiet. Press “Write today's pieces now”, or write the first one from the newsroom.",
-  statusCount:n=>`${n} ${n===1?"piece":"pieces"} in the feed`,lastUpdate:"last update from the forest",
+  statusCount:n=>`${n} ${n===1?"testimony":"testimonies"} published`,lastUpdate:"last update from the forest",
   openInClaude:"Open this page inside Claude to see the live feed.",signIn:"Sign in to Claude to see the live feed.",feedFail:"Can't reach the feed right now.",
   stories:n=>`${n} ${n===1?"story":"stories"}`,
   reading:"Reading…",readOk:n=>`Read (${n.toLocaleString("en")} characters)`,readUnsupported:"This file type can't be read",readFail:"Couldn't read the file",
@@ -823,7 +824,7 @@ function richHTML(i,editable){
   return `${i.crisis?`<div class="crisis"><b${ce("crisis")}>${esc(i.crisis)}</b></div>`:""}
     <h2${ce("headline")}>${esc(i.headline)}</h2>
     ${i.angle?`<p class="angle"${ce("angle")}>${esc(i.angle)}</p>`:""}
-    ${pieceImg(i.imageUrl)?`<div class="att-wrap"><img class="att" onerror="imgFail(this)" src="${esc(bigImg(pieceImg(i.imageUrl)))}" data-fb="${esc(pieceImg(i.imageUrl))}" alt=""></div>${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
+    ${pieceImg(i.imageUrl)?`<div class="att-wrap"><img class="att" onerror="imgFail(this)" src="${esc(bigImg(pieceImg(i.imageUrl)))}" data-fb="${esc(pieceImg(i.imageUrl))}" alt="">${narrHTML(i._narr,who(i).n)}</div>${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
     <p class="voice"${ce("dispatch")}>${esc(i.dispatch)}</p>
     ${chain.length?`<div class="chain"><div class="lbl">${T("chain")}</div><ol>${chain.map(c=>`<li>${esc(c)}</li>`).join("")}</ol></div>`:""}
     ${figs.length?`<div class="figs"><div class="lbl">${T("figures")}</div><div class="grid">${figs.map(f=>{const warn=isWarn(f.source);return `<div class="fig${warn?" warn":""}"><div class="v">${esc(f.value)}</div><div class="t">${esc(f.label)}</div>${f.source?`<div class="s">${esc(f.source)}</div>`:""}</div>`}).join("")}</div></div>`:""}
@@ -874,7 +875,7 @@ function cardHTML(raw){
     ${miss}
     <div class="who"><div class="ava">${r.e}</div><div><div class="nm">${esc(r.n)}</div><div class="bt">${esc(r.b)}</div></div>
       <div class="tags"><span class="tag">${esc(catName(raw.category||""))}</span><span>${esc(i.place||"")}</span><span>${fmtDate(i.eventDate||i.createdAt)}</span></div></div>
-    ${editId===raw.id?editHTML(raw):richHTML((()=>{const s=shownImg(raw);return {...i,imageUrl:s.img,imageCredit:s.credit}})(),false)}
+    ${editId===raw.id?editHTML(raw):richHTML((()=>{const s=shownImg(raw);return {...i,imageUrl:s.img,imageCredit:s.credit,_narr:s.narr}})(),false)}
     <div class="foot"${editId===raw.id?" hidden":""}><span class="src">${src?T("sources")+": "+src:""}${raw.kind==="desk"?" · "+T("fromDesk"):""}</span>
       ${"speechSynthesis" in window?`<button class="btn" data-act="say">${T("listen")}</button>`:""}
       ${canEditPiece()?`<button class="btn" data-act="edit">${T("edBtn")}</button>`:""}
@@ -900,14 +901,23 @@ fetch(SITE_DATA+"short-ids.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?
 function pieceUrl(id){return "https://alshuhud.org/p/"+(SHORTID[id]?SHORTID[id]:encodeURIComponent(id)+".html")}
 /* Wikimedia thumbnails come at 330/500px: ask for 960px; if that size does not exist, fall back to the original link */
 function bigImg(u){u=String(u||"");const m=/^(https:\/\/upload\.wikimedia\.org\/.+\/thumb\/.+\/)(\d+)px-([^\/]+)$/.exec(u);return m&&+m[2]<960?m[1]+"960px-"+m[3]:u}
-function imgFail(el){const fb=el.dataset.fb;if(fb&&el.getAttribute("src")!==fb){el.removeAttribute("data-fb");el.src=fb;return}const w=el.closest(".tz-img");if(w){w.classList.add("noimg");el.remove()}else{const a=el.closest(".att-wrap");if(a)a.hidden=true}}
-function shownImg(raw){let img=pieceImg(raw.imageUrl),credit=raw.imageCredit||"";if(img)return {img,credit};
-  try{const s=spInfo(spKey(raw));if(s.img)return {img:s.img,credit:s.credit||""}}catch(e){}
-  const n=raw.en&&raw.en.animalName;if(n&&WIKIIMG[n])return {img:WIKIIMG[n],credit:"Wikipedia"};return {img:"",credit:""}}
+function imgFail(el){const fb=el.dataset.fb;if(fb&&el.getAttribute("src")!==fb){el.removeAttribute("data-fb");el.src=fb;return}
+  /* the event photo would not load: the narrator's photo takes the whole frame */
+  const nr=el.parentNode&&el.parentNode.querySelector("img.narr");if(nr&&nr!==el){el.dataset.fb=nr.getAttribute("src");el.src=nr.dataset.full||nr.src;nr.remove();return}const w=el.closest(".tz-img");if(w){w.classList.add("noimg");el.remove()}else{const a=el.closest(".att-wrap");if(a)a.hidden=true}}
+/* the narrator's own photo: its card photo, its reference photo, or Wikipedia (never another piece's event photo) */
+function narrImg(raw){let k="",d={};try{k=spKey(raw);d=spDocs[k]||{}}catch(e){}
+  const own=pubImg(d.imageUrl)||d.extImg;if(own)return {img:own,credit:d.credit||""};
+  const n=raw.en&&raw.en.animalName;if(n&&WIKIIMG[n])return {img:WIKIIMG[n],credit:"Wikipedia"};
+  try{const s=spInfo(k);const w=spWiki[k];if(w&&w.img)return {img:w.img,credit:"Wikipedia"};if(s.img&&!items.some(x=>x.id!==raw.id&&pieceImg(x.imageUrl)===s.img))return {img:s.img,credit:s.credit||""}}catch(e){}
+  return {img:"",credit:""}}
+/* the event's own photo fills the frame and the narrator sits in a small circle in its corner; without one, the narrator's photo fills it */
+function shownImg(raw){const own=pieceImg(raw.imageUrl),nr=narrImg(raw);
+  if(own)return {img:own,credit:raw.imageCredit||"",narr:nr.img&&nr.img!==own?nr.img:""};return {img:nr.img,credit:nr.credit,narr:""}}
+function narrHTML(u,name){return u?`<img class="narr" data-full="${esc(bigImg(u))}" src="${esc(bigImg(u).replace("/960px-","/330px-"))}" alt="${esc(name||"")}" title="${esc(name||"")}" loading="lazy" onerror="this.remove()">`:""}
 function teaserHTML(raw,lead){
-  const i=L(raw),r=who(i);const img=shownImg(raw).img;
+  const i=L(raw),r=who(i);const sh=shownImg(raw),img=sh.img;
   return `<article class="tz${lead?" lead":""}" style="--th:${THEMES[themeOf(raw)].ui}" data-open="${esc(raw.id)}" tabindex="0" role="link" aria-label="${esc(i.headline)}">
-    <div class="tz-img${img?"":" noimg"}">${img?`<img src="${esc(bigImg(img))}" data-fb="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="imgFail(this)">`:""}<span aria-hidden="true">${r.e}</span></div>
+    <div class="tz-img${img?"":" noimg"}">${img?`<img src="${esc(bigImg(img))}" data-fb="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="imgFail(this)">${narrHTML(sh.narr,r.n)}`:""}<span aria-hidden="true">${r.e}</span></div>
     <div class="tz-b"><div class="tz-meta"><span class="tag">${esc(catName(raw.category||""))}</span><span>${fmtDate(i.eventDate||i.createdAt)}</span></div>
       <h3>${esc(i.headline)}</h3>${i.angle?`<p>${esc(i.angle)}</p>`:""}
       <div class="tz-f"><span>${r.e} ${esc(r.n)}</span><span class="go">${T("readFull")}</span></div></div>
@@ -2265,7 +2275,7 @@ Object.assign(DICT.ar,{
 </ul>
 <h4>ما تجده هنا</h4>
 <ul>
-<li><b>النشرة الحية:</b> المواد بلسان الكائنات، بالعربية والإنجليزية، ويمكن الاستماع إليها.</li>
+<li><b>الرئيسية:</b> المواد بلسان الكائنات، بالعربية والإنجليزية، ويمكن الاستماع إليها.</li>
 <li><b>المراسلون:</b> الكائنات التي تروي موادنا من كل قارات العالم وبحاره.</li>
 <li><b>بطاقات الكائنات:</b> تعريف بكل كائن ظهر في موادنا، مع وضعه على القائمة الحمراء.</li>
 <li><b>مهددة بالانقراض:</b> كائنات تقف على حافة الاختفاء.</li>
@@ -2300,7 +2310,7 @@ Object.assign(DICT.en,{
 </ul>
 <h4>What you'll find</h4>
 <ul>
-<li><b>Live feed:</b> pieces in the creatures' voices, in Arabic and English, with audio.</li>
+<li><b>Home:</b> pieces in the creatures' voices, in Arabic and English, with audio.</li>
 <li><b>Correspondents:</b> the creatures who tell our stories, from every continent and sea.</li>
 <li><b>Species cards:</b> a profile of every creature in our pieces, with its Red List status.</li>
 <li><b>Endangered:</b> species on the edge of disappearing.</li>

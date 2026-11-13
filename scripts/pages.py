@@ -66,6 +66,15 @@ def image_of(p):
             return img, "Wikipedia"
     return "", ""
 
+def narr_of(p):
+    """the narrator's own photo, shown in a small circle when the piece has a photo of the event"""
+    if not str(p.get("imageUrl") or ""): return ""
+    s = species.get(p.get("animal"))
+    if s and str(s.get("extImg") or "").startswith("http"): return s["extImg"]
+    en = p.get("en") if isinstance(p.get("en"), dict) else {}
+    name = str(en.get("animalName") or "").strip()
+    return wiki_image(name) if name else ""
+
 WIKI_PATH = "data/wiki-img.json"
 try:
     WIKI = json.load(open(WIKI_PATH, encoding="utf8"))
@@ -113,7 +122,7 @@ header.top{border-bottom:1px solid var(--line);padding:14px 0}header.top .wrap{d
 .top nav a{font-size:15px;text-decoration:none;margin-inline-start:14px}
 article{padding:26px 0 10px}.kick{color:var(--acc);font-size:14px;font-weight:600}.meta{color:var(--mute);font-size:14px;margin:6px 0 18px}
 h1{font-size:30px;line-height:1.4;margin:6px 0}h2{font-size:21px;margin:28px 0 8px}
-figure{margin:0 0 18px}figure img{display:block;max-width:100%;max-height:520px;margin:0 auto;border-radius:12px}figcaption{color:var(--mute);font-size:12px;text-align:center;margin-top:4px}
+figure{margin:0 0 18px;position:relative}figure .narr{position:absolute;right:12px;bottom:34px;width:20%;max-width:104px;min-width:52px;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid #f4efe2;box-shadow:0 4px 16px rgba(0,0,0,.55)}figure img{display:block;max-width:100%;max-height:520px;margin:0 auto;border-radius:12px}figcaption{color:var(--mute);font-size:12px;text-align:center;margin-top:4px}
 .voice{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;white-space:pre-line}
 .angle{font-size:19px;color:var(--mute)}.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .fig{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}.fig b{display:block;font-size:22px;color:var(--acc)}.fig small{color:var(--mute)}
@@ -212,7 +221,9 @@ for p in items:
     body.append(f'<div class="kick">{p.get("animalEmoji","")} {e(p.get("animalName"))}{" · " + kick if kick else ""}</div>')
     body.append(f'<h1>{e(p["headline"])}</h1><div class="meta">{nice(d) if d else ""}{" · " if d else ""}{e(p.get("crisis"))}</div>')
     if img:
-        body.append(f'<figure><img src="{e(img)}" alt="{e(p.get("animalName"))}" loading="eager">{f"<figcaption>{e(credit)}</figcaption>" if credit else ""}</figure>')
+        nr = narr_of(p)
+        nr = f'<img class="narr" src="{e(nr)}" alt="{e(p.get("animalName"))}">' if nr and nr != img else ""
+        body.append(f'<figure><img src="{e(img)}" alt="{e(p.get("crisis") or p.get("animalName"))}" loading="eager">{nr}{f"<figcaption>{e(credit)}</figcaption>" if credit else ""}</figure>')
     body.append(block(p, True))
     if en.get("headline"):
         en_full = {**en, "figures": en.get("figures") or [], "sources": en.get("sources") or p.get("sources")}
