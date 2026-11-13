@@ -554,8 +554,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794432654"</script>
-<script src="local.js?v=1794432654"></script>
+<script>window.SHUHUD_BUILD="1794545022"</script>
+<script src="local.js?v=1794545022"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -790,7 +790,7 @@ function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB"
 /* ---------- views ---------- */
 const VIEWS=["live","track","desk","corr","ids","red","media","about"];
 function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
-document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{location.hash=b.dataset.view;show(b.dataset.view)});
+document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{if(/^\/p\//.test(location.pathname)){openId=null;history.replaceState(null,"","/#"+b.dataset.view)}else location.hash=b.dataset.view;show(b.dataset.view)});
 addEventListener("hashchange",()=>show(location.hash.slice(1)));
 show(location.hash.slice(1));
 document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
@@ -909,7 +909,11 @@ function renderFeed(force){
   const vis=list.slice(0,Math.max(shown,openId?list.findIndex(x=>x.id===openId)+1:0));
   feed.innerHTML=vis.map((raw,k)=>raw.id===openId?cardHTML(raw).replace('<div class="who">',`<div class="close-row"><button class="btn" type="button" data-act="close">${T("closePiece")}</button></div><div class="who">`):teaserHTML(raw,k===0)).join("")+(list.length>vis.length?`<button class="btn more" type="button" data-more>${T("showMore")} (${list.length-vis.length})</button>`:"");
 }
-function openPiece(id){openId=openId===id?null:id;renderFeed();if(openId){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({behavior:"smooth",block:"start"})}}
+/* on the public site the address bar follows the open piece: alshuhud.org/p/<id>.html is that piece's own page, ready to copy and share */
+const PIECE_URLS=!!window.SHUHUD_READER&&!!window.SHUHUD_STANDALONE&&!!history.pushState;
+function setPieceUrl(id){if(!PIECE_URLS)return;const want=id?"/p/"+encodeURIComponent(id)+".html":"/";if(location.pathname!==want)history.pushState({p:id||null},"",want)}
+addEventListener("popstate",()=>{if(!PIECE_URLS)return;const m=location.pathname.match(/^\/p\/(.+)\.html$/);const id=m?decodeURIComponent(m[1]):null;if(id===openId)return;openId=id;renderFeed(true);if(id){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({block:"start"})}});
+function openPiece(id){openId=openId===id?null:id;setPieceUrl(openId);renderFeed();if(openId){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({behavior:"smooth",block:"start"})}}
 $("#feed").addEventListener("click",e=>{if(e.target.closest("[data-more]")){shown+=12;renderFeed();return}const t=e.target.closest("[data-open]");if(t)openPiece(t.dataset.open)});
 $("#feed").addEventListener("keydown",e=>{const t=e.target.closest&&e.target.closest("[data-open]");if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openPiece(t.dataset.open)}});
 function updateStatus(){
@@ -927,7 +931,7 @@ $("#feed").addEventListener("click",async e=>{
   if(act==="ed-save"){editSave(raw,b.closest("[data-ed]"));return}
   if(act==="ed-del"){b.closest(".ed-row").remove();return}
   if(act==="ed-addfig"||act==="ed-addsrc"){const tmp=document.createElement("div");tmp.innerHTML=editHTML({...raw,figures:[{}],sources:[{}],en:raw.en?{...raw.en,figures:[{}],sources:[{}]}:raw.en});const row=tmp.querySelector(`[data-list="${act==="ed-addfig"?"fig":"src"}"] .ed-row`);b.previousElementSibling.appendChild(row);row.querySelector("input").focus();return}
-  if(act==="close"){const tz=id;openId=null;editId=null;stopNarration&&stopNarration();renderFeed();const el=$(`#feed [data-open="${CSS.escape(tz)}"]`);if(el)el.scrollIntoView({block:"center"});return}
+  if(act==="close"){const tz=id;openId=null;editId=null;setPieceUrl(null);stopNarration&&stopNarration();renderFeed();const el=$(`#feed [data-open="${CSS.escape(tz)}"]`);if(el)el.scrollIntoView({block:"center"});return}
   if(act==="share"){/* every piece has its own public page with its title, image and summary for link previews */
     const url="https://alshuhud.org/p/"+encodeURIComponent(raw.id)+".html",title=i.headline||"";
     if(navigator.share){navigator.share({title,text:title,url}).catch(()=>{});return}
