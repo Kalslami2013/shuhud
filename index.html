@@ -444,8 +444,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794547126"</script>
-<script src="local.js?v=1794547126"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794547609"</script>
+<script src="local.js?v=1794547609"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-copy", "b-paste", "b-use", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-track"]);
@@ -682,7 +682,11 @@ function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB"
 /* ---------- views ---------- */
 const VIEWS=["live","track","desk","corr","ids","red","media","about"];
 function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
-document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{const was=openId;if(/^\/p\//.test(location.pathname)){openId=null;history.replaceState(null,"","/#"+b.dataset.view)}else location.hash=b.dataset.view;show(b.dataset.view);
+function clearHash(){if(!location.hash&&!/^\/p\//.test(location.pathname))return;try{history.pushState(null,"",/^\/p\//.test(location.pathname)?"/":location.pathname+location.search)}catch(e){location.hash=""}}
+document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{const was=openId,v=b.dataset.view;
+  /* the front page (live) keeps a clean address: alshuhud.org with nothing after it */
+  if(v==="live"){if(/^\/p\//.test(location.pathname))openId=null;clearHash()}
+  else if(/^\/p\//.test(location.pathname)){openId=null;history.replaceState(null,"","/#"+v)}else location.hash=v;show(v);
   if(b.dataset.view==="live"&&(was||openId)){openId=null;editId=null;try{stopNarration&&stopNarration()}catch(e){}renderFeed(true);const f=$("#cats")||$("#feed");if(f)f.scrollIntoView({behavior:"smooth",block:"start"})}});
 addEventListener("hashchange",()=>show(location.hash.slice(1)));
 show(location.hash.slice(1));
@@ -1044,7 +1048,7 @@ function renderRoster(){
 $("#d-narr").onchange=e=>{chosen=e.target.value};
 
 $("#roster").addEventListener("click",e=>{const b=e.target.closest("[data-rk]");if(!b)return;const k=b.dataset.rk;if(READER&&!items.some(i=>i.animal===k))return;
-  if(items.some(i=>i.animal===k)){byAnimal=k;cat="الكل";renderCats();renderFeed();location.hash="live";show("live");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
+  if(items.some(i=>i.animal===k)){byAnimal=k;cat="الكل";renderCats();renderFeed();clearHash();show("live");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
   else{chosen=k;renderRoster();location.hash="desk";show("desk");toast(T("writeFirst")(rName(k)));window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}});
 
 /* ---------- attachments ---------- */
@@ -1207,11 +1211,11 @@ async function publishDraft(){
       await ghSaveList(l=>[{id,...doc},...l.filter(x=>x.id!==id)],"Piece: "+(doc.headline||id),GH.pieces);
       try{await db.collection("dispatches").doc(id).set(doc)}catch(_){}
       if(fromTrack){try{await db.collection("monitor").doc(fromTrack).update({pieceId:id})}catch(_){}fromTrack=null}
-      toast(T("published")+" · "+T("ghNote"));draft=null;att=[];renderFiles();$("#d-out").innerHTML="";cat="الكل";location.hash="live";show("live")}
+      toast(T("published")+" · "+T("ghNote"));draft=null;att=[];renderFiles();$("#d-out").innerHTML="";cat="الكل";clearHash();show("live")}
     catch(e){b.disabled=false;b.textContent=T("publish");toast(e&&e.code===401?T("ghBad"):T("pubFail"))}
     return}
   if(img&&assets){try{const u=await assets.upload(img.file);doc.imageUrl=u.url;doc.imageId=u.id}catch(e){}}
-  try{const ref=await db.collection("dispatches").add(doc);if(fromTrack){try{await db.collection("monitor").doc(fromTrack).update({pieceId:ref.id})}catch(e){}fromTrack=null}toast(T("published"));draft=null;att=[];renderFiles();$("#d-out").innerHTML="";cat="الكل";location.hash="live";show("live")}
+  try{const ref=await db.collection("dispatches").add(doc);if(fromTrack){try{await db.collection("monitor").doc(fromTrack).update({pieceId:ref.id})}catch(e){}fromTrack=null}toast(T("published"));draft=null;att=[];renderFiles();$("#d-out").innerHTML="";cat="الكل";clearHash();show("live")}
   catch(e){b.disabled=false;b.textContent=T("publish");toast(T("pubFail"))}
 }
 
@@ -2117,7 +2121,7 @@ async function spFill(k){
 }
 function spClick(e){
   const b=e.target.closest("[data-sa]");if(!b)return;const k=b.closest(".sp").dataset.sk,a=b.dataset.sa;
-  if(a==="pieces"){byAnimal=k;cat="الكل";renderCats();renderFeed();location.hash="live";show("live");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
+  if(a==="pieces"){byAnimal=k;cat="الكل";renderCats();renderFeed();clearHash();show("live");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
   if(a==="write"){chosen=k;renderRoster();location.hash="desk";show("desk");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
   if(a==="about"){chosen="auto";renderRoster();$("#d-angle").value=T("spAngle")(spInfo(k).name);location.hash="desk";show("desk");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
   if(a==="photo"){if(!assets){toast(T("spNeedEdit"));return}spPhotoKey=k;$("#sp-photo-in").click()}
