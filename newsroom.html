@@ -120,8 +120,7 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .tz:hover,.tz:focus-visible{border-color:var(--th,var(--leaf));transform:translateY(-2px)}
 .tz-img{width:100%;background:#0d1a14;position:relative;overflow:hidden;display:grid;place-items:center;font-size:54px}
 .tz-img.noimg{aspect-ratio:16/9}.tz-img:not(.noimg)>span{display:none}
-.tz-img{aspect-ratio:16/9}.tz-img img{position:relative;display:block;width:100%;height:100%;object-fit:contain}
-.tz-img .tz-bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(18px) brightness(.55);transform:scale(1.05)}
+.tz-img{aspect-ratio:16/9}.tz-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
 .tz-b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:7px;flex:1}
 .tz-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--faint)}
 .tz h3{font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.4;margin:0;text-wrap:balance}
@@ -154,8 +153,8 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .card h2{font-family:var(--f-display);font-weight:700;font-size:26px;line-height:1.35;margin:0;text-wrap:balance}
 .voice{margin:0;font-size:16px;line-height:1.95;white-space:pre-line;text-wrap:pretty}
 .att-wrap{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0d1a14;margin-bottom:12px}
-.att-wrap .att-bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(18px) brightness(.55)}
-.card .att-wrap img.att{position:relative;width:100%;height:100%;max-height:none;max-width:none;object-fit:contain;border-radius:0}
+.att-wrap .att-bg{display:none}
+.card .att-wrap img.att{width:100%;height:100%;max-height:none;max-width:none;object-fit:cover;object-position:50% 40%;border-radius:0}
 .card img.att{display:block;width:auto;height:auto;max-width:100%;max-height:520px;border-radius:12px}
 .fact{border-inline-start:3px solid var(--leaf);padding:8px 12px;background:rgba(156,199,122,.07);border-radius:4px 10px 10px 4px;font-size:13.5px;color:var(--dim)}
 .fact b{display:block;color:var(--leaf);font-size:12px;font-weight:600;margin-bottom:2px}
@@ -557,8 +556,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794546559"</script>
-<script src="local.js?v=1794546559"></script>
+<script>window.SHUHUD_BUILD="1794547126"</script>
+<script src="local.js?v=1794547126"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -793,7 +792,8 @@ function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB"
 /* ---------- views ---------- */
 const VIEWS=["live","track","desk","corr","ids","red","media","about"];
 function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
-document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{if(/^\/p\//.test(location.pathname)){openId=null;history.replaceState(null,"","/#"+b.dataset.view)}else location.hash=b.dataset.view;show(b.dataset.view)});
+document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{const was=openId;if(/^\/p\//.test(location.pathname)){openId=null;history.replaceState(null,"","/#"+b.dataset.view)}else location.hash=b.dataset.view;show(b.dataset.view);
+  if(b.dataset.view==="live"&&(was||openId)){openId=null;editId=null;try{stopNarration&&stopNarration()}catch(e){}renderFeed(true);const f=$("#cats")||$("#feed");if(f)f.scrollIntoView({behavior:"smooth",block:"start"})}});
 addEventListener("hashchange",()=>show(location.hash.slice(1)));
 show(location.hash.slice(1));
 document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
@@ -819,7 +819,7 @@ function richHTML(i,editable){
   return `${i.crisis?`<div class="crisis"><b${ce("crisis")}>${esc(i.crisis)}</b></div>`:""}
     <h2${ce("headline")}>${esc(i.headline)}</h2>
     ${i.angle?`<p class="angle"${ce("angle")}>${esc(i.angle)}</p>`:""}
-    ${pieceImg(i.imageUrl)?`<div class="att-wrap"><img class="att-bg" src="${esc(pieceImg(i.imageUrl))}" alt="" aria-hidden="true"><img class="att" onerror="this.parentNode.hidden=true" src="${esc(pieceImg(i.imageUrl))}" alt=""></div>${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
+    ${pieceImg(i.imageUrl)?`<div class="att-wrap"><img class="att" onerror="imgFail(this)" src="${esc(bigImg(pieceImg(i.imageUrl)))}" data-fb="${esc(pieceImg(i.imageUrl))}" alt=""></div>${i.imageCredit?`<div class="credit">📷 ${esc(i.imageCredit)}</div>`:""}`:""}
     <p class="voice"${ce("dispatch")}>${esc(i.dispatch)}</p>
     ${chain.length?`<div class="chain"><div class="lbl">${T("chain")}</div><ol>${chain.map(c=>`<li>${esc(c)}</li>`).join("")}</ol></div>`:""}
     ${figs.length?`<div class="figs"><div class="lbl">${T("figures")}</div><div class="grid">${figs.map(f=>{const warn=isWarn(f.source);return `<div class="fig${warn?" warn":""}"><div class="v">${esc(f.value)}</div><div class="t">${esc(f.label)}</div>${f.source?`<div class="s">${esc(f.source)}</div>`:""}</div>`}).join("")}</div></div>`:""}
@@ -894,13 +894,16 @@ let WIKIIMG={},SHORTID={};const SITE_DATA=window.SHUHUD_STANDALONE?"data/":"http
 fetch(SITE_DATA+"wiki-img.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():{}).then(j=>{WIKIIMG=j||{};try{if(!editId)renderFeed()}catch(_){}}).catch(()=>{});
 fetch(SITE_DATA+"short-ids.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():{}).then(j=>{SHORTID=j||{};if(openId)setPieceUrl(openId,true)}).catch(()=>{});
 function pieceUrl(id){return "https://alshuhud.org/p/"+(SHORTID[id]?SHORTID[id]:encodeURIComponent(id)+".html")}
+/* Wikimedia thumbnails come at 330/500px: ask for 960px; if that size does not exist, fall back to the original link */
+function bigImg(u){u=String(u||"");const m=/^(https:\/\/upload\.wikimedia\.org\/.+\/thumb\/.+\/)(\d+)px-([^\/]+)$/.exec(u);return m&&+m[2]<960?m[1]+"960px-"+m[3]:u}
+function imgFail(el){const fb=el.dataset.fb;if(fb&&el.getAttribute("src")!==fb){el.removeAttribute("data-fb");el.src=fb;return}const w=el.closest(".tz-img");if(w){w.classList.add("noimg");el.remove()}else{const a=el.closest(".att-wrap");if(a)a.hidden=true}}
 function shownImg(raw){let img=pieceImg(raw.imageUrl),credit=raw.imageCredit||"";if(img)return {img,credit};
   try{const s=spInfo(spKey(raw));if(s.img)return {img:s.img,credit:s.credit||""}}catch(e){}
   const n=raw.en&&raw.en.animalName;if(n&&WIKIIMG[n])return {img:WIKIIMG[n],credit:"Wikipedia"};return {img:"",credit:""}}
 function teaserHTML(raw,lead){
   const i=L(raw),r=who(i);const img=shownImg(raw).img;
   return `<article class="tz${lead?" lead":""}" style="--th:${THEMES[themeOf(raw)].ui}" data-open="${esc(raw.id)}" tabindex="0" role="link" aria-label="${esc(i.headline)}">
-    <div class="tz-img${img?"":" noimg"}">${img?`<img class="tz-bg" src="${esc(img)}" alt="" aria-hidden="true" loading="${lead?"eager":"lazy"}"><img src="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="this.parentNode.classList.add('noimg');this.parentNode.innerHTML='<span>'+this.parentNode.querySelector('span').textContent+'</span>'">`:""}<span aria-hidden="true">${r.e}</span></div>
+    <div class="tz-img${img?"":" noimg"}">${img?`<img src="${esc(bigImg(img))}" data-fb="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="imgFail(this)">`:""}<span aria-hidden="true">${r.e}</span></div>
     <div class="tz-b"><div class="tz-meta"><span class="tag">${esc(catName(raw.category||""))}</span><span>${fmtDate(i.eventDate||i.createdAt)}</span></div>
       <h3>${esc(i.headline)}</h3>${i.angle?`<p>${esc(i.angle)}</p>`:""}
       <div class="tz-f"><span>${r.e} ${esc(r.n)}</span><span class="go">${T("readFull")}</span></div></div>
