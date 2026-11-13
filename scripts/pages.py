@@ -57,7 +57,37 @@ def image_of(p):
     s = species.get(p.get("animal"))
     if s and str(s.get("extImg") or "").startswith("http"):
         return s["extImg"], s.get("credit") or ""
+    # species written for one story (animal "custom") have no card: borrow the photo of its Wikipedia article
+    en = p.get("en") if isinstance(p.get("en"), dict) else {}
+    name = str(en.get("animalName") or "").strip()
+    if name:
+        img = wiki_image(name)
+        if img:
+            return img, "Wikipedia"
     return "", ""
+
+WIKI_PATH = "data/wiki-img.json"
+try:
+    WIKI = json.load(open(WIKI_PATH, encoding="utf8"))
+except Exception:
+    WIKI = {}
+def wiki_image(name):
+    if name in WIKI:
+        return WIKI[name]
+    import urllib.request, urllib.parse
+    url = ""
+    try:
+        req = urllib.request.Request("https://en.wikipedia.org/api/rest_v1/page/summary/" + urllib.parse.quote(name.replace(" ", "_")),
+                                     headers={"user-agent": "ShuhudPages/1.0 (https://alshuhud.org)"})
+        with urllib.request.urlopen(req, timeout=8) as r:
+            j = json.load(r)
+        t = (j.get("thumbnail") or {}).get("source") or ""
+        if t and j.get("type") != "disambiguation":
+            url = re.sub(r"/\d+px-", "/640px-", t)
+    except Exception:
+        return ""  # not cached: try again next build
+    WIKI[name] = url
+    return url
 
 AR_MONTHS = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"]
 EN_MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -193,3 +223,5 @@ for p in items:
 with open("sitemap.xml", "w", encoding="utf8") as fh:
     fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>\n")
 print(len(built), "piece pages")
+with open(WIKI_PATH, "w", encoding="utf8") as fh:
+    json.dump(WIKI, fh, ensure_ascii=False, indent=0)
