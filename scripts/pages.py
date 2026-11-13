@@ -73,7 +73,7 @@ except Exception:
     WIKI = {}
 def wiki_image(name):
     if name in WIKI:
-        return WIKI[name]
+        return WIKI[name].split("?")[0].replace("://thumb.wikimedia.org/", "://upload.wikimedia.org/")
     import urllib.request, urllib.parse
     url = ""
     try:
@@ -84,6 +84,7 @@ def wiki_image(name):
         t = (j.get("thumbnail") or {}).get("source") or ""
         if t and j.get("type") != "disambiguation":
             url = re.sub(r"/\d+px-", "/640px-", t)
+            url = url.split("?")[0].replace("://thumb.wikimedia.org/", "://upload.wikimedia.org/")
     except Exception:
         return ""  # not cached: try again next build
     WIKI[name] = url
