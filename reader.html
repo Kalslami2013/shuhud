@@ -123,14 +123,15 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .tz:hover,.tz:focus-visible{border-color:var(--th,var(--leaf));transform:translateY(-2px)}
 .tz-img{width:100%;background:#0d1a14;position:relative;overflow:hidden;display:grid;place-items:center;font-size:54px}
 .tz-img.noimg{aspect-ratio:16/9}.tz-img:not(.noimg)>span{display:none}
-.tz-img img{display:block;width:100%;height:auto;max-height:460px;object-fit:contain}
+.tz-img{aspect-ratio:16/9}.tz-img img{position:relative;display:block;width:100%;height:100%;object-fit:contain}
+.tz-img .tz-bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(18px) brightness(.55);transform:scale(1.05)}
 .tz-b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:7px;flex:1}
 .tz-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--faint)}
 .tz h3{font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.4;margin:0;text-wrap:balance}
 .tz p{margin:0;color:var(--dim);font-size:14px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .tz-f{margin-top:auto;padding-top:6px;display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--dim)}
 .tz-f .go{color:var(--th,var(--leaf));font-weight:600}
-.lead .tz-img.noimg{aspect-ratio:21/9}.lead .tz-img img{max-height:520px}.lead h3{font-size:clamp(24px,3.2vw,32px)}.lead p{-webkit-line-clamp:4;font-size:15.5px}
+.lead .tz-img.noimg{aspect-ratio:21/9}.lead .tz-img{aspect-ratio:16/9}.lead h3{font-size:clamp(24px,3.2vw,32px)}.lead p{-webkit-line-clamp:4;font-size:15.5px}
 @media (min-width:900px){.lead{flex-direction:row}.lead .tz-img{flex:1.25;align-self:center}.lead .tz-img.noimg{min-height:300px;align-self:stretch}.lead .tz-b{flex:1;padding:22px 24px;justify-content:center}}
 .more{justify-self:center;margin-top:4px}
 #feed .card,#feed .tz{scroll-margin-top:140px}
@@ -155,7 +156,9 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .tag{color:var(--amber);border:1px solid rgba(242,184,75,.35);border-radius:999px;padding:1px 8px}
 .card h2{font-family:var(--f-display);font-weight:700;font-size:26px;line-height:1.35;margin:0;text-wrap:balance}
 .voice{margin:0;font-size:16px;line-height:1.95;white-space:pre-line;text-wrap:pretty}
-.att-wrap{display:flex;justify-content:center}.att-wrap .att-bg{display:none}
+.att-wrap{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0d1a14;margin-bottom:12px}
+.att-wrap .att-bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(18px) brightness(.55)}
+.card .att-wrap img.att{position:relative;width:100%;height:100%;max-height:none;max-width:none;object-fit:contain;border-radius:0}
 .card img.att{display:block;width:auto;height:auto;max-width:100%;max-height:520px;border-radius:12px}
 .fact{border-inline-start:3px solid var(--leaf);padding:8px 12px;background:rgba(156,199,122,.07);border-radius:4px 10px 10px 4px;font-size:13.5px;color:var(--dim)}
 .fact b{display:block;color:var(--leaf);font-size:12px;font-weight:600;margin-bottom:2px}
@@ -442,8 +445,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794545856"</script>
-<script src="local.js?v=1794545856"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794546559"</script>
+<script src="local.js?v=1794546559"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-copy", "b-paste", "b-use", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-track"]);
@@ -776,14 +779,18 @@ function plain(i){
   return [i.crisis?T("crisis")+": "+i.crisis:"",i.headline,i.angle,i.dispatch,chain?T("chain")+":\n"+chain:"",figs?T("figures")+":\n"+figs:"",i.fact?T("fact")+": "+i.fact:"",i.question?T("question")+": "+i.question:"",srcs?T("sources")+":\n"+srcs:""].filter(Boolean).join("\n\n");
 }
 let openId=null,shown=13;
-let WIKIIMG={};if(window.SHUHUD_STANDALONE){fetch("data/wiki-img.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():{}).then(j=>{WIKIIMG=j||{};try{if(!openId||!editId)renderFeed()}catch(_){}}).catch(()=>{})}
+/* the website keeps two small lists: Wikipedia photos for species without a card, and the short address of each piece (alshuhud.org/p/turtle-campania) */
+let WIKIIMG={},SHORTID={};const SITE_DATA=window.SHUHUD_STANDALONE?"data/":"https://alshuhud.org/data/";
+fetch(SITE_DATA+"wiki-img.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():{}).then(j=>{WIKIIMG=j||{};try{if(!editId)renderFeed()}catch(_){}}).catch(()=>{});
+fetch(SITE_DATA+"short-ids.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():{}).then(j=>{SHORTID=j||{};if(openId)setPieceUrl(openId,true)}).catch(()=>{});
+function pieceUrl(id){return "https://alshuhud.org/p/"+(SHORTID[id]?SHORTID[id]:encodeURIComponent(id)+".html")}
 function shownImg(raw){let img=pieceImg(raw.imageUrl),credit=raw.imageCredit||"";if(img)return {img,credit};
   try{const s=spInfo(spKey(raw));if(s.img)return {img:s.img,credit:s.credit||""}}catch(e){}
   const n=raw.en&&raw.en.animalName;if(n&&WIKIIMG[n])return {img:WIKIIMG[n],credit:"Wikipedia"};return {img:"",credit:""}}
 function teaserHTML(raw,lead){
   const i=L(raw),r=who(i);const img=shownImg(raw).img;
   return `<article class="tz${lead?" lead":""}" style="--th:${THEMES[themeOf(raw)].ui}" data-open="${esc(raw.id)}" tabindex="0" role="link" aria-label="${esc(i.headline)}">
-    <div class="tz-img${img?"":" noimg"}">${img?`<img src="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="this.parentNode.classList.add('noimg');this.remove()">`:""}<span aria-hidden="true">${r.e}</span></div>
+    <div class="tz-img${img?"":" noimg"}">${img?`<img class="tz-bg" src="${esc(img)}" alt="" aria-hidden="true" loading="${lead?"eager":"lazy"}"><img src="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="this.parentNode.classList.add('noimg');this.parentNode.innerHTML='<span>'+this.parentNode.querySelector('span').textContent+'</span>'">`:""}<span aria-hidden="true">${r.e}</span></div>
     <div class="tz-b"><div class="tz-meta"><span class="tag">${esc(catName(raw.category||""))}</span><span>${fmtDate(i.eventDate||i.createdAt)}</span></div>
       <h3>${esc(i.headline)}</h3>${i.angle?`<p>${esc(i.angle)}</p>`:""}
       <div class="tz-f"><span>${r.e} ${esc(r.n)}</span><span class="go">${T("readFull")}</span></div></div>
@@ -802,11 +809,15 @@ function renderFeed(force){
   if(!list.length){feed.innerHTML=`<div class="card empty"><div class="big">🌙</div>${items.length?T("emptyCat"):T("emptyAll")}</div>`;return}
   const vis=list.slice(0,Math.max(shown,openId?list.findIndex(x=>x.id===openId)+1:0));
   feed.innerHTML=vis.map((raw,k)=>raw.id===openId?cardHTML(raw).replace('<div class="who">',`<div class="close-row"><button class="btn" type="button" data-act="close">${T("closePiece")}</button></div><div class="who">`):teaserHTML(raw,k===0)).join("")+(list.length>vis.length?`<button class="btn more" type="button" data-more>${T("showMore")} (${list.length-vis.length})</button>`:"");
+  if(window.__scrollTo){const c=feed.querySelector(`.card[data-id="${CSS.escape(window.__scrollTo)}"]`);if(c){window.__scrollTo=null;setTimeout(()=>c.scrollIntoView({block:"start"}),60)}}
 }
 /* on the public site the address bar follows the open piece: alshuhud.org/p/<id>.html is that piece's own page, ready to copy and share */
 const PIECE_URLS=!!window.SHUHUD_READER&&!!window.SHUHUD_STANDALONE&&!!history.pushState;
-function setPieceUrl(id){if(!PIECE_URLS)return;const want=id?"/p/"+encodeURIComponent(id)+".html":"/";if(location.pathname!==want)history.pushState({p:id||null},"",want)}
-addEventListener("popstate",()=>{if(!PIECE_URLS)return;const m=location.pathname.match(/^\/p\/(.+)\.html$/);const id=m?decodeURIComponent(m[1]):null;if(id===openId)return;openId=id;renderFeed(true);if(id){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({block:"start"})}});
+function setPieceUrl(id,replace){if(!PIECE_URLS)return;const want=id?pieceUrl(id).replace("https://alshuhud.org",""):"/";if(location.pathname!==want)history[replace?"replaceState":"pushState"]({p:id||null},"",want)}
+function idFromPath(){const m=location.pathname.match(/^\/p\/([^\/]+?)(?:\.html)?$/);if(!m)return null;const x=decodeURIComponent(m[1]);for(const k in SHORTID)if(SHORTID[k]===x)return k;return x}
+/* a piece page sends people here as /?p=<id>: open that piece and show its short address */
+(()=>{try{const q=new URLSearchParams(location.search).get("p");if(q&&/^[\w-]{1,120}$/.test(q)){openId=q;window.__scrollTo=q;if(PIECE_URLS)history.replaceState({p:q},"","/p/"+encodeURIComponent(q)+".html"+location.hash)}}catch(e){}})();
+addEventListener("popstate",()=>{if(!PIECE_URLS)return;const id=idFromPath();if(id===openId)return;openId=id;renderFeed(true);if(id){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({block:"start"})}});
 function openPiece(id){openId=openId===id?null:id;setPieceUrl(openId);renderFeed();if(openId){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({behavior:"smooth",block:"start"})}}
 $("#feed").addEventListener("click",e=>{if(e.target.closest("[data-more]")){shown+=12;renderFeed();return}const t=e.target.closest("[data-open]");if(t)openPiece(t.dataset.open)});
 $("#feed").addEventListener("keydown",e=>{const t=e.target.closest&&e.target.closest("[data-open]");if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openPiece(t.dataset.open)}});
@@ -827,7 +838,7 @@ $("#feed").addEventListener("click",async e=>{
   if(act==="ed-addfig"||act==="ed-addsrc"){const tmp=document.createElement("div");tmp.innerHTML=editHTML({...raw,figures:[{}],sources:[{}],en:raw.en?{...raw.en,figures:[{}],sources:[{}]}:raw.en});const row=tmp.querySelector(`[data-list="${act==="ed-addfig"?"fig":"src"}"] .ed-row`);b.previousElementSibling.appendChild(row);row.querySelector("input").focus();return}
   if(act==="close"){const tz=id;openId=null;editId=null;setPieceUrl(null);stopNarration&&stopNarration();renderFeed();const el=$(`#feed [data-open="${CSS.escape(tz)}"]`);if(el)el.scrollIntoView({block:"center"});return}
   if(act==="share"){/* every piece has its own public page with its title, image and summary for link previews */
-    const url="https://alshuhud.org/p/"+encodeURIComponent(raw.id)+".html",title=i.headline||"";
+    const url=pieceUrl(raw.id),title=i.headline||"";
     if(navigator.share){navigator.share({title,text:title,url}).catch(()=>{});return}
     try{await navigator.clipboard.writeText(title+"\n"+url);toast(T("shareCopied"))}catch(e){prompt(T("shareCopy"),url)}return}
   if(act==="copy")copy(plain(i));

@@ -72,7 +72,7 @@ try:
 except Exception:
     WIKI = {}
 def wiki_image(name):
-    if name in WIKI:
+    if name in WIKI and "/640px-" not in WIKI[name]:
         return WIKI[name].split("?")[0].replace("://thumb.wikimedia.org/", "://upload.wikimedia.org/")
     import urllib.request, urllib.parse
     url = ""
@@ -82,8 +82,9 @@ def wiki_image(name):
         with urllib.request.urlopen(req, timeout=8) as r:
             j = json.load(r)
         t = (j.get("thumbnail") or {}).get("source") or ""
+        o = j.get("originalimage") or {}
         if t and j.get("type") != "disambiguation":
-            url = re.sub(r"/\d+px-", "/640px-", t)
+            url = re.sub(r"/\d+px-", "/960px-", t) if (o.get("width") or 0) > 960 and "/thumb/" in t else (o.get("source") or t)
             url = url.split("?")[0].replace("://thumb.wikimedia.org/", "://upload.wikimedia.org/")
     except Exception:
         return ""  # not cached: try again next build
@@ -159,14 +160,40 @@ def block(p, ar=True):
             (f'<li><a href="{e(s["url"])}" rel="nofollow noopener" target="_blank">{e(s["name"])}</a></li>' if str(s.get("url") or "").startswith("http") else f'<li>{e(s["name"])}</li>') for s in srcs) + "</ul>")
     return "\n".join(out)
 
+SHORT_PATH = "data/short-ids.json"
+SHORT = json.load(open(SHORT_PATH, encoding="utf8")) if os.path.exists(SHORT_PATH) else {}
+if not isinstance(SHORT, dict): SHORT = {}
+def short_id(pid):
+    if pid in SHORT: return SHORT[pid]
+    taken = set(SHORT.values()) | {"index"} | set(pieces)
+    m = re.match(r"^env-\d{8}-(?:custom-)?(.+)$", pid)
+    toks = m.group(1).split("-") if m else [pid[:8]]
+    cand = [ "-".join(toks[:n]) for n in range(2 if len(toks) > 1 else 1, len(toks) + 1)]
+    cand += [cand[-1] + "-" + str(k) for k in range(2, 99)]
+    for c in cand:
+        if c not in taken and SAFE.match(c):
+            SHORT[pid] = c
+            return c
+    SHORT[pid] = pid
+    return pid
+
+# a person who opens a piece page is taken to the same piece inside the site itself (same look, photos, sound);
+# search engines and link previews read this page as it is
+def go_script(pid):
+    return ('<script>if(!/bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|twitter|discord|linkedin|skype|preview|lighthouse|headless/i.test(navigator.userAgent)){'
+            'document.documentElement.style.background="#0b1712";document.write("<style>body{visibility:hidden}</style>");'
+            f'location.replace("/?p={pid}"+location.hash)}}</script>\n')
+
 os.makedirs("p", exist_ok=True)
 built = set()
+files = set()
 items = sorted(pieces.values(), key=lambda p: (date_of(p), str(p.get("createdAt") or "")), reverse=True)
 for p in items:
     pid = p["id"]
     if not SAFE.match(pid):
         continue
-    url = f"{BASE}p/{pid}.html"
+    sid = short_id(pid)
+    url = f"{BASE}p/{sid}"
     d = date_of(p)
     img, credit = image_of(p)
     en = p.get("en") if isinstance(p.get("en"), dict) else {}
@@ -179,7 +206,7 @@ for p in items:
     if d: ld["datePublished"] = str(p.get("createdAt") or d)[:25]
     if img: ld["image"] = [img]
     if en.get("headline"): ld["alternativeHeadline"] = short(en["headline"], 110)
-    extra = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+    extra = go_script(pid) + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
     kick = " · ".join(x for x in (e(p.get("category")), e(p.get("place"))) if x)
     body = [head(title, desc, url, img, extra), '<main class="wrap"><article>']
     body.append(f'<div class="kick">{p.get("animalEmoji","")} {e(p.get("animalName"))}{" · " + kick if kick else ""}</div>')
@@ -192,14 +219,17 @@ for p in items:
         body.append(f'<section class="en" lang="en" dir="ltr"><h1>{e(en["headline"])}</h1><div class="meta">{nice(d, False) if d else ""}{" · " if d else ""}{e(en.get("crisis"))}</div>{block(en_full, False)}</section>')
     body.append(f'<a class="cta" href="{BASE}">اقرأ المزيد في شهود ←</a></article></main>')
     body.append(FOOT)
-    with open(f"p/{pid}.html", "w", encoding="utf8") as fh:
-        fh.write("\n".join(body))
+    # the short address is the page; the old long address stays for links already shared
+    for name in {sid, pid}:
+        with open(f"p/{name}.html", "w", encoding="utf8") as fh:
+            fh.write("\n".join(body))
+        files.add(name)
     built.add(pid)
 
 # pages of pieces that were deleted are removed
 for f in glob.glob("p/*.html"):
     n = os.path.basename(f)[:-5]
-    if n != "index" and n not in built:
+    if n != "index" and n not in files:
         os.remove(f)
 
 # archive
@@ -207,7 +237,7 @@ rows = []
 for p in items:
     if p["id"] not in built: continue
     d = date_of(p)
-    rows.append(f'<li><a href="{p["id"]}.html">{e(p["headline"])}</a><small>{p.get("animalEmoji","")} {e(p.get("animalName"))} · {nice(d) if d else ""}</small></li>')
+    rows.append(f'<li><a href="{SHORT[p["id"]]}">{e(p["headline"])}</a><small>{p.get("animalEmoji","")} {e(p.get("animalName"))} · {nice(d) if d else ""}</small></li>')
 arch = head("كل القطع | شهود — أزمات العالم بلسان الكائنات التي تعيشها",
             "أرشيف قطع شهود: أزمات العالم من زاويتها البيئية بلسان الكائنات التي تعيشها، بالعربية والإنجليزية.", BASE + "p/", "")
 with open("p/index.html", "w", encoding="utf8") as fh:
@@ -220,9 +250,11 @@ urls = [f"  <url><loc>{BASE}</loc><lastmod>{today}</lastmod><changefreq>daily</c
 for p in items:
     if p["id"] in built:
         d = date_of(p) or today
-        urls.append(f"  <url><loc>{BASE}p/{p['id']}.html</loc><lastmod>{d}</lastmod><priority>0.7</priority></url>")
+        urls.append(f"  <url><loc>{BASE}p/{SHORT[p['id']]}</loc><lastmod>{d}</lastmod><priority>0.7</priority></url>")
 with open("sitemap.xml", "w", encoding="utf8") as fh:
     fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>\n")
 print(len(built), "piece pages")
+with open(SHORT_PATH, "w", encoding="utf8") as fh:
+    json.dump(SHORT, fh, ensure_ascii=False, indent=0)
 with open(WIKI_PATH, "w", encoding="utf8") as fh:
     json.dump(WIKI, fh, ensure_ascii=False, indent=0)
