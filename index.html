@@ -287,6 +287,7 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
 .radar .rd-meta b{color:var(--amber);font-weight:600}
 .radar a.rd-t{color:var(--parchment);text-decoration:none;font-size:14.5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .radar a.rd-t:hover{color:#fff;text-decoration:underline}
+.radar .rd-mk{display:inline-block;margin-top:6px;font-size:11.5px;color:var(--amber,#f2b84b);background:rgba(242,184,75,.08);border:1px solid rgba(242,184,75,.35);border-radius:999px;padding:3px 10px;font-family:inherit;cursor:pointer}.radar .rd-mk:hover{background:rgba(242,184,75,.18)}.radar .rd-wait{display:inline-block;margin-top:6px;font-size:11.5px;opacity:.75}.radar .mk-menu .btn{font-size:11.5px;padding:4px 9px}
 .radar .rd-go{display:inline-block;margin-top:5px;font-size:12px;color:var(--leaf,#9cc77a);background:none;border:0;padding:0;font-family:inherit;cursor:pointer}
 .radar .rd-foot{font-size:11px;color:var(--faint,#8a9a8a);margin-top:6px}
 .radar .rd-dot{width:8px;height:8px;border-radius:50%;background:#e5484d;box-shadow:0 0 0 0 rgba(229,72,77,.6);animation:rdp 2s infinite}
@@ -499,8 +500,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794685546"</script>
-<script src="local.js?v=1794685546"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794686400"</script>
+<script src="local.js?v=1794686400"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -516,7 +517,7 @@ ar:{
   moonNames:["محاق","هلال","تربيع أول","أحدب متزايد","بدر","أحدب متناقص","تربيع ثانٍ","هلال أخير"],
   navTrack:"الرصد",trackIntro:"تطورات البيئة والأزمات المرتبطة بها. الرصد يدوي: لا يعمل إلا حين تضغط «ارصد الآن».",toPiece:"حوّل إلى مادة",ghFirstKey:"",mkManual:"✍️ اكتبها يدوياً",mkBridge:"📋 عبر محادثة Claude الآن",mkQueue:"🗂️ أرسلها إلى Claude ليكتبها",mkQueued:"أُرسلت إلى Claude: يكتبها حين تضغط «اكتب قطع اليوم» في نسخة Claude، ثم «زامن»",mkWaiting:"⏳ بانتظار Claude",trTrack:"ترجم",trTrackBack:"الأصل",trTrackIng:"يترجم…",trTrackFail:"تعذّرت الترجمة، حاول بعد قليل",trAll:n=>`ترجم الإنجليزي (${n.toLocaleString("ar")})`,converted:"✓ صارت مادة",newestFirst:"الأحدث أولاً",oldestFirst:"الأقدم أولاً",trackEmpty:"لم يصل شيء إلى الرصد بعد. اضغط «ارصد الآن» لتبدأ جولة رصد.",lastScan:"آخر رصد",trackCount:n=>`${n.toLocaleString("ar")} تطوراً مرصوداً`,
   runMonitor:"",runSync:"",runNoMcp:"",runDaily:"",runSending:"",runStarted:"",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"",runDenied:"",runFail:"",runLast:"",syncEarly:"⚠️ كتابة قطع اليوم لم تنتهِ بعد، فالمزامنة الآن لن تنقل القطع الجديدة. انتظر حتى تختفي رسالة «Claude يعمل الآن»، أو اضغط مرة أخرى للمزامنة رغم ذلك.",runBusy:t=>`⏳ Claude يعمل الآن (بدأ ${t}). تظهر النتائج خلال 10 إلى 15 دقيقة، لا تضغط مرة أخرى.`,
-  navLive:"الرئيسية",radarH:"رادار شهود",radarSub:"ما نراقبه الآن حول العالم، من الوكالات والهيئات الدولية",radarRead:"اقرأ الشهادة",radarUpd:t=>"آخر تحديث للرادار: "+t,feedSearch:"🔍 ابحث في القطع: كلمة، مكان، كائن…",noFound:"لا قطع تطابق بحثك.",navGuide:"📘 دليلي",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
+  navLive:"الرئيسية",radarH:"رادار شهود",radarSub:"ما نراقبه الآن حول العالم، من الوكالات والهيئات الدولية",radarRead:"اقرأ الشهادة",radarMk:"✍️ حوّله إلى قطعة",radarUpd:t=>"آخر تحديث للرادار: "+t,feedSearch:"🔍 ابحث في القطع: كلمة، مكان، كائن…",noFound:"لا قطع تطابق بحثك.",navGuide:"📘 دليلي",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
   loadingStatus:"تتجمع الحيوانات حول النار…",all:"الكل",
   deskTitle:"",deskSub:"",
   dText:"الأزمة أو الخبر والمادة الخام",dTextPh:"الصق الخبر هنا…",
@@ -578,7 +579,7 @@ en:{
   moonNames:["new","waxing crescent","first quarter","waxing gibbous","full","waning gibbous","last quarter","waning crescent"],
   navTrack:"Tracker",trackIntro:"Environmental developments and related crises. Tracking is manual: it only runs when you press “Track now”.",toPiece:"Turn into a piece",ghFirstKey:"",mkManual:"✍️ Write it myself",mkBridge:"📋 Via a Claude chat now",mkQueue:"🗂️ Send it to Claude to write",mkQueued:"Sent to Claude: written when you press «Write today's pieces» in the Claude copy, then «Sync»",mkWaiting:"⏳ Waiting for Claude",trTrack:"Translate",trTrackBack:"Original",trTrackIng:"Translating…",trTrackFail:"Translation failed, try again shortly",trAll:n=>`Translate English (${n})`,converted:"✓ Turned into a piece",newestFirst:"Newest first",oldestFirst:"Oldest first",trackEmpty:"Nothing in the tracker yet. Press “Track now” to start a scan.",lastScan:"Last scan",trackCount:n=>`${n} ${n===1?"development":"developments"} tracked`,
   runMonitor:"",runSync:"",runNoMcp:"",runDaily:"",runSending:"",runStarted:"",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"",runDenied:"",runFail:"",runLast:"",syncEarly:"⚠️ Today's pieces are still being written, so syncing now won't carry them. Wait until “Claude is working” disappears, or press again to sync anyway.",runBusy:t=>`⏳ Claude is working (started ${t}). Results appear within 10–15 minutes; no need to press again.`,
-  navLive:"Home",radarH:"Shuhud Radar",radarSub:"What we are watching around the world, from agencies and international bodies",radarRead:"Read the testimony",radarUpd:t=>"Radar last updated "+t,feedSearch:"🔍 Search the pieces: a word, a place, a species…",noFound:"No pieces match your search.",navGuide:"📘 My guide",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
+  navLive:"Home",radarH:"Shuhud Radar",radarSub:"What we are watching around the world, from agencies and international bodies",radarRead:"Read the testimony",radarMk:"✍️ Turn into a piece",radarUpd:t=>"Radar last updated "+t,feedSearch:"🔍 Search the pieces: a word, a place, a species…",noFound:"No pieces match your search.",navGuide:"📘 My guide",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
   loadingStatus:"The animals are gathering around the fire…",all:"All",
   deskTitle:"",deskSub:"",
   dText:"The crisis, news item or raw material",dTextPh:"Paste the story here…",
@@ -877,7 +878,7 @@ function teaserHTML(raw,lead){
 const RADAR_URL=window.SHUHUD_STANDALONE?"/data/feed.json":"https://alshuhud.org/data/feed.json";
 /* trusted sources only, by language: the Arabic page shows Arabic outlets, the English page English ones */
 const RADAR_SRC={ar:["الأناضول","الجزيرة نت","الشرق الأوسط","BBC عربي","أخبار الأمم المتحدة","RT عربي"],en:["UN News","UNEP","WMO","WHO","FAO","NASA Earth Observatory","NOAA","ReliefWeb","GDACS","USGS","BBC","Al Jazeera","The Guardian","Mongabay","Carbon Brief","Yale Environment 360","Climate Home News","Inside Climate News","Euronews","TASS","Down To Earth"]};
-let radarAll=[],radarShown=12,radarAt="";
+let radarAll=[],radarShown=12,radarAt="",reqIds=new Set();
 async function loadRadar(){try{const r=await fetch(RADAR_URL+"?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const l=await r.json();if(Array.isArray(l)){radarAll=l;renderRadar()}}catch(e){}
   try{const r=await fetch(RADAR_URL.replace("feed.json","feed-status.json")+"?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json();radarAt=j&&j.at||"";radarFoot()}}catch(e){}}
 function agoTxt(iso){const m=Math.max(1,Math.round((Date.now()-Date.parse(iso))/60000));const en=isEn();
@@ -888,7 +889,13 @@ function radarList(){const lang=isEn()?"en":"ar",ok=new Set(RADAR_SRC[lang]),cut
     per[x.source]=(per[x.source]||0)+1;(per[x.source]<=2&&first.length<12?first:rest).push(x)}
   return [...first,...rest.sort((a,b)=>Date.parse(b.at)-Date.parse(a.at))]}
 function radarLi(x){const pc=items.find(p=>p.fromRequest===x.id);
-  return `<li><div class="rd-meta"><b>${esc(x.source)}</b><span>·</span><time datetime="${esc(x.at)}">${agoTxt(x.at)}</time></div><a class="rd-t" href="${esc(x.url)}" target="_blank" rel="noopener nofollow" dir="auto">${esc(x.text)}</a>${pc?`<button class="rd-go" type="button" data-rdopen="${esc(pc.id)}">🐾 ${T("radarRead")}</button>`:""}</li>`}
+  return `<li><div class="rd-meta"><b>${esc(x.source)}</b><span>·</span><time datetime="${esc(x.at)}">${agoTxt(x.at)}</time></div><a class="rd-t" href="${esc(x.url)}" target="_blank" rel="noopener nofollow" dir="auto">${esc(x.text)}</a>${pc?`<button class="rd-go" type="button" data-rdopen="${esc(pc.id)}">🐾 ${T("radarRead")}</button>`:READER?"":reqIds.has(x.id)?`<span class="rd-wait">${T("mkWaiting")}</span>`:`<button class="rd-mk" type="button" data-rdmk="${esc(x.id)}">${T("radarMk")}</button>`}</li>`}
+/* internal copies only: a radar headline can be turned into a piece, the same way as from the tracker */
+document.addEventListener("click",e=>{const b=e.target.closest("[data-rdmk]");if(!b||READER)return;e.preventDefault();const t=radarAll.find(x=>x.id===b.dataset.rdmk);if(!t)return;
+  if(!t.date)t.date=String(t.at||"").slice(0,10);
+  if(window.SHUHUD_STANDALONE){const li=b.closest("li"),open=li.querySelector(".mk-menu");document.querySelectorAll(".mk-menu").forEach(m=>m.remove());if(open)return;
+    li.insertAdjacentHTML("beforeend",`<div class="mk-menu"><button class="btn" type="button" data-mko="manual" data-id="${esc(t.id)}">${T("mkManual")}</button><button class="btn" type="button" data-mko="bridge" data-id="${esc(t.id)}">${T("mkBridge")}</button><button class="btn export" type="button" data-mko="queue" data-id="${esc(t.id)}">${T("mkQueue")}</button></div>`);return}
+  trackToDesk(t,sample?"auto":"bridge")});
 function radarFoot(){const f=document.querySelector("#radar .rd-foot");if(f)f.textContent=radarAt?T("radarUpd")(agoTxt(radarAt)):""}
 function renderRadar(){const box=$("#radar");if(!box)return;const list=radarList();
   if(!list.length){box.hidden=true;return}
@@ -1042,14 +1049,14 @@ let trackDb=[],siteFeed=[];
 function mergeTrack(){const seen=new Set(trackDb.map(t=>t.id));track=[...trackDb,...siteFeed.filter(t=>!seen.has(t.id))].sort((a,b)=>String(b.at||b.date||"").localeCompare(String(a.at||a.date||"")));renderTrack()}
 async function loadSiteFeed(){try{const r=await fetch("https://alshuhud.org/data/feed.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const l=await r.json();if(Array.isArray(l)){siteFeed=l.slice(0,250);mergeTrack()}}catch(e){}}
 /* requests for Claude, kept in data/requests-gh.json; the daily writing round in Claude reads them first */
-const REQ_PATH="data/requests-gh.json";let reqIds=new Set();
-async function loadRequests(){if(!window.SHUHUD_STANDALONE||READER)return;try{const r=await fetch(REQ_PATH+"?t="+Date.now(),{cache:"no-store"});if(r.ok){const l=await r.json();reqIds=new Set(l.map(x=>x.trackId));renderTrack()}}catch(e){}}
+const REQ_PATH="data/requests-gh.json";
+async function loadRequests(){if(!window.SHUHUD_STANDALONE||READER)return;try{const r=await fetch(REQ_PATH+"?t="+Date.now(),{cache:"no-store"});if(r.ok){const l=await r.json();reqIds=new Set(l.map(x=>x.trackId));renderTrack();renderRadar()}}catch(e){}}
 loadRequests();
-$("#track").addEventListener("click",async e=>{const b=e.target.closest("[data-mko]");if(!b)return;const t=track.find(x=>x.id===b.dataset.id);if(!t)return;const how=b.dataset.mko;b.closest(".mk-menu").remove();
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-mko]");if(!b)return;const t=track.find(x=>x.id===b.dataset.id)||radarAll.find(x=>x.id===b.dataset.id);if(!t)return;const how=b.dataset.mko;b.closest(".mk-menu").remove();
   if(how!=="queue"){trackToDesk(t,how);return}
   if(!ghTok()){toast(T("ghFirstKey"));return}
   try{const item={trackId:t.id,text:t.text,trAr:t.trAr||"",en:t.en&&t.en.text||"",source:t.source||"",url:t.url||"",date:t.date||"",at:new Date().toISOString()};
-    await ghSaveList(l=>[...l.filter(x=>x.trackId!==t.id),item],"Request for Claude: "+t.text.slice(0,60),REQ_PATH);reqIds.add(t.id);renderTrack();toast(T("mkQueued"))}
+    await ghSaveList(l=>[...l.filter(x=>x.trackId!==t.id),item],"Request for Claude: "+t.text.slice(0,60),REQ_PATH);reqIds.add(t.id);renderTrack();renderRadar();toast(T("mkQueued"))}
   catch(err){toast(T("mFail"))}});
 
 /* ---------- narration: picks the most natural voice on the device and reads like a documentary ---------- */
