@@ -706,8 +706,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794686400"</script>
-<script src="local.js?v=1794686400"></script>
+<script>window.SHUHUD_BUILD="1794687988"</script>
+<script src="local.js?v=1794687988"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1092,7 +1092,10 @@ function radarList(){const lang=isEn()?"en":"ar",ok=new Set(RADAR_SRC[lang]),cut
   for(const x of radarAll){if(!x||x.lang!==lang||!ok.has(x.source)||!x.url||Date.parse(x.at)<cut)continue;
     per[x.source]=(per[x.source]||0)+1;(per[x.source]<=2&&first.length<12?first:rest).push(x)}
   return [...first,...rest.sort((a,b)=>Date.parse(b.at)-Date.parse(a.at))]}
-function radarLi(x){const pc=items.find(p=>p.fromRequest===x.id);
+/* a radar headline is linked to the piece written from it: by request id, or because the piece cites the same article */
+const rdUrl=u=>String(u||"").split(/[?#]/)[0].replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,"").toLowerCase();
+function radarPiece(x){const u=rdUrl(x.url);return items.find(p=>p.fromRequest===x.id||(u&&(p.sources||[]).some(s=>rdUrl(s&&s.url)===u)))}
+function radarLi(x){const pc=radarPiece(x);
   return `<li><div class="rd-meta"><b>${esc(x.source)}</b><span>·</span><time datetime="${esc(x.at)}">${agoTxt(x.at)}</time></div><a class="rd-t" href="${esc(x.url)}" target="_blank" rel="noopener nofollow" dir="auto">${esc(x.text)}</a>${pc?`<button class="rd-go" type="button" data-rdopen="${esc(pc.id)}">🐾 ${T("radarRead")}</button>`:READER?"":reqIds.has(x.id)?`<span class="rd-wait">${T("mkWaiting")}</span>`:`<button class="rd-mk" type="button" data-rdmk="${esc(x.id)}">${T("radarMk")}</button>`}</li>`}
 /* internal copies only: a radar headline can be turned into a piece, the same way as from the tracker */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-rdmk]");if(!b||READER)return;e.preventDefault();const t=radarAll.find(x=>x.id===b.dataset.rdmk);if(!t)return;
