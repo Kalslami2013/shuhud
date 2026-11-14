@@ -500,8 +500,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794689717"</script>
-<script src="local.js?v=1794689717"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794691302"</script>
+<script src="local.js?v=1794691302"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -861,8 +861,10 @@ function imgFail(el){
 function narrImg(raw){let k="",d={};try{k=spKey(raw);d=spDocs[k]||{}}catch(e){}
   const own=pubImg(d.imageUrl)||d.extImg;if(own)return {img:own,credit:d.credit||""};
   const n=raw.en&&raw.en.animalName;if(n&&WIKIIMG[n])return {img:WIKIIMG[n],credit:"Wikipedia"};
-  try{const s=spInfo(k);const w=spWiki[k];if(w&&w.img)return {img:w.img,credit:"Wikipedia"};if(s.img&&!items.some(x=>x.id!==raw.id&&pieceImg(x.imageUrl)===s.img))return {img:s.img,credit:s.credit||""}}catch(e){}
+  try{const s=spInfo(k);const w=spWiki[k];if(w&&w.img)return {img:w.img,credit:"Wikipedia"};if(s.img&&s.img!==pieceImg(raw.imageUrl)&&!items.some(x=>x.id!==raw.id&&pieceImg(x.imageUrl)===s.img))return {img:s.img,credit:s.credit||""}}catch(e){}
   if(n)wikiNarr(n);
+  /* a local breed or kin of a roster species (e.g. Ongole cattle for the cow): until its own photo arrives, use the roster card's photo */
+  try{if(k!==raw.animal&&ROSTER[raw.animal]){const d2=spDocs[raw.animal]||{},o2=pubImg(d2.imageUrl)||d2.extImg;if(o2)return {img:o2,credit:d2.credit||""};const s2=spInfo(raw.animal);if(s2.img)return {img:s2.img,credit:s2.credit||""}}}catch(e){}
   return {img:"",credit:""}}
 /* a narrator with no card and no stored photo yet (a new species): its Wikipedia photo is fetched once, then the feed is drawn again */
 const wikiTried=new Set();let wikiNarrT=null;
@@ -2122,8 +2124,8 @@ async function savePhotoTo(id,file){
   toast(T("uploading"));file=await shrinkImg(file);
   if(typeof ghMode==="function"&&ghMode()&&ghTok()){try{const fid="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const ext=(file.name.match(/\.[a-z0-9]{2,5}$/i)||[".jpg"])[0].toLowerCase();
     await ghApi("media/"+fid+ext,"PUT",{message:"Piece photo: "+id,content:await fileB64(file)});const url="media/"+fid+ext;
-    await ghSetPiecePhoto(id,url);await db.collection("dispatches").doc(id).update({imageUrl:url,imageId:""});toast(T("photoSaved")+" · "+T("ghNote"));return url}catch(e){toast(T("photoFail"));return null}}
-  try{const up=await assets.upload(file);await db.collection("dispatches").doc(id).update({imageUrl:up.url,imageId:up.id});toast(T("photoSaved"));return up.url}
+    await ghSetPiecePhoto(id,url);await db.collection("dispatches").doc(id).update({imageUrl:url,imageId:"",imageCredit:""});toast(T("photoSaved")+" · "+T("ghNote"));return url}catch(e){toast(T("photoFail"));return null}}
+  try{const up=await assets.upload(file);await db.collection("dispatches").doc(id).update({imageUrl:up.url,imageId:up.id,imageCredit:""});toast(T("photoSaved"));return up.url}
   catch(e){toast(T("photoFail"));return null}
 }
 $("#photo-in").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
@@ -2656,7 +2658,7 @@ async function ghDel(m){
   try{await db.collection("media").doc(m.id).delete()}catch(e){}
 }
 /* a photo added in the standalone newsroom to a piece that came from Claude: kept in pieces-gh.json as a small overlay {id,imageUrl,_photo} (local.js merges it over the piece) */
-async function ghSetPiecePhoto(id,url){await ghSaveList(l=>{const k=l.findIndex(x=>x.id===id);if(k>=0){l[k]={...l[k],imageUrl:url};return l}return [...l,{id,imageUrl:url,_photo:true}]},(url?"Piece photo: ":"Piece photo removed: ")+id,GH.pieces)}
+async function ghSetPiecePhoto(id,url){await ghSaveList(l=>{const k=l.findIndex(x=>x.id===id);if(k>=0){l[k]={...l[k],imageUrl:url,imageCredit:""};return l}return [...l,{id,imageUrl:url,imageCredit:"",_photo:true}]},(url?"Piece photo: ":"Piece photo removed: ")+id,GH.pieces)}
 function renderGh(){const box=$("#gh-box"),btn=$("#gh-link");if(!box)return;const on=ghMode();btn.hidden=!on||!!ghTok();$("#gh-unlink").hidden=!on||!ghTok();if(!on)box.hidden=true}
 $("#gh-link").onclick=()=>{$("#gh-box").hidden=!$("#gh-box").hidden};
 $("#gh-unlink").onclick=()=>{try{localStorage.removeItem(GH.key)}catch(e){}renderMedia();renderPartners()};
