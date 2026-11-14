@@ -138,7 +138,7 @@ def head(title, desc, url, img, extra=""):
     return f"""<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><link rel="canonical" href="{e(url)}"><meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#0b1712"><link rel="icon" href="{BASE}favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="96x96" href="{BASE}icon-96.png"><link rel="icon" type="image/png" sizes="192x192" href="{BASE}icon-192.png"><link rel="apple-touch-icon" href="{BASE}icon-180.png">
-<meta property="og:site_name" content="شهود · Shuhud"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{e(img)}"><meta property="og:locale" content="ar_AR"><meta property="og:locale:alternate" content="en_GB">
+<meta property="og:site_name" content="شهود · Shuhud"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{e(img)}">{'<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">' if '/og/' in img else ''}<meta property="og:locale" content="ar_AR"><meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(title)}"><meta name="twitter:description" content="{e(desc)}"><meta name="twitter:image" content="{e(img)}">
 {extra}<style>{CSS}</style></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="{BASE}"><img src="{BASE}icon-192.png" alt="">شهود</a><nav><a href="{BASE}p/">كل القطع</a><a href="{BASE}#about">من نحن</a></nav></div></header>
@@ -168,6 +168,58 @@ def block(p, ar=True):
         out.append(f'<h2>{t("المصادر","Sources")}</h2><ul>' + "".join(
             (f'<li><a href="{e(s["url"])}" rel="nofollow noopener" target="_blank">{e(s["name"])}</a></li>' if str(s.get("url") or "").startswith("http") else f'<li>{e(s["name"])}</li>') for s in srcs) + "</ul>")
     return "\n".join(out)
+
+# share images: Facebook, WhatsApp and X read og:image. A ready 1200x630 picture served from alshuhud.org itself
+# always shows large (remote Wikipedia photos are often refused or shown small). The narrator sits in a circle when
+# the piece has its own event photo. Made once per piece and kept in og/<short>.jpg.
+OG_PATH = "data/og-img.json"
+try:
+    OG = json.load(open(OG_PATH, encoding="utf8"))
+except Exception:
+    OG = {}
+def _fetch(src):
+    import urllib.request, time
+    if src.startswith(BASE) and os.path.exists(src[len(BASE):]):
+        return open(src[len(BASE):], "rb").read()
+    if src.startswith("media/") and os.path.exists(src):
+        return open(src, "rb").read()
+    for k in range(3):
+        try:
+            req = urllib.request.Request(src, headers={"user-agent": "ShuhudPages/1.0 (https://alshuhud.org)"})
+            with urllib.request.urlopen(req, timeout=25) as r:
+                return r.read()
+        except Exception:
+            time.sleep(3 * (k + 1))
+    return None
+def og_image(sid, src, narr=""):
+    key = src + "|" + (narr or "")
+    path = f"og/{sid}.jpg"
+    if not src:
+        return ""
+    if OG.get(sid) == key and os.path.exists(path):
+        return BASE + path
+    try:
+        from io import BytesIO
+        from PIL import Image, ImageOps, ImageDraw
+        raw = _fetch(src)
+        if not raw:
+            return src
+        im = ImageOps.fit(Image.open(BytesIO(raw)).convert("RGB"), (1200, 630), Image.LANCZOS, centering=(0.5, 0.42))
+        if narr:
+            nb = _fetch(narr)
+            if nb:
+                d = 190
+                c = ImageOps.fit(Image.open(BytesIO(nb)).convert("RGB"), (d, d), Image.LANCZOS, centering=(0.5, 0.4))
+                m = Image.new("L", (d, d), 0); ImageDraw.Draw(m).ellipse((0, 0, d - 1, d - 1), fill=255)
+                x, y = 1200 - d - 40, 630 - d - 40
+                ImageDraw.Draw(im).ellipse((x - 7, y - 7, x + d + 6, y + d + 6), fill=(244, 239, 226))
+                im.paste(c, (x, y), m)
+        os.makedirs("og", exist_ok=True)
+        im.save(path, "JPEG", quality=84, optimize=True, progressive=True)
+        OG[sid] = key
+        return BASE + path
+    except Exception:
+        return src
 
 SHORT_PATH = "data/short-ids.json"
 SHORT = json.load(open(SHORT_PATH, encoding="utf8")) if os.path.exists(SHORT_PATH) else {}
@@ -217,7 +269,8 @@ for p in items:
     if en.get("headline"): ld["alternativeHeadline"] = short(en["headline"], 110)
     extra = go_script(pid) + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
     kick = " · ".join(x for x in (e(p.get("category")), e(p.get("place"))) if x)
-    body = [head(title, desc, url, img, extra), '<main class="wrap"><article>']
+    share = og_image(sid, img, narr_of(p) if str(p.get("imageUrl") or "") else "")
+    body = [head(title, desc, url, share or img, extra), '<main class="wrap"><article>']
     body.append(f'<div class="kick">{p.get("animalEmoji","")} {e(p.get("animalName"))}{" · " + kick if kick else ""}</div>')
     body.append(f'<h1>{e(p["headline"])}</h1><div class="meta">{nice(d) if d else ""}{" · " if d else ""}{e(p.get("crisis"))}</div>')
     if img:
@@ -267,5 +320,7 @@ with open("sitemap.xml", "w", encoding="utf8") as fh:
 print(len(built), "piece pages")
 with open(SHORT_PATH, "w", encoding="utf8") as fh:
     json.dump(SHORT, fh, ensure_ascii=False, indent=0)
+with open(OG_PATH, "w", encoding="utf8") as fh:
+    json.dump(OG, fh, ensure_ascii=False, indent=0)
 with open(WIKI_PATH, "w", encoding="utf8") as fh:
     json.dump(WIKI, fh, ensure_ascii=False, indent=0)
