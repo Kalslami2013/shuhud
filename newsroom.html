@@ -389,7 +389,7 @@ body.reader .rc .cnt.none{visibility:hidden}
   </nav>
 
   <section id="v-live">
-    <div class="feed-q"><input type="search" id="feed-q" class="sp-q" autocomplete="off" name="shuhud-feed-q-nofill" data-i18n-ph="feedSearch" placeholder="🔍 ابحث في القطع: كلمة، مكان، كائن…" aria-label="بحث في القطع"></div>
+    <div class="feed-q" id="feed-q-box"></div>
     <div class="cats" id="cats" role="toolbar" aria-label="أبواب النشرة" data-i18n-aria="catsAria"></div>
     <div class="runbar" id="run-live" hidden><button class="btn run" type="button" data-run="daily" data-i18n="runDaily">✨ اكتب قطع اليوم الآن</button><button class="btn" type="button" data-run="sync" data-i18n="runSync">↻ زامن النسخة المستقلة</button><span class="note" data-note="daily"></span><span class="note" data-note="sync"></span></div>
     <div class="status" id="status">تتجمع الحيوانات حول النار…</div>
@@ -662,8 +662,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794664254"</script>
-<script src="local.js?v=1794664254"></script>
+<script>window.SHUHUD_BUILD="1794664721"</script>
+<script src="local.js?v=1794664721"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1037,6 +1037,10 @@ function normAr(t){return String(t||"").toLowerCase().replace(/[\u064B-\u0652\u0
 /* the browser must never bring back an old search by itself (form restore, back button): the box always starts empty */
 function fqReset(){const f=document.getElementById("feed-q");if(f&&f.value&&document.activeElement!==f){f.value="";try{renderFeed(true)}catch(e){}}}
 addEventListener("pageshow",()=>setTimeout(fqReset,0));addEventListener("DOMContentLoaded",()=>setTimeout(fqReset,0));setTimeout(fqReset,300);
+(function(){const box=document.getElementById("feed-q-box");if(!box)return;const f=document.createElement("input");
+  f.type="search";f.id="feed-q";f.className="sp-q";f.autocomplete="off";f.setAttribute("autocomplete","off");f.setAttribute("autocorrect","off");f.spellcheck=false;
+  f.name="q"+Math.random().toString(36).slice(2,8);f.readOnly=true;f.addEventListener("focus",()=>{f.readOnly=false},{once:false});f.addEventListener("blur",()=>{if(!f.value)f.readOnly=true});
+  f.setAttribute("aria-label",T("feedSearch"));f.placeholder=T("feedSearch");f.dataset.i18nPh="feedSearch";f.value="";box.appendChild(f)})();
 let fqT=null;document.addEventListener("input",e=>{if(e.target&&e.target.id==="feed-q"){clearTimeout(fqT);fqT=setTimeout(()=>{openId=null;shown=13;renderFeed(true)},200)}});
 function renderFeed(force){
   if(!force&&editId&&document.querySelector("#feed [data-ed]"))return;
