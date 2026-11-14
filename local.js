@@ -63,6 +63,8 @@
   });
 
   /* new version on the site? reload once, so the home-screen app is never stuck on an old copy */
+  /* the update reload adds ?v=<build> only to skip the browser cache; once loaded, the address goes back to plain alshuhud.org */
+  try{const q=new URLSearchParams(location.search);if(q.has("v")){q.delete("v");const rest=q.toString();history.replaceState(history.state,"",location.pathname+(rest?"?"+rest:"")+location.hash)}}catch(e){}
   async function checkVersion(){try{const r=await fetch("version.txt?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const v=(await r.text()).trim();
     if(v&&window.SHUHUD_BUILD&&v!==window.SHUHUD_BUILD){const k="shuhud-reloaded-"+v;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.replace(location.pathname+"?v="+v+location.hash)}}}catch(e){}}
   checkVersion();document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkVersion()});
