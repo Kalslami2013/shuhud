@@ -302,18 +302,18 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
 @media (prefers-reduced-motion:reduce){.radar .rd-scope::after,.radar .rd-dot{animation:none}}
 /* phones and narrow screens: the radar is an extra service, so it is one slim, quiet line that never competes with the pieces */
 @media (max-width:1379px){
-  .radar{margin-bottom:12px}
+  .radar{margin-bottom:12px;padding:0}
   .radar .rd-in{display:flex;align-items:stretch;padding:0!important;border-radius:12px;overflow:hidden;background:rgba(9,18,14,.88);border:1px solid rgba(242,184,75,.28);box-shadow:0 4px 14px rgba(0,0,0,.35)}
   .radar .rd-in::before{display:none}
   .radar .rd-head{flex:0 0 auto;margin:0!important;padding:0 10px!important;display:flex;align-items:center;border-inline-end:1px solid rgba(242,184,75,.22);background:rgba(242,184,75,.06)!important}
-  .radar .rd-head h2{font-size:14.5px;gap:6px;white-space:nowrap}
-  .radar .rd-scope{width:17px;height:17px;flex-basis:17px;border-width:1px}
+  .radar .rd-head h2{font-size:17px;gap:7px;white-space:nowrap}
+  .radar .rd-scope{width:20px;height:20px;flex-basis:20px;border-width:1px}
   .radar .rd-sub,.radar .rd-foot,.radar .rd-dot,.radar .rd-mk,.radar .rd-wait,.radar .mk-menu{display:none!important}
   .radar ol{flex:1;gap:0;padding:0;align-items:stretch;scroll-snap-type:x mandatory;-webkit-mask:linear-gradient(to left,#000 calc(100% - 22px),transparent);mask:linear-gradient(to left,#000 calc(100% - 22px),transparent)}
   html[dir=ltr] .radar ol{-webkit-mask:linear-gradient(to right,#000 calc(100% - 22px),transparent);mask:linear-gradient(to right,#000 calc(100% - 22px),transparent)}
-  .radar li{flex:0 0 84%;border:0;border-radius:0;background:none;box-shadow:none;padding:7px 11px;border-inline-end:1px solid rgba(255,255,255,.06);transform:none!important}
-  .radar .rd-meta{font-size:10.5px;margin:0 0 1px;gap:5px}
-  .radar a.rd-t{font-size:13.5px;line-height:1.45;-webkit-line-clamp:1}
+  .radar li{flex:0 0 84%;border:0;border-radius:0;background:none;box-shadow:none;padding:9px 12px;border-inline-end:1px solid rgba(255,255,255,.06);transform:none!important}
+  .radar .rd-meta{font-size:12px;margin:0 0 2px;gap:5px}
+  .radar a.rd-t{font-size:15.5px;line-height:1.5;-webkit-line-clamp:1}
   .radar .rd-go{font-size:11px;margin-top:1px}
 }
 /* wide screens: the column stands right beside the pieces (fixed gap), starts level with them and stays in view while scrolling */
@@ -722,8 +722,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794691689"</script>
-<script src="local.js?v=1794691689"></script>
+<script>window.SHUHUD_BUILD="1794691883"</script>
+<script src="local.js?v=1794691883"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
