@@ -662,8 +662,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794662058"</script>
-<script src="local.js?v=1794662058"></script>
+<script>window.SHUHUD_BUILD="1794663067"</script>
+<script src="local.js?v=1794663067"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2543,7 +2543,7 @@ function spClick(e){
 }
 $("#ids-grid").addEventListener("click",spClick);$("#red-grid").addEventListener("click",spClick);
 $("#red-chips").addEventListener("click",e=>{const b=e.target.closest("[data-rs]");if(!b)return;redSt=b.dataset.rs;renderSpecies()});
-document.querySelectorAll(".sp-q").forEach(inp=>inp.addEventListener("input",()=>{spQuery=inp.value;document.querySelectorAll(".sp-q").forEach(o=>{if(o!==inp)o.value=inp.value});renderSpecies()}));
+document.querySelectorAll(".sp-q:not(#feed-q)").forEach(inp=>inp.addEventListener("input",()=>{spQuery=inp.value;document.querySelectorAll(".sp-q:not(#feed-q)").forEach(o=>{if(o!==inp)o.value=inp.value});renderSpecies()}));
 $("#sp-photo-in").onchange=async e=>{const f=e.target.files[0];e.target.value="";const k=spPhotoKey;spPhotoKey=null;if(!f||!k||!assets||!db)return;
   toast(T("uploading"));
   try{const old=spDocs[k]&&spDocs[k].imageId;const up=await assets.upload(f);await spSave(k,{imageUrl:up.url,imageId:up.id});if(old){try{await assets.delete(old)}catch(_){}}toast(T("photoSaved"))}

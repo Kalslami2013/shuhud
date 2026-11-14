@@ -456,8 +456,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794662058"</script>
-<script src="local.js?v=1794662058"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794663067"</script>
+<script src="local.js?v=1794663067"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -2339,7 +2339,7 @@ function spClick(e){
 }
 $("#ids-grid").addEventListener("click",spClick);$("#red-grid").addEventListener("click",spClick);
 $("#red-chips").addEventListener("click",e=>{const b=e.target.closest("[data-rs]");if(!b)return;redSt=b.dataset.rs;renderSpecies()});
-document.querySelectorAll(".sp-q").forEach(inp=>inp.addEventListener("input",()=>{spQuery=inp.value;document.querySelectorAll(".sp-q").forEach(o=>{if(o!==inp)o.value=inp.value});renderSpecies()}));
+document.querySelectorAll(".sp-q:not(#feed-q)").forEach(inp=>inp.addEventListener("input",()=>{spQuery=inp.value;document.querySelectorAll(".sp-q:not(#feed-q)").forEach(o=>{if(o!==inp)o.value=inp.value});renderSpecies()}));
 $("#sp-photo-in").onchange=async e=>{const f=e.target.files[0];e.target.value="";const k=spPhotoKey;spPhotoKey=null;if(!f||!k||!assets||!db)return;
   toast(T("uploading"));
   try{const old=spDocs[k]&&spDocs[k].imageId;const up=await assets.upload(f);await spSave(k,{imageUrl:up.url,imageId:up.id});if(old){try{await assets.delete(old)}catch(_){}}toast(T("photoSaved"))}
