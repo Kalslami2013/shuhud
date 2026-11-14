@@ -341,6 +341,11 @@ body:not(.en) .sp .sci{text-align:right}
 .about{gap:10px;font-size:15.5px;line-height:1.9}
 .about h3{font-size:30px}.about h4{font-family:var(--f-display);font-size:21px;color:var(--amber);margin:8px 0 0}
 .about p,.about ul{margin:0}.about ul{padding-inline-start:20px;display:grid;gap:6px}
+.guide details{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:12px;padding:10px 14px;background:rgba(0,0,0,.18)}
+.guide summary{cursor:pointer;font-family:var(--f-display);font-size:19px;color:var(--amber)}
+.guide details[open] summary{margin-bottom:10px}.guide ol{padding-inline-start:22px;display:grid;gap:6px;margin:0}
+.g-t{width:100%;border-collapse:collapse;font-size:14.5px}.g-t th,.g-t td{border:1px solid rgba(255,255,255,.12);padding:8px 10px;vertical-align:top;text-align:start}.g-t th{color:var(--amber);font-weight:600}
+@media (max-width:640px){.g-t{font-size:13px}.g-t th,.g-t td{padding:6px}}
 .about .lead{font-size:17px;color:var(--parchment);font-weight:500}
 .about .q{font-family:var(--f-display);font-size:19px;color:var(--amber);margin-top:6px}
 .founder{display:flex;gap:18px;align-items:center;margin:12px 0 0;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(0,0,0,.18)}
@@ -377,6 +382,7 @@ body.reader .rc .cnt.none{visibility:hidden}
     <button role="tab" data-view="red" aria-selected="false" data-i18n="navRed">مهددة بالانقراض</button>
     <button role="tab" data-view="media" aria-selected="false" data-i18n="navMedia">ميديا</button>
     <button role="tab" data-view="about" aria-selected="false" data-i18n="navAbout">من نحن</button>
+    <button role="tab" data-view="guide" aria-selected="false" data-i18n="navGuide">📘 دليلي</button>
   </nav>
 
   <section id="v-live">
@@ -502,6 +508,98 @@ body.reader .rc .cnt.none{visibility:hidden}
     <div class="md-grid" id="media-grid"></div>
   </section>
 
+  <section id="v-guide" hidden>
+    <div class="panel about guide" dir="rtl" lang="ar">
+      <h3>دليلي لإدارة شهود</h3>
+      <p class="lead">هذا الدليل لك وحدك: يظهر في نسخة Claude وفي غرفة التحرير المستقلة، ولا يظهر في الموقع العام. اضغط أي عنوان لتفتحه.</p>
+
+      <details open><summary>١. خريطة المنصة: ثلاث نسخ</summary>
+        <table class="g-t"><tr><th>النسخة</th><th>رابطها</th><th>لماذا أستعملها</th></tr>
+          <tr><td><b>نسخة Claude</b></td><td><a href="https://claude.ai/artifact/TLB9MVnFJxTj3thKnp9wrL" target="_blank" rel="noopener">claude.ai/artifact/TLB9MVnF…</a></td><td>القلب: فيها أزرار Claude (كتابة القطع، الرصد، المزامنة) وقاعدة البيانات الأصلية. الضغط على أزرارها يستهلك من رصيدك.</td></tr>
+          <tr><td><b>غرفة التحرير المستقلة</b></td><td><a href="https://alshuhud.org/newsroom.html" target="_blank" rel="noopener">alshuhud.org/newsroom.html</a></td><td>تعمل بلا Claude وبلا رصيد، بمفتاح GitHub المحفوظ في متصفحك: نشر قطعة يدويًا، صور، ميديا، تعديل، حسابات وشركاء. تبقى تعمل حتى لو توقف اشتراك Claude.</td></tr>
+          <tr><td><b>الموقع العام</b></td><td><a href="https://alshuhud.org" target="_blank" rel="noopener">alshuhud.org</a></td><td>ما يراه القرّاء وGoogle: بلا أدوات ولا غرفة تحرير. لكل قطعة صفحة برابط قصير مثل alshuhud.org/p/turtle-campania.</td></tr>
+        </table>
+      </details>
+
+      <details><summary>٢. دورة العمل العادية خطوة بخطوة</summary>
+        <ol>
+          <li>في نسخة Claude، في «الرئيسية»: اضغط <b>«✨ اكتب قطع اليوم الآن»</b>. يكتب Claude ثلاث قطع (طلباتك أولًا).</li>
+          <li>تظهر رسالة «⏳ Claude يعمل الآن». انتظر 10 إلى 15 دقيقة، ولا تضغط مرة أخرى.</li>
+          <li>حدّث الصفحة: تظهر القطع الجديدة في أعلى «الرئيسية». راجعها، وعدّل ما تريد بزر «✏️ تعديل».</li>
+          <li>(اختياري) اكتب لي في محادثة Claude: <b>«صور القطع الجديدة»</b> لأبحث عن صور حرة للأحداث.</li>
+          <li>اضغط <b>«↻ زامن النسخة المستقلة»</b> (بجانب زر الكتابة). بعد 5 دقائق تقريبًا تصل القطع إلى alshuhud.org وتُبنى صفحاتها وروابطها القصيرة وتُبلَّغ Google تلقائيًا.</li>
+          <li>شارك القطعة بزر «🔗 شارك» داخلها: ينسخ رابطها القصير مع العنوان والصورة.</li>
+        </ol>
+      </details>
+
+      <details><summary>٣. ما يستهلك رصيد Claude وما لا يستهلك</summary>
+        <table class="g-t"><tr><th>يستهلك من رصيدك</th><th>مجاني تمامًا</th></tr>
+          <tr><td>«✨ اكتب قطع اليوم» (الأكبر)<br>«🔍 ارصد الآن»<br>«↻ زامن النسخة المستقلة»<br>الحديث معي في المحادثة (ومنه البحث عن الصور)<br>«✨ أكمل البطاقة» و«✍️ اكتب بلسانه» في بطاقات الكائنات</td>
+              <td>زيارة الموقع وتصفحه<br>كل ما تفعله في غرفة التحرير المستقلة (نشر يدوي، صور، ميديا، تعديل، حذف)<br>الرصد التلقائي من الوكالات كل ساعة (برنامج GitHub)<br>بناء صفحات القطع والروابط القصيرة وخريطة Google<br>تصدير البطاقات والفيديو من الاستوديو</td></tr>
+        </table>
+        <p>القاعدة المتفق عليها: لا شيء يعمل بـClaude تلقائيًا. كل تشغيل بضغطة منك فقط.</p>
+      </details>
+
+      <details><summary>٤. كيف ترتبط النسختان</summary>
+        <ul>
+          <li><b>من Claude إلى الموقع:</b> زر «زامن» ينسخ القطع والكائنات والصور والشركاء من نسخة Claude إلى الموقع. لا تصل قطع Claude إلى الموقع بدون هذه الضغطة.</li>
+          <li><b>من غرفة التحرير المستقلة:</b> ما تنشره أو تعدّله أو تضيفه هناك يُحفظ في الموقع مباشرة، ولا يرجع إلى نسخة Claude (إلا الميديا: نسخة Claude تعرض مواد الموقع للقراءة فقط).</li>
+          <li><b>الرصد:</b> برنامج مجاني يجمع كل ساعة أخبار البيئة من الوكالات والهيئات الأممية. يظهر في «الرصد» في النسختين. في المستقلة يمكنك تحويل أي خبر إلى مادة: يدويًا، أو بنسخه إلى محادثة Claude، أو بزر «أرسلها إلى Claude» فيُكتب في جولة «اكتب قطع اليوم» التالية.</li>
+          <li><b>تعديل قطعة نشرها Claude:</b> عدّلها في نسخة Claude ثم زامن. إن عدّلتها في المستقلة فالتعديل يبقى في الموقع فقط.</li>
+        </ul>
+      </details>
+
+      <details><summary>٥. أعمال يومية: أين وكيف</summary>
+        <table class="g-t"><tr><th>أريد أن…</th><th>أين</th><th>كيف</th></tr>
+          <tr><td>أنشر قطعة كتبتها بنفسي</td><td>المستقلة ← غرفة التحرير</td><td>املأ الحقول ثم «انشر في النشرة»</td></tr>
+          <tr><td>أضيف صورة لقطعة</td><td>أي نسخة داخلية</td><td>افتح القطعة ← «📷 صورة». صورة الحدث تملأ الإطار، والراوي يظهر في الدائرة</td></tr>
+          <tr><td>أصحّح نصًا أو رقمًا</td><td>أي نسخة داخلية</td><td>افتح القطعة ← «✏️ تعديل» ← «حفظ»</td></tr>
+          <tr><td>أضيف بطاقات أو فيديو</td><td>المستقلة ← ميديا</td><td>«＋ أضف مادة»، أو من الاستوديو بزر التصدير داخل القطعة</td></tr>
+          <tr><td>أضيف حساب تواصل</td><td>أسفل الصفحة ← «تابعونا»</td><td>«＋ أضف حساباً» واختر المنصة والرابط</td></tr>
+          <tr><td>أضيف شريكًا</td><td>من نحن ← شركاؤنا</td><td>زر الإضافة تحت القسم</td></tr>
+        </table>
+      </details>
+
+      <details><summary>٦. مفتاح GitHub (للمستقلة)</summary>
+        <ul>
+          <li>المفتاح يُحفظ في متصفحك فقط، على الجهاز الذي وضعته فيه. لا تكتبه في أي محادثة ولا ترسله لأحد.</li>
+          <li>على جهاز جديد: افتح alshuhud.org/newsroom.html ← غرفة التحرير ← ضع المفتاح في خانة GitHub.</li>
+          <li>إن ظهرت رسالة خطأ من GitHub عند النشر: غالبًا انتهت صلاحية المفتاح. اصنع مفتاحًا جديدًا من github.com ← Settings ← Developer settings ← Fine-grained tokens، لمستودع Kalslami2013/shuhud، بصلاحية Contents: Read and write.</li>
+        </ul>
+      </details>
+
+      <details><summary>٧. Google والمشاركة</summary>
+        <ul>
+          <li>كل قطعة لها رابط قصير ثابت، وهو ما يظهر في شريط العنوان وما ينسخه زر المشاركة.</li>
+          <li>خريطة الموقع (sitemap) تُحدَّث تلقائيًا بعد كل مزامنة، وGoogle يقرؤها وحده. ظهور الموقع في البحث يأخذ أسابيع، وهذا طبيعي لموقع جديد.</li>
+          <li>للمتابعة: <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console</a> (خاصية alshuhud.org). تنبيه «noindex» عن newsroom.html مقصود ولا يحتاج علاجًا.</li>
+          <li>النطاق alshuhud.org مسجّل في Cloudflare. لا تغيّر سجلات DNS هناك.</li>
+        </ul>
+      </details>
+
+      <details><summary>٨. حل المشكلات</summary>
+        <table class="g-t"><tr><th>المشكلة</th><th>الحل</th></tr>
+          <tr><td>عدّلت شيئًا ولا يظهر في الموقع</td><td>انتظر 5 دقائق، ثم حدّث الصفحة تحديثًا كاملًا: Ctrl+Shift+R (في الماك Cmd+Shift+R). في الهاتف أغلق الصفحة وافتحها.</td></tr>
+          <tr><td>قطع Claude الجديدة ليست في الموقع</td><td>لم تُضغط «زامن» بعد. اضغطها في نسخة Claude.</td></tr>
+          <tr><td>زر Claude لا يعمل («الزر لا يعمل في هذا التطبيق»)</td><td>افتح نسخة Claude من متصفح الكمبيوتر لا من تطبيق الهاتف، أو اكتب الطلب لي في المحادثة.</td></tr>
+          <tr><td>ضغطت «اكتب قطع اليوم» ولم يظهر شيء</td><td>الكتابة تأخذ 10 إلى 15 دقيقة. حدّث بعدها. إن مرّت 30 دقيقة بلا شيء فاسألني في المحادثة.</td></tr>
+          <tr><td>قطعة بلا صورة (رسم الحيوان فقط)</td><td>لم يُعثر على صورة للراوي. أضف صورة بزر «📷 صورة»، أو اطلب مني البحث.</td></tr>
+          <tr><td>الرصد لا يتحدث</td><td>البرنامج المجاني يعمل كل ساعة. إن توقف يومًا كاملًا فأخبرني.</td></tr>
+          <tr><td>شيء غريب في التصميم أو زر اختفى</td><td>صوّر الشاشة وأرسلها لي في المحادثة.</td></tr>
+        </table>
+      </details>
+
+      <details><summary>٩. ماذا أطلب من Claude في المحادثة</summary>
+        <ul>
+          <li>«صور القطع الجديدة»: بحث عن صور حرة للأحداث بعد كل جولة.</li>
+          <li>«اكتب قطعة عن …»: قطعة محددة تختارها أنت.</li>
+          <li>«عدّل في الموقع …»: أي تغيير في التصميم أو الأزرار.</li>
+          <li>«تابع رسائل التمويل»: مسودات الرسائل والمتابعات (أنت ترسلها بنفسك).</li>
+        </ul>
+        <p>تذكير: المحادثة تستهلك من رصيدك، فاجمع طلباتك في رسالة واحدة حين تستطيع.</p>
+      </details>
+    </div>
+  </section>
   <section id="v-about" hidden>
     <div class="panel about" data-i18n="aboutHTML"></div>
   </section>
@@ -557,8 +655,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794640594"</script>
-<script src="local.js?v=1794640594"></script>
+<script>window.SHUHUD_BUILD="1794649906"</script>
+<script src="local.js?v=1794649906"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -572,7 +670,7 @@ ar:{
   moonNames:["محاق","هلال","تربيع أول","أحدب متزايد","بدر","أحدب متناقص","تربيع ثانٍ","هلال أخير"],
   navTrack:"الرصد",trackIntro:"تطورات البيئة والأزمات المرتبطة بها. الرصد يدوي: لا يعمل إلا حين تضغط «ارصد الآن».",toPiece:"حوّل إلى مادة",ghFirstKey:"احفظ مفتاح GitHub في هذا الجهاز أولاً: تبويب «ميديا» ← «🔑 اربط GitHub» ← الصق المفتاح ← «حفظ»، ثم أعد المحاولة",mkManual:"✍️ اكتبها يدوياً",mkBridge:"📋 عبر محادثة Claude الآن",mkQueue:"🗂️ أرسلها إلى Claude ليكتبها",mkQueued:"أُرسلت إلى Claude: يكتبها حين تضغط «اكتب قطع اليوم» في نسخة Claude، ثم «زامن»",mkWaiting:"⏳ بانتظار Claude",trTrack:"ترجم",trTrackBack:"الأصل",trTrackIng:"يترجم…",trTrackFail:"تعذّرت الترجمة، حاول بعد قليل",trAll:n=>`ترجم الإنجليزي (${n.toLocaleString("ar")})`,converted:"✓ صارت مادة",newestFirst:"الأحدث أولاً",oldestFirst:"الأقدم أولاً",trackEmpty:"لم يصل شيء إلى الرصد بعد. اضغط «ارصد الآن» لتبدأ جولة رصد.",lastScan:"آخر رصد",trackCount:n=>`${n.toLocaleString("ar")} تطوراً مرصوداً`,
   runMonitor:"🔍 ارصد الآن",runSync:"↻ زامن النسخة المستقلة",runNoMcp:"الزر لا يعمل في هذا التطبيق أو المتصفح. افتح شهود من متصفح الكمبيوتر، أو اكتب لـClaude في المحادثة: «اكتب قطع اليوم».",runDaily:"✨ اكتب قطع اليوم الآن",runSending:"يبدأ…",runStarted:"بدأ. تصل النتائج خلال دقائق، ثم يتوقف وحده.",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"وافق على طلب الإذن ثم اضغط مرة أخرى.",runDenied:"لم يُسمح للصفحة بتشغيل المهام. فعّلها من قائمة الأذونات أعلى الصفحة.",runFail:"لم يبدأ. جرّب بعد دقيقة.",runLast:"آخر تشغيل",runBusy:t=>`⏳ Claude يعمل الآن (بدأ ${t}). تظهر النتائج خلال 10 إلى 15 دقيقة، لا تضغط مرة أخرى.`,
-  navLive:"الرئيسية",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
+  navLive:"الرئيسية",navGuide:"📘 دليلي",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
   loadingStatus:"تتجمع الحيوانات حول النار…",all:"الكل",
   deskTitle:"غرفة التحرير",deskSub:"أعطِ شهود أزمة، واختر من يرويها، أو دع الغابة تختار.",
   dText:"الأزمة أو الخبر والمادة الخام",dTextPh:"الصق الخبر هنا…",
@@ -634,7 +732,7 @@ en:{
   moonNames:["new","waxing crescent","first quarter","waxing gibbous","full","waning gibbous","last quarter","waning crescent"],
   navTrack:"Tracker",trackIntro:"Environmental developments and related crises. Tracking is manual: it only runs when you press “Track now”.",toPiece:"Turn into a piece",ghFirstKey:"Save your GitHub token on this device first: Media tab → «🔑 Connect GitHub» → paste the token → Save, then try again",mkManual:"✍️ Write it myself",mkBridge:"📋 Via a Claude chat now",mkQueue:"🗂️ Send it to Claude to write",mkQueued:"Sent to Claude: written when you press «Write today's pieces» in the Claude copy, then «Sync»",mkWaiting:"⏳ Waiting for Claude",trTrack:"Translate",trTrackBack:"Original",trTrackIng:"Translating…",trTrackFail:"Translation failed, try again shortly",trAll:n=>`Translate English (${n})`,converted:"✓ Turned into a piece",newestFirst:"Newest first",oldestFirst:"Oldest first",trackEmpty:"Nothing in the tracker yet. Press “Track now” to start a scan.",lastScan:"Last scan",trackCount:n=>`${n} ${n===1?"development":"developments"} tracked`,
   runMonitor:"🔍 Track now",runSync:"↻ Sync the standalone copy",runNoMcp:"This button doesn't work in this app or browser. Open Shuhud in a desktop browser, or ask Claude in the chat: “write today's pieces”.",runDaily:"✨ Write today's pieces now",runSending:"Starting…",runStarted:"Started. Results arrive in a few minutes, then it stops on its own.",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"Approve the permission prompt, then press again.",runDenied:"This page isn't allowed to run tasks. Turn it on from the page's permissions menu.",runFail:"Didn't start. Try again in a minute.",runLast:"Last run",runBusy:t=>`⏳ Claude is working (started ${t}). Results appear within 10–15 minutes; no need to press again.`,
-  navLive:"Home",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
+  navLive:"Home",navGuide:"📘 My guide",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
   loadingStatus:"The animals are gathering around the fire…",all:"All",
   deskTitle:"Newsroom",deskSub:"Give the witnesses a crisis, pick who tells it, or let the forest choose.",
   dText:"The crisis, news item or raw material",dTextPh:"Paste the story here…",
@@ -791,8 +889,8 @@ function toast(t){const d=document.createElement("div");d.className="toast";d.te
 function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB":"ar",{day:"numeric",month:"long",year:"numeric"})}catch(e){return""}}
 
 /* ---------- views ---------- */
-const VIEWS=["live","track","desk","corr","ids","red","media","about"];
-function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
+const VIEWS=["live","track","desk","corr","ids","red","media","about","guide"];
+function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track"||v==="guide")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
 function clearHash(){if(!location.hash&&!/^\/p\//.test(location.pathname))return;try{history.pushState(null,"",/^\/p\//.test(location.pathname)?"/":location.pathname+location.search)}catch(e){location.hash=""}}
 document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{const was=openId,v=b.dataset.view;
   /* the front page (live) keeps a clean address: alshuhud.org with nothing after it */
