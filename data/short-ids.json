@@ -49,5 +49,11 @@
 "env-20261030-condor-peru-fires": "condor-peru",
 "env-20261101-custom-caspianseal-shrinking-sea": "caspianseal-shrinking",
 "env-20261106-penguin-antarctic-seaice-lows": "penguin-antarctic",
-"env-20261027-warbler-datacenters": "warbler-datacenters"
+"env-20261027-warbler-datacenters": "warbler-datacenters",
+"env-20261114-custom-srilankaelephant-tuskers-risk": "srilankaelephant-tuskers",
+"env-20261114-bison-bialowieza-eastshield": "bison-bialowieza",
+"env-20261114-custom-darter-bessemer-datacenter": "darter-bessemer",
+"env-20261114-custom-turnstone-thanet-oil": "turnstone-thanet",
+"env-20261114-custom-scarletmacaw-rioplatano-emergency": "scarletmacaw-rioplatano",
+"env-20261114-shark-pacific-monument-fishing": "shark-pacific"
 }

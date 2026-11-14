@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://alshuhud.org/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://alshuhud.org/p/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://alshuhud.org/</loc><lastmod>2026-11-14</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://alshuhud.org/p/</loc><lastmod>2026-11-14</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://alshuhud.org/p/srilankaelephant-tuskers</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/p/bison-bialowieza</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/p/darter-bessemer</loc><lastmod>2026-11-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/p/turnstone-thanet</loc><lastmod>2026-11-11</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/p/scarletmacaw-rioplatano</loc><lastmod>2026-11-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/p/shark-pacific</loc><lastmod>2026-11-09</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/p/mahseer-tarbela</loc><lastmod>2026-11-09</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/p/flyingsquid-korea</loc><lastmod>2026-11-09</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/p/osprey-chesapeake</loc><lastmod>2026-11-09</lastmod><priority>0.7</priority></url>
