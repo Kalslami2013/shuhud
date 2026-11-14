@@ -392,7 +392,7 @@ body.reader .rc .cnt.none{visibility:hidden}
   </nav>
 
   <section id="v-live">
-    <div class="feed-q"><input type="search" id="feed-q" class="sp-q" data-i18n-ph="feedSearch" placeholder="🔍 ابحث في القطع: كلمة، مكان، كائن…" aria-label="بحث في القطع"></div>
+    <div class="feed-q"><input type="search" id="feed-q" class="sp-q" autocomplete="off" name="shuhud-feed-q-nofill" data-i18n-ph="feedSearch" placeholder="🔍 ابحث في القطع: كلمة، مكان، كائن…" aria-label="بحث في القطع"></div>
     <div class="cats" id="cats" role="toolbar" aria-label="أبواب النشرة" data-i18n-aria="catsAria"></div>
     
     <div class="status" id="status">تتجمع الحيوانات حول النار…</div>
@@ -456,8 +456,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794661968"</script>
-<script src="local.js?v=1794661968"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794662058"</script>
+<script src="local.js?v=1794662058"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -826,6 +826,9 @@ function teaserHTML(raw,lead){
   </article>`;
 }
 function normAr(t){return String(t||"").toLowerCase().replace(/[\u064B-\u0652\u0640]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه")}
+/* the browser must never bring back an old search by itself (form restore, back button): the box always starts empty */
+function fqReset(){const f=document.getElementById("feed-q");if(f&&f.value&&document.activeElement!==f){f.value="";try{renderFeed(true)}catch(e){}}}
+addEventListener("pageshow",()=>setTimeout(fqReset,0));addEventListener("DOMContentLoaded",()=>setTimeout(fqReset,0));setTimeout(fqReset,300);
 let fqT=null;document.addEventListener("input",e=>{if(e.target&&e.target.id==="feed-q"){clearTimeout(fqT);fqT=setTimeout(()=>{openId=null;shown=13;renderFeed(true)},200)}});
 function renderFeed(force){
   if(!force&&editId&&document.querySelector("#feed [data-ed]"))return;
