@@ -658,8 +658,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794659464"</script>
-<script src="local.js?v=1794659464"></script>
+<script>window.SHUHUD_BUILD="1794661100"</script>
+<script src="local.js?v=1794661100"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1031,7 +1031,8 @@ function renderFeed(force){
   let list=cat==="الكل"?items:items.filter(i=>i.category===cat);
   if(byAnimal)list=list.filter(i=>spKey(i)===byAnimal);
   /* newest event first (the date shown on each card), then newest written */
-  const evKey=i=>String(i.eventDate||i.createdAt||"").slice(0,10)+"|"+String(i.createdAt||"");list=[...list].sort((a,b)=>evKey(b).localeCompare(evKey(a)));
+  /* newest published first (what was just added sits on top), then the newest event */
+  const pubT=i=>Date.parse(i.createdAt)||Date.parse(i.eventDate)||0,evT=i=>Date.parse(i.eventDate)||0;list=[...list].sort((a,b)=>(pubT(b)-pubT(a))||(evT(b)-evT(a)));
   const fb=$("#by-animal");if(fb){fb.hidden=!byAnimal;if(byAnimal){const sI=spInfo(byAnimal);fb.innerHTML=`<span>${safeE(sI.e)} ${T("piecesBy")(sI.name)}</span><button class="btn" type="button" id="by-clear">${T("showAll")}</button>`}const c=$("#by-clear");if(c)c.onclick=()=>{byAnimal=null;renderFeed()}}
   const feed=$("#feed");
   if(!dbReady&&!items.length){feed.innerHTML=`<div class="card empty"><div class="big">🔥</div>${T("emptyLoading")}</div>`;return}
