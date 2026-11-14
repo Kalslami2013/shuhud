@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /newsroom.html
+
+Sitemap: https://alshuhud.org/sitemap.xml
