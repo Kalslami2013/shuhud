@@ -272,6 +272,28 @@ nav.main button{flex:1 1 auto;white-space:nowrap}
 /* the platform's paw as the pointer over everything clickable (desktop) */
 a,button,[role=button],[role=tab],[role=link],[data-open],.tz,select,summary,label[for],.chip{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22%23f2b84b%22%20stroke%3D%22%231d1406%22%20stroke-width%3D%221.6%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2221.5%22%20rx%3D%227.2%22%20ry%3D%226%22/%3E%3Cellipse%20cx%3D%226.6%22%20cy%3D%2213.6%22%20rx%3D%223%22%20ry%3D%223.8%22%20transform%3D%22rotate%28-20%206.6%2013.6%29%22/%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%227.6%22%20rx%3D%223%22%20ry%3D%224%22%20transform%3D%22rotate%28-8%2012%207.6%29%22/%3E%3Cellipse%20cx%3D%2220%22%20cy%3D%227.6%22%20rx%3D%223%22%20ry%3D%224%22%20transform%3D%22rotate%288%2020%207.6%29%22/%3E%3Cellipse%20cx%3D%2225.4%22%20cy%3D%2213.6%22%20rx%3D%223%22%20ry%3D%223.8%22%20transform%3D%22rotate%2820%2025.4%2013.6%29%22/%3E%3C/g%3E%3C/svg%3E") 16 4,pointer}
 input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace}
+/* «على رادار شهود»: what the platform is watching, from agencies and international bodies (free hourly feed, no AI).
+   Wide screens: a column fixed at the reader's left. Narrow screens: a short horizontal strip above the pieces. */
+.radar{position:relative;z-index:2;margin:0 auto 14px;max-width:760px;padding:0 16px}
+.radar .rd-in{background:rgba(9,18,14,.86);border:1px solid var(--line);border-radius:16px;padding:12px 12px 8px;backdrop-filter:blur(6px)}
+.radar h2{margin:0;font-family:var(--f-display);font-size:21px;color:var(--amber);display:flex;align-items:center;gap:8px}
+.radar .rd-sub{font-size:12px;color:var(--faint,#8a9a8a);margin:2px 0 8px}
+.radar ol{list-style:none;margin:0;padding:0;display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+.radar li{flex:0 0 78%;scroll-snap-align:start;border:1px solid var(--line);border-radius:12px;padding:9px 11px;background:rgba(0,0,0,.18)}
+.radar .rd-meta{display:flex;gap:6px;align-items:center;font-size:11.5px;color:var(--faint,#8a9a8a);margin-bottom:3px}
+.radar .rd-meta b{color:var(--amber);font-weight:600}
+.radar a.rd-t{color:var(--parchment);text-decoration:none;font-size:14.5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.radar a.rd-t:hover{color:#fff;text-decoration:underline}
+.radar .rd-go{display:inline-block;margin-top:5px;font-size:12px;color:var(--leaf,#9cc77a);background:none;border:0;padding:0;font-family:inherit;cursor:pointer}
+.radar .rd-foot{font-size:11px;color:var(--faint,#8a9a8a);margin-top:6px}
+.radar .rd-dot{width:8px;height:8px;border-radius:50%;background:#e5484d;box-shadow:0 0 0 0 rgba(229,72,77,.6);animation:rdp 2s infinite}
+@keyframes rdp{0%{box-shadow:0 0 0 0 rgba(229,72,77,.55)}70%{box-shadow:0 0 0 8px rgba(229,72,77,0)}100%{box-shadow:0 0 0 0 rgba(229,72,77,0)}}
+@media (min-width:1300px){
+  .radar{position:fixed;top:84px;left:14px;width:clamp(230px,calc((100vw - 820px)/2 - 20px),330px);max-height:calc(100vh - 100px);margin:0;padding:0}
+  .radar .rd-in{max-height:calc(100vh - 100px);overflow:auto}
+  .radar ol{display:block;overflow:visible}
+  .radar li{margin-bottom:8px}
+}
 .feed-q{max-width:1140px;margin:0 auto 10px;padding:0 16px}.feed-q input{width:100%;background:rgba(9,18,14,.78)!important;color:#f3ead6}.feed-q input::placeholder{color:rgba(243,234,214,.75)}
 input[type=search].sp-q{box-sizing:border-box;background:rgba(0,0,0,.28);border:1px solid var(--line);color:var(--parchment);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:15px}
 .sp-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
@@ -395,6 +417,7 @@ body.reader .rc .cnt.none{visibility:hidden}
     <div class="runbar" id="run-live" hidden><button class="btn run" type="button" data-run="daily" data-i18n="runDaily">✨ اكتب قطع اليوم الآن</button><button class="btn" type="button" data-run="sync" data-i18n="runSync">↻ زامن النسخة المستقلة</button><span class="note" data-note="daily"></span><span class="note" data-note="sync"></span></div>
     <div class="status" id="status">تتجمع الحيوانات حول النار…</div>
     <div class="by-animal" id="by-animal" hidden></div>
+    <aside class="radar" id="radar" hidden aria-labelledby="radar-h"></aside>
     <div class="feed" id="feed"></div>
   </section>
 
@@ -663,8 +686,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794668434"</script>
-<script src="local.js?v=1794668434"></script>
+<script>window.SHUHUD_BUILD="1794671908"</script>
+<script src="local.js?v=1794671908"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -678,7 +701,7 @@ ar:{
   moonNames:["محاق","هلال","تربيع أول","أحدب متزايد","بدر","أحدب متناقص","تربيع ثانٍ","هلال أخير"],
   navTrack:"الرصد",trackIntro:"تطورات البيئة والأزمات المرتبطة بها. الرصد يدوي: لا يعمل إلا حين تضغط «ارصد الآن».",toPiece:"حوّل إلى مادة",ghFirstKey:"احفظ مفتاح GitHub في هذا الجهاز أولاً: تبويب «ميديا» ← «🔑 اربط GitHub» ← الصق المفتاح ← «حفظ»، ثم أعد المحاولة",mkManual:"✍️ اكتبها يدوياً",mkBridge:"📋 عبر محادثة Claude الآن",mkQueue:"🗂️ أرسلها إلى Claude ليكتبها",mkQueued:"أُرسلت إلى Claude: يكتبها حين تضغط «اكتب قطع اليوم» في نسخة Claude، ثم «زامن»",mkWaiting:"⏳ بانتظار Claude",trTrack:"ترجم",trTrackBack:"الأصل",trTrackIng:"يترجم…",trTrackFail:"تعذّرت الترجمة، حاول بعد قليل",trAll:n=>`ترجم الإنجليزي (${n.toLocaleString("ar")})`,converted:"✓ صارت مادة",newestFirst:"الأحدث أولاً",oldestFirst:"الأقدم أولاً",trackEmpty:"لم يصل شيء إلى الرصد بعد. اضغط «ارصد الآن» لتبدأ جولة رصد.",lastScan:"آخر رصد",trackCount:n=>`${n.toLocaleString("ar")} تطوراً مرصوداً`,
   runMonitor:"🔍 ارصد الآن",runSync:"↻ زامن النسخة المستقلة",runNoMcp:"الزر لا يعمل في هذا التطبيق أو المتصفح. افتح شهود من متصفح الكمبيوتر، أو اكتب لـClaude في المحادثة: «اكتب قطع اليوم».",runDaily:"✨ اكتب قطع اليوم الآن",runSending:"يبدأ…",runStarted:"بدأ. تصل النتائج خلال دقائق، ثم يتوقف وحده.",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"وافق على طلب الإذن ثم اضغط مرة أخرى.",runDenied:"لم يُسمح للصفحة بتشغيل المهام. فعّلها من قائمة الأذونات أعلى الصفحة.",runFail:"لم يبدأ. جرّب بعد دقيقة.",runLast:"آخر تشغيل",syncEarly:"⚠️ كتابة قطع اليوم لم تنتهِ بعد، فالمزامنة الآن لن تنقل القطع الجديدة. انتظر حتى تختفي رسالة «Claude يعمل الآن»، أو اضغط مرة أخرى للمزامنة رغم ذلك.",runBusy:t=>`⏳ Claude يعمل الآن (بدأ ${t}). تظهر النتائج خلال 10 إلى 15 دقيقة، لا تضغط مرة أخرى.`,
-  navLive:"الرئيسية",feedSearch:"🔍 ابحث في القطع: كلمة، مكان، كائن…",noFound:"لا قطع تطابق بحثك.",navGuide:"📘 دليلي",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
+  navLive:"الرئيسية",radarH:"على رادار شهود",radarSub:"ما نراقبه الآن حول العالم، من الوكالات والهيئات الدولية",radarRead:"اقرأ الشهادة",radarFoot:"روابط لمصادرها الأصلية، تتجدد كل ساعة.",feedSearch:"🔍 ابحث في القطع: كلمة، مكان، كائن…",noFound:"لا قطع تطابق بحثك.",navGuide:"📘 دليلي",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
   loadingStatus:"تتجمع الحيوانات حول النار…",all:"الكل",
   deskTitle:"غرفة التحرير",deskSub:"أعطِ شهود أزمة، واختر من يرويها، أو دع الغابة تختار.",
   dText:"الأزمة أو الخبر والمادة الخام",dTextPh:"الصق الخبر هنا…",
@@ -740,7 +763,7 @@ en:{
   moonNames:["new","waxing crescent","first quarter","waxing gibbous","full","waning gibbous","last quarter","waning crescent"],
   navTrack:"Tracker",trackIntro:"Environmental developments and related crises. Tracking is manual: it only runs when you press “Track now”.",toPiece:"Turn into a piece",ghFirstKey:"Save your GitHub token on this device first: Media tab → «🔑 Connect GitHub» → paste the token → Save, then try again",mkManual:"✍️ Write it myself",mkBridge:"📋 Via a Claude chat now",mkQueue:"🗂️ Send it to Claude to write",mkQueued:"Sent to Claude: written when you press «Write today's pieces» in the Claude copy, then «Sync»",mkWaiting:"⏳ Waiting for Claude",trTrack:"Translate",trTrackBack:"Original",trTrackIng:"Translating…",trTrackFail:"Translation failed, try again shortly",trAll:n=>`Translate English (${n})`,converted:"✓ Turned into a piece",newestFirst:"Newest first",oldestFirst:"Oldest first",trackEmpty:"Nothing in the tracker yet. Press “Track now” to start a scan.",lastScan:"Last scan",trackCount:n=>`${n} ${n===1?"development":"developments"} tracked`,
   runMonitor:"🔍 Track now",runSync:"↻ Sync the standalone copy",runNoMcp:"This button doesn't work in this app or browser. Open Shuhud in a desktop browser, or ask Claude in the chat: “write today's pieces”.",runDaily:"✨ Write today's pieces now",runSending:"Starting…",runStarted:"Started. Results arrive in a few minutes, then it stops on its own.",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"Approve the permission prompt, then press again.",runDenied:"This page isn't allowed to run tasks. Turn it on from the page's permissions menu.",runFail:"Didn't start. Try again in a minute.",runLast:"Last run",syncEarly:"⚠️ Today's pieces are still being written, so syncing now won't carry them. Wait until “Claude is working” disappears, or press again to sync anyway.",runBusy:t=>`⏳ Claude is working (started ${t}). Results appear within 10–15 minutes; no need to press again.`,
-  navLive:"Home",feedSearch:"🔍 Search the pieces: a word, a place, a species…",noFound:"No pieces match your search.",navGuide:"📘 My guide",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
+  navLive:"Home",radarH:"On Shuhud's radar",radarSub:"What we are watching around the world, from agencies and international bodies",radarRead:"Read the testimony",radarFoot:"Links to the original sources, refreshed hourly.",feedSearch:"🔍 Search the pieces: a word, a place, a species…",noFound:"No pieces match your search.",navGuide:"📘 My guide",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
   loadingStatus:"The animals are gathering around the fire…",all:"All",
   deskTitle:"Newsroom",deskSub:"Give the witnesses a crisis, pick who tells it, or let the forest choose.",
   dText:"The crisis, news item or raw material",dTextPh:"Paste the story here…",
@@ -811,7 +834,7 @@ function applyStatic(){
   
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
 }
-function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();renderCats();renderFeed();renderRoster();updateStatus();if(typeof renderSpecies==="function")renderSpecies();if(typeof renderMedia==="function")renderMedia();if(typeof renderPartners==="function")renderPartners();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
+function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();renderCats();renderFeed();try{renderRadar()}catch(e){}renderRoster();updateStatus();if(typeof renderSpecies==="function")renderSpecies();if(typeof renderMedia==="function")renderMedia();if(typeof renderPartners==="function")renderPartners();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
 
 const ROSTER={
   oryx:{e:"🦌",n:"المها العربي",b:"صحراء الربع الخالي",r:"arabia"},
@@ -1034,6 +1057,24 @@ function teaserHTML(raw,lead){
       <div class="tz-f"><span>${r.e} ${esc(r.n)}</span><span class="go">${T("readFull")}</span></div></div>
   </article>`;
 }
+
+/* ---------- «على رادار شهود» ---------- */
+const RADAR_URL=window.SHUHUD_STANDALONE?"/data/feed.json":"https://alshuhud.org/data/feed.json";
+/* trusted sources only, by language: the Arabic page shows Arabic outlets, the English page English ones */
+const RADAR_SRC={ar:["الأناضول","الجزيرة نت","الشرق الأوسط","BBC عربي","أخبار الأمم المتحدة","RT عربي"],en:["UN News","UNEP","WMO","WHO","FAO","NASA Earth Observatory","NOAA","ReliefWeb","GDACS","USGS","BBC","Al Jazeera","The Guardian","Mongabay","Carbon Brief","Yale Environment 360","Climate Home News","Inside Climate News","Euronews","TASS","Down To Earth"]};
+let radarAll=[],radarT=0;
+async function loadRadar(){try{const r=await fetch(RADAR_URL+"?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const l=await r.json();if(Array.isArray(l)){radarAll=l;renderRadar()}}catch(e){}}
+function agoTxt(iso){const m=Math.max(1,Math.round((Date.now()-Date.parse(iso))/60000));const en=isEn();
+  if(m<60)return en?m+" min ago":"منذ "+m+" د";const h=Math.round(m/60);if(h<24)return en?h+" h ago":"منذ "+h+" س";const d=Math.round(h/24);return en?d+" d ago":"منذ "+d+(d===1?" يوم":" أيام")}
+function renderRadar(){const box=$("#radar");if(!box)return;const lang=isEn()?"en":"ar",ok=new Set(RADAR_SRC[lang]),cut=Date.now()-2*864e5,per={},list=[];
+  for(const x of radarAll){if(!x||x.lang!==lang||!ok.has(x.source)||!x.url||Date.parse(x.at)<cut)continue;per[x.source]=(per[x.source]||0)+1;if(per[x.source]>2)continue;list.push(x);if(list.length>=10)break}
+  if(!list.length){box.hidden=true;return}
+  const covered=id=>items.find(p=>p.fromRequest===id);
+  box.innerHTML=`<div class="rd-in"><h2 id="radar-h"><span class="rd-dot" aria-hidden="true"></span>${T("radarH")}</h2><div class="rd-sub">${T("radarSub")}</div><ol>${list.map(x=>{const pc=covered(x.id);
+    return `<li><div class="rd-meta"><b>${esc(x.source)}</b><span>·</span><time datetime="${esc(x.at)}">${agoTxt(x.at)}</time></div><a class="rd-t" href="${esc(x.url)}" target="_blank" rel="noopener nofollow" dir="auto">${esc(x.text)}</a>${pc?`<button class="rd-go" type="button" data-rdopen="${esc(pc.id)}">🐾 ${T("radarRead")}</button>`:""}</li>`}).join("")}</ol><div class="rd-foot">${T("radarFoot")}</div></div>`;
+  box.hidden=false}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-rdopen]");if(!b)return;e.preventDefault();openPiece(b.dataset.rdopen)});
+loadRadar();setInterval(loadRadar,30*60*1000);
 function normAr(t){return String(t||"").toLowerCase().replace(/[\u064B-\u0652\u0640]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه")}
 /* the browser must never bring back an old search by itself (form restore, back button): the box always starts empty */
 function fqReset(){const f=document.getElementById("feed-q");if(f&&f.value&&document.activeElement!==f){f.value="";try{renderFeed(true)}catch(e){}}}
