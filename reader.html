@@ -452,8 +452,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794649906"</script>
-<script src="local.js?v=1794649906"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794653611"</script>
+<script src="local.js?v=1794653611"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-copy", "b-paste", "b-use", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -832,7 +832,7 @@ function renderFeed(force){
   const feed=$("#feed");
   if(!dbReady&&!items.length){feed.innerHTML=`<div class="card empty"><div class="big">🔥</div>${T("emptyLoading")}</div>`;return}
   if(!list.length){feed.innerHTML=`<div class="card empty"><div class="big">🌙</div>${items.length?T("emptyCat"):T("emptyAll")}</div>`;return}
-  const vis=list.slice(0,Math.max(shown,openId?list.findIndex(x=>x.id===openId)+1:0));
+  let vis=list.slice(0,shown);if(openId){const o=list.find(x=>x.id===openId);if(o)vis=[o,...vis.filter(x=>x.id!==openId)]}
   feed.innerHTML=vis.map((raw,k)=>raw.id===openId?cardHTML(raw).replace('<div class="who">',`<div class="close-row"><button class="btn" type="button" data-act="close">${T("closePiece")}</button></div><div class="who">`):teaserHTML(raw,k===0)).join("")+(list.length>vis.length?`<button class="btn more" type="button" data-more>${T("showMore")} (${list.length-vis.length})</button>`:"");
   if(window.__scrollTo){const c=feed.querySelector(`.card[data-id="${CSS.escape(window.__scrollTo)}"]`);if(c){window.__scrollTo=null;setTimeout(()=>c.scrollIntoView({block:"start"}),60)}}
 }
@@ -1824,9 +1824,14 @@ function speciesQuery(raw){const k=raw.animal;return (raw.en&&raw.en.animalName)
 const commonsLink=raw=>"https://commons.wikimedia.org/w/index.php?title=Special:MediaSearch&type=image&search="+encodeURIComponent(speciesQuery(raw));
 let photoTarget=null;
 function pickPhoto(id){photoTarget=id;$("#photo-in").click()}
+async function shrinkImg(file){try{if(!/^image\//.test(file.type)||file.type==="image/gif")return file;
+  const url=URL.createObjectURL(file);const im=await loadImg(url);URL.revokeObjectURL(url);const W=im.naturalWidth||im.width,H=im.naturalHeight||im.height;
+  if(file.size<1.5e6&&Math.max(W,H)<=1920&&/jpe?g/.test(file.type))return file;
+  const k=Math.min(1,1920/Math.max(W,H)),c=document.createElement("canvas");c.width=Math.round(W*k);c.height=Math.round(H*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+  const b=await new Promise(r=>c.toBlob(r,"image/jpeg",.86));return b?new File([b],(file.name||"photo").replace(/\.[^.]+$/,"")+".jpg",{type:"image/jpeg"}):file}catch(e){return file}}
 async function savePhotoTo(id,file){
   if(!assets||!db||id==="draft")return null;
-  toast(T("uploading"));
+  toast(T("uploading"));file=await shrinkImg(file);
   if(typeof ghMode==="function"&&ghMode()&&ghTok()){try{const fid="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const ext=(file.name.match(/\.[a-z0-9]{2,5}$/i)||[".jpg"])[0].toLowerCase();
     await ghApi("media/"+fid+ext,"PUT",{message:"Piece photo: "+id,content:await fileB64(file)});const url="media/"+fid+ext;
     await ghSetPiecePhoto(id,url);await db.collection("dispatches").doc(id).update({imageUrl:url,imageId:""});toast(T("photoSaved")+" · "+T("ghNote"));return url}catch(e){toast(T("photoFail"));return null}}
