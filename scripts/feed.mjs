@@ -40,7 +40,11 @@ const FEEDS = [
 // general feeds keep only stories with an environmental subject, and drop market and price news unless pollution or climate is the point
 const MARKET = /\b(stocks?|shares|prices?|markets?|gold|crude futures|brent|investors?)\b|أسعار|سعر|البورصة|الذهب|الأسهم|الدولار|برنت|العقود الآجلة|المستثمرين/i;
 const STRONG = /spill|pollut|emission|climate|wildlife|species|flood|drought|wildfire|earthquake|تسرب|تلوث|انبعاث|مناخ|حياة برية|فيضان|جفاف|حرائق|زلزال/i;
-const KW = /climate|environment|pollut|oil spill|spill|wildfire|forest fire|deforest|flood|drought|heatwave|heat wave|cyclone|hurricane|typhoon|storm|earthquake|tsunami|volcano|glacier|ice sheet|sea ice|coral|reef|ocean|species|extinct|wildlife|biodiversity|endangered|emission|carbon|methane|fossil fuel|renewable|oil spill|landslide|\bbees?\b|pollinat|butterfl|insect|\bbirds?\b|whale|shark|turtle|nature|wildlife trade|poaching|deforestation|desertification|air quality|smog|heat record|data cent|water crisis|water shortage|famine|locust|bird flu|avian|ebola|outbreak|el niño|el nino|cop31|cop17|unep|iucn|wmo|مناخ|بيئ|تلوث|تسرب|حرائق|حريق غابات|غابات|فيضان|فيضانات|سيول|جفاف|موجة حر|إعصار|عاصفة|زلزال|تسونامي|بركان|جليد|شعاب|مرجان|انقراض|حياة برية|تنوع بيولوجي|انبعاثات|كربون|ميثان|تسرب نفطي|بقعة نفطية|نحل|فراش|حشرات|طيور|حيتان|سلاحف|الطبيعة|طاقة متجددة|انهيار أرضي|انجراف|التصحر|جودة الهواء|ضباب دخاني|الصيد الجائر|مراكز البيانات|شح المياه|أزمة المياه|مجاعة|جراد|إنفلونزا الطيور|إيبولا|تفشي|النينيو|التصحر|كوب31/i;
+const KW = /climate|environment|pollut|oil spill|spill|wildfire|forest fire|deforest|flood|drought|heatwave|heat wave|cyclone|hurricane|typhoon|tornado|earthquake|tsunami|volcano|glacier|ice sheet|sea ice|coral|reef|species|extinct|wildlife|biodiversity|endangered|emission|carbon|methane|fossil fuel|renewable|landslide|\bbees?\b|pollinat|butterfl|insect|\bbirds?\b|whale|shark|turtle|poaching|desertification|air quality|smog|heat record|water crisis|water shortage|locust|bird flu|avian|ebola|cholera|el niño|el nino|cop31|unep|iucn|wmo|مناخ|بيئ|تلوث|تسرب|حرائق|حريق غابات|غابات|فيضان|سيول|جفاف|موجة حر|حرارة قياسية|إعصار|زلزال|تسونامي|بركان|جليد|شعاب|مرجان|انقراض|حياة برية|تنوع بيولوجي|انبعاثات|كربون|ميثان|تسرب نفطي|بقعة نفطية|نحل|فراش|حشرات|طيور|حيتان|سلاحف|طاقة متجددة|انهيار أرضي|انهيارات أرضية|التصحر|تصحر|جودة الهواء|ضباب دخاني|الصيد الجائر|شح المياه|أزمة المياه|جراد|إنفلونزا الطيور|إيبولا|كوليرا|النينيو|كوب31|كوب 31|ارتفاع البحر|ارتفاع مستوى البحر|sea level|sea-level|plastic|sewage|nurdle|rewild|nature restoration|بلاستيك|نفايات|الصرف الصحي/i;
+// words used as metaphors or in sport and culture headlines
+const OFFTOPIC = /nvidia|إنفيديا|انفيديا|hockey|هوكي|football|soccer|كرة القدم|مونديال|منتخب|الدوري|جائزة|award|festival|مهرجان|\bfilm\b|فيلم|بورصة/i;
+// a general-news headline must itself name the environmental subject: words in the summary alone let politics through
+export const keepGeneral = (title) => KW.test(title) && !OFFTOPIC.test(title) && !(MARKET.test(title) && !STRONG.test(title));
 
 const CAT = [
   ["التلوث", /pollut|spill|plastic|تلوث|تسرب|نفايات/i],
@@ -75,7 +79,7 @@ export function parse(xml, [source, , lang, filter]) {
     const d = new Date(when); const at = isNaN(d) ? new Date().toISOString() : d.toISOString();
     if (!title || !url) return null;
     const txt = title + " " + summary;
-    if (filter instanceof RegExp ? !filter.test(title) : filter && (!KW.test(txt) || (MARKET.test(title) && !STRONG.test(title)))) return null;
+    if (filter instanceof RegExp ? !filter.test(title) : filter && !keepGeneral(title)) return null;
     const category = CAT.find(([, re]) => re.test(title + " " + summary))[0];
     const item = { id: "r-" + hash(url), at, date: at.slice(0, 10), text: title, source, url, category, lang, rss: true, createdAt: new Date().toISOString() };
     if (lang === "en") item.en = { text: title, source };
@@ -86,6 +90,9 @@ export function parse(xml, [source, , lang, filter]) {
 async function main() {
   const path = "data/feed.json";
   let old = []; try { old = JSON.parse(readFileSync(path, "utf8")); } catch {}
+  // stored headlines from general feeds are checked again, so a looser earlier rule leaves nothing behind
+  const general = new Set(FEEDS.filter((f) => f[3] === true).map((f) => f[0]));
+  old = old.filter((x) => !general.has(x.source) || keepGeneral(x.text));
   const seen = new Map(old.map((x) => [x.id, x]));
   const norm = (t) => t.toLowerCase().replace(/[^\p{L}\p{N} ]/gu, "").slice(0, 80);
   const titles = new Set(old.map((x) => norm(x.text)));
