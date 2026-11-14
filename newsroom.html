@@ -662,8 +662,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794663619"</script>
-<script src="local.js?v=1794663619"></script>
+<script>window.SHUHUD_BUILD="1794663816"</script>
+<script src="local.js?v=1794663816"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -885,9 +885,10 @@ const CATS=["الكل","الحروب والبيئة","التقنية والذك�
 /* reader mode: the public page for readers, with no newsroom and no controls */
 const READER=!!window.SHUHUD_READER;if(READER)document.body.classList.add("reader");
 /* photos stored inside Claude (/_blob/) can't load on the public site */
-const pubImg=u=>u&&!(window.SHUHUD_STANDALONE&&String(u).startsWith("/_blob/"))?u:"";
+const pubImg=u=>!u||(window.SHUHUD_STANDALONE&&String(u).startsWith("/_blob/"))?"":window.SHUHUD_STANDALONE&&/^media\//.test(u)?"/"+u:u;
 /* piece photos from Claude are copied by the sync to media/<id>.jpg */
-const pieceImg=u=>!u?"":window.SHUHUD_STANDALONE&&String(u).startsWith("/_blob/")?"media/"+String(u).slice(7).replace(/[^\w-]/g,"")+".jpg":u;
+/* site photos are addressed from the site root: a piece opened at /p/<name> must still find /media/… */
+const pieceImg=u=>{if(!u)return"";u=String(u);if(window.SHUHUD_STANDALONE){if(u.startsWith("/_blob/"))return "/media/"+u.slice(7).replace(/[^\w-]/g,"")+".jpg";if(/^media\//.test(u))return "/"+u}return u};
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let byAnimal=null,armedPhoto=null,db=null,sample=null,assets=null,items=[],cat="الكل",chosen="auto",att=[],draft=null,armed=null,dbReady=false,translatingId=null,statusMsg="";
 const isWarn=s=>/تحقق|verif/i.test(s||"");
@@ -1009,7 +1010,7 @@ function pieceUrl(id){return "https://alshuhud.org/p/"+(SHORTID[id]?SHORTID[id]:
 function bigImg(u){u=String(u||"");const m=/^(https:\/\/upload\.wikimedia\.org\/.+\/thumb\/.+\/)(\d+)px-([^\/]+)$/.exec(u);return m&&+m[2]<960?m[1]+"960px-"+m[3]:u}
 function imgFail(el){
   /* a photo just added on the website is on GitHub before the site has published it: show it from GitHub meanwhile */
-  {const s0=el.getAttribute("src")||"",m=/(?:^|alshuhud\.org\/)(media\/g_[\w.-]+)$/.exec(s0);if(m&&!el.dataset.raw){el.dataset.raw="1";el.src="https://raw.githubusercontent.com/Kalslami2013/shuhud/main/"+m[1];return}}
+  {const s0=el.getAttribute("src")||"",m=/(?:^\/?|alshuhud\.org\/)(media\/g_[\w.-]+)$/.exec(s0);if(m&&!el.dataset.raw){el.dataset.raw="1";el.src="https://raw.githubusercontent.com/Kalslami2013/shuhud/main/"+m[1];return}}
   const fb=el.dataset.fb;if(fb&&el.getAttribute("src")!==fb){el.removeAttribute("data-fb");el.src=fb;return}
   /* the event photo would not load: the narrator's photo takes the whole frame */
   const nr=el.parentNode&&el.parentNode.querySelector("img.narr");if(nr&&nr!==el){el.dataset.fb=nr.getAttribute("src");el.src=nr.dataset.full||nr.src;nr.remove();return}const w=el.closest(".tz-img");if(w){w.classList.add("noimg");el.remove()}else{const a=el.closest(".att-wrap");if(a)a.hidden=true}}
@@ -2622,7 +2623,7 @@ Object.assign(DICT.en,{
 let media=[],mType="all",mArmed=null,mBusy=false;
 const M_TYPES=["image","card","video","carousel","info"];
 /* files uploaded inside Claude are copied to media/ on the public site by the sync task */
-const mSrc=f=>{const u=String(f.url||"");if(window.SHUHUD_STANDALONE)return u.startsWith("/_blob/")?"media/"+f.id+(f.ext||""):u;
+const mSrc=f=>{const u=String(f.url||"");if(window.SHUHUD_STANDALONE)return u.startsWith("/_blob/")?"/media/"+f.id+(f.ext||""):/^media\//.test(u)?"/"+u:u;
   /* the Claude copy also shows media made in the website's newsroom (media/g_*): those live on alshuhud.org */
   return /^media\//.test(u)?"https://alshuhud.org/"+u:u};
 const canAddMedia=()=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE)||(typeof ghMode==="function"&&ghMode()&&!!ghTok());
