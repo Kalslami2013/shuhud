@@ -662,8 +662,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794661683"</script>
-<script src="local.js?v=1794661683"></script>
+<script>window.SHUHUD_BUILD="1794661968"</script>
+<script src="local.js?v=1794661968"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1037,7 +1037,7 @@ function renderFeed(force){
   let list=cat==="الكل"?items:items.filter(i=>i.category===cat);
   /* search: every word must appear somewhere in the piece (Arabic or English, letters normalised) */
   const fq=normAr(($("#feed-q")||{}).value||"").trim();
-  if(fq){const ws=fq.split(/\s+/).filter(Boolean);list=list.filter(i=>{const e=i.en||{};const hay=normAr([i.headline,i.crisis,i.angle,i.place,i.animalName,i.animalHabitat,i.fact,i.dispatch,i.category,e.headline,e.crisis,e.angle,e.place,e.animalName,e.fact].filter(Boolean).join(" "));return ws.every(w=>hay.includes(w))})}
+  if(fq){const ws=fq.split(/\s+/).filter(Boolean);list=list.filter(i=>{const e=i.en||{};const src=(Array.isArray(i.sources)?i.sources:[]).map(x=>(x&&(x.name||"")+" "+(x.url||""))||"").join(" ");const hay=normAr([i.headline,i.crisis,i.angle,i.place,i.animalName,i.animalHabitat,i.fact,i.dispatch,i.category,e.headline,e.crisis,e.angle,e.place,e.animalName,e.fact,src].filter(Boolean).join(" "));return ws.every(w=>hay.includes(w))})}
   if(byAnimal)list=list.filter(i=>spKey(i)===byAnimal);
   /* newest event first (the date shown on each card), then newest written */
   /* newest published first (what was just added sits on top), then the newest event */
@@ -1057,7 +1057,7 @@ function idFromPath(){const m=location.pathname.match(/^\/p\/([^\/]+?)(?:\.html)
 /* a piece page sends people here as /?p=<id>: open that piece and show its short address */
 (()=>{try{const q=new URLSearchParams(location.search).get("p");if(q&&/^[\w-]{1,120}$/.test(q)){openId=q;window.__scrollTo=q;if(PIECE_URLS)history.replaceState({p:q},"","/p/"+encodeURIComponent(q)+".html"+location.hash)}}catch(e){}})();
 addEventListener("popstate",()=>{if(!PIECE_URLS)return;const id=idFromPath();if(id===openId)return;openId=id;renderFeed(true);if(id){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({block:"start"})}});
-function openPiece(id){openId=openId===id?null:id;setPieceUrl(openId);renderFeed();if(openId){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({behavior:"smooth",block:"start"})}}
+function openPiece(id){openId=openId===id?null:id;{const fqi=$("#feed-q");if(openId&&fqi&&fqi.value){fqi.value="";fqi.blur()}}setPieceUrl(openId);renderFeed(true);if(openId){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({behavior:"smooth",block:"start"})}}
 $("#feed").addEventListener("click",e=>{if(e.target.closest("[data-more]")){shown+=12;renderFeed();return}const t=e.target.closest("[data-open]");if(t)openPiece(t.dataset.open)});
 $("#feed").addEventListener("keydown",e=>{const t=e.target.closest&&e.target.closest("[data-open]");if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openPiece(t.dataset.open)}});
 function updateStatus(){

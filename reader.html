@@ -456,8 +456,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794661683"</script>
-<script src="local.js?v=1794661683"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794661968"</script>
+<script src="local.js?v=1794661968"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -833,7 +833,7 @@ function renderFeed(force){
   let list=cat==="الكل"?items:items.filter(i=>i.category===cat);
   /* search: every word must appear somewhere in the piece (Arabic or English, letters normalised) */
   const fq=normAr(($("#feed-q")||{}).value||"").trim();
-  if(fq){const ws=fq.split(/\s+/).filter(Boolean);list=list.filter(i=>{const e=i.en||{};const hay=normAr([i.headline,i.crisis,i.angle,i.place,i.animalName,i.animalHabitat,i.fact,i.dispatch,i.category,e.headline,e.crisis,e.angle,e.place,e.animalName,e.fact].filter(Boolean).join(" "));return ws.every(w=>hay.includes(w))})}
+  if(fq){const ws=fq.split(/\s+/).filter(Boolean);list=list.filter(i=>{const e=i.en||{};const src=(Array.isArray(i.sources)?i.sources:[]).map(x=>(x&&(x.name||"")+" "+(x.url||""))||"").join(" ");const hay=normAr([i.headline,i.crisis,i.angle,i.place,i.animalName,i.animalHabitat,i.fact,i.dispatch,i.category,e.headline,e.crisis,e.angle,e.place,e.animalName,e.fact,src].filter(Boolean).join(" "));return ws.every(w=>hay.includes(w))})}
   if(byAnimal)list=list.filter(i=>spKey(i)===byAnimal);
   /* newest event first (the date shown on each card), then newest written */
   /* newest published first (what was just added sits on top), then the newest event */
@@ -853,7 +853,7 @@ function idFromPath(){const m=location.pathname.match(/^\/p\/([^\/]+?)(?:\.html)
 /* a piece page sends people here as /?p=<id>: open that piece and show its short address */
 (()=>{try{const q=new URLSearchParams(location.search).get("p");if(q&&/^[\w-]{1,120}$/.test(q)){openId=q;window.__scrollTo=q;if(PIECE_URLS)history.replaceState({p:q},"","/p/"+encodeURIComponent(q)+".html"+location.hash)}}catch(e){}})();
 addEventListener("popstate",()=>{if(!PIECE_URLS)return;const id=idFromPath();if(id===openId)return;openId=id;renderFeed(true);if(id){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({block:"start"})}});
-function openPiece(id){openId=openId===id?null:id;setPieceUrl(openId);renderFeed();if(openId){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({behavior:"smooth",block:"start"})}}
+function openPiece(id){openId=openId===id?null:id;{const fqi=$("#feed-q");if(openId&&fqi&&fqi.value){fqi.value="";fqi.blur()}}setPieceUrl(openId);renderFeed(true);if(openId){const c=$(`#feed .card[data-id="${CSS.escape(id)}"]`);if(c)c.scrollIntoView({behavior:"smooth",block:"start"})}}
 $("#feed").addEventListener("click",e=>{if(e.target.closest("[data-more]")){shown+=12;renderFeed();return}const t=e.target.closest("[data-open]");if(t)openPiece(t.dataset.open)});
 $("#feed").addEventListener("keydown",e=>{const t=e.target.closest&&e.target.closest("[data-open]");if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openPiece(t.dataset.open)}});
 function updateStatus(){
