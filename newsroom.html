@@ -705,8 +705,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794684366"</script>
-<script src="local.js?v=1794684366"></script>
+<script>window.SHUHUD_BUILD="1794685546"</script>
+<script src="local.js?v=1794685546"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -947,7 +947,7 @@ document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{const was
   /* the front page (live) keeps a clean address: alshuhud.org with nothing after it */
   if(v==="live"){if(/^\/p\//.test(location.pathname))openId=null;clearHash()}
   else if(/^\/p\//.test(location.pathname)){openId=null;history.replaceState(null,"","/#"+v)}else location.hash=v;show(v);
-  if(b.dataset.view==="live"&&(was||openId)){openId=null;editId=null;try{stopNarration&&stopNarration()}catch(e){}renderFeed(true);const f=$("#cats")||$("#feed");if(f)f.scrollIntoView({behavior:"smooth",block:"start"})}});
+  if(b.dataset.view==="live"&&(was||openId||byAnimal)){openId=null;editId=null;byAnimal=null;try{stopNarration&&stopNarration()}catch(e){}renderFeed(true);const f=$("#cats")||$("#feed");if(f)f.scrollIntoView({behavior:"smooth",block:"start"})}});
 addEventListener("hashchange",()=>show(location.hash.slice(1)));
 show(location.hash.slice(1));
 document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
