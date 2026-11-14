@@ -1,28 +1,42 @@
 name: Tracker feed
+# GitHub delays scheduled runs by hours, so one run keeps going for ~5 hours,
+# refreshing the feed every hour, then starts the next run itself.
+# Free: the repository is public. It does not use Claude.
 on:
   schedule:
-    - cron: "17 * * * *"
+    - cron: "17 */3 * * *"
   workflow_dispatch:
 permissions:
   contents: write
+  actions: write
 concurrency:
-  group: data-writes
+  group: feed-loop
   cancel-in-progress: false
 jobs:
   feed:
     runs-on: ubuntu-latest
+    timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: node scripts/feed.mjs
-      - name: Commit if changed
+      - name: Refresh every hour (5 rounds)
         run: |
           git config user.name "shuhud-bot"
           git config user.email "shuhud-bot@users.noreply.github.com"
-          git add data/feed.json data/feed-status.json
-          git diff --cached --quiet && exit 0
-          git commit -m "Tracker: hourly feed update"
-          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
-          exit 1
+          for round in 1 2 3 4 5; do
+            git pull -q --rebase || true
+            node scripts/feed.mjs || echo "feed round $round failed"
+            git add data/feed.json data/feed-status.json
+            if ! git diff --cached --quiet; then
+              git commit -q -m "Tracker: hourly feed update"
+              for i in 1 2 3; do git pull -q --rebase && git push -q && break; sleep 7; done
+            fi
+            [ "$round" = 5 ] || sleep 3540
+          done
+      - name: Start the next run
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run feed.yml --ref main -R "$GITHUB_REPOSITORY"
