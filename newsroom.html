@@ -303,6 +303,8 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
 @media (min-width:1380px){
   #v-live{position:relative}
   .radar{position:absolute;top:0;bottom:0;left:calc(50% - 380px - 22px - 284px);width:284px;margin:0;padding:0}
+  /* English page: the column moves to the reader's right, mirroring the Arabic page */
+  html[dir=ltr] .radar{left:auto;right:calc(50% - 380px - 22px - 284px)}
   .radar .rd-in{position:sticky;top:0;max-height:calc(100vh - 12px);overflow:auto;padding-top:0}
   .radar .rd-head{position:sticky;top:0;z-index:2;margin:0 -12px 8px;padding:13px 12px 8px;background:linear-gradient(180deg,rgba(28,46,36,.99),rgba(20,34,27,.97));border-bottom:1px solid rgba(242,184,75,.18);border-radius:18px 18px 0 0}
   .radar ol{display:block;overflow:visible}
@@ -701,8 +703,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794672548"</script>
-<script src="local.js?v=1794672548"></script>
+<script>window.SHUHUD_BUILD="1794672670"</script>
+<script src="local.js?v=1794672670"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
