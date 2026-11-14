@@ -280,7 +280,7 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
 .radar{position:relative;z-index:2;margin:0 auto 14px;max-width:760px;padding:0 16px}
 .radar .rd-in{background:rgba(9,18,14,.86);border:1px solid var(--line);border-radius:16px;padding:12px 12px 8px;backdrop-filter:blur(6px)}
 .radar h2{margin:0;font-family:var(--f-display);font-size:21px;color:var(--amber);display:flex;align-items:center;gap:8px}
-.radar .rd-sub{font-size:12px;color:var(--faint,#8a9a8a);margin:2px 0 8px}
+.radar .rd-sub{font-size:12px;color:var(--faint,#8a9a8a);margin:2px 0 0}.radar .rd-head{margin-bottom:8px}
 .radar ol{list-style:none;margin:0;padding:0;display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
 .radar li{flex:0 0 78%;scroll-snap-align:start;border:1px solid var(--line);border-radius:12px;padding:9px 11px;background:rgba(0,0,0,.18)}
 .radar .rd-meta{display:flex;gap:6px;align-items:center;font-size:11.5px;color:var(--faint,#8a9a8a);margin-bottom:3px}
@@ -306,7 +306,8 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
 @media (min-width:1380px){
   #v-live{position:relative}
   .radar{position:absolute;top:0;bottom:0;left:calc(50% - 380px - 22px - 284px);width:284px;margin:0;padding:0}
-  .radar .rd-in{position:sticky;top:84px;max-height:calc(100vh - 100px);overflow:auto}
+  .radar .rd-in{position:sticky;top:0;max-height:calc(100vh - 12px);overflow:auto;padding-top:0}
+  .radar .rd-head{position:sticky;top:0;z-index:2;margin:0 -12px 8px;padding:13px 12px 8px;background:linear-gradient(180deg,rgba(28,46,36,.99),rgba(20,34,27,.97));border-bottom:1px solid rgba(242,184,75,.18);border-radius:18px 18px 0 0}
   .radar ol{display:block;overflow:visible}
   .radar li{margin-bottom:8px}
 }
@@ -415,6 +416,7 @@ body.reader .rc .cnt.none{visibility:hidden}
     <div class="clock" data-i18n="clock">لو كان عمر الأرض يوماً واحداً، لظهر الإنسان قبل منتصف الليل بـ <b>٦ ثوانٍ</b> فقط</div>
   </header>
 
+  <div id="nav-mark" aria-hidden="true" style="height:0"></div>
   <nav class="main" role="tablist">
     <button role="tab" data-view="live" aria-selected="true" data-i18n="navLive">الرئيسية</button>
     
@@ -493,8 +495,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794672239"</script>
-<script src="local.js?v=1794672239"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794672548"</script>
+<script src="local.js?v=1794672548"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -731,7 +733,7 @@ function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB"
 
 /* ---------- views ---------- */
 const VIEWS=["live","track","desk","corr","ids","red","media","about","guide"];
-function show(v){try{if(NARR.playing)stopNarration()}catch(e){}if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track"||v==="guide")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
+function show(v){try{if(NARR.playing)stopNarration()}catch(e){}setTimeout(()=>{try{placeRadar()}catch(e){}},0);if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track"||v==="guide")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
 function clearHash(){if(!location.hash&&!/^\/p\//.test(location.pathname))return;try{history.pushState(null,"",/^\/p\//.test(location.pathname)?"/":location.pathname+location.search)}catch(e){location.hash=""}}
 document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{const was=openId,v=b.dataset.view;
   /* the front page (live) keeps a clean address: alshuhud.org with nothing after it */
@@ -879,9 +881,14 @@ function renderRadar(){const box=$("#radar");if(!box)return;const lang=isEn()?"e
   for(const x of radarAll){if(!x||x.lang!==lang||!ok.has(x.source)||!x.url||Date.parse(x.at)<cut)continue;per[x.source]=(per[x.source]||0)+1;if(per[x.source]>2)continue;list.push(x);if(list.length>=10)break}
   if(!list.length){box.hidden=true;return}
   const covered=id=>items.find(p=>p.fromRequest===id);
-  box.innerHTML=`<div class="rd-in"><h2 id="radar-h"><span class="rd-scope" aria-hidden="true"></span>${T("radarH")}<span class="rd-dot" aria-hidden="true" style="margin-inline-start:auto"></span></h2><div class="rd-sub">${T("radarSub")}</div><ol>${list.map(x=>{const pc=covered(x.id);
+  box.innerHTML=`<div class="rd-in"><div class="rd-head"><h2 id="radar-h"><span class="rd-scope" aria-hidden="true"></span>${T("radarH")}<span class="rd-dot" aria-hidden="true" style="margin-inline-start:auto"></span></h2><div class="rd-sub">${T("radarSub")}</div></div><ol>${list.map(x=>{const pc=covered(x.id);
     return `<li><div class="rd-meta"><b>${esc(x.source)}</b><span>·</span><time datetime="${esc(x.at)}">${agoTxt(x.at)}</time></div><a class="rd-t" href="${esc(x.url)}" target="_blank" rel="noopener nofollow" dir="auto">${esc(x.text)}</a>${pc?`<button class="rd-go" type="button" data-rdopen="${esc(pc.id)}">🐾 ${T("radarRead")}</button>`:""}</li>`}).join("")}</ol><div class="rd-foot">${T("radarFoot")}</div></div>`;
-  box.hidden=false}
+  box.hidden=false;placeRadar()}
+/* on wide screens the column starts level with the tab bar and stays beside it while scrolling */
+function placeRadar(){const box=$("#radar"),mk=document.getElementById("nav-mark"),vl=document.getElementById("v-live");if(!box||!mk||!vl)return;
+  if(!matchMedia("(min-width:1380px)").matches){box.style.top="";return}
+  box.style.top=Math.round(mk.getBoundingClientRect().top-vl.getBoundingClientRect().top)+"px"}
+addEventListener("resize",()=>{try{placeRadar()}catch(e){}});setTimeout(()=>{try{placeRadar()}catch(e){}},1500);
 document.addEventListener("click",e=>{const b=e.target.closest("[data-rdopen]");if(!b)return;e.preventDefault();openPiece(b.dataset.rdopen)});
 loadRadar();setInterval(loadRadar,30*60*1000);
 function normAr(t){return String(t||"").toLowerCase().replace(/[\u064B-\u0652\u0640]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه")}
