@@ -706,8 +706,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794689027"</script>
-<script src="local.js?v=1794689027"></script>
+<script>window.SHUHUD_BUILD="1794689717"</script>
+<script src="local.js?v=1794689717"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1066,7 +1066,14 @@ function narrImg(raw){let k="",d={};try{k=spKey(raw);d=spDocs[k]||{}}catch(e){}
   const own=pubImg(d.imageUrl)||d.extImg;if(own)return {img:own,credit:d.credit||""};
   const n=raw.en&&raw.en.animalName;if(n&&WIKIIMG[n])return {img:WIKIIMG[n],credit:"Wikipedia"};
   try{const s=spInfo(k);const w=spWiki[k];if(w&&w.img)return {img:w.img,credit:"Wikipedia"};if(s.img&&!items.some(x=>x.id!==raw.id&&pieceImg(x.imageUrl)===s.img))return {img:s.img,credit:s.credit||""}}catch(e){}
+  if(n)wikiNarr(n);
   return {img:"",credit:""}}
+/* a narrator with no card and no stored photo yet (a new species): its Wikipedia photo is fetched once, then the feed is drawn again */
+const wikiTried=new Set();let wikiNarrT=null;
+function wikiNarr(n){if(wikiTried.has(n)||(typeof spWikiOff!=="undefined"&&spWikiOff))return;wikiTried.add(n);
+  fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(n.replace(/ /g,"_"))).then(r=>r.ok?r.json():null).then(j=>{
+    const src=j&&j.thumbnail&&j.thumbnail.source;if(!src)return;WIKIIMG[n]=src.replace("//thumb.wikimedia.org/","//upload.wikimedia.org/").replace(/\?.*$/,"");
+    clearTimeout(wikiNarrT);wikiNarrT=setTimeout(()=>{try{if(!editId)renderFeed()}catch(_){}},400)}).catch(()=>{})}
 /* the event's own photo fills the frame and the narrator sits in a small circle in its corner; without one, the narrator's photo fills it */
 function shownImg(raw){const own=pieceImg(raw.imageUrl),nr=narrImg(raw);
   if(own)return {img:own,credit:raw.imageCredit||"",narr:nr.img&&nr.img!==own?nr.img:""};return {img:nr.img,credit:nr.credit,narr:""}}

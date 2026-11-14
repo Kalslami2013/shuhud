@@ -500,8 +500,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794689027"</script>
-<script src="local.js?v=1794689027"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794689717"</script>
+<script src="local.js?v=1794689717"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -862,7 +862,14 @@ function narrImg(raw){let k="",d={};try{k=spKey(raw);d=spDocs[k]||{}}catch(e){}
   const own=pubImg(d.imageUrl)||d.extImg;if(own)return {img:own,credit:d.credit||""};
   const n=raw.en&&raw.en.animalName;if(n&&WIKIIMG[n])return {img:WIKIIMG[n],credit:"Wikipedia"};
   try{const s=spInfo(k);const w=spWiki[k];if(w&&w.img)return {img:w.img,credit:"Wikipedia"};if(s.img&&!items.some(x=>x.id!==raw.id&&pieceImg(x.imageUrl)===s.img))return {img:s.img,credit:s.credit||""}}catch(e){}
+  if(n)wikiNarr(n);
   return {img:"",credit:""}}
+/* a narrator with no card and no stored photo yet (a new species): its Wikipedia photo is fetched once, then the feed is drawn again */
+const wikiTried=new Set();let wikiNarrT=null;
+function wikiNarr(n){if(wikiTried.has(n)||(typeof spWikiOff!=="undefined"&&spWikiOff))return;wikiTried.add(n);
+  fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(n.replace(/ /g,"_"))).then(r=>r.ok?r.json():null).then(j=>{
+    const src=j&&j.thumbnail&&j.thumbnail.source;if(!src)return;WIKIIMG[n]=src.replace("//thumb.wikimedia.org/","//upload.wikimedia.org/").replace(/\?.*$/,"");
+    clearTimeout(wikiNarrT);wikiNarrT=setTimeout(()=>{try{if(!editId)renderFeed()}catch(_){}},400)}).catch(()=>{})}
 /* the event's own photo fills the frame and the narrator sits in a small circle in its corner; without one, the narrator's photo fills it */
 function shownImg(raw){const own=pieceImg(raw.imageUrl),nr=narrImg(raw);
   if(own)return {img:own,credit:raw.imageCredit||"",narr:nr.img&&nr.img!==own?nr.img:""};return {img:nr.img,credit:nr.credit,narr:""}}
