@@ -557,8 +557,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794639018"</script>
-<script src="local.js?v=1794639018"></script>
+<script>window.SHUHUD_BUILD="1794639922"</script>
+<script src="local.js?v=1794639922"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2331,9 +2331,11 @@ Object.assign(DICT.en,{
 let media=[],mType="all",mArmed=null,mBusy=false;
 const M_TYPES=["image","card","video","carousel","info"];
 /* files uploaded inside Claude are copied to media/ on the public site by the sync task */
-const mSrc=f=>window.SHUHUD_STANDALONE&&String(f.url||"").startsWith("/_blob/")?"media/"+f.id+(f.ext||""):f.url;
+const mSrc=f=>{const u=String(f.url||"");if(window.SHUHUD_STANDALONE)return u.startsWith("/_blob/")?"media/"+f.id+(f.ext||""):u;
+  /* the Claude copy also shows media made in the website's newsroom (media/g_*): those live on alshuhud.org */
+  return /^media\//.test(u)?"https://alshuhud.org/"+u:u};
 const canAddMedia=()=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE)||(typeof ghMode==="function"&&ghMode()&&!!ghTok());
-const canDelMedia=m=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE)||(typeof ghMode==="function"&&ghMode()&&!!ghTok()&&String(m.id).startsWith("g_"));
+const canDelMedia=m=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE&&!m._site)||(typeof ghMode==="function"&&ghMode()&&!!ghTok()&&String(m.id).startsWith("g_"));
 /* a video shows its cover (title card) before it plays; older videos without one open on the title frame */
 const vidTag=(m,f)=>m.poster?`<video src="${esc(mSrc(f))}" poster="${esc(/^media\/g_/.test(m.poster.url||"")&&Date.now()-Date.parse(m.createdAt||0)<9e5?"https://raw.githubusercontent.com/Kalslami2013/shuhud/main/"+m.poster.url:mSrc(m.poster))}" controls playsinline preload="metadata"></video>`:`<video src="${esc(mSrc(f))}#t=2" controls playsinline preload="metadata"></video>`;
 function mediaHTML(m){
@@ -2347,6 +2349,8 @@ function mediaHTML(m){
     <span class="tag">${esc(T("mTypes")[m.type]||"")}</span>${t?`<h3>${esc(t)}</h3>`:""}${c?`<p>${esc(c)}</p>`:""}
     <div class="md-ft"><span class="note">${fmtDate(m.createdAt)}</span>${canDelMedia(m)?`<button class="btn danger" type="button" data-md="del">${mArmed===m.id?T("mDelConfirm"):T("mDel")}</button>`:""}</div></div></article>`;
 }
+let mediaDb=[],mediaSite=[];
+function mergeMedia(){const seen=new Set(mediaDb.map(m=>m.id));media=[...mediaDb,...mediaSite.filter(m=>!seen.has(m.id))].sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));renderMedia()}
 function renderMedia(){
   const g=$("#media-grid");if(!g)return;
   $("#media-add-btn").hidden=!canAddMedia();if(!canAddMedia())$("#media-add").hidden=true;if(typeof renderGh==="function")renderGh();
@@ -2581,7 +2585,9 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
     updateStatus();renderCats();renderFeed();renderRoster();renderTrack();renderSpecies();
   },()=>{dbReady=true;statusMsg="feedFail";updateStatus();renderFeed()});
   db.collection("partners").onSnapshot(snap=>{partners=snap.docs.map(d=>({id:d.id,...d.data()}));renderPartners()},()=>{});
-  db.collection("media").orderBy("createdAt","desc").limit(300).onSnapshot(snap=>{media=snap.docs.map(d=>({id:d.id,...d.data()}));renderMedia()},()=>{});
+  db.collection("media").orderBy("createdAt","desc").limit(300).onSnapshot(snap=>{mediaDb=snap.docs.map(d=>({id:d.id,...d.data()}));mergeMedia()},()=>{});
+  /* media made on the website (newsroom.html with the GitHub key) sit in data/media-gh.json: show them here too, read-only */
+  if(!window.SHUHUD_STANDALONE)fetch("https://alshuhud.org/data/media-gh.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(l=>{if(Array.isArray(l)){mediaSite=l.filter(x=>x&&x.id&&!x._del).map(x=>({...x,_site:true}));mergeMedia()}}).catch(()=>{});
   db.collection("species").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{const x=d.data();m[x.key||d.id]=x});spDocs=m;spLoaded=true;renderSpecies();try{if(!NARR.playing&&!openId)renderFeed()}catch(_){}},()=>{});
   db.collection("monitor").orderBy("at","desc").limit(300).onSnapshot(snap=>{trackDb=snap.docs.map(d=>({id:d.id,...d.data()}));mergeTrack()},()=>{});
   if(!window.SHUHUD_STANDALONE){loadSiteFeed();setInterval(loadSiteFeed,30*60*1000)}
