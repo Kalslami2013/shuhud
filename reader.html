@@ -456,8 +456,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794663428"</script>
-<script src="local.js?v=1794663428"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794663619"</script>
+<script src="local.js?v=1794663619"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -775,7 +775,7 @@ function cardHTML(raw){
   return `<article class="card" style="--th:${THEMES[themeOf(raw)].ui}" data-id="${esc(raw.id)}" ${i._missing?'dir="rtl" lang="ar"':""}>
     ${miss}
     <div class="who"><div class="ava">${r.e}</div><div><div class="nm">${esc(r.n)}</div><div class="bt">${esc(r.b)}</div></div>
-      <div class="tags"><span class="tag">${esc(catName(raw.category||""))}</span><span>${esc(i.place||"")}</span><span>${fmtDate(i.eventDate||i.createdAt)}</span></div></div>
+      <div class="tags"><span class="tag">${esc(catName(raw.category||""))}</span><span>${esc(i.place||"")}</span><span>${fmtDate(i.createdAt||i.eventDate)}</span></div></div>
     ${editId===raw.id?editHTML(raw):richHTML((()=>{const s=shownImg(raw);return {...i,imageUrl:s.img,imageCredit:s.credit,_narr:s.narr}})(),false)}
     <div class="foot"${editId===raw.id?" hidden":""}><span class="src">${src?T("sources")+": "+src:""}${raw.kind==="desk"?" · "+T("fromDesk"):""}</span>
       ${"speechSynthesis" in window?`<button class="btn" data-act="say">${T("listen")}</button>`:""}
@@ -823,7 +823,7 @@ function teaserHTML(raw,lead){
   const i=L(raw),r=who(i);const sh=shownImg(raw),img=sh.img;
   return `<article class="tz${lead?" lead":""}" style="--th:${THEMES[themeOf(raw)].ui}" data-open="${esc(raw.id)}" tabindex="0" role="link" aria-label="${esc(i.headline)}">
     <div class="tz-img${img?"":" noimg"}">${img?`<img src="${esc(bigImg(img))}" data-fb="${esc(img)}" alt="" loading="${lead?"eager":"lazy"}" onerror="imgFail(this)">${narrHTML(sh.narr,r.n)}`:""}<span aria-hidden="true">${r.e}</span></div>
-    <div class="tz-b"><div class="tz-meta"><span class="tag">${esc(catName(raw.category||""))}</span><span>${fmtDate(i.eventDate||i.createdAt)}</span></div>
+    <div class="tz-b"><div class="tz-meta"><span class="tag">${esc(catName(raw.category||""))}</span><span>${fmtDate(i.createdAt||i.eventDate)}</span></div>
       <h3>${esc(i.headline)}</h3>${i.angle?`<p>${esc(i.angle)}</p>`:""}
       <div class="tz-f"><span>${r.e} ${esc(r.n)}</span><span class="go">${T("readFull")}</span></div></div>
   </article>`;

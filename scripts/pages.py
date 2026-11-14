@@ -40,7 +40,7 @@ e = lambda s: html.escape(str(s or ""), quote=True)
 SAFE = re.compile(r"^[A-Za-z0-9_-]{1,120}$")
 
 def date_of(p):
-    for k in ("eventDate", "createdAt"):
+    for k in ("createdAt", "eventDate"):  # the date shown is the day the piece was published
         v = str(p.get(k) or "")
         if re.match(r"\d{4}-\d{2}-\d{2}", v):
             return v[:10]
