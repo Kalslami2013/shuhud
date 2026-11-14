@@ -662,8 +662,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794664854"</script>
-<script src="local.js?v=1794664854"></script>
+<script>window.SHUHUD_BUILD="1794664877"</script>
+<script src="local.js?v=1794664877"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1042,7 +1042,7 @@ addEventListener("pageshow",()=>setTimeout(fqReset,0));addEventListener("DOMCont
   f.name="q"+Math.random().toString(36).slice(2,8);f.readOnly=true;f.addEventListener("focus",()=>{f.readOnly=false},{once:false});f.addEventListener("blur",()=>{if(!f.value)f.readOnly=true});
   f.setAttribute("aria-label",T("feedSearch"));f.placeholder=T("feedSearch");f.dataset.i18nPh="feedSearch";f.value="";box.appendChild(f);
   /* only what Kamal types or pastes himself stays in the box; anything the browser puts there on its own is wiped */
-  ["keydown","paste","drop","compositionstart"].forEach(ev=>f.addEventListener(ev,()=>{f.dataset.typed="1"}));
+  ["keydown","beforeinput","paste","drop","compositionstart"].forEach(ev=>f.addEventListener(ev,()=>{f.dataset.typed="1"}));
   const guard=()=>{if(f.value&&!f.dataset.typed){f.value="";try{renderFeed(true)}catch(e){}}};let n=0;const t=setInterval(()=>{guard();if(++n>40)clearInterval(t)},250);
   addEventListener("pageshow",()=>{f.dataset.typed="";guard()});f.addEventListener("search",()=>{if(!f.value)f.dataset.typed=""})})();
 let fqT=null;document.addEventListener("input",e=>{if(e.target&&e.target.id==="feed-q"){clearTimeout(fqT);fqT=setTimeout(()=>{openId=null;shown=13;renderFeed(true)},200)}});
