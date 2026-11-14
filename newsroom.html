@@ -655,8 +655,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794656173"</script>
-<script src="local.js?v=1794656173"></script>
+<script>window.SHUHUD_BUILD="1794657584"</script>
+<script src="local.js?v=1794657584"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2222,7 +2222,7 @@ async function saveBlob(blob,filename){
 }
 const toBlob=cv=>new Promise(r=>cv.toBlob(r,"image/png"));
 function clearUrls(){stUrls.forEach(u=>URL.revokeObjectURL(u));stUrls=[]}
-function openStudio(raw){if(typeof stopNarration==="function")stopNarration();stItem=raw;$("#st-theme").value="auto";stPhoto=null;stPhotoLocal=false;$("#studio").hidden=false;document.body.style.overflow="hidden";setMode(stMode);setTimeout(()=>$("#st-close").focus(),30)}
+function openStudio(raw){if(typeof stopNarration==="function")stopNarration();stItem=raw;$("#st-theme").value="auto";if($("#st-style"))$("#st-style").value="pro";stPhoto=null;stPhotoLocal=false;$("#studio").hidden=false;document.body.style.overflow="hidden";setMode(stMode);setTimeout(()=>$("#st-close").focus(),30)}
 function closeStudio(){if(stAbort)stAbort();if(typeof mPrev==="function"&&mPrev)mPrev();clearUrls();$("#studio").hidden=true;document.body.style.overflow=""}
 function setMode(m){
   if(stAbort)stAbort();stMode=m;document.querySelectorAll("#studio .st-tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.m===m));
