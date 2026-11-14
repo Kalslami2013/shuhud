@@ -557,8 +557,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794638453"</script>
-<script src="local.js?v=1794638453"></script>
+<script>window.SHUHUD_BUILD="1794639018"</script>
+<script src="local.js?v=1794639018"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2051,6 +2051,8 @@ $("#st-music").onchange=()=>{if(mPrev)mPrev()};$("#st-amb").onchange=()=>{if(mPr
 const RUNS={monitor:"trig_0125YiqtfabraBE2uwyQPiTC",daily:"trig_01G2eR2CZH9M4hgUHgKRreAW",sync:"trig_01NmR7hkZpXxnmNxCbVjXcVE"};
 const RUN_COOL=10*60*1000,RUN_KEY="shuhud-runs";
 const RUN_TEXT="تشغيل يدوي طلبه كمال الآن من داخل التطبيق. نفّذ جولة واحدة قصيرة ومحدودة: بضع دقائق وعدد قليل من عمليات البحث، ثم توقف. لا تنشئ أي جدولة ولا تعِد تشغيل نفسك.";
+/* «اكتب قطع اليوم»: three pieces per press (Kamal's choice, 14 Nov 2026): requests first, then the strongest crises */
+const RUN_DAILY="تشغيل يدوي طلبه كمال الآن من داخل التطبيق. اكتب 3 قطع بالضبط في هذه الجولة (طلبات كمال أولًا إن وُجدت، ثم أقوى الأزمات الموثقة)، بالجودة والتدقيق المعتادين، ثم توقف. لا تنشئ أي جدولة ولا تعِد تشغيل نفسك.";
 let mcp=null;
 const runsGet=()=>{try{return JSON.parse(localStorage.getItem(RUN_KEY)||"{}")}catch(e){return{}}};
 const runsSet=o=>{try{localStorage.setItem(RUN_KEY,JSON.stringify(o))}catch(e){}};
@@ -2064,7 +2066,7 @@ document.querySelectorAll("[data-run]").forEach(b=>b.onclick=async()=>{
   const k=b.dataset.run,last=runsGet(),ago=Date.now()-(last[k]||0);
   if(ago<RUN_COOL){runMsg(k,T("runWait")(Math.ceil((RUN_COOL-ago)/60000)));return}
   if(!mcp){runMsg(k,T("runNoMcp"));return}b.disabled=true;runMsg(k,T("runSending"));
-  try{await mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:RUNS[k],text:RUN_TEXT},{cache:false});
+  try{await mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:RUNS[k],text:k==="daily"?RUN_DAILY:RUN_TEXT},{cache:false});
     last[k]=Date.now();runsSet(last);runMsg(k,T("runStarted"))}
   catch(e){const c=e&&e.code;runMsg(k,c==="approval_required"?T("runApproval"):(c==="not_in_manifest"||c==="blocked_by_policy")?T("runDenied"):T("runFail"))}
   finally{setTimeout(()=>{b.disabled=false},4000)}});
