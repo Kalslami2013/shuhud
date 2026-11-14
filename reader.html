@@ -500,8 +500,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794688238"</script>
-<script src="local.js?v=1794688238"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794689027"</script>
+<script src="local.js?v=1794689027"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -848,7 +848,10 @@ fetch(SITE_DATA+"short-ids.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?
 function pieceUrl(id){return "https://alshuhud.org/p/"+(SHORTID[id]?SHORTID[id]:encodeURIComponent(id)+".html")}
 /* Wikimedia thumbnails come at 330/500px: ask for 960px; if that size does not exist, fall back to the original link */
 function bigImg(u){u=String(u||"");const m=/^(https:\/\/upload\.wikimedia\.org\/.+\/thumb\/.+\/)(\d+)px-([^\/]+)$/.exec(u);return m&&+m[2]<960?m[1]+"960px-"+m[3]:u}
+/* the original file behind a Wikimedia thumbnail (always there, even when Wikimedia refuses to render a new size) */
+function wikiOrig(u){const m=/^(https:\/\/upload\.wikimedia\.org\/wikipedia\/[\w-]+)\/thumb\/(.+?)\/\d+px-[^\/]+$/.exec(String(u||""));return m?m[1]+"/"+m[2]:""}
 function imgFail(el){
+  {const o=wikiOrig(el.getAttribute("src"));if(o&&!el.dataset.orig){el.dataset.orig="1";el.src=o;return}}
   /* a photo just added on the website is on GitHub before the site has published it: show it from GitHub meanwhile */
   {const s0=el.getAttribute("src")||"",m=/(?:^\/?|alshuhud\.org\/)(media\/g_[\w.-]+)$/.exec(s0);if(m&&!el.dataset.raw){el.dataset.raw="1";el.src="https://raw.githubusercontent.com/Kalslami2013/shuhud/main/"+m[1];return}}
   const fb=el.dataset.fb;if(fb&&el.getAttribute("src")!==fb){el.removeAttribute("data-fb");el.src=fb;return}
@@ -863,7 +866,7 @@ function narrImg(raw){let k="",d={};try{k=spKey(raw);d=spDocs[k]||{}}catch(e){}
 /* the event's own photo fills the frame and the narrator sits in a small circle in its corner; without one, the narrator's photo fills it */
 function shownImg(raw){const own=pieceImg(raw.imageUrl),nr=narrImg(raw);
   if(own)return {img:own,credit:raw.imageCredit||"",narr:nr.img&&nr.img!==own?nr.img:""};return {img:nr.img,credit:nr.credit,narr:""}}
-function narrHTML(u,name){return u?`<img class="narr" data-full="${esc(bigImg(u))}" src="${esc(bigImg(u).replace("/960px-","/330px-"))}" alt="${esc(name||"")}" title="${esc(name||"")}" loading="lazy" onerror="this.remove()">`:""}
+function narrHTML(u,name){return u?`<img class="narr" data-full="${esc(bigImg(u))}" src="${esc(bigImg(u).replace("/960px-","/330px-"))}" alt="${esc(name||"")}" title="${esc(name||"")}" loading="lazy" onerror="const o=wikiOrig(this.src);if(o&&!this.dataset.orig){this.dataset.orig=1;this.src=o}else this.remove()">`:""}
 function teaserHTML(raw,lead){
   const i=L(raw),r=who(i);const sh=shownImg(raw),img=sh.img;
   return `<article class="tz${lead?" lead":""}" style="--th:${THEMES[themeOf(raw)].ui}" data-open="${esc(raw.id)}" tabindex="0" role="link" aria-label="${esc(i.headline)}">
