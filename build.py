@@ -40,7 +40,7 @@ def cut(html, tag, attr):
     return html
 for tag, attr in (('section','id="v-track"'),('section','id="v-desk"'),('div','id="gh-box"'),('div','id="media-add"'),('div','id="s-form"'),('div','id="p-form"'),('div','id="studio"'),
                   ('button','id="media-add-btn"'),('button','id="gh-link"'),('button','id="gh-unlink"'),('button','id="s-add-btn"'),('button','id="p-add-btn"'),
-                  ('button','role="tab" data-view="track"'),('button','role="tab" data-view="desk"')):
+                  ('div','id="run-live"'),('button','role="tab" data-view="track"'),('button','role="tab" data-view="desk"')):
     rsrc = cut(rsrc, tag, attr)
 NIL = 'const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});\nconst __CUT=new Set(%s);\nconst $=s=>{const e=document.querySelector(s);if(e)return e;const m=/^#([\\w-]+)/.exec(s);return m&&__CUT.has(m[1])?__nil:null};'
 assert rsrc.count('const $=s=>document.querySelector(s);')==1
