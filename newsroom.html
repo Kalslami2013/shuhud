@@ -271,6 +271,7 @@ nav.main button{flex:1 1 auto;white-space:nowrap}
 @media (max-width:620px){nav.main button{flex:1 1 30%}}
 /* the platform's paw as the pointer over everything clickable (desktop) */
 a,button,[role=button],[role=tab],[role=link],[data-open],.tz,select,summary,label[for],.chip{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22%23f2b84b%22%20stroke%3D%22%231d1406%22%20stroke-width%3D%221.6%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2221.5%22%20rx%3D%227.2%22%20ry%3D%226%22/%3E%3Cellipse%20cx%3D%226.6%22%20cy%3D%2213.6%22%20rx%3D%223%22%20ry%3D%223.8%22%20transform%3D%22rotate%28-20%206.6%2013.6%29%22/%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%227.6%22%20rx%3D%223%22%20ry%3D%224%22%20transform%3D%22rotate%28-8%2012%207.6%29%22/%3E%3Cellipse%20cx%3D%2220%22%20cy%3D%227.6%22%20rx%3D%223%22%20ry%3D%224%22%20transform%3D%22rotate%288%2020%207.6%29%22/%3E%3Cellipse%20cx%3D%2225.4%22%20cy%3D%2213.6%22%20rx%3D%223%22%20ry%3D%223.8%22%20transform%3D%22rotate%2820%2025.4%2013.6%29%22/%3E%3C/g%3E%3C/svg%3E") 16 4,pointer}
+input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace}
 .feed-q{max-width:1140px;margin:0 auto 10px;padding:0 16px}.feed-q input{width:100%;background:rgba(9,18,14,.78)!important;color:#f3ead6}.feed-q input::placeholder{color:rgba(243,234,214,.75)}
 input[type=search].sp-q{box-sizing:border-box;background:rgba(0,0,0,.28);border:1px solid var(--line);color:var(--parchment);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:15px}
 .sp-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
@@ -476,13 +477,13 @@ body.reader .rc .cnt.none{visibility:hidden}
       </div>
       <div class="manual" id="d-az-box" hidden>
         <label class="l" data-i18n="azLbl">الأصوات الطبيعية (Azure Speech)</label>
-        <div class="row2"><div><input type="password" id="az-key" placeholder="Key 1" aria-label="Azure key"></div><div><input type="text" id="az-region" placeholder="westeurope" aria-label="Azure region"></div></div>
+        <div class="row2"><div><input type="text" class="secret" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" id="az-key" placeholder="Key 1" aria-label="Azure key"></div><div><input type="text" id="az-region" placeholder="westeurope" aria-label="Azure region"></div></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn" type="button" id="az-save" data-i18n="azSave">احفظ وجرّب</button><span class="note" id="az-note"></span></div>
         <p class="note" data-i18n="azHelp">المفتاح والمنطقة من صفحة «Keys and Endpoint» في خدمة Speech على Azure. يُحفظان في هذا المتصفح فقط.</p>
       </div>
       <div class="manual" id="d-key-box" hidden>
         <label class="l" for="k-key" data-i18n="keyLbl">مفتاح Anthropic API للكتابة الآلية (اختياري)</label>
-        <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="password" id="k-key" placeholder="sk-ant-…" style="flex:1;min-width:200px"><button class="btn" type="button" id="k-save" data-i18n="keySave">احفظ</button></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="text" class="secret" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" id="k-key" placeholder="sk-ant-…" style="flex:1;min-width:200px"><button class="btn" type="button" id="k-save" data-i18n="keySave">احفظ</button></div>
         <p class="note" data-i18n="keyHelp">يُحفظ في هذا المتصفح فقط. رصيده منفصل عن اشتراك Claude، والمادة الواحدة تكلّف سنتات قليلة.</p>
       </div>
       <div id="d-out"></div>
@@ -500,7 +501,7 @@ body.reader .rc .cnt.none{visibility:hidden}
     <div class="sp-head"><div class="cats" id="media-chips" role="toolbar" style="flex:1;min-width:0"></div><button class="btn export" type="button" id="media-add-btn" hidden data-i18n="mAddBtn">➕ أضف مادة</button><button class="btn" type="button" id="gh-link" hidden data-i18n="ghLink">🔑 اربط GitHub</button><button class="btn" type="button" id="gh-unlink" hidden data-i18n="ghUnlink">افصل GitHub</button></div>
     <div class="panel" id="gh-box" hidden style="margin-bottom:14px">
       <label class="l" for="gh-tok" data-i18n="ghLbl">مفتاح GitHub</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="password" id="gh-tok" placeholder="github_pat_…" style="flex:1;min-width:200px"><button class="btn" type="button" id="gh-save" data-i18n="ghSave">احفظ</button></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="text" class="secret" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" id="gh-tok" placeholder="github_pat_…" style="flex:1;min-width:200px"><button class="btn" type="button" id="gh-save" data-i18n="ghSave">احفظ</button></div>
       <p class="note" data-i18n="ghHelp"></p>
     </div>
     <div class="panel" id="media-add" hidden style="margin-bottom:14px">
@@ -662,8 +663,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794664877"</script>
-<script src="local.js?v=1794664877"></script>
+<script>window.SHUHUD_BUILD="1794664922"</script>
+<script src="local.js?v=1794664922"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
