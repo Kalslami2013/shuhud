@@ -48,7 +48,7 @@ body.en .card[dir="rtl"] h2,body.en .card[dir="rtl"] .q{font-family:"Aref Ruqaa"
 .trbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--amber);background:rgba(242,184,75,.08);border:1px dashed rgba(242,184,75,.35);border-radius:10px;padding:6px 10px;direction:ltr;font-family:"IBM Plex Sans",Arial,sans-serif}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bark-solid)}
 #forest{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
-.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 120px}
+.wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 120px}
 a{color:var(--leaf)}
 button{font-family:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--amber);outline-offset:2px}
@@ -277,7 +277,7 @@ a,button,[role=button],[role=tab],[role=link],[data-open],.tz,select,summary,lab
 input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace}
 /* «على رادار شهود»: what the platform is watching, from agencies and international bodies (free hourly feed, no AI).
    Wide screens: a column fixed at the reader's left. Narrow screens: a short horizontal strip above the pieces. */
-.radar{position:relative;z-index:2;margin:0 auto 14px;max-width:760px;padding:0 16px}
+.radar{position:relative;z-index:2;margin:0 auto 14px;max-width:880px;padding:0 16px}
 .radar .rd-in{background:rgba(9,18,14,.86);border:1px solid var(--line);border-radius:16px;padding:12px 12px 8px;backdrop-filter:blur(6px)}
 .radar h2{margin:0;font-family:var(--f-display);font-size:21px;color:var(--amber);display:flex;align-items:center;gap:8px}
 .radar .rd-sub{font-size:12px;color:var(--faint,#8a9a8a);margin:2px 0 0}.radar .rd-head{margin-bottom:8px}
@@ -305,9 +305,11 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
 /* wide screens: the column stands right beside the pieces (fixed gap), starts level with them and stays in view while scrolling */
 @media (min-width:1380px){
   #v-live{position:relative}
-  .radar{position:absolute;top:0;bottom:0;left:calc(50% - 380px - 22px - 284px);width:284px;margin:0;padding:0}
+  .radar{position:absolute;top:0;bottom:0;left:calc(50% - 440px - 22px - 284px);width:284px;margin:0;padding:0}
   /* English page: the column moves to the reader's right, mirroring the Arabic page */
-  html[dir=ltr] .radar{left:auto;right:calc(50% - 380px - 22px - 284px)}
+  html[dir=ltr] .radar{left:auto;right:calc(50% - 440px - 22px - 284px)}
+  .wrap:has(#v-live:not([hidden])){left:150px}
+  html[dir=ltr] .wrap:has(#v-live:not([hidden])){left:-150px}
   .radar .rd-in{position:sticky;top:0;max-height:calc(100vh - 12px);overflow:auto;padding-top:0}
   .radar .rd-head{position:sticky;top:0;z-index:2;margin:0 -12px 8px;padding:13px 12px 8px;background:linear-gradient(180deg,rgba(28,46,36,.99),rgba(20,34,27,.97));border-bottom:1px solid rgba(242,184,75,.18);border-radius:18px 18px 0 0}
   .radar ol{display:block;overflow:visible}
@@ -497,8 +499,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794673154"</script>
-<script src="local.js?v=1794673154"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794684366"</script>
+<script src="local.js?v=1794684366"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
