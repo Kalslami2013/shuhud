@@ -722,8 +722,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794691883"</script>
-<script src="local.js?v=1794691883"></script>
+<script>window.SHUHUD_BUILD="1794692269"</script>
+<script src="local.js?v=1794692269"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -3174,11 +3174,14 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
   function start(){if(running&&!reduce)return;running=true;requestAnimationFrame(frame)}
   function updateLabel(){
     const el=$("#scene");if(!el)return;
-    const parts=[isEn()?S.pl.en:S.pl.name,T(S.phase),T(S.season)];
+    /* today's date, like the masthead of a newspaper (the reader's own date; no ticking clock) */
+    let today="";try{today=new Date().toLocaleDateString(isEn()?"en-GB":"ar",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).replace(/[،,]/g,"")}catch(e){}
+    const parts=[isEn()?S.pl.en:S.pl.name,today,T(S.phase),T(S.season)];
     if(S.phase==="night")parts.push(T("moon")+" "+T("moonNames")[S.moon.idx]);
     el.textContent=parts.filter(Boolean).join(" · ");
   }
   window.__forestLabel=updateLabel;
+  setInterval(updateLabel,60000);
   $("#sc-time").onchange=e=>{override.time=e.target.value;build();if(reduce)start()};
   $("#sc-season").onchange=e=>{override.season=e.target.value;build();if(reduce)start()};
   build();start();
