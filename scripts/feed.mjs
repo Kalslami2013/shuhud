@@ -25,6 +25,11 @@ const FEEDS = [
   ["Down To Earth", "https://www.downtoearth.org.in/rss/environment", "en", false],
   // UN, international and government bodies; disaster monitors
   ["UN News", "https://news.un.org/feed/subscribe/en/news/topic/climate-change/feed/rss.xml", "en", false],
+  // French press and bodies (headlines translated to Arabic and English below)
+  ["Le Monde", "https://www.lemonde.fr/planete/rss_full.xml", "fr", false],
+  ["Reporterre", "https://reporterre.net/spip.php?page=backend", "fr", false],
+  ["France 24", ["https://www.france24.com/fr/plan%C3%A8te/rss", "https://www.france24.com/fr/environnement/rss"], "fr", false],
+  ["ONU Info", "https://news.un.org/feed/subscribe/fr/news/topic/climate-change/feed/rss.xml", "fr", false],
   ["أخبار الأمم المتحدة", "https://news.un.org/feed/subscribe/ar/news/topic/climate-change/feed/rss.xml", "ar", false],
   ["UNEP", ["https://www.unep.org/news-and-stories/rss.xml", "https://www.unep.org/rss/news", "https://www.unep.org/news-and-stories/press-release/rss.xml"], "en", false],
   ["WMO", ["https://wmo.int/media/news/rss.xml", "https://wmo.int/news/rss.xml", "https://wmo.int/rss/news"], "en", false],
@@ -112,18 +117,16 @@ async function main() {
       console.log("ok", f[0], items.length);
     } catch (e) { console.log("fail", f[0], e.message); }
   }
-  // English headlines also get an Arabic translation (free Google endpoint; skipped quietly if unavailable)
+  // English and French headlines get an Arabic translation, French ones an English one too (free endpoints; skipped quietly if unavailable)
   let tr = 0; const trLog = [];
-  const gtx = async (q) => { const r = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ar&dt=t&q=" + encodeURIComponent(q), { headers: { "user-agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(10000) }); if (!r.ok) throw new Error("gtx " + r.status); const j = await r.json(); return (j[0] || []).map((x) => x[0]).join("").trim(); };
-  const mym = async (q) => { const r = await fetch("https://api.mymemory.translated.net/get?langpair=en|ar&q=" + encodeURIComponent(q.slice(0, 480)), { signal: AbortSignal.timeout(10000) }); if (!r.ok) throw new Error("mymemory " + r.status); const j = await r.json(); const t = j?.responseData?.translatedText || ""; if (/MYMEMORY WARNING|QUERY LENGTH/i.test(t)) throw new Error("mymemory quota"); return t.trim(); };
+  const gtx = async (q, sl, tl) => { const r = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=` + encodeURIComponent(q), { headers: { "user-agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(10000) }); if (!r.ok) throw new Error("gtx " + r.status); const j = await r.json(); return (j[0] || []).map((x) => x[0]).join("").trim(); };
+  const mym = async (q, sl, tl) => { const r = await fetch(`https://api.mymemory.translated.net/get?langpair=${sl}|${tl}&q=` + encodeURIComponent(q.slice(0, 480)), { signal: AbortSignal.timeout(10000) }); if (!r.ok) throw new Error("mymemory " + r.status); const j = await r.json(); const t = j?.responseData?.translatedText || ""; if (/MYMEMORY WARNING|QUERY LENGTH/i.test(t)) throw new Error("mymemory quota"); return t.trim(); };
   let engines = [gtx, mym];
+  const translate = async (q, sl, tl) => { for (const eng of [...engines]) { try { const t = await eng(q, sl, tl); if (t) return t; } catch (e) { trLog.push(e.message); engines = engines.filter((x) => x !== eng); } } return ""; };
   for (const it of seen.values()) {
-    if (it.lang !== "en" || it.trAr || tr >= 80 || !engines.length) continue;
-    for (const eng of [...engines]) {
-      try { const ar = await eng(it.text); if (ar) { it.trAr = ar; tr++; break; } }
-      catch (e) { trLog.push(e.message); engines = engines.filter((x) => x !== eng); }
-    }
-    await new Promise((ok) => setTimeout(ok, 300));
+    if (it.lang === "ar" || tr >= 100 || !engines.length) continue;
+    if (!it.trAr) { const t = await translate(it.text, it.lang, "ar"); if (t) { it.trAr = t; tr++; } await new Promise((ok) => setTimeout(ok, 300)); }
+    if (it.lang === "fr" && !it.trEn && engines.length) { const t = await translate(it.text, "fr", "en"); if (t) { it.trEn = t; tr++; } await new Promise((ok) => setTimeout(ok, 300)); }
   }
   writeFileSync("data/feed-status.json", JSON.stringify({ at: new Date().toISOString(), translated: tr, errors: trLog.slice(0, 5) }));
   console.log("translated", tr);

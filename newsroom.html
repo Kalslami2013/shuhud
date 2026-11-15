@@ -282,6 +282,7 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
 .radar li{flex:0 0 78%;scroll-snap-align:start;border:1px solid var(--line);border-radius:12px;padding:9px 11px;background:rgba(0,0,0,.18)}
 .radar .rd-meta{display:flex;gap:6px;align-items:center;font-size:11.5px;color:var(--faint,#8a9a8a);margin-bottom:3px}
 .radar .rd-meta b{color:var(--amber);font-weight:600}
+.radar .rd-lg{font-size:9.5px;letter-spacing:.5px;padding:0 5px;border:1px solid rgba(156,199,122,.45);color:#9cc77a;border-radius:4px;line-height:15px;margin-inline-start:2px}
 .radar a.rd-t{color:var(--parchment);text-decoration:none;font-size:14.5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .radar a.rd-t:hover{color:#fff;text-decoration:underline}
 .radar .rd-mk{display:inline-block;margin-top:6px;font-size:11.5px;color:var(--amber,#f2b84b);background:rgba(242,184,75,.08);border:1px solid rgba(242,184,75,.35);border-radius:999px;padding:3px 10px;font-family:inherit;cursor:pointer}.radar .rd-mk:hover{background:rgba(242,184,75,.18)}.radar .rd-wait{display:inline-block;margin-top:6px;font-size:11.5px;opacity:.75}.radar .mk-menu .btn{font-size:11.5px;padding:4px 9px}
@@ -722,8 +723,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794692269"</script>
-<script src="local.js?v=1794692269"></script>
+<script>window.SHUHUD_BUILD="1794720817"</script>
+<script src="local.js?v=1794720817"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -737,7 +738,7 @@ ar:{
   moonNames:["محاق","هلال","تربيع أول","أحدب متزايد","بدر","أحدب متناقص","تربيع ثانٍ","هلال أخير"],
   navTrack:"الرصد",trackIntro:"تطورات البيئة والأزمات المرتبطة بها. الرصد يدوي: لا يعمل إلا حين تضغط «ارصد الآن».",toPiece:"حوّل إلى مادة",ghFirstKey:"احفظ مفتاح GitHub في هذا الجهاز أولاً: تبويب «ميديا» ← «🔑 اربط GitHub» ← الصق المفتاح ← «حفظ»، ثم أعد المحاولة",mkManual:"✍️ اكتبها يدوياً",mkBridge:"📋 عبر محادثة Claude الآن",mkQueue:"🗂️ أرسلها إلى Claude ليكتبها",mkQueued:"أُرسلت إلى Claude: يكتبها حين تضغط «اكتب قطع اليوم» في نسخة Claude، ثم «زامن»",mkWaiting:"⏳ بانتظار Claude",trTrack:"ترجم",trTrackBack:"الأصل",trTrackIng:"يترجم…",trTrackFail:"تعذّرت الترجمة، حاول بعد قليل",trAll:n=>`ترجم الإنجليزي (${n.toLocaleString("ar")})`,converted:"✓ صارت مادة",newestFirst:"الأحدث أولاً",oldestFirst:"الأقدم أولاً",trackEmpty:"لم يصل شيء إلى الرصد بعد. اضغط «ارصد الآن» لتبدأ جولة رصد.",lastScan:"آخر رصد",trackCount:n=>`${n.toLocaleString("ar")} تطوراً مرصوداً`,
   runMonitor:"🔍 ارصد الآن",runSync:"↻ زامن النسخة المستقلة",runNoMcp:"الزر لا يعمل في هذا التطبيق أو المتصفح. افتح شهود من متصفح الكمبيوتر، أو اكتب لـClaude في المحادثة: «اكتب قطع اليوم».",runDaily:"✨ اكتب قطع اليوم الآن",runSending:"يبدأ…",runStarted:"بدأ. تصل النتائج خلال دقائق، ثم يتوقف وحده.",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"وافق على طلب الإذن ثم اضغط مرة أخرى.",runDenied:"لم يُسمح للصفحة بتشغيل المهام. فعّلها من قائمة الأذونات أعلى الصفحة.",runFail:"لم يبدأ. جرّب بعد دقيقة.",runLast:"آخر تشغيل",syncEarly:"⚠️ كتابة قطع اليوم لم تنتهِ بعد، فالمزامنة الآن لن تنقل القطع الجديدة. انتظر حتى تختفي رسالة «Claude يعمل الآن»، أو اضغط مرة أخرى للمزامنة رغم ذلك.",runBusy:t=>`⏳ Claude يعمل الآن (بدأ ${t}). تظهر النتائج خلال 10 إلى 15 دقيقة، لا تضغط مرة أخرى.`,
-  navLive:"الرئيسية",radarH:"رادار شهود",radarSub:"ما نراقبه الآن حول العالم، من الوكالات والهيئات الدولية",radarRead:"اقرأ الشهادة",radarMk:"✍️ حوّله إلى قطعة",radarUpd:t=>"آخر تحديث للرادار: "+t,feedSearch:"🔍 ابحث في القطع: كلمة، مكان، كائن…",noFound:"لا قطع تطابق بحثك.",navGuide:"📘 دليلي",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
+  navLive:"الرئيسية",radarH:"رادار شهود",radarSub:"ما نراقبه الآن حول العالم، من الوكالات والهيئات الدولية",radarRead:"اقرأ الشهادة",radarTr:"عنوان مترجم آليًا من لغته الأصلية",radarMk:"✍️ حوّله إلى قطعة",radarUpd:t=>"آخر تحديث للرادار: "+t,feedSearch:"🔍 ابحث في القطع: كلمة، مكان، كائن…",noFound:"لا قطع تطابق بحثك.",navGuide:"📘 دليلي",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
   loadingStatus:"تتجمع الحيوانات حول النار…",all:"الكل",
   deskTitle:"غرفة التحرير",deskSub:"أعطِ شهود أزمة، واختر من يرويها، أو دع الغابة تختار.",
   dText:"الأزمة أو الخبر والمادة الخام",dTextPh:"الصق الخبر هنا…",
@@ -799,7 +800,7 @@ en:{
   moonNames:["new","waxing crescent","first quarter","waxing gibbous","full","waning gibbous","last quarter","waning crescent"],
   navTrack:"Tracker",trackIntro:"Environmental developments and related crises. Tracking is manual: it only runs when you press “Track now”.",toPiece:"Turn into a piece",ghFirstKey:"Save your GitHub token on this device first: Media tab → «🔑 Connect GitHub» → paste the token → Save, then try again",mkManual:"✍️ Write it myself",mkBridge:"📋 Via a Claude chat now",mkQueue:"🗂️ Send it to Claude to write",mkQueued:"Sent to Claude: written when you press «Write today's pieces» in the Claude copy, then «Sync»",mkWaiting:"⏳ Waiting for Claude",trTrack:"Translate",trTrackBack:"Original",trTrackIng:"Translating…",trTrackFail:"Translation failed, try again shortly",trAll:n=>`Translate English (${n})`,converted:"✓ Turned into a piece",newestFirst:"Newest first",oldestFirst:"Oldest first",trackEmpty:"Nothing in the tracker yet. Press “Track now” to start a scan.",lastScan:"Last scan",trackCount:n=>`${n} ${n===1?"development":"developments"} tracked`,
   runMonitor:"🔍 Track now",runSync:"↻ Sync the standalone copy",runNoMcp:"This button doesn't work in this app or browser. Open Shuhud in a desktop browser, or ask Claude in the chat: “write today's pieces”.",runDaily:"✨ Write today's pieces now",runSending:"Starting…",runStarted:"Started. Results arrive in a few minutes, then it stops on its own.",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"Approve the permission prompt, then press again.",runDenied:"This page isn't allowed to run tasks. Turn it on from the page's permissions menu.",runFail:"Didn't start. Try again in a minute.",runLast:"Last run",syncEarly:"⚠️ Today's pieces are still being written, so syncing now won't carry them. Wait until “Claude is working” disappears, or press again to sync anyway.",runBusy:t=>`⏳ Claude is working (started ${t}). Results appear within 10–15 minutes; no need to press again.`,
-  navLive:"Home",radarH:"Shuhud Radar",radarSub:"What we are watching around the world, from agencies and international bodies",radarRead:"Read the testimony",radarMk:"✍️ Turn into a piece",radarUpd:t=>"Radar last updated "+t,feedSearch:"🔍 Search the pieces: a word, a place, a species…",noFound:"No pieces match your search.",navGuide:"📘 My guide",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
+  navLive:"Home",radarH:"Shuhud Radar",radarSub:"What we are watching around the world, from agencies and international bodies",radarRead:"Read the testimony",radarTr:"Headline machine-translated from its original language",radarMk:"✍️ Turn into a piece",radarUpd:t=>"Radar last updated "+t,feedSearch:"🔍 Search the pieces: a word, a place, a species…",noFound:"No pieces match your search.",navGuide:"📘 My guide",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
   loadingStatus:"The animals are gathering around the fire…",all:"All",
   deskTitle:"Newsroom",deskSub:"Give the witnesses a crisis, pick who tells it, or let the forest choose.",
   dText:"The crisis, news item or raw material",dTextPh:"Paste the story here…",
@@ -1109,22 +1110,24 @@ function teaserHTML(raw,lead){
 /* ---------- «على رادار شهود» ---------- */
 const RADAR_URL=window.SHUHUD_STANDALONE?"/data/feed.json":"https://alshuhud.org/data/feed.json";
 /* trusted sources only, by language: the Arabic page shows Arabic outlets, the English page English ones */
-const RADAR_SRC={ar:["الأناضول","الجزيرة نت","الشرق الأوسط","BBC عربي","أخبار الأمم المتحدة","RT عربي"],en:["UN News","UNEP","WMO","WHO","FAO","NASA Earth Observatory","NOAA","ReliefWeb","GDACS","USGS","BBC","Al Jazeera","The Guardian","Mongabay","Carbon Brief","Yale Environment 360","Climate Home News","Inside Climate News","Euronews","TASS","Down To Earth"]};
+const RADAR_SRC={ar:["الأناضول","الجزيرة نت","الشرق الأوسط","BBC عربي","أخبار الأمم المتحدة","RT عربي"],en:["UN News","UNEP","WMO","WHO","FAO","NASA Earth Observatory","NOAA","ReliefWeb","GDACS","USGS","BBC","Al Jazeera","The Guardian","Mongabay","Carbon Brief","Yale Environment 360","Climate Home News","Inside Climate News","Euronews","TASS","Down To Earth","Phys.org"],fr:["Le Monde","Reporterre","France 24","ONU Info"]};
 let radarAll=[],radarShown=12,radarAt="",reqIds=new Set();
 async function loadRadar(){try{const r=await fetch(RADAR_URL+"?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const l=await r.json();if(Array.isArray(l)){radarAll=l;renderRadar()}}catch(e){}
   try{const r=await fetch(RADAR_URL.replace("feed.json","feed-status.json")+"?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json();radarAt=j&&j.at||"";radarFoot()}}catch(e){}}
 function agoTxt(iso){const m=Math.max(1,Math.round((Date.now()-Date.parse(iso))/60000));const en=isEn();
   if(m<60)return en?m+" min ago":"منذ "+m+" د";const h=Math.round(m/60);if(h<24)return en?h+" h ago":"منذ "+h+" س";const d=Math.round(h/24);return en?d+" d ago":"منذ "+d+(d===1?" يوم":" أيام")}
 /* the whole radar list, newest first: the first screen keeps at most two items per outlet, older items follow as the reader scrolls */
-function radarList(){const lang=isEn()?"en":"ar",ok=new Set(RADAR_SRC[lang]),cut=Date.now()-7*864e5,per={},first=[],rest=[];
-  for(const x of radarAll){if(!x||x.lang!==lang||!ok.has(x.source)||!x.url||Date.parse(x.at)<cut)continue;
+/* the Arabic page shows Arabic sources plus the world's press and bodies (English, French) through their machine translation; the English page shows English and French */
+function radarText(x){return isEn()?(x.lang==="en"?x.text:x.trEn||""):(x.lang==="ar"?x.text:x.trAr||"")}
+function radarList(){const ok=new Set([...RADAR_SRC.ar,...RADAR_SRC.en,...RADAR_SRC.fr]),cut=Date.now()-7*864e5,per={},first=[],rest=[];
+  for(const x of radarAll){if(!x||!ok.has(x.source)||!x.url||Date.parse(x.at)<cut||!radarText(x))continue;
     per[x.source]=(per[x.source]||0)+1;(per[x.source]<=2&&first.length<12?first:rest).push(x)}
   return [...first,...rest.sort((a,b)=>Date.parse(b.at)-Date.parse(a.at))]}
 /* a radar headline is linked to the piece written from it: by request id, or because the piece cites the same article */
 const rdUrl=u=>String(u||"").split(/[?#]/)[0].replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,"").toLowerCase();
 function radarPiece(x){const u=rdUrl(x.url);return items.find(p=>p.fromRequest===x.id||(u&&(p.sources||[]).some(s=>rdUrl(s&&s.url)===u)))}
 function radarLi(x){const pc=radarPiece(x);
-  return `<li><div class="rd-meta"><b>${esc(x.source)}</b><span>·</span><time datetime="${esc(x.at)}">${agoTxt(x.at)}</time></div><a class="rd-t" href="${esc(x.url)}" target="_blank" rel="noopener nofollow" dir="auto">${esc(x.text)}</a>${pc?`<button class="rd-go" type="button" data-rdopen="${esc(pc.id)}">🐾 ${T("radarRead")}</button>`:READER?"":reqIds.has(x.id)?`<span class="rd-wait">${T("mkWaiting")}</span>`:`<button class="rd-mk" type="button" data-rdmk="${esc(x.id)}">${T("radarMk")}</button>`}</li>`}
+  return `<li><div class="rd-meta"><b>${esc(x.source)}</b><span>·</span><time datetime="${esc(x.at)}">${agoTxt(x.at)}</time>${radarText(x)!==x.text?`<span class="rd-lg" title="${esc(T("radarTr"))}">${esc(String(x.lang||"").toUpperCase())}</span>`:""}</div><a class="rd-t" href="${esc(x.url)}" target="_blank" rel="noopener nofollow" dir="auto" title="${esc(x.text)}">${esc(radarText(x))}</a>${pc?`<button class="rd-go" type="button" data-rdopen="${esc(pc.id)}">🐾 ${T("radarRead")}</button>`:READER?"":reqIds.has(x.id)?`<span class="rd-wait">${T("mkWaiting")}</span>`:`<button class="rd-mk" type="button" data-rdmk="${esc(x.id)}">${T("radarMk")}</button>`}</li>`}
 /* internal copies only: a radar headline can be turned into a piece, the same way as from the tracker */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-rdmk]");if(!b||READER)return;e.preventDefault();const t=radarAll.find(x=>x.id===b.dataset.rdmk);if(!t)return;
   if(!t.date)t.date=String(t.at||"").slice(0,10);
