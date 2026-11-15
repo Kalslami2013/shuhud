@@ -136,6 +136,9 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .more{justify-self:center;margin-top:4px}
 /* "show more" keeps its own dark panel so it stays readable over the bright day sky */
 .btn.more{background:rgba(12,22,17,.9);color:var(--parchment,#f3ead7);border:1px solid rgba(242,184,75,.55);font-size:14.5px;padding:10px 26px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.3);backdrop-filter:blur(6px);cursor:pointer}
+nav.main button.heal-tab{color:#9fe0b4;border-color:rgba(47,191,113,.45)}nav.main button.heal-tab[aria-selected="true"]{background:rgba(47,191,113,.18);border-color:#2FBF71;color:#d8f5e2}
+#cats .chip[data-c="الطبيعة تتعافى"]{border-color:rgba(47,191,113,.55);color:#9fe0b4}#cats .chip[data-c="الطبيعة تتعافى"][aria-pressed="true"]{background:#2FBF71;color:#06240f}
+.radar .rd-good{font-size:12px;margin-inline-start:2px}
 .btn.more:hover{background:rgba(20,34,27,.95);border-color:#f2b84b;color:#fff}
 #feed .card,#feed .tz{scroll-margin-top:140px}
 .ed{display:grid;gap:6px}.ed .ed-i{width:100%;box-sizing:border-box;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;color:inherit;font:inherit;padding:8px 10px}.ed textarea.ed-i{line-height:1.8;resize:vertical}.ed-list{display:grid;gap:6px}.ed-row{display:grid;grid-template-columns:1fr 2fr 1fr auto;gap:6px}.ed-row[data-row="src"]{grid-template-columns:1fr 2fr auto}@media(max-width:600px){.ed-row,.ed-row[data-row="src"]{grid-template-columns:1fr auto}.ed-row .ed-i{grid-column:1}}
@@ -451,6 +454,7 @@ body.reader .rc .cnt.none{visibility:hidden}
     <button role="tab" data-view="corr" aria-selected="false" data-i18n="navCorr">المراسلون</button>
     <button role="tab" data-view="ids" aria-selected="false" data-i18n="navIds">بطاقات الكائنات</button>
     <button role="tab" data-view="red" aria-selected="false" data-i18n="navRed">مهددة بالانقراض</button>
+    <button role="tab" data-view="heal" aria-selected="false" data-i18n="navHeal" class="heal-tab">🌱 الطبيعة تتعافى</button>
     <button role="tab" data-view="media" aria-selected="false" data-i18n="navMedia">ميديا</button>
     <button role="tab" data-view="about" aria-selected="false" data-i18n="navAbout">من نحن</button>
     
@@ -522,8 +526,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794722908"</script>
-<script src="local.js?v=1794722908"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794728489"</script>
+<script src="local.js?v=1794728489"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -555,7 +559,7 @@ ar:{
   crisis:"الأزمة",angle:"الزاوية البيئية",chain:"سلسلة الأثر",figures:"بالأرقام",fact:"ما حدث عند البشر",question:"سؤال مفتوح",
   sources:"المصادر",source:"المصدر",fromDesk:"من غرفة التحرير",listen:"استمع",export:"تصدير",copy:"نسخ",del:"حذف",delConfirm:"تأكيد الحذف",
   deleted:"حُذفت الرواية",delFail:"تعذر الحذف",copied:"نُسخ النص",witness:"شاهد",
-  emptyLoading:"تتجمع الحيوانات حول النار، وستظهر النشرة بعد لحظات.",emptyCat:"لا قطع في هذا الباب بعد. اكتب واحدة من غرفة التحرير.",
+  emptyLoading:"تتجمع الحيوانات حول النار، وستظهر النشرة بعد لحظات.",emptyCat:"لا قطع في هذا الباب بعد. اكتب واحدة من غرفة التحرير.",emptyHeal:"هنا ما يعود إلى الحياة: محميات جديدة، وكائنات تخرج من خطر الانقراض، وولادات نادرة، وكائنات ظهرت بعد أن عُدّت منقرضة. تُنشر أولى قطعه قريبًا.",
   emptyAll:"الغابة صامتة الآن. اضغط «اكتب قطع اليوم الآن»، أو اكتب أول قطعة من غرفة التحرير.",
   statusCount:n=>`${n.toLocaleString("ar")} شهادة منشورة`,lastUpdate:"آخر تحديث من الغابة",
   openInClaude:"افتح الصفحة داخل Claude لترى النشرة الحية.",signIn:"سجّل الدخول في Claude لترى النشرة الحية.",feedFail:"تعذر الوصول إلى النشرة الآن.",
@@ -617,7 +621,7 @@ en:{
   crisis:"The crisis",angle:"The environmental angle",chain:"Chain of impact",figures:"By the numbers",fact:"What happened among humans",question:"An open question",
   sources:"Sources",source:"Source",fromDesk:"from the newsroom",listen:"Listen",export:"Export",copy:"Copy",del:"Delete",delConfirm:"Confirm delete",
   deleted:"Story deleted",delFail:"Couldn't delete",copied:"Text copied",witness:"Witness",
-  emptyLoading:"The animals are gathering around the fire. The feed will appear in a moment.",emptyCat:"Nothing in this section yet. Write one from the newsroom.",
+  emptyLoading:"The animals are gathering around the fire. The feed will appear in a moment.",emptyCat:"Nothing in this section yet. Write one from the newsroom.",emptyHeal:"What comes back to life: new reserves, species leaving the danger list, rare births, species found again after being declared extinct. The first pieces are coming soon.",
   emptyAll:"The forest is quiet. Press “Write today's pieces now”, or write the first one from the newsroom.",
   statusCount:n=>`${n} ${n===1?"testimony":"testimonies"} published`,lastUpdate:"last update from the forest",
   openInClaude:"Open this page inside Claude to see the live feed.",signIn:"Sign in to Claude to see the live feed.",feedFail:"Can't reach the feed right now.",
@@ -653,7 +657,7 @@ en:{
   readFull:"Read the testimony →",shareBtn:"🔗 Share",shareCopied:"Piece link copied: paste it into X or WhatsApp",shareCopy:"Copy the piece link:",edBtn:"✏️ Edit",edNote:"Change what you need, then press Save. The edit is saved into the published piece.",edNoteEn:"You are editing the English version. Switch to «عربي» for the Arabic.",edHeadline:"Headline",edCrisis:"Crisis",edAngle:"Angle",edPlace:"Place",edDate:"Event date",edDispatch:"Testimony",edFigs:"Figures",edVal:"Value",edLbl:"What it measures",edSrc:"Source",edAddFig:"➕ Figure",edChain:"Chain of impact (one link per line)",edFact:"What happened among humans",edQuestion:"Open question",edSources:"Sources",edSrcName:"Source name",edAddSrc:"➕ Source",edSave:"💾 Save",edCancel:"Cancel",edSaved:"Edit saved",edFail:"Couldn't save the edit",edNeed:"The headline can't be empty",closePiece:"✕ Close",showMore:"Show more",photo:"📷 Photo",addPhoto:"Add photo",changePhoto:"Change photo",removePhoto:"No photo",findPhoto:"Find a photo of the species",photoSaved:"Photo saved with the piece",photoFail:"Couldn't upload the photo",uploading:"Uploading photo…",credit:"Photo credit",creditPh:"e.g. Photographer / CC BY-SA",photoLocal:"Photo used in this export only, not saved with the piece",photoHint:"The species photo appears on the cover and the infographic.",
   swipe:"Swipe for more →",voiceOf:n=>"Told by the "+n.replace(/^the /i,""),card:k=>"Card "+k,infoAlt:"Infographic"
 }};
-const CAT_EN={"الكل":"All","الحروب والبيئة":"War & environment","التقنية والذكاء الاصطناعي":"Tech & AI","التلوث":"Pollution","المياه":"Water","الطاقة":"Energy","كوارث طبيعية":"Natural disasters","كوارث بشرية":"Human-made disasters","الغابات":"Forests","المناخ":"Climate","البحار والمحيطات":"Seas & oceans","الميكروبات والأوبئة":"Microbes & epidemics","الانقراض":"Extinction","الكون":"Cosmos","المدن":"Cities","الغذاء والزراعة":"Food & farming","الهجرة والنزوح":"Migration & displacement"};
+const CAT_EN={"الكل":"All","الحروب والبيئة":"War & environment","التقنية والذكاء الاصطناعي":"Tech & AI","التلوث":"Pollution","المياه":"Water","الطاقة":"Energy","كوارث طبيعية":"Natural disasters","كوارث بشرية":"Human-made disasters","الغابات":"Forests","المناخ":"Climate","البحار والمحيطات":"Seas & oceans","الميكروبات والأوبئة":"Microbes & epidemics","الانقراض":"Extinction","الكون":"Cosmos","المدن":"Cities","الغذاء والزراعة":"Food & farming","الهجرة والنزوح":"Migration & displacement","الطبيعة تتعافى":"Nature recovers"};
 const ROSTER_EN={oryx:["Arabian oryx", "Rub' al Khali desert"],arleopard:["Arabian leopard", "Dhofar, Sarawat and Yemen highlands"],camel:["Camel", "Arabian deserts"],houbara:["Houbara bustard", "Arabian sandy plains"],hoopoe:["Hoopoe", "Yemen, Marib and the terraced mountains"],dugong:["Dugong", "Gulf seagrass meadows"],whaleshark:["Whale shark", "Red Sea and Gulf of Aden"],flamingo:["Greater flamingo", "Gulf salt flats and Iraqi marshes"],otter:["Smooth-coated otter", "Mesopotamian marshes"],ibis:["Northern bald ibis", "Cliffs of Palmyra and the Moroccan coast"],socotra:["Socotra starling", "Socotra island"],mangrove:["Mangrove crab", "Red Sea and Gulf mangroves"],gorilla:["Mountain gorilla", "Virunga forests, Congo"],elephant:["African elephant", "Congo Basin and African savanna"],croc:["Nile crocodile", "The Nile and its dams"],shoebill:["Shoebill", "Sudd wetlands, South Sudan"],lion:["Lion", "East African savanna"],cheetah:["Cheetah", "Sahara and Sahel"],locust:["Desert locust", "Horn of Africa to Yemen"],rhino:["Black rhino", "Southern African savanna"],lemur:["Lemur", "Madagascar forests"],donkey:["Donkey", "Villages of Sudan and the Sahel"],tiger:["Bengal tiger", "Sundarbans, India and Bangladesh"],asiaele:["Asian elephant", "Western Ghats forests, India"],snowleo:["Snow leopard", "The Himalaya"],panda:["Giant panda", "Sichuan bamboo forests"],amur:["Amur tiger", "Siberian taiga, Russian Far East"],crane:["Siberian crane", "Siberian tundra and Chinese wetlands"],orangutan:["Orangutan", "Borneo and Sumatra rainforests"],irrawaddy:["Irrawaddy dolphin", "The Mekong river"],saiga:["Saiga antelope", "Kazakh steppe"],komodo:["Komodo dragon", "Eastern Indonesian islands"],brownbear:["Brown bear", "Carpathian forests"],lynx:["Iberian lynx", "Spanish and Portuguese woodlands"],bison:["European bison", "Białowieża Forest"],monkseal:["Mediterranean monk seal", "Mediterranean coasts"],stork:["White stork", "Migration routes between Europe and Africa"],jaguar:["Jaguar", "Amazon rainforest"],boto:["Amazon river dolphin", "Amazon rivers"],monarch:["Monarch butterfly", "Michoacán forests, Mexico"],salmon:["Pacific salmon", "North Pacific rivers"],condor:["Andean condor", "The Andes"],sloth:["Sloth", "Central American forests"],warbler:["Cerulean warbler", "Mature Appalachian forests"],bear:["Polar bear", "Arctic sea ice"],penguin:["Emperor penguin", "Antarctic ice"],reindeer:["Reindeer", "Arctic tundra"],coral:["Coral", "Warm-water coral reefs"],turtle:["Sea turtle", "Oceans and nesting beaches"],whale:["Blue whale", "The open ocean"],shark:["Shark", "The high seas"],krill:["Krill", "The Southern Ocean"],albatross:["Albatross", "Southern ocean skies"],octopus:["Octopus", "The sea floor"],koala:["Koala", "Australian eucalyptus forests"],kangaroo:["Kangaroo", "The Australian outback"],ant:["Ant", "Underground, everywhere"],bee:["Bee", "Fields and orchards"],bat:["Bat", "Caves and forests, on the front line of epidemics"],frog:["Frog", "Ponds and rivers"],cow:["Cow", "Pastures and farms"],cat:["Cat", "Cities and neighbourhoods"],vulture:["Vulture", "Above human-made disasters"]};
 let lang="ar";try{const s=localStorage.getItem("shuhud-lang");if(s==="en"||s==="ar")lang=s}catch(e){}
 const T=k=>DICT[lang][k]??DICT.ar[k];
@@ -742,7 +746,7 @@ const ROSTER={
 const REGIONS=[{"k": "arabia", "ar": "الجزيرة العربية والشرق الأوسط", "en": "Arabia & the Middle East"}, {"k": "africa", "ar": "أفريقيا", "en": "Africa"}, {"k": "asia", "ar": "آسيا", "en": "Asia"}, {"k": "europe", "ar": "أوروبا", "en": "Europe"}, {"k": "americas", "ar": "الأمريكتان", "en": "The Americas"}, {"k": "poles", "ar": "القطبان", "en": "The poles"}, {"k": "oceans", "ar": "المحيطات", "en": "Oceans"}, {"k": "oceania", "ar": "أستراليا والمحيط الهادئ", "en": "Australia & the Pacific"}, {"k": "global", "ar": "من كل مكان", "en": "Everywhere"}];
 const rName=k=>isEn()&&ROSTER_EN[k]?ROSTER_EN[k][0]:ROSTER[k].n;
 const rBio=k=>isEn()&&ROSTER_EN[k]?ROSTER_EN[k][1]:ROSTER[k].b;
-const CATS=["الكل","الحروب والبيئة","التقنية والذكاء الاصطناعي","التلوث","المياه","الطاقة","كوارث طبيعية","كوارث بشرية","الغابات","المناخ","البحار والمحيطات","الميكروبات والأوبئة","الانقراض","الكون","المدن","الغذاء والزراعة","الهجرة والنزوح"];
+const CATS=["الكل","الطبيعة تتعافى","الحروب والبيئة","التقنية والذكاء الاصطناعي","التلوث","المياه","الطاقة","كوارث طبيعية","كوارث بشرية","الغابات","المناخ","البحار والمحيطات","الميكروبات والأوبئة","الانقراض","الكون","المدن","الغذاء والزراعة","الهجرة والنزوح"];
 
 /* reader mode: the public page for readers, with no newsroom and no controls */
 const READER=!!window.SHUHUD_READER;if(READER)document.body.classList.add("reader");
@@ -762,7 +766,11 @@ function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB"
 const VIEWS=["live","track","desk","corr","ids","red","media","about","guide"];
 function show(v){try{if(NARR.playing)stopNarration()}catch(e){}setTimeout(()=>{try{placeRadar()}catch(e){}},0);if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track"||v==="guide")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
 function clearHash(){if(!location.hash&&!/^\/p\//.test(location.pathname))return;try{history.pushState(null,"",/^\/p\//.test(location.pathname)?"/":location.pathname+location.search)}catch(e){location.hash=""}}
+const HEAL="الطبيعة تتعافى";
 document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{const was=openId,v=b.dataset.view;
+  /* «Nature recovers» is the front page filtered to its own category */
+  if(v==="heal"){openId=null;editId=null;byAnimal=null;cat=HEAL;shown=13;clearHash();show("live");document.querySelectorAll("nav.main button").forEach(x=>x.setAttribute("aria-selected",x===b));renderCats();renderFeed(true);const f=$("#cats")||$("#feed");if(f)f.scrollIntoView({behavior:"smooth",block:"start"});return}
+  if(v==="live"&&cat===HEAL){cat="الكل";renderCats();renderFeed(true)}
   /* the front page (live) keeps a clean address: alshuhud.org with nothing after it */
   if(v==="live"){if(/^\/p\//.test(location.pathname))openId=null;clearHash()}
   else if(/^\/p\//.test(location.pathname)){openId=null;history.replaceState(null,"","/#"+v)}else location.hash=v;show(v);
@@ -924,12 +932,14 @@ function radarText(x){return isEn()?(x.lang==="en"?x.text:x.trEn||""):(x.lang===
 function radarList(){const ok=new Set([...RADAR_SRC.ar,...RADAR_SRC.en,...RADAR_SRC.fr]),cut=Date.now()-7*864e5,per={},first=[],rest=[];
   for(const x of radarAll){if(!x||!ok.has(x.source)||!x.url||Date.parse(x.at)<cut||!radarText(x))continue;
     per[x.source]=(per[x.source]||0)+1;(per[x.source]<=2&&first.length<12?first:rest).push(x)}
-  return [...first,...rest.sort((a,b)=>Date.parse(b.at)-Date.parse(a.at))]}
+  /* good news for nature (🌱) is lifted into the first screen, so it is not buried under the day's damage */
+  const all=[...first,...rest.sort((a,b)=>Date.parse(b.at)-Date.parse(a.at))],good=all.filter(x=>x.good).slice(0,2);
+  return good.length?[...all.slice(0,1),...good,...all.slice(1).filter(x=>!good.includes(x))]:all}
 /* a radar headline is linked to the piece written from it: by request id, or because the piece cites the same article */
 const rdUrl=u=>String(u||"").split(/[?#]/)[0].replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,"").toLowerCase();
 function radarPiece(x){const u=rdUrl(x.url);return items.find(p=>p.fromRequest===x.id||(u&&(p.sources||[]).some(s=>rdUrl(s&&s.url)===u)))}
 function radarLi(x){const pc=radarPiece(x);
-  return `<li><div class="rd-meta"><b>${esc(x.source)}</b><span>·</span><time datetime="${esc(x.at)}">${agoTxt(x.at)}</time>${radarText(x)!==x.text?`<span class="rd-lg" title="${esc(T("radarTr"))}">${esc(String(x.lang||"").toUpperCase())}</span>`:""}</div><a class="rd-t" href="${esc(x.url)}" target="_blank" rel="noopener nofollow" dir="auto" title="${esc(x.text)}">${esc(radarText(x))}</a>${pc?`<button class="rd-go" type="button" data-rdopen="${esc(pc.id)}">🐾 ${T("radarRead")}</button>`:READER?"":reqIds.has(x.id)?`<span class="rd-wait">${T("mkWaiting")}</span>`:`<button class="rd-mk" type="button" data-rdmk="${esc(x.id)}">${T("radarMk")}</button>`}</li>`}
+  return `<li><div class="rd-meta"><b>${esc(x.source)}</b><span>·</span><time datetime="${esc(x.at)}">${agoTxt(x.at)}</time>${x.good?`<span class="rd-good" title="${esc(T("navHeal"))}">🌱</span>`:""}${radarText(x)!==x.text?`<span class="rd-lg" title="${esc(T("radarTr"))}">${esc(String(x.lang||"").toUpperCase())}</span>`:""}</div><a class="rd-t" href="${esc(x.url)}" target="_blank" rel="noopener nofollow" dir="auto" title="${esc(x.text)}">${esc(radarText(x))}</a>${pc?`<button class="rd-go" type="button" data-rdopen="${esc(pc.id)}">🐾 ${T("radarRead")}</button>`:READER?"":reqIds.has(x.id)?`<span class="rd-wait">${T("mkWaiting")}</span>`:`<button class="rd-mk" type="button" data-rdmk="${esc(x.id)}">${T("radarMk")}</button>`}</li>`}
 /* internal copies only: a radar headline can be turned into a piece, the same way as from the tracker */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-rdmk]");if(!b||READER)return;e.preventDefault();const t=radarAll.find(x=>x.id===b.dataset.rdmk);if(!t)return;
   if(!t.date)t.date=String(t.at||"").slice(0,10);
@@ -982,7 +992,7 @@ function renderFeed(force){
   const fb=$("#by-animal");if(fb){fb.hidden=!byAnimal;if(byAnimal){const sI=spInfo(byAnimal);fb.innerHTML=`<span>${safeE(sI.e)} ${T("piecesBy")(sI.name)}</span><button class="btn" type="button" id="by-clear">${T("showAll")}</button>`}const c=$("#by-clear");if(c)c.onclick=()=>{byAnimal=null;renderFeed()}}
   const feed=$("#feed");
   if(!dbReady&&!items.length){feed.innerHTML=`<div class="card empty"><div class="big">🔥</div>${T("emptyLoading")}</div>`;return}
-  if(!list.length){feed.innerHTML=`<div class="card empty"><div class="big">🌙</div>${fq?T("noFound"):items.length?T("emptyCat"):T("emptyAll")}</div>`;return}
+  if(!list.length){feed.innerHTML=`<div class="card empty"><div class="big">${cat===HEAL&&!fq?"🌱":"🌙"}</div>${fq?T("noFound"):cat===HEAL?T("emptyHeal"):items.length?T("emptyCat"):T("emptyAll")}</div>`;return}
   let vis=list.slice(0,shown);if(openId){const o=list.find(x=>x.id===openId);if(o)vis=[o,...vis.filter(x=>x.id!==openId)]}
   feed.innerHTML=vis.map((raw,k)=>raw.id===openId?cardHTML(raw).replace('<div class="who">',`<div class="close-row"><button class="btn" type="button" data-act="close">${T("closePiece")}</button></div><div class="who">`):teaserHTML(raw,k===0)).join("")+(list.length>vis.length?`<button class="btn more" type="button" data-more>${T("showMore")} (${list.length-vis.length})</button>`:"");
   if(window.__scrollTo){const c=feed.querySelector(`.card[data-id="${CSS.escape(window.__scrollTo)}"]`);if(c){window.__scrollTo=null;setTimeout(()=>c.scrollIntoView({block:"start"}),60)}}
@@ -1739,7 +1749,7 @@ const THEME_KW=[
   ["war",/حرب|قصف|غارة|صاروخ|مسيّرة|انفجار|حريق|حرائق|نار|war|strike|missile|drone|bomb|fire|wildfire|blaze/i],
   ["city",/مدينة|مدن|حضري|مركز بيانات|مراكز البيانات|city|urban|data cent/i]
 ];
-const CAT_THEME={"البحار والمحيطات":"ocean","المياه":"river","الغابات":"forest","الانقراض":"forest","الكون":"cosmos","المدن":"city","الميكروبات والأوبئة":"lab","الهجرة والنزوح":"desert","الغذاء والزراعة":"fields","الحروب والبيئة":"war","كوارث بشرية":"war","التقنية والذكاء الاصطناعي":"city","التلوث":"city","الطاقة":"city","المناخ":"ice","كوارث طبيعية":"desert"};
+const CAT_THEME={"البحار والمحيطات":"ocean","المياه":"river","الغابات":"forest","الانقراض":"forest","الكون":"cosmos","المدن":"city","الميكروبات والأوبئة":"lab","الهجرة والنزوح":"desert","الطبيعة تتعافى":"forest","الغذاء والزراعة":"fields","الحروب والبيئة":"war","كوارث بشرية":"war","التقنية والذكاء الاصطناعي":"city","التلوث":"city","الطاقة":"city","المناخ":"ice","كوارث طبيعية":"desert"};
 function themeOf(raw){
   if(raw.theme&&THEMES[raw.theme])return raw.theme;
   const txt=[raw.animalHabitat,raw.crisis,raw.angle,raw.headline,raw.place,raw.en&&raw.en.animalHabitat,raw.en&&raw.en.angle].filter(Boolean).join(" ");
@@ -1952,9 +1962,9 @@ function forestAudio(ac,dest){
    real photos first, one strong colour per subject, one big number per card, a modern sans,
    the news and the figures lead; the narrator is a small signature and one quote. */
 const PRO=()=>{const s=$("#st-style");return !s||s.value!=="classic"};
-const PRO_ACC={"الحروب والبيئة":"#E5484D","كوارث بشرية":"#EF5B4C","التقنية والذكاء الاصطناعي":"#8B7CF6","التلوث":"#C9A227","المياه":"#22B8CF","الطاقة":"#F5A524","كوارث طبيعية":"#FF7A1A","الغابات":"#30A46C","المناخ":"#F76B15","البحار والمحيطات":"#3B8BFF","الميكروبات والأوبئة":"#D35BE8","الانقراض":"#E2B714","الكون":"#7C83FF","المدن":"#9AA6B8","الغذاء والزراعة":"#84CC16","الهجرة والنزوح":"#E8A04C"};
+const PRO_ACC={"الحروب والبيئة":"#E5484D","كوارث بشرية":"#EF5B4C","التقنية والذكاء الاصطناعي":"#8B7CF6","التلوث":"#C9A227","المياه":"#22B8CF","الطاقة":"#F5A524","كوارث طبيعية":"#FF7A1A","الغابات":"#30A46C","المناخ":"#F76B15","البحار والمحيطات":"#3B8BFF","الميكروبات والأوبئة":"#D35BE8","الانقراض":"#E2B714","الكون":"#7C83FF","المدن":"#9AA6B8","الغذاء والزراعة":"#84CC16","الهجرة والنزوح":"#E8A04C","الطبيعة تتعافى":"#2FBF71"};
 let PP={},stNarr=null;
-const CALM_CATS=["الغذاء والزراعة","المياه","الغابات","البحار والمحيطات"];
+const CALM_CATS=["الطبيعة تتعافى","الغذاء والزراعة","المياه","الغابات","البحار والمحيطات"];
 /* the card ground: dark for heavy news, light for calm subjects, or the subject's own colour */
 function toneOf(raw){const v=$("#st-tone")?$("#st-tone").value:"auto";if(v!=="auto")return v;return CALM_CATS.includes(raw&&raw.category)?"light":"dark"}
 function proPal(tone,acc){
@@ -2293,7 +2303,7 @@ document.querySelectorAll("[data-run]").forEach(b=>b.onclick=async()=>{
   finally{setTimeout(()=>{b.disabled=false},4000)}});
 /* ---------- species cards & endangered list ---------- */
 Object.assign(DICT.ar,{
-  navIds:"بطاقات الكائنات",navRed:"مهددة بالانقراض",
+  navIds:"بطاقات الكائنات",navRed:"مهددة بالانقراض",navHeal:"🌱 الطبيعة تتعافى",
   idsIntro:"بطاقة تعريف لكل كائن ظهر في مادة من مواد شهود: صورته، وموطنه، ووضعه على القائمة الحمراء، والأحداث التي ظهر فيها.",
   redIntro:"كائنات مهددة بالانقراض، بعضها من مراسلي شهود وبعضها خارجهم. الأشد خطراً أولاً.",
   redNote:"التصنيفات من القائمة الحمراء للاتحاد الدولي لصون الطبيعة (IUCN) وقد تتغير. راجع رابط IUCN في البطاقة قبل النشر.",
@@ -2306,7 +2316,7 @@ Object.assign(DICT.ar,{
   stAll:""
 });
 Object.assign(DICT.en,{
-  navIds:"Species cards",navRed:"Endangered",
+  navIds:"Species cards",navRed:"Endangered",navHeal:"🌱 Nature recovers",
   idsIntro:"An ID card for every creature that appeared in a Shuhud piece: its photo, home, Red List status and the events it witnessed.",
   redIntro:"Threatened species, some from the Shuhud correspondents and some beyond them. Most at risk first.",
   redNote:"Statuses follow the IUCN Red List and can change. Check the IUCN link on each card before publishing.",
@@ -2323,9 +2333,9 @@ if(window.SHUHUD_STANDALONE){
   Object.assign(DICT.en,{trackIntro:"Environmental developments and related crises as they come in."});
 }
 if(READER){
-  Object.assign(DICT.ar,{emptyAll:"الغابة صامتة الآن. ستظهر المواد هنا قريباً.",emptyCat:"لا مواد في هذا الباب بعد."});
+  Object.assign(DICT.ar,{emptyAll:"الغابة صامتة الآن. ستظهر المواد هنا قريباً.",emptyCat:"لا مواد في هذا الباب بعد.",emptyHeal:"هنا ما يعود إلى الحياة: محميات جديدة، وكائنات تخرج من خطر الانقراض، وولادات نادرة، وكائنات ظهرت بعد أن عُدّت منقرضة. تُنشر أولى قطعه قريبًا."});
   window.SHUHUD_REDNOTE={ar:"التصنيفات من القائمة الحمراء للاتحاد الدولي لصون الطبيعة (IUCN)، وقد تتغير مع كل تحديث للقائمة.",en:"Statuses follow the IUCN Red List and may change with each update."};
-  Object.assign(DICT.en,{emptyAll:"The forest is quiet. Pieces will appear here soon.",emptyCat:"Nothing in this section yet."});
+  Object.assign(DICT.en,{emptyAll:"The forest is quiet. Pieces will appear here soon.",emptyCat:"Nothing in this section yet.",emptyHeal:"What comes back to life: new reserves, species leaving the danger list, rare births, species found again after being declared extinct. The first pieces are coming soon."});
 }
 if(window.SHUHUD_REDNOTE){DICT.ar.redNote=window.SHUHUD_REDNOTE.ar;DICT.en.redNote=window.SHUHUD_REDNOTE.en}
 /* scientific name and IUCN Red List category for the correspondents */

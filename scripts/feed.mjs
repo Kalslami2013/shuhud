@@ -53,14 +53,18 @@ const FEEDS = [
 // general feeds keep only stories with an environmental subject, and drop market and price news unless pollution or climate is the point
 const MARKET = /\b(stocks?|shares|prices?|markets?|gold|crude futures|brent|investors?)\b|أسعار|سعر|البورصة|الذهب|الأسهم|الدولار|برنت|العقود الآجلة|المستثمرين/i;
 const STRONG = /spill|pollut|emission|climate|wildlife|species|flood|drought|wildfire|earthquake|تسرب|تلوث|انبعاث|مناخ|حياة برية|فيضان|جفاف|حرائق|زلزال/i;
-const KW = /climate|environment|pollut|oil spill|spill|wildfire|forest fire|deforest|flood|drought|heatwave|heat wave|cyclone|hurricane|typhoon|tornado|earthquake|tsunami|volcano|glacier|ice sheet|sea ice|coral|reef|species|extinct|wildlife|biodiversity|endangered|emission|carbon|methane|fossil fuel|renewable|landslide|\bbees?\b|pollinat|butterfl|insect|\bbirds?\b|whale|shark|turtle|poaching|desertification|air quality|smog|heat record|water crisis|water shortage|locust|bird flu|avian|ebola|cholera|el niño|el nino|cop31|unep|iucn|wmo|مناخ|بيئ|تلوث|تسرب|حرائق|حريق غابات|غابات|فيضان|سيول|جفاف|موجة حر|حرارة قياسية|إعصار|زلزال|تسونامي|بركان|جليد|شعاب|مرجان|انقراض|حياة برية|تنوع بيولوجي|انبعاثات|كربون|ميثان|تسرب نفطي|بقعة نفطية|نحل|فراش|حشرات|طيور|حيتان|سلاحف|طاقة متجددة|انهيار أرضي|انهيارات أرضية|التصحر|تصحر|جودة الهواء|ضباب دخاني|الصيد الجائر|شح المياه|أزمة المياه|جراد|إنفلونزا الطيور|إيبولا|كوليرا|النينيو|كوب31|كوب 31|ارتفاع البحر|ارتفاع مستوى البحر|sea level|sea-level|plastic|sewage|nurdle|rewild|nature restoration|بلاستيك|نفايات|الصرف الصحي/i;
+const KW = /climate|environment|pollut|oil spill|spill|wildfire|forest fire|deforest|flood|drought|heatwave|heat wave|cyclone|hurricane|typhoon|tornado|earthquake|tsunami|volcano|glacier|ice sheet|sea ice|coral|reef|species|extinct|wildlife|biodiversity|endangered|emission|carbon|methane|fossil fuel|renewable|landslide|\bbees?\b|pollinat|butterfl|insect|\bbirds?\b|whale|shark|turtle|poaching|desertification|air quality|smog|heat record|water crisis|water shortage|locust|bird flu|avian|ebola|cholera|el niño|el nino|cop31|unep|iucn|wmo|مناخ|بيئ|تلوث|تسرب نفطي|تسرب كيميائي|تسرب إشعاعي|حرائق|حريق غابات|غابات|فيضان|سيول|جفاف|موجة حر|حرارة قياسية|إعصار|زلزال|تسونامي|بركان|جليد|شعاب|مرجان|انقراض|حياة برية|تنوع بيولوجي|انبعاثات|كربون|ميثان|تسرب نفطي|بقعة نفطية|نحل|فراش|حشرات|طيور|حيتان|سلاحف|طاقة متجددة|انهيار أرضي|انهيارات أرضية|التصحر|تصحر|جودة الهواء|ضباب دخاني|الصيد الجائر|شح المياه|أزمة المياه|جراد|إنفلونزا الطيور|إيبولا|كوليرا|النينيو|كوب31|كوب 31|ارتفاع البحر|ارتفاع مستوى البحر|sea level|sea-level|plastic|sewage|nurdle|rewild|nature restoration|بلاستيك|نفايات|الصرف الصحي/i;
 // words used as metaphors or in sport and culture headlines
 const OFFTOPIC = /nvidia|إنفيديا|انفيديا|hockey|هوكي|football|soccer|كرة القدم|مونديال|منتخب|الدوري|جائزة|award|festival|مهرجان|\bfilm\b|فيلم|بورصة/i;
 // a general-news headline must itself name the environmental subject: words in the summary alone let politics through
-export const keepGeneral = (title) => KW.test(title) && !OFFTOPIC.test(title) && !(MARKET.test(title) && !STRONG.test(title));
+export const keepGeneral = (title) => (KW.test(title) || isGood(title)) && !OFFTOPIC.test(title) && !(MARKET.test(title) && !STRONG.test(title));
 
+// good news for nature: recoveries, rediscoveries, new reserves, rare births, reintroductions (marked "good", shown with 🌱)
+export const GOOD = /rediscover|re-discover|found alive|thought (to be )?extinct|back from (the brink|extinction)|no longer (endangered|threatened)|downlist|least concern|recover(y|ed|ing)? (of|in) (the )?(population|species)|population (rebound|recover|increase|grow)|rebound|reintroduc|rewild|returns? to the wild|released into the wild|new (marine )?(reserve|sanctuary|protected area|national park)|(creat|establish|declar|design|expand)\w* .{0,30}(protected area|reserve|sanctuary|national park)|hatchling|chicks? hatch|born in (captivity|the wild)|first (birth|calf|chick)|conservation success|restoration success|محمية (جديدة|طبيعية)|إنشاء محمية|إعادة اكتشاف|أعيد اكتشاف|ظهر(ت)? (مجددا|مجدداً|من جديد)|بعد أن (كان|كانت|اعتبر|اعتُبر)[^،.]{0,20}منقرض|عاد(ت)? إلى (البرية|الطبيعة)|إعادة (توطين|إطلاق|تأهيل)|إطلاق .{0,20}(في البرية|في الطبيعة)|تعافي|تعافى|تعافت|ولادة (نادرة|صغير|أول)|فقس|خرج(ت)? من (قائمة|خطر)|réintrodu|aire (marine )?protégée|réserve naturelle|redécouv|naissance|retour (du|de la|des)|rétablissement|sauvé/i;
+const NOT_GOOD = /fail|failing|loss|lose|losing|declin|threat|collapse|open\w* .{0,30}to (fishing|mining|drilling|logging)|roll ?back|يفشل|تفشل|تراجع|تهديد|خسارة|échec|menac|recul/i;
+export const isGood = (t) => GOOD.test(t) && !NOT_GOOD.test(t);
 const CAT = [
-  ["التلوث", /pollut|spill|plastic|تلوث|تسرب|نفايات/i],
+    ["التلوث", /pollut|spill|plastic|تلوث|تسرب|نفايات/i],
   ["الحروب والبيئة", /war|strike|attack|missile|drone|حرب|غارة|قصف|هجوم|مسيّرة/i],
   ["التقنية والذكاء الاصطناعي", /data cent|\bai\b|artificial intel|مراكز البيانات|ذكاء اصطناعي/i],
   ["الغابات", /forest|deforest|wildfire|غابات|حرائق/i],
@@ -95,6 +99,7 @@ export function parse(xml, [source, , lang, filter]) {
     if (filter instanceof RegExp ? !filter.test(title) : filter && !keepGeneral(title)) return null;
     const category = CAT.find(([, re]) => re.test(title + " " + summary))[0];
     const item = { id: "r-" + hash(url), at, date: at.slice(0, 10), text: title, source, url, category, lang, rss: true, createdAt: new Date().toISOString() };
+    if (isGood(title)) { item.good = true; item.category = "الطبيعة تتعافى"; }
     if (lang === "en") item.en = { text: title, source };
     return item;
   }).filter(Boolean);
@@ -106,6 +111,7 @@ async function main() {
   // stored headlines from general feeds are checked again, so a looser earlier rule leaves nothing behind
   const general = new Set(FEEDS.filter((f) => f[3] === true).map((f) => f[0]));
   old = old.filter((x) => !general.has(x.source) || keepGeneral(x.text));
+  for (const x of old) { if (isGood(x.text)) { x.good = true; x.category = "الطبيعة تتعافى"; } else delete x.good; }
   const seen = new Map(old.map((x) => [x.id, x]));
   const norm = (t) => t.toLowerCase().replace(/[^\p{L}\p{N} ]/gu, "").slice(0, 80);
   const titles = new Set(old.map((x) => norm(x.text)));
