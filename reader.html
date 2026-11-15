@@ -563,8 +563,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794764866"</script>
-<script src="local.js?v=1794764866"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794769963"</script>
+<script src="local.js?v=1794769963"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -2023,7 +2023,10 @@ function proGround(ctx,W,H){ctx.fillStyle=PP.bg;ctx.fillRect(0,0,W,H);
 /* a real photo across the whole card, darkened so white type always reads */
 function proPhoto(ctx,W,H,img,key,pp,alpha=1,strength=1){ctx.save();ctx.globalAlpha*=alpha;
   if(MOTION&&stItem)animatePhoto(ctx,fitted(img,W,H),0,0,W,H,MOTION.t,motionFor(stItem,key),pp,key);else drawCoverImg(ctx,img,0,0,W,H);
-  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,`rgba(5,8,12,${.55*strength})`);g.addColorStop(.28,`rgba(5,8,12,${.12*strength})`);g.addColorStop(.5,`rgba(5,8,12,${.35*strength})`);g.addColorStop(1,`rgba(5,8,12,${.94*strength})`);
+  const g=ctx.createLinearGradient(0,0,0,H),cov=key==="cover";g.addColorStop(0,`rgba(5,8,12,${.55*strength})`);g.addColorStop(.28,`rgba(5,8,12,${.12*strength})`);
+  /* the cover carries the headline low on the card: a deeper shade there so it always reads (Kamal, 15 Nov 2026) */
+  if(cov){g.addColorStop(.42,`rgba(5,8,12,${.3*strength})`);g.addColorStop(.62,`rgba(5,8,12,${.8*strength})`);g.addColorStop(1,`rgba(5,8,12,${.96*strength})`)}
+  else{g.addColorStop(.5,`rgba(5,8,12,${.35*strength})`);g.addColorStop(1,`rgba(5,8,12,${.94*strength})`)}
   ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore()}
 function proCircle(ctx,img,cx,cy,r,u){ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.closePath();ctx.clip();drawCoverImg(ctx,img,cx-r,cy-r,2*r,2*r);ctx.restore();
   ctx.lineWidth=4*u;ctx.strokeStyle="#F4EFE2";ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke()}
@@ -2037,13 +2040,20 @@ function proChrome(ctx,W,H,u,i,idx,total,onPhoto){const pad=80*u,ink=onPhoto?"#F
   paw(ctx,MX(W-pad-24*u),pad-8*u,48*u,PP.color?"#FFFFFF":"#f2b84b");
   ctx.direction=DIR();ctx.textAlign=AL("right");ctx.font=`700 ${(CL==="en"?32:38)*u}px ${FDf()}`;ctx.fillStyle=ink;ctx.fillText(CT("brand"),MX(W-pad-62*u),pad+32*u);
   const cat=CL==="en"?(CAT_EN[i.category]||i.category):i.category;
-  if(cat){ctx.textAlign=AL("left");ctx.font=proFont(600,24*u);ctx.fillStyle=onPhoto&&!PP.color?PP.base||PP.acc:PP.acc;ctx.fillText(cat,MX(pad),pad+30*u)}
+  if(cat){ctx.save();ctx.textAlign=AL("left");ctx.font=proFont(700,onPhoto?30*u:24*u);ctx.fillStyle=onPhoto&&!PP.color?"#FFFFFF":PP.acc;if(onPhoto){ctx.shadowColor="rgba(0,0,0,.65)";ctx.shadowBlur=14*u}ctx.fillText(cat,MX(pad),pad+30*u);
+    if(onPhoto&&!PP.color){const w=ctx.measureText(cat).width;ctx.shadowBlur=0;ctx.fillStyle=PP.base||PP.acc;ctx.fillRect(CL==="en"?W-pad-Math.min(w,90*u):pad,pad+44*u,Math.min(w,90*u),5*u)}ctx.restore()}
   ctx.fillStyle=onPhoto?"rgba(255,255,255,.22)":PP.rule;ctx.fillRect(pad,H-104*u,W-2*pad,2*u);
   ctx.font=proFont(500,22*u);ctx.fillStyle=dim;ctx.direction="ltr";ctx.textAlign=AL("left");
   if(total)ctx.fillText(`${idx} / ${total}`,MX(pad),H-62*u);
   ctx.textAlign=AL("right");ctx.fillText("alshuhud.org",MX(W-pad),H-62*u)}
 function proLabel(ctx,text,W,y,u){const pad=80*u;ctx.direction=DIR();ctx.textAlign=AL("right");ctx.font=proFont(700,26*u);ctx.fillStyle=PP.acc;ctx.fillText(text,MX(W-pad),y);
   ctx.fillRect(CL==="en"?pad:W-pad-60*u,y+18*u,60*u,4*u)}
+/* the cover's kicker: the crisis in a solid label of the subject's colour, so it reads on any photo */
+function proKicker(ctx,text,W,y,u,cw){const pad=80*u,ph=22*u,acc=PP.base||PP.acc;let fs=32*u;ctx.font=proFont(700,fs);while(fs>24*u&&ctx.measureText(text).width>cw-2*ph){fs-=1*u;ctx.font=proFont(700,fs)}const h=fs+26*u;
+  const c=String(acc).replace("#",""),n=parseInt(c.length===3?c.split("").map(x=>x+x).join(""):c,16),lum=((n>>16&255)*.299+(n>>8&255)*.587+(n&255)*.114)/255;
+  ctx.font=proFont(700,fs);const tw=Math.min(cw-2*ph,ctx.measureText(text).width),bw=tw+2*ph,bx=CL==="en"?pad:W-pad-bw;
+  ctx.fillStyle=acc;rrect(ctx,bx,y-h+10*u,bw,h,10*u);ctx.fill();
+  txt(ctx,text,{x:W-pad-ph,y:y-4*u,maxW:tw+2,font:proFont(700,fs),color:lum>.62?"#0B0F14":"#FFFFFF",lh:fs*1.3,maxLines:1})}
 /* the one quote from the testimony: its first one or two sentences, at most ~32 words */
 function proQuote(i){const p=String(i.dispatch||"").split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean);if(!p.length)return"";
   const sents=p[0].split(/(?<=[.!؟?])\s+/);let q="";for(const s of sents){const t=q?q+" "+s:s;if(t.split(/\s+/).length>34&&q)break;q=t;if(q.split(/\s+/).length>=18)break}
@@ -2058,8 +2068,8 @@ function proSlides(i,W,H,forVideo,target=0){
     const hl={x:W-pad,y:0,maxW:cw,font:`700 ${fs}px ${FDf()}`,color:onP?"#FFFFFF":PP.ink,lh:fs*(en?1.15:1.38),maxLines:tall?5:4};
     const hh=txt(ctx,i.headline,{...hl,measure:true});
     let y=bottom-(stNarr&&narrOnCover||!coverImg?150:70)*u-hh;
-    fade(ctx,p,0,.3,()=>{if(i.crisis)txt(ctx,i.crisis,{x:W-pad,y:y-24*u,maxW:cw,font:proFont(600,30*u),color:PP.acc,lh:42*u,maxLines:1})});
-    fade(ctx,p,.1,.45,()=>{txt(ctx,i.headline,{...hl,y:y+fs*.9})});
+    fade(ctx,p,0,.3,()=>{if(i.crisis)proKicker(ctx,i.crisis,W,y-40*u,u,cw)});
+    fade(ctx,p,.1,.45,()=>{if(onP){ctx.shadowColor="rgba(0,0,0,.6)";ctx.shadowBlur=20*u;ctx.shadowOffsetY=2*u}txt(ctx,i.headline,{...hl,y:y+fs*.9})});
     if(narrOnCover||!coverImg)fade(ctx,p,.3,.6,()=>{proSign(ctx,W,bottom-62*u,u,r,onP)});
     if(stPhoto&&i.imageCredit){ctx.font=proFont(400,17*u);ctx.fillStyle="rgba(255,255,255,.7)";ctx.direction="ltr";ctx.textAlign=AL("left");ctx.fillText("📷 "+(i.imageCredit.length>70?i.imageCredit.split("·").slice(-2).join("·").trim():i.imageCredit),MX(pad),top-20*u)}
     else if(!stPhoto&&stNarr&&i.__narrCredit){ctx.font=proFont(400,17*u);ctx.fillStyle="rgba(255,255,255,.7)";ctx.direction="ltr";ctx.textAlign=AL("left");ctx.fillText("📷 "+i.__narrCredit,MX(pad),top-20*u)}
