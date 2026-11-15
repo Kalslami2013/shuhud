@@ -431,6 +431,36 @@ body.reader nav.main button[data-view="desk"],body.reader nav.main button[data-v
 body.reader [data-act="del"],body.reader [data-act="photo"],body.reader [data-act="unphoto"],body.reader [data-act="export"],body.reader [data-act="tr"],
 body.reader .trbar button,body.reader #track .mk,body.reader .sp-iucn,body.reader [data-sa="photo"],body.reader [data-sa="fill"],body.reader [data-sa="write"],body.reader [data-sa="about"]{display:none!important}
 body.reader .rc .cnt.none{visibility:hidden}
+/* phones (15 Nov 2026, Kamal): a compact masthead so the lead story shows on the first screen; the lede and the "Earth's day" line move to the foot */
+.foot-intro{display:none}
+@media (max-width:640px){
+  .hero{padding-block:12px 4px;gap:2px}
+  .hero-top{align-items:center}
+  .brandmark{flex-direction:row;align-items:center;gap:10px}
+  .brandmark .paw{width:34px}
+  .hero h1,body.en .hero h1{font-size:46px}
+  .hero-tools{flex-direction:row;align-items:center;gap:6px}
+  .hero-tools .lang button{padding:4px 11px;font-size:13px}
+  .inst{padding:4px 10px;font-size:11.5px}
+  .hero h1,body.en .hero h1{line-height:1.2}
+  .eyebrow{font-size:14px;margin-top:4px}
+  .hero>p,.hero>.clock{display:none}
+  .scene-row{margin-top:4px;gap:6px;font-size:11.5px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .scene-row::-webkit-scrollbar{display:none}
+  .scene-row #scene{padding:3px 10px;white-space:nowrap}
+  .scene-row select.mini{font-size:11.5px;padding:3px 8px;flex:0 0 auto}
+  nav.main{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-block:7px;gap:5px;-webkit-mask:linear-gradient(to left,#000 calc(100% - 18px),transparent);mask:linear-gradient(to left,#000 calc(100% - 18px),transparent)}
+  html[dir=ltr] nav.main{-webkit-mask:linear-gradient(to right,#000 calc(100% - 18px),transparent);mask:linear-gradient(to right,#000 calc(100% - 18px),transparent)}
+  nav.main::-webkit-scrollbar{display:none}
+  nav.main button{flex:0 0 auto!important;padding:7px 12px;font-size:13.5px;border-radius:999px}
+  .feed-q{margin-bottom:6px;margin-top:8px}
+  .feed-q input{padding-block:7px!important;font-size:14px}
+  .cats{grid-template-rows:auto;padding-block:2px 8px}
+  .status.count{display:none}
+  .foot-intro{display:grid;gap:10px;margin-bottom:22px}
+  .foot-intro p{margin:0;color:var(--parchment)}
+  .foot-intro .clock{margin-top:0}
+}
 </style>
 
 <canvas id="forest" aria-hidden="true"></canvas>
@@ -700,6 +730,7 @@ body.reader .rc .cnt.none{visibility:hidden}
   </section>
 
   <footer class="site-foot">
+    <div class="foot-intro"><p data-i18n="lede">لا ننقل الخبر، بل نتتبع أثره في الماء والغابة والبحر. كل أزمة يرويها كائن يعيش في قلبها، ومعها الأرقام ومصادرها.</p><div class="clock" data-i18n="clock">لو كان عمر الأرض يوماً واحداً، لظهر الإنسان قبل منتصف الليل بـ <b>٦ ثوانٍ</b> فقط</div></div>
     <div id="s-wrap" hidden>
       <div class="sc-head"><h3 data-i18n="sTitle">تابعونا</h3><button class="btn export" type="button" id="s-add-btn" hidden data-i18n="sAdd">➕ أضف حساباً</button></div>
       <div class="panel" id="s-form" hidden style="margin-bottom:14px">
@@ -736,8 +767,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794731368"</script>
-<script src="local.js?v=1794731368"></script>
+<script>window.SHUHUD_BUILD="1794733829"</script>
+<script src="local.js?v=1794733829"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1218,9 +1249,11 @@ function openPiece(id){openId=openId===id?null:id;{const fqi=$("#feed-q");if(ope
 $("#feed").addEventListener("click",e=>{if(e.target.closest("[data-more]")){shown+=12;renderFeed();return}const t=e.target.closest("[data-open]");if(t)openPiece(t.dataset.open)});
 $("#feed").addEventListener("keydown",e=>{const t=e.target.closest&&e.target.closest("[data-open]");if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openPiece(t.dataset.open)}});
 function updateStatus(){
+  $("#status").classList.remove("count");
   if(statusMsg){$("#status").textContent=T(statusMsg);return}
   if(!dbReady){$("#status").textContent=T("loadingStatus");return}
   const lastLive=items.find(i=>i.kind==="live");
+  $("#status").classList.toggle("count",!!items.length);
   $("#status").textContent=items.length?`${T("statusCount")(items.length)}${lastLive?" · "+T("lastUpdate")+": "+fmtDate(lastLive.createdAt):""}`:"";
 }
 $("#feed").addEventListener("click",async e=>{
