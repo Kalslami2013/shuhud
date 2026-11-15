@@ -139,6 +139,10 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 nav.main button.heal-tab{color:#9fe0b4;border-color:rgba(47,191,113,.45)}nav.main button.heal-tab[aria-selected="true"]{background:rgba(47,191,113,.18);border-color:#2FBF71;color:#d8f5e2}
 #cats .chip[data-c="الطبيعة تتعافى"]{border-color:rgba(47,191,113,.55);color:#9fe0b4}#cats .chip[data-c="الطبيعة تتعافى"][aria-pressed="true"]{background:#2FBF71;color:#06240f}
 .radar .rd-good{font-size:12px;margin-inline-start:2px}
+/* a soft fade when a tab opens, instead of a hard cut */
+section[id^="v-"]:not([hidden]){animation:vfade .32s ease both}
+@keyframes vfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){section[id^="v-"]:not([hidden]){animation:none}}
 .btn.more:hover{background:rgba(20,34,27,.95);border-color:#f2b84b;color:#fff}
 #feed .card,#feed .tz{scroll-margin-top:140px}
 .ed{display:grid;gap:6px}.ed .ed-i{width:100%;box-sizing:border-box;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;color:inherit;font:inherit;padding:8px 10px}.ed textarea.ed-i{line-height:1.8;resize:vertical}.ed-list{display:grid;gap:6px}.ed-row{display:grid;grid-template-columns:1fr 2fr 1fr auto;gap:6px}.ed-row[data-row="src"]{grid-template-columns:1fr 2fr auto}@media(max-width:600px){.ed-row,.ed-row[data-row="src"]{grid-template-columns:1fr auto}.ed-row .ed-i{grid-column:1}}
@@ -526,8 +530,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794728489"</script>
-<script src="local.js?v=1794728489"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794731368"</script>
+<script src="local.js?v=1794731368"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -764,12 +768,14 @@ function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB"
 
 /* ---------- views ---------- */
 const VIEWS=["live","track","desk","corr","ids","red","media","about","guide"];
-function show(v){try{if(NARR.playing)stopNarration()}catch(e){}setTimeout(()=>{try{placeRadar()}catch(e){}},0);if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track"||v==="guide")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
+/* switching tabs keeps the reader in place: the tab bar stays where it is and the new section starts right under it (no jump back to the top, no jump down) */
+function keepNav(){const m=document.getElementById("nav-mark");if(!m)return;const top=m.getBoundingClientRect().top+scrollY;if(scrollY>top)window.scrollTo({top,behavior:"instant"})}
+function show(v){try{if(NARR.playing)stopNarration()}catch(e){}keepNav();setTimeout(()=>{try{placeRadar()}catch(e){}},0);if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track"||v==="guide")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
 function clearHash(){if(!location.hash&&!/^\/p\//.test(location.pathname))return;try{history.pushState(null,"",/^\/p\//.test(location.pathname)?"/":location.pathname+location.search)}catch(e){location.hash=""}}
 const HEAL="الطبيعة تتعافى";
 document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{const was=openId,v=b.dataset.view;
   /* «Nature recovers» is the front page filtered to its own category */
-  if(v==="heal"){openId=null;editId=null;byAnimal=null;cat=HEAL;shown=13;clearHash();show("live");document.querySelectorAll("nav.main button").forEach(x=>x.setAttribute("aria-selected",x===b));renderCats();renderFeed(true);const f=$("#cats")||$("#feed");if(f)f.scrollIntoView({behavior:"smooth",block:"start"});return}
+  if(v==="heal"){openId=null;editId=null;byAnimal=null;cat=HEAL;shown=13;clearHash();show("live");document.querySelectorAll("nav.main button").forEach(x=>x.setAttribute("aria-selected",x===b));renderCats();renderFeed(true);return}
   if(v==="live"&&cat===HEAL){cat="الكل";renderCats();renderFeed(true)}
   /* the front page (live) keeps a clean address: alshuhud.org with nothing after it */
   if(v==="live"){if(/^\/p\//.test(location.pathname))openId=null;clearHash()}
