@@ -133,6 +133,9 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .lead .tz-img.noimg{aspect-ratio:21/9}.lead .tz-img{aspect-ratio:16/9}.lead h3{font-size:clamp(24px,3.2vw,32px)}.lead p{-webkit-line-clamp:4;font-size:15.5px}
 @media (min-width:900px){.lead{flex-direction:row}.lead .tz-img{flex:1.25;align-self:center}.lead .tz-img.noimg{min-height:300px;align-self:stretch}.lead .tz-b{flex:1;padding:22px 24px;justify-content:center}}
 .more{justify-self:center;margin-top:4px}
+/* "show more" keeps its own dark panel so it stays readable over the bright day sky */
+.btn.more{background:rgba(12,22,17,.9);color:var(--parchment,#f3ead7);border:1px solid rgba(242,184,75,.55);font-size:14.5px;padding:10px 26px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.3);backdrop-filter:blur(6px);cursor:pointer}
+.btn.more:hover{background:rgba(20,34,27,.95);border-color:#f2b84b;color:#fff}
 #feed .card,#feed .tz{scroll-margin-top:140px}
 .ed{display:grid;gap:6px}.ed .ed-i{width:100%;box-sizing:border-box;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;color:inherit;font:inherit;padding:8px 10px}.ed textarea.ed-i{line-height:1.8;resize:vertical}.ed-list{display:grid;gap:6px}.ed-row{display:grid;grid-template-columns:1fr 2fr 1fr auto;gap:6px}.ed-row[data-row="src"]{grid-template-columns:1fr 2fr auto}@media(max-width:600px){.ed-row,.ed-row[data-row="src"]{grid-template-columns:1fr auto}.ed-row .ed-i{grid-column:1}}
 .mk-menu{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;width:100%}.mk-menu .btn{font-size:12.5px;padding:5px 11px}
@@ -518,8 +521,8 @@ body.reader .rc .cnt.none{visibility:hidden}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794721851"</script>
-<script src="local.js?v=1794721851"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794722390"</script>
+<script src="local.js?v=1794722390"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);

@@ -130,6 +130,9 @@ nav.main button[aria-selected="true"]{background:var(--moss);color:var(--parchme
 .lead .tz-img.noimg{aspect-ratio:21/9}.lead .tz-img{aspect-ratio:16/9}.lead h3{font-size:clamp(24px,3.2vw,32px)}.lead p{-webkit-line-clamp:4;font-size:15.5px}
 @media (min-width:900px){.lead{flex-direction:row}.lead .tz-img{flex:1.25;align-self:center}.lead .tz-img.noimg{min-height:300px;align-self:stretch}.lead .tz-b{flex:1;padding:22px 24px;justify-content:center}}
 .more{justify-self:center;margin-top:4px}
+/* "show more" keeps its own dark panel so it stays readable over the bright day sky */
+.btn.more{background:rgba(12,22,17,.9);color:var(--parchment,#f3ead7);border:1px solid rgba(242,184,75,.55);font-size:14.5px;padding:10px 26px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.3);backdrop-filter:blur(6px);cursor:pointer}
+.btn.more:hover{background:rgba(20,34,27,.95);border-color:#f2b84b;color:#fff}
 #feed .card,#feed .tz{scroll-margin-top:140px}
 .ed{display:grid;gap:6px}.ed .ed-i{width:100%;box-sizing:border-box;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;color:inherit;font:inherit;padding:8px 10px}.ed textarea.ed-i{line-height:1.8;resize:vertical}.ed-list{display:grid;gap:6px}.ed-row{display:grid;grid-template-columns:1fr 2fr 1fr auto;gap:6px}.ed-row[data-row="src"]{grid-template-columns:1fr 2fr auto}@media(max-width:600px){.ed-row,.ed-row[data-row="src"]{grid-template-columns:1fr auto}.ed-row .ed-i{grid-column:1}}
 .mk-menu{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;width:100%}.mk-menu .btn{font-size:12.5px;padding:5px 11px}
@@ -724,8 +727,8 @@ body.reader .rc .cnt.none{visibility:hidden}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794721851"</script>
-<script src="local.js?v=1794721851"></script>
+<script>window.SHUHUD_BUILD="1794722390"</script>
+<script src="local.js?v=1794722390"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
