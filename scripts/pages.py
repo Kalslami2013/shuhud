@@ -192,7 +192,7 @@ def _fetch(src):
             time.sleep(3 * (k + 1))
     return None
 def og_image(sid, src, narr=""):
-    key = src + "|" + (narr or "")
+    key = src + "|" + (narr or "") + ("|fit2" if narr else "")
     path = f"og/{sid}.jpg"
     if not src:
         return ""
@@ -209,7 +209,16 @@ def og_image(sid, src, narr=""):
             nb = _fetch(narr)
             if nb:
                 d = 190
-                c = ImageOps.fit(Image.open(BytesIO(nb)).convert("RGB"), (d, d), Image.LANCZOS, centering=(0.5, 0.4))
+                ni = Image.open(BytesIO(nb)).convert("RGB")
+                ar = ni.width / max(1, ni.height)
+                # a long or tall creature (a fish, a snake) is shown whole on a parchment ground, not cropped
+                if ar > 1.55 or ar < 0.66:
+                    inner = int(d * 0.94)
+                    c = Image.new("RGB", (d, d), (244, 239, 226))
+                    ni.thumbnail((inner, inner), Image.LANCZOS)
+                    c.paste(ni, ((d - ni.width) // 2, (d - ni.height) // 2))
+                else:
+                    c = ImageOps.fit(ni, (d, d), Image.LANCZOS, centering=(0.5, 0.4))
                 m = Image.new("L", (d, d), 0); ImageDraw.Draw(m).ellipse((0, 0, d - 1, d - 1), fill=255)
                 x, y = 1200 - d - 40, 630 - d - 40
                 ImageDraw.Draw(im).ellipse((x - 7, y - 7, x + d + 6, y + d + 6), fill=(244, 239, 226))

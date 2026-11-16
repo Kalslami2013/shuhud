@@ -169,6 +169,8 @@ section[id^="v-"]:not([hidden]){animation:vfade .32s ease both}
 .voice{margin:0;font-size:16px;line-height:1.95;white-space:pre-line;text-wrap:pretty}
 .att-wrap{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0d1a14;margin-bottom:12px}
 .att-wrap .att-bg{display:none}
+/* the narrator's circle shows the whole creature when its photo is long or tall (Kamal, 16 Nov 2026) */
+.tz-img img.narr.fit,.att-wrap img.narr.fit{object-fit:contain;background:#f4efe2;padding:2%;box-sizing:border-box}
 .tz-img img.narr,.att-wrap img.narr{position:absolute;inset-inline-start:12px;bottom:12px;width:20%;max-width:104px;min-width:52px;height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid #f4efe2;box-shadow:0 4px 16px rgba(0,0,0,.55);z-index:2}
 .card .att-wrap img.att{width:100%;height:100%;max-height:none;max-width:none;object-fit:cover;object-position:50% 40%;border-radius:0}
 .card img.att{display:block;width:auto;height:auto;max-width:100%;max-height:520px;border-radius:12px}
@@ -583,8 +585,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794831301"</script>
-<script src="local.js?v=1794831301"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794834046"</script>
+<script src="local.js?v=1794834046"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -973,7 +975,8 @@ function wikiNarr(n){if(wikiTried.has(n)||(typeof spWikiOff!=="undefined"&&spWik
 /* the event's own photo fills the frame and the narrator sits in a small circle in its corner; without one, the narrator's photo fills it */
 function shownImg(raw){const own=pieceImg(raw.imageUrl),nr=narrImg(raw);
   if(own)return {img:own,credit:raw.imageCredit||"",narr:nr.img&&nr.img!==own?nr.img:""};return {img:nr.img,credit:nr.credit,narr:""}}
-function narrHTML(u,name){return u?`<img class="narr" data-full="${esc(bigImg(u))}" src="${esc(bigImg(u).replace("/960px-","/330px-"))}" alt="${esc(name||"")}" title="${esc(name||"")}" loading="lazy" onerror="const o=wikiOrig(this.src);if(o&&!this.dataset.orig){this.dataset.orig=1;this.src=o}else this.remove()">`:""}
+function narrFit(el){const r=(el.naturalWidth||1)/(el.naturalHeight||1);el.classList.toggle("fit",r>1.55||r<.66)}
+function narrHTML(u,name){return u?`<img class="narr" onload="narrFit(this)" data-full="${esc(bigImg(u))}" src="${esc(bigImg(u).replace("/960px-","/330px-"))}" alt="${esc(name||"")}" title="${esc(name||"")}" loading="lazy" onerror="const o=wikiOrig(this.src);if(o&&!this.dataset.orig){this.dataset.orig=1;this.src=o}else this.remove()">`:""}
 function teaserHTML(raw,lead){
   const i=L(raw),r=who(i);const sh=shownImg(raw),img=sh.img;
   return `<article class="tz${lead?" lead":""}" style="--th:${THEMES[themeOf(raw)].ui}" data-open="${esc(raw.id)}" tabindex="0" role="link" aria-label="${esc(i.headline)}">
@@ -2090,7 +2093,9 @@ function proPhoto(ctx,W,H,img,key,pp,alpha=1,strength=1){ctx.save();ctx.globalAl
   if(cov){g.addColorStop(.42,`rgba(5,8,12,${.3*strength})`);g.addColorStop(.62,`rgba(5,8,12,${.8*strength})`);g.addColorStop(1,`rgba(5,8,12,${.96*strength})`)}
   else{g.addColorStop(.5,`rgba(5,8,12,${.35*strength})`);g.addColorStop(1,`rgba(5,8,12,${.94*strength})`)}
   ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore()}
-function proCircle(ctx,img,cx,cy,r,u){ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.closePath();ctx.clip();drawCoverImg(ctx,img,cx-r,cy-r,2*r,2*r);ctx.restore();
+function proCircle(ctx,img,cx,cy,r,u){ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.closePath();ctx.clip();
+  const ar=img.width/img.height;if(ar>1.55||ar<.66){ctx.fillStyle="#f4efe2";ctx.fillRect(cx-r,cy-r,2*r,2*r);const m=r*1.9,w=ar>1?m:m*ar,h=ar>1?m/ar:m;ctx.drawImage(img,cx-w/2,cy-h/2,w,h)}
+  else drawCoverImg(ctx,img,cx-r,cy-r,2*r,2*r);ctx.restore();
   ctx.lineWidth=4*u;ctx.strokeStyle="#F4EFE2";ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke()}
 /* the narrator's signature: small photo (or nothing) + «شهادة: …» */
 function proSign(ctx,W,y,u,r,onPhoto){const pad=80*u,R=40*u;let x=W-pad;
