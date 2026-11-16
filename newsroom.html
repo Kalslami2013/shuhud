@@ -792,8 +792,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794862080"</script>
-<script src="local.js?v=1794862080"></script>
+<script>window.SHUHUD_BUILD="1794862783"</script>
+<script src="local.js?v=1794862783"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1624,7 +1624,7 @@ function buildPrompt(){
 
 Tasks:
 1. Name the human crisis in a few words.
-2. Write the "angle" (the summary shown under the headline): ONE sentence of 25 to 40 words that first tells the news itself in brief, WHAT happened and WHERE (with the key number or date when useful), then the environmental pathway from that human decision to the lives of species. A reader who sees only the headline and this sentence must know the news. Example: "تقرير جديد يقدّر أن ارتفاع البحر سيُفقد مصر والعراق 130 مليار دولار من خدمات الطبيعة، إذ تغمر المياه المالحة أراضي الدلتا الرطبة وحقولها أولاً، فتخسر الطيور والأسماك والبشر معاً." ${angle?"Angle requested by the editor: "+angle:"Choose the strongest angle the material supports."}
+2. Write the "angle" (the summary shown under the headline): ONE sentence of 25 to 40 words that first tells the news itself in brief, WHAT happened and WHERE (with the key number or date when useful), then the environmental pathway from that human decision to the lives of species. A reader who sees only the headline and this sentence must know the news. Example: "تقرير جديد يقدّر أن ارتفاع البحر سيُفقد مصر والعراق 130 مليار دولار من خدمات الطبيعة، إذ تغمر المياه المالحة أراضي الدلتا الرطبة وحقولها أولاً، فتخسر الطيور والأسماك والبشر معاً." ${angle?"Angle requested by the editor: "+angle:"Choose the strongest angle the material supports."} Every proper name used in the headline (a river, city, country, region, body or species) must also appear explicitly in the angle and in the first paragraph of the dispatch, with what tells the reader what it is (e.g. "the Garonne river in south-west France"); the same in English.
 3. Choose the narrator. ${chosen==="auto"?"Pick the species most emblematic of the exact place and habitat affected (the region, forest, desert, river or sea where it happens): prefer the ready-made list grouped by region below when one lives there; otherwise any real endemic species of that place (key custom).":"The narrator must be: "+ROSTER_EN[chosen][0]+" (key "+chosen+")."}
 4. Write the dispatch as a FIELD CORRESPONDENT'S REPORT in the first person of this creature (Kamal's rule, 15 Nov 2026), not a fable. The FIRST paragraph is the news itself: what happened, where, when, the key number and who said it (attributed: \"according to…\", \"the ministry said…\"). Then about 70% facts and figures, 30% the creature's own view: explain the impact through its real, scientifically accurate food, habitat, breeding or migration in that place. The creature names itself once, early, at the start of the second paragraph (e.g. \"أنا الدجاجة السلطانية، أعيش بين أعواد القصب جنوب بحيرة البرلس…\"), so the reader always knows who is speaking. At most ONE light human touch in the whole piece; no wisdom, no irony about humans, no \"humans are strange creatures\", no emotional musing, no talking to the reader, no fairy-tale phrasing. End on a concrete consequence for the place, not a moral. Tone: ${tone}. Length: ${len} words.
 5. Chain of impact: 3 to 5 short links from the human act to the harm.
@@ -2607,7 +2607,7 @@ const RUN_TEXT="تشغيل يدوي طلبه كمال الآن من داخل ا�
 const runDaily=(mode,n)=>RUN_DAILY.replace("اكتب 3 قطع بالضبط في هذه الجولة (طلبات كمال أولًا إن وُجدت، ثم أقوى الأزمات الموثقة)",
   mode==="only"?"وضع الجولة: طلبات كمال فقط. اكتب طلباته المنتظرة في requests-gh.json وحدها (حتى 5)، ولا تختر أي قصة من عندك؛ إن لم يوجد طلب منتظر فلا تكتب شيئًا وقل ذلك في السطر الأخير":
   `وضع الجولة: طلبات كمال ثم اختيارك. اكتب طلباته المنتظرة أولًا، ثم أكمل من اختيارك حتى يصبح مجموع قطع الجولة ${n} (إن كانت طلباته ${n} أو أكثر فاكتب طلباته وحدها حتى 5)`);
-const RUN_DAILY="تشغيل يدوي طلبه كمال الآن من داخل التطبيق. اكتب 3 قطع بالضبط في هذه الجولة (طلبات كمال أولًا إن وُجدت، ثم أقوى الأزمات الموثقة)، بالجودة والتدقيق المعتادين، ثم توقف. قاعدة الأرقام: قيمة كل رقم (value) تُقرأ وحدها كعنوان واضح فيها العدد والوحدة وما يُعدّ، مثل «أكثر من 1,900 طائر نافق» لا «1,900 طائر»، والشرح (label) يضيف المكان وتاريخ الرقم والمقارنة. لا تنشئ أي جدولة ولا تعِد تشغيل نفسك.";
+const RUN_DAILY="تشغيل يدوي طلبه كمال الآن من داخل التطبيق. اكتب 3 قطع بالضبط في هذه الجولة (طلبات كمال أولًا إن وُجدت، ثم أقوى الأزمات الموثقة)، بالجودة والتدقيق المعتادين، ثم توقف. قاعدة الأرقام: قيمة كل رقم (value) تُقرأ وحدها كعنوان واضح فيها العدد والوحدة وما يُعدّ، مثل «أكثر من 1,900 طائر نافق» لا «1,900 طائر»، والشرح (label) يضيف المكان وتاريخ الرقم والمقارنة. قاعدة الأسماء: كل اسم علم في العنوان (نهر، مدينة، بلد، منطقة، جهة، كائن) يجب أن يرد صراحة في الخلاصة (angle) وفي الفقرة الأولى من الشهادة، ومعه ما يعرّف القارئ به (مثل «نهر الغارون في جنوب غرب فرنسا»)، بالعربية والإنجليزية. لا تنشئ أي جدولة ولا تعِد تشغيل نفسك.";
 let mcp=null;
 const runsGet=()=>{try{return JSON.parse(localStorage.getItem(RUN_KEY)||"{}")}catch(e){return{}}};
 const runsSet=o=>{try{localStorage.setItem(RUN_KEY,JSON.stringify(o))}catch(e){}};
