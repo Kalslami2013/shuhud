@@ -434,6 +434,21 @@ body.reader nav.main button[data-view="desk"],body.reader nav.main button[data-v
 body.reader [data-act="del"],body.reader [data-act="photo"],body.reader [data-act="unphoto"],body.reader [data-act="export"],body.reader [data-act="tr"],
 body.reader .trbar button,body.reader #track .mk,body.reader .sp-iucn,body.reader [data-sa="photo"],body.reader [data-sa="fill"],body.reader [data-sa="write"],body.reader [data-sa="about"]{display:none!important}
 body.reader .rc .cnt.none{visibility:hidden}
+/* «مقترحات اليوم» (standalone newsroom) and the daily-run chooser (Claude copy), 16 Nov 2026 */
+.picks{background:rgba(9,18,14,.9);border:1px solid rgba(242,184,75,.3);border-radius:16px;padding:14px 16px;margin:0 0 14px}
+.picks h2{font-size:17px;margin:0 0 2px;color:var(--amber)}.picks .pk-sub{font-size:13px;color:var(--dim);margin:0 0 10px}
+.picks ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.picks li{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
+.picks li input{margin-top:5px;width:18px;height:18px;flex:0 0 auto;accent-color:#f2b84b}
+.picks li label{flex:1;min-width:0;cursor:pointer}.picks .pk-t{display:block;color:var(--parchment);font-size:15px;line-height:1.55}
+.picks .pk-m{font-size:12px;color:var(--faint);display:flex;gap:6px;flex-wrap:wrap;align-items:center}.picks .pk-m a{color:var(--leaf)}
+.picks .pk-tag{border:1px solid var(--line);border-radius:999px;padding:0 8px;color:var(--leaf)}
+.picks .pk-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.picks .pk-q{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--dim)}
+.picks .pk-q li{padding:6px 10px}.picks .pk-q button{background:none;border:0;color:var(--faint);cursor:pointer;font-size:15px}
+.run-pick{flex-basis:100%;display:grid;gap:8px;background:rgba(9,18,14,.92);border:1px solid rgba(242,184,75,.35);border-radius:14px;padding:12px 14px}
+.run-pick .rp-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.run-pick label{display:flex;gap:6px;align-items:center;cursor:pointer;color:var(--parchment);font-size:14px}
+.run-pick select{width:auto}.run-pick .note{font-size:12.5px}
 /* headlines and summaries a little larger (Kamal, 15 Nov 2026) */
 .tz h3{font-size:22px}.tz p{font-size:15px}
 .lead h3{font-size:clamp(26px,3.5vw,36px)}.lead p{font-size:16.5px}
@@ -505,6 +520,7 @@ body.en .hero>p{max-width:54em}
     <div class="feed-q" id="feed-q-box"></div>
     <div class="cats" id="cats" role="toolbar" aria-label="أبواب النشرة" data-i18n-aria="catsAria"></div>
     
+    <section class="picks" id="picks" hidden aria-labelledby="picks-h"></section>
     <div class="status" id="status">تتجمع الحيوانات حول النار…</div>
     <div class="by-animal" id="by-animal" hidden></div>
     <aside class="radar" id="radar" hidden aria-labelledby="radar-h"></aside>
@@ -568,11 +584,11 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794775008"</script>
-<script src="local.js?v=1794775008"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794822924"</script>
+<script src="local.js?v=1794822924"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
-const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
+const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
 const $=s=>{const e=document.querySelector(s);if(e)return e;const m=/^#([\w-]+)/.exec(s);return m&&__CUT.has(m[1])?__nil:null};
 /* ---------- language ---------- */
 const DICT={
@@ -584,6 +600,10 @@ ar:{
   dawn:"فجر",day:"نهار",dusk:"غروب",night:"ليل",spring:"ربيع",summer:"صيف",autumn:"خريف",winter:"شتاء",tropic:"موسم استوائي",moon:"القمر",
   moonNames:["محاق","هلال","تربيع أول","أحدب متزايد","بدر","أحدب متناقص","تربيع ثانٍ","هلال أخير"],
   navTrack:"الرصد",trackIntro:"تطورات البيئة والأزمات المرتبطة بها. الرصد يدوي: لا يعمل إلا حين تضغط «ارصد الآن».",toPiece:"حوّل إلى مادة",ghFirstKey:"",mkManual:"✍️ اكتبها يدوياً",mkBridge:"📋 عبر محادثة Claude الآن",mkQueue:"🗂️ أرسلها إلى Claude ليكتبها",mkQueued:"أُرسلت إلى Claude: يكتبها حين تضغط «اكتب قطع اليوم» في نسخة Claude، ثم «زامن»",mkWaiting:"⏳ بانتظار Claude",trTrack:"ترجم",trTrackBack:"الأصل",trTrackIng:"يترجم…",trTrackFail:"تعذّرت الترجمة، حاول بعد قليل",trAll:n=>`ترجم الإنجليزي (${n.toLocaleString("ar")})`,converted:"✓ صارت مادة",newestFirst:"الأحدث أولاً",oldestFirst:"الأقدم أولاً",trackEmpty:"لم يصل شيء إلى الرصد بعد. اضغط «ارصد الآن» لتبدأ جولة رصد.",lastScan:"آخر رصد",trackCount:n=>`${n.toLocaleString("ar")} تطوراً مرصوداً`,
+  pkH:"📋 مقترحات اليوم",pkSub:"أخبار من الرصد المجاني تصلح قطعًا (آخر 48 ساعة، تصنيفات متنوعة). اختر ما تريده، ثم أرسله إلى Claude.",pkSend:n=>`📨 أرسل المختارة إلى Claude (${n})`,pkMore:"اعرض مقترحات أخرى",
+  pkSent:n=>`أُرسلت ${n} إلى قائمة الكتابة. اضغط الآن «اكتب قطع اليوم» في نسخة Claude أو لوحة الرصد.`,pkQueue:n=>`في انتظار الكتابة (${n})`,pkNone:"لا مقترحات جديدة الآن.",pkDel:"احذف من القائمة",
+  rpTitle:"ماذا يكتب Claude في هذه الجولة؟",rpOnly:"طلباتي فقط (ما أرسلته من الرادار والرصد)",rpFill:"طلباتي، ثم أكمل من اختيارك حتى",rpGo:"✨ ابدأ الكتابة",rpCancel:"إلغاء",
+  rpNote:"تستغرق الجولة نحو 10 دقائق، وتظهر القطع هنا. ثم اضغط «↻ زامن النسخة المستقلة» لتظهر في الموقع العام.",
   runMonitor:"",runSync:"",runNoMcp:"",runDaily:"",runSending:"",runStarted:"",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"",runDenied:"",runFail:"",runLast:"",syncEarly:"⚠️ كتابة قطع اليوم لم تنتهِ بعد، فالمزامنة الآن لن تنقل القطع الجديدة. انتظر حتى تختفي رسالة «Claude يعمل الآن»، أو اضغط مرة أخرى للمزامنة رغم ذلك.",runBusy:t=>`⏳ Claude يعمل الآن (بدأ ${t}). تظهر النتائج خلال 10 إلى 15 دقيقة، لا تضغط مرة أخرى.`,
   navLive:"الرئيسية",radarH:"رادار شهود",radarSub:"ما نراقبه الآن حول العالم، من الوكالات والهيئات الدولية",radarRead:"اقرأ الشهادة",radarTr:"عنوان مترجم آليًا من لغته الأصلية",speaker:"الراوي:",radarMk:"✍️ حوّله إلى قطعة",radarUpd:t=>"آخر تحديث للرادار: "+t,feedSearch:"🔍 ابحث في القطع: كلمة، مكان، كائن…",noFound:"لا قطع تطابق بحثك.",navGuide:"📘 دليلي",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
   loadingStatus:"تتجمع الحيوانات حول النار…",all:"الكل",
@@ -646,6 +666,10 @@ en:{
   dawn:"Dawn",day:"Day",dusk:"Dusk",night:"Night",spring:"Spring",summer:"Summer",autumn:"Autumn",winter:"Winter",tropic:"Tropical season",moon:"Moon",
   moonNames:["new","waxing crescent","first quarter","waxing gibbous","full","waning gibbous","last quarter","waning crescent"],
   navTrack:"Tracker",trackIntro:"Environmental developments and related crises. Tracking is manual: it only runs when you press “Track now”.",toPiece:"Turn into a piece",ghFirstKey:"",mkManual:"✍️ Write it myself",mkBridge:"📋 Via a Claude chat now",mkQueue:"🗂️ Send it to Claude to write",mkQueued:"Sent to Claude: written when you press «Write today's pieces» in the Claude copy, then «Sync»",mkWaiting:"⏳ Waiting for Claude",trTrack:"Translate",trTrackBack:"Original",trTrackIng:"Translating…",trTrackFail:"Translation failed, try again shortly",trAll:n=>`Translate English (${n})`,converted:"✓ Turned into a piece",newestFirst:"Newest first",oldestFirst:"Oldest first",trackEmpty:"Nothing in the tracker yet. Press “Track now” to start a scan.",lastScan:"Last scan",trackCount:n=>`${n} ${n===1?"development":"developments"} tracked`,
+  pkH:"📋 Today's picks",pkSub:"Stories from the free feed that could become pieces (last 48 hours, varied subjects). Tick the ones you want, then send them to Claude.",pkSend:n=>`📨 Send the ticked ones to Claude (${n})`,pkMore:"Show other picks",
+  pkSent:n=>`${n} sent to the writing list. Now press “Write today's pieces” in the Claude copy or the radar panel.`,pkQueue:n=>`Waiting to be written (${n})`,pkNone:"No new picks right now.",pkDel:"Remove from the list",
+  rpTitle:"What should Claude write this round?",rpOnly:"Only my requests (what I sent from the radar and tracker)",rpFill:"My requests, then your own picks up to",rpGo:"✨ Start writing",rpCancel:"Cancel",
+  rpNote:"A round takes about 10 minutes and the pieces appear here. Then press “↻ Sync the standalone copy” to put them on the public site.",
   runMonitor:"",runSync:"",runNoMcp:"",runDaily:"",runSending:"",runStarted:"",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"",runDenied:"",runFail:"",runLast:"",syncEarly:"⚠️ Today's pieces are still being written, so syncing now won't carry them. Wait until “Claude is working” disappears, or press again to sync anyway.",runBusy:t=>`⏳ Claude is working (started ${t}). Results appear within 10–15 minutes; no need to press again.`,
   navLive:"Home",radarH:"Shuhud Radar",radarSub:"What we are watching around the world, from agencies and international bodies",radarRead:"Read the testimony",radarTr:"Headline machine-translated from its original language",speaker:"Told by",radarMk:"✍️ Turn into a piece",radarUpd:t=>"Radar last updated "+t,feedSearch:"🔍 Search the pieces: a word, a place, a species…",noFound:"No pieces match your search.",navGuide:"📘 My guide",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
   loadingStatus:"The animals are gathering around the fire…",all:"All",
@@ -966,7 +990,7 @@ const RADAR_URL=window.SHUHUD_STANDALONE?"/data/feed.json":"https://alshuhud.org
 /* trusted sources only, by language: the Arabic page shows Arabic outlets, the English page English ones */
 const RADAR_SRC={ar:["الأناضول","الجزيرة نت","الشرق الأوسط","BBC عربي","أخبار الأمم المتحدة","RT عربي","DW عربية","فرانس 24","سكاي نيوز عربية"],en:["UN News","UNEP","WMO","WHO","FAO","NASA Earth Observatory","NOAA","ReliefWeb","GDACS","USGS","BBC","Al Jazeera","The Guardian","Mongabay","Carbon Brief","Yale Environment 360","Climate Home News","Inside Climate News","Euronews","TASS","Down To Earth","Phys.org","New York Times","Washington Post","France 24 English","DW","Anadolu"],fr:["Le Monde","Reporterre","France 24","ONU Info"]};
 let radarAll=[],radarShown=12,radarAt="",reqIds=new Set();
-async function loadRadar(){try{const r=await fetch(RADAR_URL+"?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const l=await r.json();if(Array.isArray(l)){radarAll=l;renderRadar()}}catch(e){}
+async function loadRadar(){try{const r=await fetch(RADAR_URL+"?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const l=await r.json();if(Array.isArray(l)){radarAll=l;renderRadar();try{renderPicks()}catch(e){}}}catch(e){}
   try{const r=await fetch(RADAR_URL.replace("feed.json","feed-status.json")+"?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json();radarAt=j&&j.at||"";radarFoot()}}catch(e){}}
 function agoTxt(iso){const m=Math.max(1,Math.round((Date.now()-Date.parse(iso))/60000));const en=isEn();
   if(m<60)return en?m+" min ago":"منذ "+m+" د";const h=Math.round(m/60);if(h<24)return en?h+" h ago":"منذ "+h+" س";const d=Math.round(h/24);return en?d+" d ago":"منذ "+d+(d===1?" يوم":" أيام")}
@@ -1146,13 +1170,41 @@ function mergeTrack(){const seen=new Set(trackDb.map(t=>t.id));track=[...trackDb
 async function loadSiteFeed(){try{const r=await fetch("https://alshuhud.org/data/feed.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const l=await r.json();if(Array.isArray(l)){siteFeed=l.slice(0,250);mergeTrack()}}catch(e){}}
 /* requests for Claude, kept in data/requests-gh.json; the daily writing round in Claude reads them first */
 const REQ_PATH="data/requests-gh.json";
-async function loadRequests(){if(!window.SHUHUD_STANDALONE||READER)return;try{const r=await fetch(REQ_PATH+"?t="+Date.now(),{cache:"no-store"});if(r.ok){const l=await r.json();reqIds=new Set(l.map(x=>x.trackId));renderTrack();renderRadar()}}catch(e){}}
+let reqList=[];
+async function loadRequests(){if(!window.SHUHUD_STANDALONE||READER)return;try{const r=await fetch(REQ_PATH+"?t="+Date.now(),{cache:"no-store"});if(r.ok){const l=await r.json();reqList=Array.isArray(l)?l:[];reqIds=new Set(reqList.map(x=>x.trackId));renderTrack();renderRadar();renderPicks()}}catch(e){}}
+/* «مقترحات اليوم»: free candidates from the hourly feed, one per subject, that Kamal ticks and sends to Claude (no Claude run to make the list) */
+let pkPage=0;const pkSel=new Set();
+const pkDone=id=>items.some(p=>p.fromRequest===id);
+function pkText(x){return x.lang==="ar"?x.text:(x.trAr||x.text)}
+function pickList(){const cut=Date.now()-48*36e5,trusted=new Set([...RADAR_SRC.ar,...RADAR_SRC.en,...RADAR_SRC.fr]);
+  const cand=radarAll.filter(x=>x&&x.url&&x.category&&Date.parse(x.at)>cut&&pkText(x)&&!reqIds.has(x.id)&&!radarPiece(x))
+    .map(x=>({x,s:(x.good?3:0)+(trusted.has(x.source)?2:0)+(Date.parse(x.at)/36e5/48)})).sort((a,b)=>b.s-a.s).map(o=>o.x);
+  const seenCat={},out=[];for(const x of cand){const c=x.category;if((seenCat[c]||0)>=1+Math.floor(out.length/12))continue;seenCat[c]=(seenCat[c]||0)+1;out.push(x)}
+  return out}
+function renderPicks(){const box=document.getElementById("picks");if(!box)return;if(!window.SHUHUD_STANDALONE||READER){box.hidden=true;return}
+  const all=pickList(),list=all.slice(pkPage*8,pkPage*8+8),pend=reqList.filter(r=>!pkDone(r.trackId));
+  const li=x=>`<li><input type="checkbox" id="pk-${esc(x.id)}" data-pk="${esc(x.id)}"${pkSel.has(x.id)?" checked":""}><label for="pk-${esc(x.id)}"><span class="pk-t">${esc(pkText(x))}</span><span class="pk-m"><span class="pk-tag">${esc(catName(x.category))}</span>${x.good?"🌱":""}<b>${esc(x.source)}</b>·<time>${agoTxt(x.at)}</time>·<a href="${esc(x.url)}" target="_blank" rel="noopener">↗</a></span></label></li>`;
+  box.innerHTML=`<h2 id="picks-h">${T("pkH")}</h2><p class="pk-sub">${T("pkSub")}</p>${list.length?`<ol>${list.map(li).join("")}</ol>`:`<p class="pk-sub">${T("pkNone")}</p>`}
+    <div class="pk-bar"><button class="btn run" type="button" id="pk-send"${pkSel.size?"":" disabled"}>${T("pkSend")(pkSel.size)}</button>${all.length>8?`<button class="btn" type="button" id="pk-more">${T("pkMore")}</button>`:""}</div>
+    ${pend.length?`<div class="pk-q"><b>${T("pkQueue")(pend.length)}</b><ol>${pend.map(r=>`<li><span class="pk-t" style="font-size:14px">${esc(r.trAr||r.text)}</span><button type="button" data-pkdel="${esc(r.trackId)}" title="${esc(T("pkDel"))}" aria-label="${esc(T("pkDel"))}">✕</button></li>`).join("")}</ol></div>`:""}`;
+  box.hidden=false}
+document.addEventListener("change",e=>{const c=e.target.closest&&e.target.closest("[data-pk]");if(!c)return;c.checked?pkSel.add(c.dataset.pk):pkSel.delete(c.dataset.pk);const b=document.getElementById("pk-send");if(b){b.disabled=!pkSel.size;b.textContent=T("pkSend")(pkSel.size)}});
+document.addEventListener("click",async e=>{
+  if(e.target.closest("#pk-more")){const n=Math.ceil(pickList().length/8);pkPage=(pkPage+1)%Math.max(1,n);renderPicks();return}
+  const del=e.target.closest("[data-pkdel]");if(del){if(!ghTok()){toast(T("ghFirstKey"));return}const id=del.dataset.pkdel;
+    try{await ghSaveList(l=>l.filter(x=>x.trackId!==id),"Request removed",REQ_PATH);reqList=reqList.filter(x=>x.trackId!==id);reqIds.delete(id);renderPicks();renderTrack();renderRadar()}catch(err){toast(T("mFail"))}return}
+  if(!e.target.closest("#pk-send"))return;if(!ghTok()){toast(T("ghFirstKey"));return}
+  const chosen=radarAll.filter(x=>pkSel.has(x.id));if(!chosen.length)return;const now=new Date().toISOString();
+  const add=chosen.map(t=>({trackId:t.id,text:t.text,trAr:t.trAr||"",en:t.en&&t.en.text||"",source:t.source||"",url:t.url||"",date:t.date||String(t.at||"").slice(0,10),at:now}));
+  try{await ghSaveList(l=>[...l.filter(x=>!pkSel.has(x.trackId)),...add],"Requests for Claude: "+add.length,REQ_PATH);
+    add.forEach(a=>{reqIds.add(a.trackId);reqList=[...reqList.filter(x=>x.trackId!==a.trackId),a]});pkSel.clear();renderPicks();renderTrack();renderRadar();toast(T("pkSent")(add.length))}
+  catch(err){toast(T("mFail"))}});
 loadRequests();
 document.addEventListener("click",async e=>{const b=e.target.closest("[data-mko]");if(!b)return;const t=track.find(x=>x.id===b.dataset.id)||radarAll.find(x=>x.id===b.dataset.id);if(!t)return;const how=b.dataset.mko;b.closest(".mk-menu").remove();
   if(how!=="queue"){trackToDesk(t,how);return}
   if(!ghTok()){toast(T("ghFirstKey"));return}
   try{const item={trackId:t.id,text:t.text,trAr:t.trAr||"",en:t.en&&t.en.text||"",source:t.source||"",url:t.url||"",date:t.date||"",at:new Date().toISOString()};
-    await ghSaveList(l=>[...l.filter(x=>x.trackId!==t.id),item],"Request for Claude: "+t.text.slice(0,60),REQ_PATH);reqIds.add(t.id);renderTrack();renderRadar();toast(T("mkQueued"))}
+    await ghSaveList(l=>[...l.filter(x=>x.trackId!==t.id),item],"Request for Claude: "+t.text.slice(0,60),REQ_PATH);reqIds.add(t.id);reqList=[...reqList.filter(x=>x.trackId!==t.id),item];renderTrack();renderRadar();try{renderPicks()}catch(e){}toast(T("mkQueued"))}
   catch(err){toast(T("mFail"))}});
 
 /* ---------- narration: picks the most natural voice on the device and reads like a documentary ---------- */
@@ -2336,6 +2388,10 @@ const RUNS={monitor:"trig_0125YiqtfabraBE2uwyQPiTC",daily:"trig_01JPrP8SZfEoZFpQ
 const RUN_COOL=10*60*1000,RUN_KEY="shuhud-runs";
 const RUN_TEXT="تشغيل يدوي طلبه كمال الآن من داخل التطبيق. نفّذ جولة واحدة قصيرة ومحدودة: بضع دقائق وعدد قليل من عمليات البحث، ثم توقف. لا تنشئ أي جدولة ولا تعِد تشغيل نفسك.";
 /* «اكتب قطع اليوم»: three pieces per press (Kamal's choice, 14 Nov 2026): requests first, then the strongest crises */
+/* 16 Nov 2026: Kamal chooses each round: only his requests, or his requests then Claude's picks up to N */
+const runDaily=(mode,n)=>RUN_DAILY.replace("اكتب 3 قطع بالضبط في هذه الجولة (طلبات كمال أولًا إن وُجدت، ثم أقوى الأزمات الموثقة)",
+  mode==="only"?"وضع الجولة: طلبات كمال فقط. اكتب طلباته المنتظرة في requests-gh.json وحدها (حتى 5)، ولا تختر أي قصة من عندك؛ إن لم يوجد طلب منتظر فلا تكتب شيئًا وقل ذلك في السطر الأخير":
+  `وضع الجولة: طلبات كمال ثم اختيارك. اكتب طلباته المنتظرة أولًا، ثم أكمل من اختيارك حتى يصبح مجموع قطع الجولة ${n} (إن كانت طلباته ${n} أو أكثر فاكتب طلباته وحدها حتى 5)`);
 const RUN_DAILY="تشغيل يدوي طلبه كمال الآن من داخل التطبيق. اكتب 3 قطع بالضبط في هذه الجولة (طلبات كمال أولًا إن وُجدت، ثم أقوى الأزمات الموثقة)، بالجودة والتدقيق المعتادين، ثم توقف. قاعدة الأرقام: قيمة كل رقم (value) تُقرأ وحدها كعنوان واضح فيها العدد والوحدة وما يُعدّ، مثل «أكثر من 1,900 طائر نافق» لا «1,900 طائر»، والشرح (label) يضيف المكان وتاريخ الرقم والمقارنة. لا تنشئ أي جدولة ولا تعِد تشغيل نفسك.";
 let mcp=null;
 const runsGet=()=>{try{return JSON.parse(localStorage.getItem(RUN_KEY)||"{}")}catch(e){return{}}};
@@ -2352,11 +2408,23 @@ document.querySelectorAll("[data-run]").forEach(b=>b.onclick=async()=>{
   /* syncing while today's pieces are still being written would copy the site without them: warn once */
   if(k==="sync"&&last.daily&&Date.now()-last.daily<15*60*1000&&!b.dataset.sure){b.dataset.sure="1";runMsg(k,T("syncEarly"));setTimeout(()=>{delete b.dataset.sure},20000);return}
   delete b.dataset.sure;
-  if(!mcp){runMsg(k,T("runNoMcp"));return}b.disabled=true;runMsg(k,T("runSending"));
-  try{await mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:RUNS[k],text:k==="daily"?RUN_DAILY:RUN_TEXT},{cache:false});
+  if(!mcp){runMsg(k,T("runNoMcp"));return}
+  if(k==="daily"){showRunPick();return}
+  fireRun(k,RUN_TEXT,b)});
+function showRunPick(){const box=document.getElementById("run-pick");if(!box)return;if(!box.hidden){box.hidden=true;return}
+  box.innerHTML=`<b>${T("rpTitle")}</b><label><input type="radio" name="rp-mode" value="only" checked> ${T("rpOnly")}</label>
+    <div class="rp-row"><label><input type="radio" name="rp-mode" value="fill"> ${T("rpFill")}</label><select id="rp-n" aria-label="N"><option>1</option><option>2</option><option selected>3</option></select></div>
+    <div class="rp-row"><button class="btn run" type="button" id="rp-go">${T("rpGo")}</button><button class="btn" type="button" id="rp-x">${T("rpCancel")}</button></div><span class="note">${T("rpNote")}</span>`;
+  box.hidden=false;
+  box.querySelector("#rp-n").onchange=()=>{box.querySelector('[name="rp-mode"][value="fill"]').checked=true};
+  box.querySelector("#rp-x").onclick=()=>{box.hidden=true};
+  box.querySelector("#rp-go").onclick=()=>{const mode=box.querySelector('[name="rp-mode"]:checked').value,n=+box.querySelector("#rp-n").value;box.hidden=true;
+    fireRun("daily",runDaily(mode,n),document.querySelector('[data-run="daily"]'))}}
+async function fireRun(k,text,b){if(b)b.disabled=true;runMsg(k,T("runSending"));const last=runsGet();
+  try{await mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:RUNS[k],text},{cache:false});
     last[k]=Date.now();runsSet(last);runMsg(k,T("runStarted"))}
   catch(e){const c=e&&e.code;runMsg(k,c==="approval_required"?T("runApproval"):(c==="not_in_manifest"||c==="blocked_by_policy")?T("runDenied"):T("runFail"))}
-  finally{setTimeout(()=>{b.disabled=false},4000)}});
+  finally{setTimeout(()=>{if(b)b.disabled=false},4000)}}
 /* ---------- species cards & endangered list ---------- */
 Object.assign(DICT.ar,{
   navIds:"بطاقات الكائنات",navRed:"مهددة بالانقراض",navHeal:"🌱 الطبيعة تتعافى",
