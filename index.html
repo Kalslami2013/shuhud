@@ -583,8 +583,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794827209"</script>
-<script src="local.js?v=1794827209"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794831301"</script>
+<script src="local.js?v=1794831301"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -1751,7 +1751,7 @@ function infographic(i,W=1080,Hfix=0,res=1){
   const sec={
     crisis:(c,d,xr,cw,y,k)=>{if(!i.crisis)return y;return txt(c,i.crisis,{x:xr,y:y+40*k,maxW:cw,font:`600 ${34*k}px ${FB}`,color:XC.parch,lh:50*k,measure:!d})+20*k},
     headline:(c,d,xr,cw,y,k)=>txt(c,i.headline,{x:xr,y:y+70*k,maxW:cw,font:`700 ${(en?64:72)*k}px ${FD}`,color:XC.parch,lh:(en?80:96)*k,measure:!d})+10*k,
-    photo:(c,d,xr,cw,y,k)=>{if(!stPhoto)return y;const h=cw*(cw>700?.5:.62)*Math.min(1,k);if(d){const x=CL==="en"?CWd-xr:xr-cw;photoBox(c,x,y+10*k,cw,h,22*k,i.imageCredit||"",k)}return y+h+40*k},
+    photo:(c,d,xr,cw,y,k)=>{if(!stPhoto)return y;const h=cw*(cw>700?.5625:.66);if(d){const x=CL==="en"?CWd-xr:xr-cw;photoBox(c,x,y+10*k,cw,h,22*k,i.imageCredit||"",k)}return y+h+40*k},
     animal:(c,d,xr,cw,y,k)=>{if(d){c.font=`${88*k}px serif`;c.textAlign=AL("right");c.direction="ltr";c.fillText(r.e,MX(xr),y+96*k);
       c.direction=DIR();c.textAlign=AL("right");c.font=`600 ${36*k}px ${FB}`;c.fillStyle=XC.amber;c.fillText(CT("voiceOf")(r.n),MX(xr-120*k),y+52*k);c.font=`400 ${28*k}px ${FB}`;c.fillStyle=XC.dim;c.fillText(r.b,MX(xr-120*k),y+94*k)}return y+150*k},
     angle:(c,d,xr,cw,y,k)=>{if(!i.angle)return y;const y0=y;y=txt(c,i.angle,{x:xr-28*k,y:y+36*k,maxW:cw-28*k,font:`500 ${37*k}px ${FB}`,color:XC.leaf,lh:58*k,measure:!d})+10*k;if(d){c.fillStyle=XC.leaf;FR(c,xr-6*k,y0,6*k,y-y0-20*k)}return y+30*k},
@@ -1760,7 +1760,7 @@ function infographic(i,W=1080,Hfix=0,res=1){
         if(d){if(n<ch.length-1){c.strokeStyle="rgba(242,184,75,.45)";c.lineWidth=4*k;c.setLineDash([9*k,9*k]);c.beginPath();c.moveTo(mcx,sy+30*k);c.lineTo(mcx,Math.max(ny,sy+80*k)-30*k);c.stroke();c.setLineDash([])}
           c.fillStyle=n===ch.length-1?XC.ember:XC.amber;c.beginPath();c.arc(mcx,sy,28*k,0,Math.PI*2);c.fill();c.fillStyle=XC.ink;c.font=`600 ${28*k}px ${FB}`;c.textAlign="center";c.direction="ltr";c.fillText(String(n+1),mcx,sy+10*k)}
         y=Math.max(ny,sy+80*k)});return y+20*k},
-    figures:(c,d,xr,cw,y,k)=>{const figs=(i.figures||[]).filter(f=>f&&f.value);if(!figs.length)return y;if(d)pill(c,CT("figures"),xr,y,k,XC.amber,XC.ink);y+=76*k;
+    figures:(c,d,xr,cw,y,k)=>{const figs=(i.figures||[]).filter(f=>f&&f.value).slice(0,FIGN);if(!figs.length)return y;if(d)pill(c,CT("figures"),xr,y,k,XC.amber,XC.ink);y+=76*k;
       const gap=20*k,nc=cw>560?2:1,colW=(cw-gap*(nc-1))/nc,ip=24*k,o=(f)=>({v:{maxW:colW-2*ip,font:`600 ${56*k}px ${FB}`,lh:66*k},l:{maxW:colW-2*ip,font:`400 ${31*k}px ${FB}`,lh:44*k},s:{maxW:colW-2*ip,font:`400 ${23*k}px ${FB}`,lh:32*k}});
       for(let n=0;n<figs.length;n+=nc){const row=figs.slice(n,n+nc),O=o();
         const hs=row.map(f=>{let h=txt(c,f.value,{...O.v,x:0,y:0,color:"#000",measure:true});h=txt(c,f.label,{...O.l,x:0,y:h,color:"#000",measure:true});if(f.source)h=txt(c,f.source,{...O.s,x:0,y:h+4*k,color:"#000",measure:true});return h+44*k});
@@ -1777,24 +1777,30 @@ function infographic(i,W=1080,Hfix=0,res=1){
       return txt(c,i.question,{x:xr,y:y+100*k,maxW:cw,font:`700 ${(en?44:48)*k}px ${FD}`,color:XC.amber,lh:(en?60:72)*k,measure:!d})+30*k},
     sources:(c,d,xr,cw,y,k)=>{const names=srcNames(i);if(!names)return y;return txt(c,CT("sources")+": "+names,{x:xr,y:y+20*k,maxW:cw,font:`400 ${25*k}px ${FB}`,color:XC.faint,lh:38*k,measure:!d})+10*k}
   };
+  let FIGN=99;
   const run=(c,d,list,xr,cw,y,k)=>{for(const s of list)y=sec[s](c,d,xr,cw,y,k);return y};
   const BASE=["crisis","headline","photo","animal","angle","chain","figures","fact","question","sources"];
   const top=Hfix?170:200,footH=Hfix?205:0,meas=document.createElement("canvas").getContext("2d");
   CWd=W;
   const gap=56,colW=(W-2*pad-gap)/2;
   /* height of a plan at scale k; a plan is one column, or two columns split at index sp */
-  const need=(pl,k)=>pl.sp?Math.max(run(meas,false,pl.list.slice(0,pl.sp),W-pad,colW,top,k),run(meas,false,pl.list.slice(pl.sp),colW+pad,colW,top,k)):run(meas,false,pl.list,W-pad,W-2*pad,top,k);
+  const need=(pl,k)=>{FIGN=pl.fn||99;return need0(pl,k)};
+  const need0=(pl,k)=>pl.sp?Math.max(run(meas,false,pl.list.slice(0,pl.sp),W-pad,colW,top,k),run(meas,false,pl.list.slice(pl.sp),colW+pad,colW,top,k)):run(meas,false,pl.list,W-pad,W-2*pad,top,k);
   const fit=(pl,limit)=>{let lo=.3,hi=1.4;if(need(pl,hi)<=limit)return hi;for(let n=0;n<16;n++){const m=(lo+hi)/2;if(need(pl,m)<=limit)lo=m;else hi=m}return lo};
   let plan={list:BASE,sp:0},k=1,H;
   if(!Hfix){H=Math.ceil(need(plan,1)+170+W*.2)}
   else{H=Hfix;const limit=H-footH-24,ratio=W/H,cands=[];
-    for(const list of [BASE,BASE.filter(x=>x!=="fact")]){
-      if(ratio<1.2)cands.push({list,sp:0});
-      if(ratio>=.7)for(let sp=3;sp<list.length-1;sp++)cands.push({list,sp});
-    }
-    /* keep the news summary unless dropping it buys a clearly larger type size */
-    let best=null;for(const c of cands){const kk=fit(c,limit)*(c.list.includes("fact")?1.12:1);if(!best||kk>best.k)best={...c,k:kk}}
+    const drop=(...x)=>BASE.filter(s=>!x.includes(s));
+    const tiers=[[BASE,99],[drop("fact"),99],[drop("fact","sources"),99],[drop("fact","sources"),4],[drop("fact","sources","chain"),4],[drop("fact","sources","chain","question"),4]];
+    const GOOD=W>=1500?.66:.72;let best=null;
+    for(const [list,fn] of tiers){const cs=[];
+      if(ratio<1.2)cs.push({list,sp:0,fn});
+      if(ratio>=.7)for(let sp=3;sp<list.length-1;sp++)cs.push({list,sp,fn});
+      let tb=null;for(const c of cs){const kk=fit(c,limit);if(!tb||kk>tb.k)tb={...c,k:kk}}
+      if(!best||tb.k>best.k*1.04)best=tb;
+      if(best.k>=GOOD)break}
     plan=best;k=fit(plan,limit)}
+  FIGN=plan.fn||99;
   const cv=document.createElement("canvas");cv.width=Math.round(W*res);cv.height=Math.round(H*res);const ctx=cv.getContext("2d");ctx.scale(res,res);
   xbg(ctx,W,H,0);brand(ctx,W,1);
   let end;
