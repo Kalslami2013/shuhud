@@ -864,8 +864,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794922508"</script>
-<script src="local.js?v=1794922508"></script>
+<script>window.SHUHUD_BUILD="1794931504"</script>
+<script src="local.js?v=1794931504"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2540,15 +2540,16 @@ function proFrame(ctx,i,W,H,s,idx,total,alpha,cp,pp){const u=W/1080;const img=s.
   const keep=PP;if(img)PP={...PP,ink:"#FFFFFF",dim:"rgba(255,255,255,.78)",faint:"rgba(255,255,255,.62)"};
   ctx.save();ctx.globalAlpha*=alpha;if(!s.outro)proChrome(ctx,W,H,u,i,idx,total,!!img);s.draw(ctx,cp);ctx.restore();PP=keep0}
 
+/* the first slide is drawn whole from the very first frame (17 Nov 2026, Kamal): players and social networks use that frame as the thumbnail */
 function renderFrame(ctx,i,W,H,S,time){
   const u=W/1080;let acc=0,k=0;while(k<S.length-1&&time>=acc+S[k].d){acc+=S[k].d;k++}
   const hasImg=n=>n>=0&&S[n]&&S[n].key&&sceneImgs[S[n].key],XF=(hasImg(k)||hasImg(k-1))?1.3:.6;
   const local=time-acc,p=Math.min(1,local/S[k].d);
-  if(PRO()){const drawP=(idx,pp,alpha,ca)=>{MOTION={t:time,pp};proFrame(ctx,i,W,H,S[idx],idx+1,0,alpha,Math.min(1,pp*1.6),pp)};
+  if(PRO()){const drawP=(idx,pp,alpha,ca)=>{MOTION={t:time,pp};proFrame(ctx,i,W,H,S[idx],idx+1,0,alpha,idx===0?1:Math.min(1,pp*1.6),pp)};
     if(k>0&&local<1){const q=local/1;drawP(k-1,1,1-q);drawP(k,p,q)}else drawP(k,p,1);MOTION=null;
     const total=S.reduce((a,s)=>a+s.d,0),w=(time/total)*W;ctx.fillStyle=PP.acc;ctx.fillRect(CL==="en"?0:W-w,H-6*u,w,6*u);return}
   xbg(ctx,W,H,time);brand.total=0;
-  const drawS=(idx,pp,alpha,ca=alpha)=>{const s=S[idx];MOTION={t:time,pp};if(hasImg(idx))drawSceneBg(ctx,W,H,sceneImgs[s.key],alpha,1,pp,s.key);ctx.save();ctx.globalAlpha=ca;const z=1+.025*pp;ctx.translate(W/2,H/2);ctx.scale(z,z);ctx.translate(-W/2,-H/2);if(!s.outro)brand(ctx,W,u);s.draw(ctx,Math.min(1,pp*1.6));if(!s.outro)foot(ctx,W,H,u,i);ctx.restore()};
+  const drawS=(idx,pp,alpha,ca=alpha)=>{const s=S[idx];MOTION={t:time,pp};if(hasImg(idx))drawSceneBg(ctx,W,H,sceneImgs[s.key],alpha,1,pp,s.key);ctx.save();ctx.globalAlpha=ca;const z=1+.025*pp;ctx.translate(W/2,H/2);ctx.scale(z,z);ctx.translate(-W/2,-H/2);if(!s.outro)brand(ctx,W,u);s.draw(ctx,idx===0?1:Math.min(1,pp*1.6));if(!s.outro)foot(ctx,W,H,u,i);ctx.restore()};
   /* pictures dissolve evenly; words leave first and arrive after, so they never pile up */
   if(k>0&&local<XF){const q=local/XF;drawS(k-1,1,1-q,Math.max(0,1-q*2));drawS(k,p,q,Math.max(0,q*2-1))}else drawS(k,p,1);
   MOTION=null;
