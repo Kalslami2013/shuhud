@@ -442,7 +442,7 @@ for r in reserves:
     url_en = f"{BASE}en/r/{slug}"
     alt = {"ar": url, "en": url_en, "x-default": url} if en.get("name") else None
     body = [head(title, desc, url, share or img, extra, "ar", alt), '<main class="wrap"><article>']
-    body.append(f'<div class="kick">🏞️ {r.get("cc","")} {e(ar.get("cty"))} · المحميات</div><h1>{e(ar.get("name"))}</h1><div class="meta">{e(ar.get("st"))}</div>')
+    body.append(f'<div class="kick">🌳 {r.get("cc","")} {e(ar.get("cty"))} · المحميات</div><h1>{e(ar.get("name"))}</h1><div class="meta">{e(ar.get("st"))}</div>')
     if img:
         body.append(f'<figure><img src="{e(img)}" alt="{e(ar.get("name"))}" loading="eager">{f"<figcaption>{e(r.get("credit"))}</figcaption>" if r.get("credit") else ""}</figure>')
     body.append(rs_block(ar, True, r, ps))
@@ -463,7 +463,7 @@ for r in reserves:
         go_en = goto.replace(f'/?r={r["id"]}', f'/?r={r["id"]}&lang=en')
         x_en = go_en + '<script type="application/ld+json">' + json.dumps(ld_en, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
         b = [head(t_en, d_en, url_en, share or img, x_en, "en", alt), '<main class="wrap"><article lang="en" dir="ltr" style="text-align:left">']
-        b.append(f'<div class="kick">🏞️ {r.get("cc","")} {e(en.get("cty"))} · Reserves</div><h1>{e(en["name"])}</h1><div class="meta">{e(en.get("st"))}</div>')
+        b.append(f'<div class="kick">🌳 {r.get("cc","")} {e(en.get("cty"))} · Reserves</div><h1>{e(en["name"])}</h1><div class="meta">{e(en.get("st"))}</div>')
         if img:
             b.append(f'<figure><img src="{e(img)}" alt="{e(en["name"])}" loading="eager">{f"<figcaption>{e(r.get("credit"))}</figcaption>" if r.get("credit") else ""}</figure>')
         b.append(rs_block(en, False, r, ps).replace(f'{BASE}p/', f'{BASE}en/p/'))
