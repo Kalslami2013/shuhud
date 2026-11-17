@@ -410,10 +410,10 @@ def rs_pieces(r):
 def rs_block(x, ar, r, ps):
     t = (lambda a, b: a if ar else b)
     o = [f'<div class="angle">{rich(x.get("about"))}</div>']
-    if x.get("more"): o.append(f'<div class="voice">{rich(x["more"])}</div>')
     figs = [f for f in (x.get("figs") or []) if isinstance(f, list) and len(f) >= 2]
     if figs:
         o.append('<div class="figs">' + "".join(f'<div class="fig"><b>{e(v)}</b><small>{e(l)}</small></div>' for v, l, *_ in figs) + "</div>")
+    if x.get("more"): o.append(f'<div class="voice">{rich(x["more"])}</div>')
     sp = [s[0] for s in (x.get("sp") or []) if s]
     if sp: o.append(f'<h2>{t("أبرز الكائنات","Notable creatures")}</h2><ul>' + "".join(f"<li>{e(n)}</li>" for n in sp) + "</ul>")
     if x.get("pl"): o.append(f'<h2>{t("أبرز النباتات","Notable plants")}</h2><ul>' + "".join(f"<li>{e(n)}</li>" for n in x["pl"]) + "</ul>")
