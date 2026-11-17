@@ -178,7 +178,7 @@ section[id^="v-"]:not([hidden]){animation:vfade .32s ease both}
 .v-fig{margin:.6em 0 1.2em}.v-fig img{display:block;width:100%;max-height:520px;object-fit:cover;border-radius:12px}.v-fig figcaption{font-size:12.5px;color:var(--dim);margin-top:6px}
 .ed-tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.ed-tools button{border:1px solid var(--line);background:var(--bark);color:inherit;border-radius:9px;padding:5px 11px;font:inherit;font-size:13.5px;cursor:pointer}
 .ed-tools button:hover{border-color:var(--amber)}.ed-pop{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px;border:1px dashed var(--line);border-radius:10px}.ed-pop[hidden]{display:none}.ed-pop input{flex:1 1 220px}
-.ed-hint{font-size:12px;color:var(--dim)}
+.ed-hint{font-size:12px;color:var(--dim)}.sp-src{font-size:12px;color:var(--faint);margin:6px 0 0}.sp-src a{color:var(--dim)}.sp .ed select.ed-i{appearance:auto}
 .att-wrap{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0d1a14;margin-bottom:12px}
 .att-wrap .att-bg{display:none}
 /* the narrator's circle shows the whole creature when its photo is long or tall (Kamal, 16 Nov 2026) */
@@ -488,7 +488,7 @@ nav.main button[data-view="ids"]::after{content:" ▾";font-size:.8em;opacity:.7
 .rs-bd{padding:14px 16px 16px;display:grid;gap:10px;min-width:0}
 .rs-bd h3{font-family:var(--f-display);font-size:25px;margin:0;line-height:1.3}
 .rs-st{font-size:13px;color:var(--amber);margin-top:-4px}
-.rs-ab{margin:0;font-size:14px;line-height:1.75;color:var(--parchment)}
+.rs-ab{margin:0;font-size:14px;line-height:1.75;color:var(--parchment)}.rs-ab p{margin:0 0 .6em}.rs-ab p:last-child{margin:0}.rs-more{font-size:14.5px}.rs-edb{margin-inline-start:auto;padding:4px 12px;font-size:12.5px}.rs-ed{padding:4px 0}
 .rs-figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
 .rs-figs div{border:1px solid rgba(242,184,75,.25);background:rgba(242,184,75,.06);border-radius:12px;padding:8px 10px}
 .rs-figs b{display:block;color:var(--amber);font-size:16px;line-height:1.35}.rs-figs span{font-size:12px;color:var(--dim);line-height:1.5}
@@ -657,8 +657,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794950401"</script>
-<script src="local.js?v=1794950401"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794950768"</script>
+<script src="local.js?v=1794950768"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -728,7 +728,7 @@ ar:{
   readThem:"اقرأها",writeAs:"اكتب بلسانه",piecesBy:n=>"قطع بلسان "+n,showAll:"عرض الكل",writeFirst:n=>"لا قطع بلسان "+n+" بعد. اكتب أولها من هنا.",
   sceneAdd:"أضف صورة لهذا المشهد",sceneChange:"غيّر صورة المشهد",sceneRemove:"أزل صورة المشهد",sceneFind:"ابحث عن صورة مناسبة",sceneHint:"📷 أضف صورة لأي مشهد تريده، اختيارياً. تُلوَّن الصورة تلقائياً بطابع المادة وتذوب في خلفية البطاقة، وفي الفيديو تنتقل المشاهد بينها بسلاسة. يكفي أربع إلى ست صور للمادة.",
   changePhotoShort:"📷 غيّر الصورة",removePhotoShort:"🗑 احذف الصورة",confirmRemovePhoto:"تأكيد حذف الصورة",photoRemoved:"حُذفت الصورة",
-  readFull:"اقرأ الشهادة ←",shareBtn:"🔗 مشاركة",shareCopied:"نُسخ رابط القطعة، الصقه في تويتر أو واتساب",shareCopy:"انسخ رابط القطعة:",edBtn:"✏️ تعديل",edNote:"عدّل ما تشاء ثم اضغط «حفظ». يُحفظ التعديل في القطعة المنشورة، وتُحدَّث النسخة الإنجليزية تلقائيًا في نسخة Claude.",mdBold:"غامق",mdBoldT:"حدّد كلمات ثم اضغط",mdBoldPh:"نص بارز",mdLink:"رابط",mdImg:"صورة",mdSub:"عنوان فرعي",mdQuote:"اقتباس",mdInsert:"أدرج",mdLinkText:"النص الظاهر (اختياري)",mdCaption:"وصف الصورة ومصدرها",mdBadUrl:"الرابط يجب أن يبدأ بـ https://",mdHint:"حدّد نصًا ثم اختر أداة. الصورة تُدرج برابط مباشر لها (مثل ويكيميديا)، في فقرة مستقلة. الأدوات لا تغيّر الخط، فهو ثابت لكل القطع.",enFollowing:"تُحدَّث النسخة الإنجليزية…",enFollowed:"حُدِّثت النسخة الإنجليزية",enFollowFail:"حُفظ التعديل العربي، وتعذّر تحديث الإنجليزية",edNoteEn:"تعدّل الآن النسخة الإنجليزية. للعربية بدّل اللغة إلى «عربي».",edHeadline:"العنوان",edCrisis:"الأزمة",edAngle:"الزاوية",edPlace:"المكان",edDate:"تاريخ الحدث",edDispatch:"الشهادة",edFigs:"الأرقام",edVal:"الرقم",edLbl:"ماذا يقيس",edSrc:"المصدر",edAddFig:"➕ رقم",edChain:"سلسلة الأثر (حلقة في كل سطر)",edFact:"ما حدث عند البشر",edQuestion:"سؤال مفتوح",edSources:"المصادر",edSrcName:"اسم المصدر",edAddSrc:"➕ مصدر",edSave:"💾 حفظ",edCancel:"إلغاء",edSaved:"حُفظ التعديل",edFail:"تعذر حفظ التعديل",edNeed:"العنوان لا يكون فارغاً",closePiece:"✕ إغلاق",showMore:"عرض المزيد",photo:"📷 صورة",addPhoto:"أضف صورة",changePhoto:"غيّر الصورة",removePhoto:"بلا صورة",findPhoto:"ابحث عن صورة للكائن",photoSaved:"حُفظت الصورة مع القطعة",photoFail:"تعذر رفع الصورة",uploading:"تُرفع الصورة…",credit:"حقوق الصورة",creditPh:"مثال: اسم المصوّر / CC BY-SA",photoLocal:"الصورة في هذا التصدير فقط، ولم تُحفظ مع القطعة",photoHint:"صورة الكائن تظهر في الغلاف والإنفوجراف.",
+  readFull:"اقرأ الشهادة ←",shareBtn:"🔗 مشاركة",shareCopied:"نُسخ رابط القطعة، الصقه في تويتر أو واتساب",shareCopy:"انسخ رابط القطعة:",edBtn:"✏️ تعديل",edNote:"عدّل ما تشاء ثم اضغط «حفظ». يُحفظ التعديل في القطعة المنشورة، وتُحدَّث النسخة الإنجليزية تلقائيًا في نسخة Claude.",mdBold:"غامق",rsEdNote:"عدّل ما تشاء ثم اضغط «حفظ». تُحدَّث النسخة الإنجليزية تلقائيًا، وتنتقل التعديلات إلى الموقع بزر المزامنة.",rsEdName:"اسم المحمية",rsEdCty:"البلد",rsEdSt:"الصفة أو الوضع",rsEdAbout:"النبذة",rsEdMore:"تفاصيل أوسع (اختياري)",rsEdSp:"أبرز الكائنات (اسم في كل سطر)",rsEdPl:"أبرز النباتات (اسم في كل سطر)",rsEdImg:"رابط الصورة (اتركه كما هو أو ضع رابطًا مباشرًا)",rsEdCredit:"مصدر الصورة",spEdNote:"عدّل ما تشاء ثم اضغط «حفظ». تُحدَّث النسخة الإنجليزية تلقائيًا، وتنتقل التعديلات إلى الموقع بزر المزامنة.",spEdName:"الاسم",spEdBio:"الموطن",spEdSci:"الاسم العلمي",spEdSt:"حالة الصون",mdBoldT:"حدّد كلمات ثم اضغط",mdBoldPh:"نص بارز",mdLink:"رابط",mdImg:"صورة",mdSub:"عنوان فرعي",mdQuote:"اقتباس",mdInsert:"أدرج",mdLinkText:"النص الظاهر (اختياري)",mdCaption:"وصف الصورة ومصدرها",mdBadUrl:"الرابط يجب أن يبدأ بـ https://",mdHint:"حدّد نصًا ثم اختر أداة. الصورة تُدرج برابط مباشر لها (مثل ويكيميديا)، في فقرة مستقلة. الأدوات لا تغيّر الخط، فهو ثابت لكل القطع.",enFollowing:"تُحدَّث النسخة الإنجليزية…",enFollowed:"حُدِّثت النسخة الإنجليزية",enFollowFail:"حُفظ التعديل العربي، وتعذّر تحديث الإنجليزية",edNoteEn:"تعدّل الآن النسخة الإنجليزية. للعربية بدّل اللغة إلى «عربي».",edHeadline:"العنوان",edCrisis:"الأزمة",edAngle:"الزاوية",edPlace:"المكان",edDate:"تاريخ الحدث",edDispatch:"الشهادة",edFigs:"الأرقام",edVal:"الرقم",edLbl:"ماذا يقيس",edSrc:"المصدر",edAddFig:"➕ رقم",edChain:"سلسلة الأثر (حلقة في كل سطر)",edFact:"ما حدث عند البشر",edQuestion:"سؤال مفتوح",edSources:"المصادر",edSrcName:"اسم المصدر",edAddSrc:"➕ مصدر",edSave:"💾 حفظ",edCancel:"إلغاء",edSaved:"حُفظ التعديل",edFail:"تعذر حفظ التعديل",edNeed:"العنوان لا يكون فارغاً",closePiece:"✕ إغلاق",showMore:"عرض المزيد",photo:"📷 صورة",addPhoto:"أضف صورة",changePhoto:"غيّر الصورة",removePhoto:"بلا صورة",findPhoto:"ابحث عن صورة للكائن",photoSaved:"حُفظت الصورة مع القطعة",photoFail:"تعذر رفع الصورة",uploading:"تُرفع الصورة…",credit:"حقوق الصورة",creditPh:"مثال: اسم المصوّر / CC BY-SA",photoLocal:"الصورة في هذا التصدير فقط، ولم تُحفظ مع القطعة",photoHint:"صورة الكائن تظهر في الغلاف والإنفوجراف.",
   swipe:"اسحب للمزيد ←",voiceOf:n=>"بلسان "+n,card:k=>"البطاقة "+k,infoAlt:"الإنفوجراف"
 },
 en:{
@@ -793,7 +793,7 @@ en:{
   readThem:"read them",writeAs:"Write in its voice",piecesBy:n=>"Pieces told by the "+n,showAll:"Show all",writeFirst:n=>"No pieces by the "+n+" yet. Write the first one here.",
   sceneAdd:"Add a photo to this scene",sceneChange:"Change scene photo",sceneRemove:"Remove scene photo",sceneFind:"Find a fitting photo",sceneHint:"📷 Add a photo to any scene you like, it is optional. Photos are tinted to the piece's theme and melt into the card; in the video, scenes dissolve smoothly between them. Four to six photos per piece is plenty.",
   changePhotoShort:"📷 Change photo",removePhotoShort:"🗑 Remove photo",confirmRemovePhoto:"Confirm removing photo",photoRemoved:"Photo removed",
-  readFull:"Read the testimony →",shareBtn:"🔗 Share",shareCopied:"Piece link copied: paste it into X or WhatsApp",shareCopy:"Copy the piece link:",edBtn:"✏️ Edit",edNote:"Change what you need, then press Save. The edit is saved into the published piece.",mdBold:"Bold",mdBoldT:"Select words, then press",mdBoldPh:"bold text",mdLink:"Link",mdImg:"Image",mdSub:"Subheading",mdQuote:"Quote",mdInsert:"Insert",mdLinkText:"Visible text (optional)",mdCaption:"Caption and credit",mdBadUrl:"The link must start with https://",mdHint:"Select text, then pick a tool. An image is inserted from a direct link (e.g. Wikimedia), in its own paragraph. The tools never change the font, which is the same for every piece.",enFollowing:"Updating the English version…",enFollowed:"English version updated",enFollowFail:"Arabic edit saved; the English could not be updated",edNoteEn:"You are editing the English version. Switch to «عربي» for the Arabic.",edHeadline:"Headline",edCrisis:"Crisis",edAngle:"Angle",edPlace:"Place",edDate:"Event date",edDispatch:"Testimony",edFigs:"Figures",edVal:"Value",edLbl:"What it measures",edSrc:"Source",edAddFig:"➕ Figure",edChain:"Chain of impact (one link per line)",edFact:"What happened among humans",edQuestion:"Open question",edSources:"Sources",edSrcName:"Source name",edAddSrc:"➕ Source",edSave:"💾 Save",edCancel:"Cancel",edSaved:"Edit saved",edFail:"Couldn't save the edit",edNeed:"The headline can't be empty",closePiece:"✕ Close",showMore:"Show more",photo:"📷 Photo",addPhoto:"Add photo",changePhoto:"Change photo",removePhoto:"No photo",findPhoto:"Find a photo of the species",photoSaved:"Photo saved with the piece",photoFail:"Couldn't upload the photo",uploading:"Uploading photo…",credit:"Photo credit",creditPh:"e.g. Photographer / CC BY-SA",photoLocal:"Photo used in this export only, not saved with the piece",photoHint:"The species photo appears on the cover and the infographic.",
+  readFull:"Read the testimony →",shareBtn:"🔗 Share",shareCopied:"Piece link copied: paste it into X or WhatsApp",shareCopy:"Copy the piece link:",edBtn:"✏️ Edit",edNote:"Change what you need, then press Save. The edit is saved into the published piece.",mdBold:"Bold",rsEdNote:"Change what you need, then press Save.",rsEdName:"Reserve name",rsEdCty:"Country",rsEdSt:"Status",rsEdAbout:"Summary",rsEdMore:"More details (optional)",rsEdSp:"Notable creatures (one per line)",rsEdPl:"Notable plants (one per line)",rsEdImg:"Image link",rsEdCredit:"Image credit",spEdNote:"Change what you need, then press Save.",spEdName:"Name",spEdBio:"Habitat",spEdSci:"Scientific name",spEdSt:"Conservation status",mdBoldT:"Select words, then press",mdBoldPh:"bold text",mdLink:"Link",mdImg:"Image",mdSub:"Subheading",mdQuote:"Quote",mdInsert:"Insert",mdLinkText:"Visible text (optional)",mdCaption:"Caption and credit",mdBadUrl:"The link must start with https://",mdHint:"Select text, then pick a tool. An image is inserted from a direct link (e.g. Wikimedia), in its own paragraph. The tools never change the font, which is the same for every piece.",enFollowing:"Updating the English version…",enFollowed:"English version updated",enFollowFail:"Arabic edit saved; the English could not be updated",edNoteEn:"You are editing the English version. Switch to «عربي» for the Arabic.",edHeadline:"Headline",edCrisis:"Crisis",edAngle:"Angle",edPlace:"Place",edDate:"Event date",edDispatch:"Testimony",edFigs:"Figures",edVal:"Value",edLbl:"What it measures",edSrc:"Source",edAddFig:"➕ Figure",edChain:"Chain of impact (one link per line)",edFact:"What happened among humans",edQuestion:"Open question",edSources:"Sources",edSrcName:"Source name",edAddSrc:"➕ Source",edSave:"💾 Save",edCancel:"Cancel",edSaved:"Edit saved",edFail:"Couldn't save the edit",edNeed:"The headline can't be empty",closePiece:"✕ Close",showMore:"Show more",photo:"📷 Photo",addPhoto:"Add photo",changePhoto:"Change photo",removePhoto:"No photo",findPhoto:"Find a photo of the species",photoSaved:"Photo saved with the piece",photoFail:"Couldn't upload the photo",uploading:"Uploading photo…",credit:"Photo credit",creditPh:"e.g. Photographer / CC BY-SA",photoLocal:"Photo used in this export only, not saved with the piece",photoHint:"The species photo appears on the cover and the infographic.",
   swipe:"Swipe for more →",voiceOf:n=>"Told by the "+n.replace(/^the /i,""),card:k=>"Card "+k,infoAlt:"Infographic"
 }};
 const CAT_EN={"الكل":"All","الحروب والبيئة":"War & environment","التقنية والذكاء الاصطناعي":"Tech & AI","التلوث":"Pollution","المياه":"Water","الطاقة":"Energy","كوارث طبيعية":"Natural disasters","كوارث بشرية":"Human-made disasters","الغابات":"Forests","المناخ":"Climate","البحار والمحيطات":"Seas & oceans","الميكروبات والأوبئة":"Microbes & epidemics","الانقراض":"Extinction","الكون":"Cosmos","المدن":"Cities","الغذاء والزراعة":"Food & farming","الهجرة والنزوح":"Migration & displacement","الطبيعة تتعافى":"Nature recovers"};
@@ -986,8 +986,8 @@ function editHTML(raw){
   </div>`;
 }
 /* edit toolbar: wraps the selection in the light markup richText() understands */
-document.addEventListener("click",e=>{const b=e.target.closest("[data-md]");if(!b)return;const ed=b.closest("[data-ed]");if(!ed)return;e.preventDefault();
-  const ta=ed.querySelector('[data-k="dispatch"]'),pop=ed.querySelector("[data-pop]"),pu=pop.querySelector("[data-pu]"),pt=pop.querySelector("[data-pt]"),m=b.dataset.md;
+document.addEventListener("click",e=>{const b=e.target.closest("[data-md]");if(!b)return;const ed=b.closest("[data-ed],[data-rsed]");if(!ed)return;e.preventDefault();
+  const ta=ed.querySelector(`[data-k="${ed.dataset.mdk||"dispatch"}"]`),pop=ed.querySelector("[data-pop]"),pu=pop.querySelector("[data-pu]"),pt=pop.querySelector("[data-pt]"),m=b.dataset.md;
   const a=ta.selectionStart,z=ta.selectionEnd,sel=ta.value.slice(a,z);
   const put=(txt,c0,c1)=>{ta.setRangeText(txt,a,z,"end");if(c0!=null)ta.setSelectionRange(a+c0,a+c1);ta.focus()};
   const lineStart=()=>ta.value.lastIndexOf("\n",a-1)+1;
@@ -2650,6 +2650,9 @@ function spInfo(k){
   if(d.st&&(!b.st||b.st==="NE"&&!ROSTER[k]))b.st=d.st;
   const info=(d.info&&(d.info[isEn()?"en":"ar"]||d.info.ar))||{};
   b.about=info.about||"";b.pop=info.pop||"";if(!b.threat)b.threat=info.threats||"";
+  /* Kamal's own edits win over the built-in text (17 Nov 2026) */
+  if(info.name)b.name=info.name;if(info.bio)b.bio=info.bio;if(info.threatsEd)b.threat=info.threatsEd;
+  if(d.sciEd)b.sci=d.sciEd;if(d.stEd)b.st=d.stEd;b.src=Array.isArray(d.src)?d.src:[];
   /* a species card shows the creature itself: a piece's photo counts only when Kamal uploaded it without a caption,
      never an event photo (satellite views, places, credited archive shots) (Kamal, 16 Nov 2026) */
   const ownShot=i=>{const u=String(i.imageUrl||"");return u&&/^(\/_blob\/|\/?media\/)/.test(u)&&!i.imageCredit};
@@ -2671,7 +2674,33 @@ function spWikiFetch(k,b){
 let spWikiT=null;
 const iucnLink=sci=>"https://www.iucnredlist.org/search?query="+encodeURIComponent(sci);
 const photoSearch=s=>"https://commons.wikimedia.org/w/index.php?title=Special:MediaSearch&type=image&search="+encodeURIComponent(s);
+let spEditK=null,spEdBusy=false;
+function spEditHTML(k){const s=spInfo(k),en=isEn();
+  const f=(key,lbl,val,rows)=>`<label class="l">${T(lbl)}</label>${rows?`<textarea class="ed-i" data-k="${key}" rows="${rows}">${esc(val||"")}</textarea>`:`<input class="ed-i" data-k="${key}" value="${esc(val||"")}">`}`;
+  return `<div class="ed" data-sped="${esc(k)}">
+    <p class="note">${T(en?"edNoteEn":"spEdNote")}</p>
+    ${f("name","spEdName",s.name)}${f("bio","spEdBio",s.bio)}
+    <label class="l">${T("spEdSci")}</label><input class="ed-i" data-k="sci" dir="ltr" value="${esc(s.sci||"")}">
+    <label class="l">${T("spEdSt")}</label><select class="ed-i" data-k="st">${ST_ORDER.map(c=>`<option value="${c}"${(s.st||"NE")===c?" selected":""}>${esc(T("st")[c]||c)}</option>`).join("")}</select>
+    ${f("about","spAbout",s.about,4)}${f("pop","spPop",s.pop,2)}${f("threats","spThreat",s.threat,3)}
+    <label class="l">${T("edSources")}</label><div class="ed-list" data-list="src">${(s.src||[]).map(([a,b])=>rsRow("src",a,b,T("edSrcName"),"https://")).join("")}</div><button class="btn" type="button" data-sa="ed-addsrc">${T("edAddSrc")}</button>
+    <div class="foot" style="justify-content:flex-start"><button class="btn primary" type="button" data-sa="ed-save">${T("edSave")}</button><button class="btn" type="button" data-sa="ed-cancel">${T("edCancel")}</button></div>
+  </div>`}
+async function spEditSave(k,box){
+  if(spEdBusy)return;const en=isEn(),L=en?"en":"ar",s=spInfo(k),g=key=>((box.querySelector(`[data-k="${key}"]`)||{}).value||"").trim();
+  const src=[...box.querySelectorAll('[data-list="src"] .ed-row')].map(r=>[r.querySelector('[data-c="0"]').value.trim(),r.querySelector('[data-c="1"]').value.trim()]).filter(a=>a[0]||a[1]);
+  const p={name:g("name"),bio:g("bio"),about:g("about"),pop:g("pop"),threatsEd:g("threats")};
+  const old={name:s.name,bio:s.bio,about:s.about,pop:s.pop,threatsEd:s.threat};
+  const d=spDocs[k]||{},info={...(d.info||{})};info[L]={...(info[L]||{}),...p,threats:p.threatsEd};
+  spEdBusy=true;try{await spSave(k,{info,sciEd:g("sci"),stEd:g("st"),src});spEditK=null;toast(T("edSaved"));renderSpecies();
+    const keys=Object.keys(p).filter(x=>p[x]!==(old[x]||""));
+    if(!en&&sample&&keys.length){const sub={};keys.forEach(x=>sub[x]=p[x]);toast(T("enFollowing"));
+      try{const out=await sample.json(`Translate the values of this JSON, a species card for the Shuhud platform, from Arabic into clear, precise English. "name" is the species' common name (give its usual English common name); keep every number, unit and name exactly. Return JSON only, with the same keys:\n${JSON.stringify(sub)}`,{modelTier:"default"});
+        const d2=spDocs[k]||{},i2={...(d2.info||{})},add={};keys.forEach(x=>{if(out&&out[x]!=null)add[x]=out[x]});if(add.threatsEd)add.threats=add.threatsEd;i2.en={...(i2.en||{}),...add};await spSave(k,{info:i2});toast(T("enFollowed"))}
+      catch(e){toast(e&&e.code==="not_granted"?T("notGranted"):T("enFollowFail"))}}}
+  catch(e){toast(T("edFail"))}finally{spEdBusy=false}}
 function spCardHTML(k){
+  if(spEditK===k&&canEditCards())return `<article class="sp" data-sk="${esc(k)}"><div class="sp-bd">${spEditHTML(k)}</div></article>`;
   const s=spInfo(k),its=spItems(k),st=s.st||"NE";
   const enName=ROSTER_EN[k]?ROSTER_EN[k][0]:EXTRA[k]?EXTRA[k][2]:"";
   const seen=its.slice(0,4).map(raw=>{const i=L(raw);return `<li><span class="when">${esc([i.place,fmtDate(i.eventDate||i.createdAt)].filter(Boolean).join(" · "))}</span>${esc(i.crisis||i.headline||"")}</li>`}).join("");
@@ -2685,6 +2714,7 @@ function spCardHTML(k){
       ${s.about?`<p class="sp-tx"><b>${T("spAbout")}:</b> ${esc(s.about)}</p>`:""}
       ${s.threat?`<p class="sp-tx"><b>${T("spThreat")}:</b> ${esc(s.threat)}</p>`:""}
       ${s.pop?`<p class="sp-tx"><b>${T("spPop")}:</b> ${esc(s.pop)}</p>`:""}
+      ${s.src&&s.src.length?`<p class="sp-src">${T("edSources")}: ${s.src.map(([n,u])=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n||u)}</a>`:esc(n)).join(" · ")}</p>`:""}
       ${seen?`<div class="sp-seen"><div class="lbl">${T("spSeen")}</div><ul>${seen}</ul></div>`:""}
       <div class="sp-act">
         ${its.length?`<button class="btn export" type="button" data-sa="pieces">${T("spPieces")(its.length)}</button>`:""}
@@ -2692,6 +2722,7 @@ function spCardHTML(k){
         ${assets?`<button class="btn" type="button" data-sa="photo">${s.img&&spDocs[k]&&spDocs[k].imageUrl?T("spPhotoChange"):T("spPhoto")}</button>`:""}
         <a class="btn" href="${photoSearch(enName||s.sci||s.name)}" target="_blank" rel="noopener">${T("spFind")} ↗</a>
         ${sample?`<button class="btn" type="button" data-sa="fill" ${busy?"disabled":""}>${busy?T("spFilling"):T("spFill")}</button>`:""}
+        ${canEditCards()?`<button class="btn" type="button" data-sa="edit">${T("edBtn")}</button>`:""}
         ${s.sci&&!/spp\.|^[A-Z][a-z]+(idae|ptera|ra|nia)$/.test(s.sci)?`<a class="btn sp-iucn" href="${iucnLink(s.sci)}" target="_blank" rel="noopener">IUCN ↗</a>`:""}
       </div>
     </div></article>`;
@@ -2832,19 +2863,67 @@ const RESERVES=[
 const rsNorm=t=>String(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 /* the pieces written in a reserve: its names appear in the place, headline or testimony */
 function rsPieces(r){const keys=r.match.map(rsNorm);return items.filter(raw=>{const t=rsNorm([raw.place,raw.headline,raw.angle,raw.dispatch,raw.en&&raw.en.place].join(" "));return keys.some(k=>t.includes(k))})}
-function rsCardHTML(r){const en=isEn(),x=en?r.en:r.ar,ps=rsPieces(r);
+const mdTools=()=>`<div class="ed-tools" data-tools><button type="button" data-md="b"><b>B</b> ${T("mdBold")}</button><button type="button" data-md="link">🔗 ${T("mdLink")}</button><button type="button" data-md="img">🖼️ ${T("mdImg")}</button><button type="button" data-md="h">${T("mdSub")}</button><button type="button" data-md="q">❝ ${T("mdQuote")}</button></div><div class="ed-pop" data-pop hidden><input class="ed-i" data-pu dir="ltr" placeholder="https://"><input class="ed-i" data-pt><button type="button" class="btn primary" data-md="ok">${T("mdInsert")}</button><button type="button" class="btn" data-md="x">✕</button></div>`;
+let rsDocs={},rsEditId=null,rsBusy=false;
+const canEditCards=()=>!!db&&!window.SHUHUD_STANDALONE&&!READER;
+/* a reserve as shown: the page's text with Kamal's saved edits on top (17 Nov 2026) */
+function rsGet(r){const d=rsDocs[r.id];if(!d)return r;return {...r,img:d.img||r.img,credit:d.img?(d.credit||""):r.credit,src:Array.isArray(d.src)?d.src:r.src,ar:{...r.ar,...(d.ar||{})},en:{...r.en,...(d.en||{})}}}
+const rsRow=(c,a,b,pa,pb)=>`<div class="ed-row" data-row="${c}"><input class="ed-i" data-c="0" placeholder="${pa}" value="${esc(a||"")}"><input class="ed-i" data-c="1" placeholder="${pb}"${c==="src"?' dir="ltr"':""} value="${esc(b||"")}"><button class="btn danger" type="button" data-rsact="del">✕</button></div>`;
+function rsEditHTML(r){const en=isEn(),x=en?r.en:r.ar,v=k=>esc(x[k]==null?"":x[k]);
+  const f=(k,lbl,rows)=>`<label class="l">${T(lbl)}</label>${rows?`<textarea class="ed-i" data-k="${k}" rows="${rows}">${v(k)}</textarea>`:`<input class="ed-i" data-k="${k}" value="${v(k)}">`}`;
+  return `<div class="ed rs-ed" data-rsed="${r.id}" data-mdk="more">
+    <p class="note">${T(en?"edNoteEn":"rsEdNote")}</p>
+    ${f("name","rsEdName")}${f("cty","rsEdCty")}${f("st","rsEdSt")}${f("about","rsEdAbout",4)}
+    <label class="l">${T("rsEdMore")}</label>${mdTools()}<textarea class="ed-i" data-k="more" rows="10">${v("more")}</textarea><div class="ed-hint">${T("mdHint")}</div>
+    <label class="l">${T("edFigs")}</label><div class="ed-list" data-list="fig">${(x.figs||[]).map(([a,b])=>rsRow("fig",a,b,T("edVal"),T("edLbl"))).join("")}</div><button class="btn" type="button" data-rsact="addfig">${T("edAddFig")}</button>
+    <label class="l">${T("rsEdSp")}</label><textarea class="ed-i" data-k="sp" rows="4">${esc((x.sp||[]).map(a=>a[0]).join("\n"))}</textarea>
+    <label class="l">${T("rsEdPl")}</label><textarea class="ed-i" data-k="pl" rows="4">${esc((x.pl||[]).join("\n"))}</textarea>
+    ${f("th","rsTh",4)}
+    <label class="l">${T("edSources")}</label><div class="ed-list" data-list="src">${(r.src||[]).map(([a,b])=>rsRow("src",a,b,T("edSrcName"),"https://")).join("")}</div><button class="btn" type="button" data-rsact="addsrc">${T("edAddSrc")}</button>
+    <label class="l">${T("rsEdImg")}</label><input class="ed-i" data-g="img" dir="ltr" value="${esc(r.img||"")}"><input class="ed-i" data-g="credit" placeholder="${T("rsEdCredit")}" value="${esc(r.credit||"")}">
+    <div class="foot" style="justify-content:flex-start"><button class="btn primary" type="button" data-rsact="save">${T("edSave")}</button><button class="btn" type="button" data-rsact="cancel">${T("edCancel")}</button></div>
+  </div>`}
+async function rsSave(r,box){
+  if(rsBusy)return;const en=isEn(),L=en?"en":"ar",x=en?r.en:r.ar,g=k=>(box.querySelector(`[data-k="${k}"]`)||{}).value||"";
+  const lines=k=>g(k).split("\n").map(t=>t.trim()).filter(Boolean);
+  const rows=c=>[...box.querySelectorAll(`[data-list="${c}"] .ed-row`)].map(row=>[row.querySelector('[data-c="0"]').value.trim(),row.querySelector('[data-c="1"]').value.trim()]).filter(a=>a[0]||a[1]);
+  const keyOf=n=>{const hit=(x.sp||[]).find(a=>a[0]===n);return hit&&hit[1]?[n,hit[1]]:[n]};
+  const p={name:g("name").trim(),cty:g("cty").trim(),st:g("st").trim(),about:g("about").trim(),more:g("more").trim(),figs:rows("fig"),sp:lines("sp").map(keyOf),pl:lines("pl"),th:g("th").trim()};
+  if(!p.name){toast(T("edNeed"));return}
+  const d=rsDocs[r.id]||{},img=(box.querySelector('[data-g="img"]')||{}).value.trim(),credit=(box.querySelector('[data-g="credit"]')||{}).value.trim();
+  const doc={...d,[L]:{...(d[L]||{}),...p},src:rows("src"),img:img||"",credit:img?credit:""};
+  rsBusy=true;try{await db.collection("reserves").doc(r.id).set(doc);rsDocs[r.id]=doc;rsEditId=null;toast(T("edSaved"));renderReserves();
+    if(!en&&sample){const keys=Object.keys(p).filter(k=>JSON.stringify(p[k])!==JSON.stringify(x[k]==null?(Array.isArray(p[k])?[]:""):x[k]));if(keys.length)rsFollow(r.id,keys,p)}}
+  catch(e){toast(T("edFail"))}finally{rsBusy=false}}
+/* after an Arabic edit, the changed fields are translated and merged into the English text (same as pieces) */
+async function rsFollow(id,keys,p){
+  const sub={};keys.forEach(k=>sub[k]=k==="sp"?p.sp.map(a=>a[0]):p[k]);toast(T("enFollowing"));
+  try{const out=await sample.json(`Translate the values of this JSON, about a nature reserve, from Arabic into clear, precise English for the Shuhud platform. Keep every number, unit, name and date exactly. "figs" is a list of [value, label] pairs; "sp" and "pl" are lists of species and plant names (give their usual English common names). Keep light markup (**…**, [text](url), ![caption](url), lines starting with "## " or "> ") exactly as markup and never change a url. Return JSON only, with the same keys:\n${JSON.stringify(sub)}`,{modelTier:"default"});
+    const add={};keys.forEach(k=>{if(out&&out[k]!=null)add[k]=k==="sp"&&Array.isArray(out.sp)?out.sp.map((n,j)=>p.sp[j]&&p.sp[j][1]?[n,p.sp[j][1]]:[n]):out[k]});
+    const d=rsDocs[id]||{};const doc={...d,en:{...(d.en||{}),...add}};await db.collection("reserves").doc(id).set(doc);rsDocs[id]=doc;renderReserves();toast(T("enFollowed"))}
+  catch(e){toast(e&&e.code==="not_granted"?T("notGranted"):T("enFollowFail"))}}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-rsact],[data-rsedit]");if(!b)return;
+  if(b.dataset.rsedit){rsEditId=b.dataset.rsedit;renderReserves();const el=document.getElementById("rs-"+rsEditId);if(el)el.scrollIntoView({block:"start"});return}
+  if(b.dataset.rsact==="del"&&b.closest("[data-sped]")){b.closest(".ed-row").remove();return}
+  const box=b.closest("[data-rsed]");if(!box)return;const r=rsGet(RESERVES.find(x=>x.id===box.dataset.rsed)),a=b.dataset.rsact;
+  if(a==="cancel"){rsEditId=null;renderReserves();return}
+  if(a==="save"){rsSave(r,box);return}
+  if(a==="del"){b.closest(".ed-row").remove();return}
+  if(a==="addfig"||a==="addsrc"){const t=document.createElement("div");t.innerHTML=a==="addfig"?rsRow("fig","","",T("edVal"),T("edLbl")):rsRow("src","","",T("edSrcName"),"https://");box.querySelector(`[data-list="${a==="addfig"?"fig":"src"}"]`).appendChild(t.firstElementChild)}});
+function rsCardHTML(r0){const r=rsGet(r0);if(rsEditId===r.id&&canEditCards())return `<article class="rs" id="rs-${r.id}"><div class="rs-bd">${rsEditHTML(r)}</div></article>`;
+  const en=isEn(),x=en?r.en:r.ar,ps=rsPieces(r);
   const sp=x.sp.map(([n,k])=>k&&items.some(i=>spKey(i)===k)?`<button type="button" data-rssp="${esc(n)}" title="${esc(T("rsSpHint"))}">${esc(n)}</button>`:`<span>${esc(n)}</span>`).join("");
   return `<article class="rs" id="rs-${r.id}">
     <div class="rs-ph"><img src="${esc(r.img)}" alt="${esc(x.name)}" loading="lazy" onerror="this.remove()"><span class="rs-cty">${r.cc} ${esc(x.cty)}</span>${r.credit?`<span class="sp-cr">📷 ${esc(r.credit)}</span>`:""}</div>
     <div class="rs-bd">
       <h3>${esc(x.name)}</h3><div class="rs-st">${esc(x.st)}</div>
-      <p class="rs-ab">${esc(x.about)}</p>
+      <div class="rs-ab rt">${richText(x.about)}</div>${x.more?`<div class="rs-more voice rt">${richText(x.more)}</div>`:""}
       <div class="rs-figs">${x.figs.map(([v,l])=>`<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div>
       <div><div class="rs-lbl">${T("rsSp")}</div><div class="rs-chips">${sp}</div></div>
       <div><div class="rs-lbl">${T("rsPl")}</div><div class="rs-chips">${x.pl.map(n=>`<span>${esc(n)}</span>`).join("")}</div></div>
       <div><div class="rs-lbl">${T("rsTh")}</div><p class="rs-th">${esc(x.th)}</p></div>
       ${ps.length?`<div class="rs-seen"><div class="rs-lbl">${T("rsSeen")} (${ps.length})</div><ul>${ps.slice(0,5).map(raw=>`<li><a href="#" data-rsopen="${esc(raw.id)}">${esc(L(raw).headline)}</a></li>`).join("")}</ul></div>`:""}
-      <div class="rs-ft"><a href="https://www.openstreetmap.org/?mlat=${r.ll[0]}&mlon=${r.ll[1]}#map=8/${r.ll[0]}/${r.ll[1]}" target="_blank" rel="noopener">${T("rsMap")} ↗</a><span>·</span><span>${T("rsSrc")}:</span>${r.src.map(([n,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join(" · ")}</div>
+      <div class="rs-ft"><a href="https://www.openstreetmap.org/?mlat=${r.ll[0]}&mlon=${r.ll[1]}#map=8/${r.ll[0]}/${r.ll[1]}" target="_blank" rel="noopener">${T("rsMap")} ↗</a><span>·</span><span>${T("rsSrc")}:</span>${r.src.map(([n,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join(" · ")}${canEditCards()?`<button class="btn rs-edb" type="button" data-rsedit="${r.id}">${T("edBtn")}</button>`:""}</div>
     </div></article>`}
 /* Arab-world reserves first, then the rest of the world */
 const RS_ORDER=["socotra","ahwar","wadirum","farasan","marawah","rasmohammed","samhan","virunga","bialowieza","galapagos"];
@@ -2956,6 +3035,11 @@ function spClick(e){
   if(a==="about"){chosen="auto";renderRoster();$("#d-angle").value=T("spAngle")(spInfo(k).name);location.hash="desk";show("desk");window.scrollTo({top:$("nav.main").offsetTop,behavior:"smooth"})}
   if(a==="photo"){if(!assets){toast(T("spNeedEdit"));return}spPhotoKey=k;$("#sp-photo-in").click()}
   if(a==="fill")spFill(k);
+  if(a==="edit"){spEditK=k;renderSpecies();const el=b.closest(".sp")||document.querySelector(`.sp[data-sk="${CSS.escape(k)}"]`);setTimeout(()=>{const x=document.querySelector(`.sp[data-sk="${CSS.escape(k)}"]`);if(x)x.scrollIntoView({block:"start"})},50)}
+  if(a==="ed-cancel"){spEditK=null;renderSpecies()}
+  if(a==="ed-save")spEditSave(k,b.closest("[data-sped]"));
+  if(a==="ed-addsrc"){const t=document.createElement("div");t.innerHTML=rsRow("src","","",T("edSrcName"),"https://");b.closest("[data-sped]").querySelector('[data-list="src"]').appendChild(t.firstElementChild)}
+  if(a==="del"){}
 }
 $("#ids-grid").addEventListener("click",spClick);$("#red-grid").addEventListener("click",spClick);
 $("#red-chips").addEventListener("click",e=>{const b=e.target.closest("[data-rs]");if(!b)return;redSt=b.dataset.rs;renderSpecies()});
@@ -3292,6 +3376,7 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
   db.collection("media").orderBy("createdAt","desc").limit(300).onSnapshot(snap=>{mediaDb=snap.docs.map(d=>({id:d.id,...d.data()}));mergeMedia()},()=>{});
   /* media made on the website (newsroom.html with the GitHub key) sit in data/media-gh.json: show them here too, read-only */
   if(!window.SHUHUD_STANDALONE)fetch("https://alshuhud.org/data/media-gh.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(l=>{if(Array.isArray(l)){mediaSite=l.filter(x=>x&&x.id&&!x._del).map(x=>({...x,_site:true}));mergeMedia()}}).catch(()=>{});
+  db.collection("reserves").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{m[d.id]=d.data()});rsDocs=m;try{if(!rsEditId&&!document.getElementById("rs-wrap").hidden)renderReserves()}catch(_){}},()=>{});
   db.collection("species").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{const x=d.data();m[x.key||d.id]=x});spDocs=m;spLoaded=true;renderSpecies();try{if(!NARR.playing&&!openId)renderFeed()}catch(_){}},()=>{});
   db.collection("monitor").orderBy("at","desc").limit(300).onSnapshot(snap=>{trackDb=snap.docs.map(d=>({id:d.id,...d.data()}));mergeTrack()},()=>{});
   if(!window.SHUHUD_STANDALONE){loadSiteFeed();setInterval(loadSiteFeed,30*60*1000)}

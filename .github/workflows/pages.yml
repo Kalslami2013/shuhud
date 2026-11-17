@@ -8,6 +8,7 @@ on:
       - data/pieces-gh.json
       - data/species.json
       - data/reserves.json
+      - data/reserves-db.json
       - data/partners.json
       - data/partners-gh.json
       - scripts/social_icons.json

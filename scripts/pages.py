@@ -388,6 +388,14 @@ with open("p/index.html", "w", encoding="utf8") as fh:
 # reserves: one page per reserve (r/<name>.html) from data/reserves.json (written by build.py from the page's RESERVES list)
 RS_SLUG = {"ahwar": "iraq-marshes", "wadirum": "wadi-rum", "rasmohammed": "ras-mohammed", "samhan": "jabal-samhan"}
 reserves = [r for r in load("data/reserves.json") if isinstance(r, dict) and re.match(r"^[a-z]{2,24}$", str(r.get("id") or "")) and isinstance(r.get("ar"), dict)]
+# Kamal's edits from the Claude copy (synced into data/reserves-db.json) are laid over the page's text
+for d in load("data/reserves-db.json"):
+    for r in reserves:
+        if isinstance(d, dict) and d.get("id") == r["id"]:
+            r["ar"] = {**r.get("ar", {}), **(d.get("ar") or {})}
+            r["en"] = {**(r.get("en") or {}), **(d.get("en") or {})}
+            if isinstance(d.get("src"), list): r["src"] = d["src"]
+            if d.get("img"): r["img"], r["credit"] = d["img"], d.get("credit") or ""
 def rs_slug(r): return RS_SLUG.get(r["id"], r["id"])
 def rs_norm(t): return re.sub(r"[ً-ْـ]", "", str(t or "")).lower()
 def rs_pieces(r):
@@ -401,7 +409,8 @@ def rs_pieces(r):
     return out
 def rs_block(x, ar, r, ps):
     t = (lambda a, b: a if ar else b)
-    o = [f'<p class="angle">{e(x.get("about"))}</p>']
+    o = [f'<div class="angle">{rich(x.get("about"))}</div>']
+    if x.get("more"): o.append(f'<div class="voice">{rich(x["more"])}</div>')
     figs = [f for f in (x.get("figs") or []) if isinstance(f, list) and len(f) >= 2]
     if figs:
         o.append('<div class="figs">' + "".join(f'<div class="fig"><b>{e(v)}</b><small>{e(l)}</small></div>' for v, l, *_ in figs) + "</div>")
@@ -427,7 +436,7 @@ for r in reserves:
     url = f"{BASE}r/{slug}"
     img = str(r.get("img") or "")
     title = f'{ar.get("name")}{" | " + en["name"] if en.get("name") else ""} — محمية في {ar.get("cty")} | شهود'
-    desc = short(ar.get("about"))
+    desc = short(plain(ar.get("about")))
     share = og_image("r-" + slug, img) if img.startswith("http") else ""
     ps = rs_pieces(r)
     ld = {"@context": "https://schema.org", "@type": "Place", "name": ar.get("name"), "alternateName": en.get("name"),
@@ -458,7 +467,7 @@ for r in reserves:
     rs_files.add(slug)
     if en.get("name"):
         t_en = f'{en["name"]}, a nature reserve in {en.get("cty")} | Shuhud'
-        d_en = short(en.get("about")) or desc
+        d_en = short(plain(en.get("about"))) or desc
         ld_en = {**ld, "name": en["name"], "alternateName": ar.get("name"), "description": d_en, "url": url_en}
         go_en = goto.replace(f'/?r={r["id"]}', f'/?r={r["id"]}&lang=en')
         x_en = go_en + '<script type="application/ld+json">' + json.dumps(ld_en, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
