@@ -29,7 +29,7 @@ jobs:
         run: |
           git config user.name "shuhud-bot"
           git config user.email "shuhud-bot@users.noreply.github.com"
-          git add -A p r og sitemap.xml data/wiki-img.json data/short-ids.json data/og-img.json
+          git add -A p r en og sitemap.xml data/wiki-img.json data/short-ids.json data/og-img.json
           git diff --cached --quiet && exit 0
           git commit -m "Piece pages: rebuild"
           for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done

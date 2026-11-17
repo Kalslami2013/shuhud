@@ -127,24 +127,29 @@ figure{margin:0 0 18px;position:relative}figure .narr{position:absolute;right:12
 .angle{font-size:19px;color:var(--mute)}.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .fig{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}.fig b{display:block;font-size:22px;color:var(--acc)}.fig small{color:var(--mute)}
 ul{padding-inline-start:22px}.q{border-inline-start:4px solid var(--acc);padding:4px 14px;font-style:italic}
-.en{direction:ltr;text-align:left;font-family:Georgia,"Segoe UI",system-ui,serif;border-top:1px solid var(--line);margin-top:34px}
+html[lang=en] body{font-family:Georgia,"Segoe UI",system-ui,serif}.en{direction:ltr;text-align:left;font-family:Georgia,"Segoe UI",system-ui,serif;border-top:1px solid var(--line);margin-top:34px}
 .cta{display:inline-block;background:var(--acc);color:var(--bg);text-decoration:none;padding:10px 18px;border-radius:999px;font-weight:700;margin:20px 0}
 footer{border-top:1px solid var(--line);color:var(--mute);font-size:14px;padding:18px 0 40px;margin-top:30px}
 .list{list-style:none;padding:0}.list li{border-bottom:1px solid var(--line);padding:14px 0}.list a{text-decoration:none;color:var(--ink);font-weight:700;font-size:19px}.list small{display:block;color:var(--mute)}
 .sc{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}.sc a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);color:var(--ink)}.sc svg{width:19px;height:19px;fill:currentColor}"""
 
-def head(title, desc, url, img, extra=""):
+def head(title, desc, url, img, extra="", lang="ar", alt=None):
     img = img or BASE + "og.jpg"
-    return f"""<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    en = lang == "en"
+    hl = "".join(f'<link rel="alternate" hreflang="{k}" href="{e(v)}">' for k, v in (alt or {}).items())
+    return f"""<!doctype html><html lang="{lang}" dir="{'ltr' if en else 'rtl'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><link rel="canonical" href="{e(url)}"><meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#0b1712"><link rel="icon" href="{BASE}favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="96x96" href="{BASE}icon-96.png"><link rel="icon" type="image/png" sizes="192x192" href="{BASE}icon-192.png"><link rel="apple-touch-icon" href="{BASE}icon-180.png">
-<meta property="og:site_name" content="شهود · Shuhud"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{e(img)}">{'<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">' if '/og/' in img else ''}<meta property="og:locale" content="ar_AR"><meta property="og:locale:alternate" content="en_GB">
+<meta property="og:site_name" content="{'Shuhud · شهود' if en else 'شهود · Shuhud'}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{e(img)}">{'<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">' if '/og/' in img else ''}<meta property="og:locale" content="{'en_GB' if en else 'ar_AR'}"><meta property="og:locale:alternate" content="{'ar_AR' if en else 'en_GB'}">{hl}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(title)}"><meta name="twitter:description" content="{e(desc)}"><meta name="twitter:image" content="{e(img)}">
 {extra}<style>{CSS}</style></head><body>
-<header class="top"><div class="wrap"><a class="brand" href="{BASE}"><img src="{BASE}icon-192.png" alt="">شهود</a><nav><a href="{BASE}p/">كل القطع</a><a href="{BASE}r/">المحميات</a><a href="{BASE}#about">من نحن</a></nav></div></header>
+<header class="top"><div class="wrap">{(f'<a class="brand" href="{BASE}?lang=en"><img src="{BASE}icon-192.png" alt="">Shuhud</a><nav><a href="{BASE}en/p/">All pieces</a><a href="{BASE}en/r/">Reserves</a><a href="{BASE}?lang=en#about">About</a></nav>') if en else (f'<a class="brand" href="{BASE}"><img src="{BASE}icon-192.png" alt="">شهود</a><nav><a href="{BASE}p/">كل القطع</a><a href="{BASE}r/">المحميات</a><a href="{BASE}#about">من نحن</a></nav>')}</div></header>
 """
 
 SC = ('<div class="sc">' + "".join(f'<a href="{e(href(x))}" target="_blank" rel="noopener me" title="{e(x.get("name") or x.get("platform"))}" aria-label="{e(x.get("name") or x.get("platform"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="{ICONS.get(x.get("platform"), ICONS["web"])}"/></svg></a>' for x in socials) + "</div>") if socials else ""
+FOOT_EN = f"""<footer><div class="wrap">{SC}Shuhud · شهود: the world's crises told by the creatures who live them. <a href="{BASE}?lang=en">alshuhud.org</a></div></footer>
+</body></html>
+"""
 FOOT = f"""<footer><div class="wrap">{SC}شهود · Shuhud — أزمات العالم بلسان الكائنات التي تعيشها. <a href="{BASE}">alshuhud.org</a></div></footer>
 </body></html>
 """
@@ -280,13 +285,14 @@ def short_id(pid):
 
 # a person who opens a piece page is taken to the same piece inside the site itself (same look, photos, sound);
 # search engines and link previews read this page as it is
-def go_script(pid):
+def go_script(pid, lang="ar"):
     return ('<script>if(!/bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|twitter|discord|linkedin|skype|preview|lighthouse|headless/i.test(navigator.userAgent)){'
             'document.documentElement.style.background="#0b1712";document.write("<style>body{visibility:hidden}</style>");'
-            f'location.replace("/?p={pid}"+location.hash)}}</script>\n')
+            f'location.replace("/?p={pid}{"&lang=en" if lang == "en" else ""}"+location.hash)}}</script>\n')
 
 os.makedirs("p", exist_ok=True)
 built = set()
+en_files = set()
 files = set()
 items = sorted(pieces.values(), key=lambda p: (date_of(p), str(p.get("createdAt") or "")), reverse=True)
 for p in items:
@@ -307,10 +313,12 @@ for p in items:
     if d: ld["datePublished"] = str(p.get("createdAt") or d)[:25]
     if img: ld["image"] = [img]
     if en.get("headline"): ld["alternativeHeadline"] = short(en["headline"], 110)
+    url_en = f"{BASE}en/p/{sid}"
+    alt = {"ar": url, "en": url_en, "x-default": url} if en.get("headline") else None
     extra = go_script(pid) + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
     kick = " · ".join(x for x in (e(p.get("category")), e(p.get("place"))) if x)
     share = og_image(sid, img, narr_of(p) if str(p.get("imageUrl") or "") else "")
-    body = [head(title, desc, url, share or img, extra), '<main class="wrap"><article>']
+    body = [head(title, desc, url, share or img, extra, "ar", alt), '<main class="wrap"><article>']
     body.append(f'<div class="kick">{p.get("animalEmoji","")} {e(p.get("animalName"))}{" · " + kick if kick else ""}</div>')
     body.append(f'<h1>{e(p["headline"])}</h1><div class="meta">{nice(d) if d else ""}{" · " if d else ""}{e(p.get("crisis"))}</div>')
     if img:
@@ -329,11 +337,41 @@ for p in items:
             fh.write("\n".join(body))
         files.add(name)
     built.add(pid)
+    # English page (17 Nov 2026, Kamal): its own address, title, description and language, linked to the Arabic one
+    if en.get("headline"):
+        en_full = {**en, "figures": en.get("figures") or [], "sources": en.get("sources") or p.get("sources")}
+        t_en = f'{en["headline"]} | Shuhud'
+        d_en = short(en.get("angle") or en.get("fact") or plain(en.get("dispatch"))) or desc
+        ld_en = {**ld, "headline": short(en["headline"], 110), "description": d_en, "inLanguage": "en", "mainEntityOfPage": url_en,
+                 "publisher": {**ld["publisher"], "name": "Shuhud", "alternateName": "شهود"}}
+        ld_en.pop("alternativeHeadline", None)
+        x_en = go_script(pid, "en") + '<script type="application/ld+json">' + json.dumps(ld_en, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+        kick_en = " · ".join(x for x in (e(en.get("category") or ""), e(en.get("place"))) if x)
+        b = [head(t_en, d_en, url_en, share or img, x_en, "en", alt), '<main class="wrap"><article lang="en" dir="ltr" style="text-align:left">']
+        b.append(f'<div class="kick">{p.get("animalEmoji","")} {e(en.get("animalName") or p.get("animalName"))}{" · " + kick_en if kick_en else ""}</div>')
+        b.append(f'<h1>{e(en["headline"])}</h1><div class="meta">{nice(d, False) if d else ""}{" · " if d else ""}{e(en.get("crisis"))}</div>')
+        if img:
+            nr = narr_of(p)
+            nr = f'<img class="narr" src="{e(nr)}" alt="{e(en.get("animalName") or p.get("animalName"))}">' if nr and nr != img else ""
+            b.append(f'<figure><img src="{e(img)}" alt="{e(en.get("crisis") or en.get("animalName") or "")}" loading="eager">{nr}{f"<figcaption>{e(en.get('imageCredit') or credit.replace('صورة أرشيفية', 'Archive photo'))}</figcaption>" if credit else ""}</figure>')
+        b.append(block(en_full, False))
+        b.append(f'<p class="meta"><a href="{url}" lang="ar">اقرأ بالعربية ←</a></p>')
+        b.append(f'<a class="cta" href="{BASE}?lang=en">More on Shuhud →</a></article></main>')
+        b.append(FOOT_EN)
+        os.makedirs("en/p", exist_ok=True)
+        with open(f"en/p/{sid}.html", "w", encoding="utf8") as fh:
+            fh.write("\n".join(b))
+        en_files.add(sid)
 
 # pages of pieces that were deleted are removed
 for f in glob.glob("p/*.html"):
     n = os.path.basename(f)[:-5]
     if n != "index" and n not in files:
+        os.remove(f)
+
+for f in glob.glob("en/p/*.html"):
+    n = os.path.basename(f)[:-5]
+    if n != "index" and n not in en_files:
         os.remove(f)
 
 # archive
@@ -343,7 +381,7 @@ for p in items:
     d = date_of(p)
     rows.append(f'<li><a href="{SHORT[p["id"]]}">{e(p["headline"])}</a><small>{p.get("animalEmoji","")} {e(p.get("animalName"))} · {nice(d) if d else ""}</small></li>')
 arch = head("كل القطع | شهود — أزمات العالم بلسان الكائنات التي تعيشها",
-            "أرشيف قطع شهود: أزمات العالم من زاويتها البيئية بلسان الكائنات التي تعيشها، بالعربية والإنجليزية.", BASE + "p/", "")
+            "أرشيف قطع شهود: أزمات العالم من زاويتها البيئية بلسان الكائنات التي تعيشها، بالعربية والإنجليزية.", BASE + "p/", "", "", "ar", {"ar": BASE + "p/", "en": BASE + "en/p/", "x-default": BASE + "p/"})
 with open("p/index.html", "w", encoding="utf8") as fh:
     fh.write(arch + f'<main class="wrap"><article><h1>كل القطع</h1><div class="meta">{len(rows)} قطعة</div><ul class="list">' + "\n".join(rows) + "</ul></article></main>" + FOOT)
 
@@ -380,6 +418,8 @@ def rs_block(x, ar, r, ps):
     return "\n".join(o)
 os.makedirs("r", exist_ok=True)
 rs_files = set()
+rs_en_files = set()
+rs_rows_en = []
 rs_rows = []
 for r in reserves:
     ar, en = r["ar"], (r.get("en") if isinstance(r.get("en"), dict) else {})
@@ -399,7 +439,9 @@ for r in reserves:
             'document.documentElement.style.background="#0b1712";document.write("<style>body{visibility:hidden}</style>");'
             f'location.replace("/?r={r["id"]}")}}</script>\n')
     extra = goto + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
-    body = [head(title, desc, url, share or img, extra), '<main class="wrap"><article>']
+    url_en = f"{BASE}en/r/{slug}"
+    alt = {"ar": url, "en": url_en, "x-default": url} if en.get("name") else None
+    body = [head(title, desc, url, share or img, extra, "ar", alt), '<main class="wrap"><article>']
     body.append(f'<div class="kick">🏞️ {r.get("cc","")} {e(ar.get("cty"))} · المحميات</div><h1>{e(ar.get("name"))}</h1><div class="meta">{e(ar.get("st"))}</div>')
     if img:
         body.append(f'<figure><img src="{e(img)}" alt="{e(ar.get("name"))}" loading="eager">{f"<figcaption>{e(r.get("credit"))}</figcaption>" if r.get("credit") else ""}</figure>')
@@ -414,16 +456,61 @@ for r in reserves:
     with open(f"r/{slug}.html", "w", encoding="utf8") as fh:
         fh.write("\n".join(body))
     rs_files.add(slug)
+    if en.get("name"):
+        t_en = f'{en["name"]}, a nature reserve in {en.get("cty")} | Shuhud'
+        d_en = short(en.get("about")) or desc
+        ld_en = {**ld, "name": en["name"], "alternateName": ar.get("name"), "description": d_en, "url": url_en}
+        go_en = goto.replace(f'/?r={r["id"]}', f'/?r={r["id"]}&lang=en')
+        x_en = go_en + '<script type="application/ld+json">' + json.dumps(ld_en, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+        b = [head(t_en, d_en, url_en, share or img, x_en, "en", alt), '<main class="wrap"><article lang="en" dir="ltr" style="text-align:left">']
+        b.append(f'<div class="kick">🏞️ {r.get("cc","")} {e(en.get("cty"))} · Reserves</div><h1>{e(en["name"])}</h1><div class="meta">{e(en.get("st"))}</div>')
+        if img:
+            b.append(f'<figure><img src="{e(img)}" alt="{e(en["name"])}" loading="eager">{f"<figcaption>{e(r.get("credit"))}</figcaption>" if r.get("credit") else ""}</figure>')
+        b.append(rs_block(en, False, r, ps).replace(f'{BASE}p/', f'{BASE}en/p/'))
+        if srcs:
+            b.append('<h2>Sources</h2><ul>' + "".join(f'<li><a href="{e(u)}" target="_blank" rel="noopener">{e(n)}</a></li>' for n, u, *_ in srcs) + "</ul>")
+        b.append(f'<p class="meta"><a href="{url}" lang="ar">اقرأ بالعربية ←</a></p>')
+        b.append(f'<a class="cta" href="{BASE}?r={r["id"]}&amp;lang=en">All reserves on Shuhud →</a></article></main>')
+        b.append(FOOT_EN)
+        os.makedirs("en/r", exist_ok=True)
+        with open(f"en/r/{slug}.html", "w", encoding="utf8") as fh:
+            fh.write("\n".join(b))
+        rs_en_files.add(slug)
+        rs_rows_en.append(f'<li><a href="{slug}">{e(en["name"])}</a><small>{r.get("cc","")} {e(en.get("cty"))} · {e(en.get("st"))}</small></li>')
     rs_rows.append(f'<li><a href="{slug}">{e(ar.get("name"))}</a><small>{r.get("cc","")} {e(ar.get("cty"))} · {e(ar.get("st"))}</small></li>')
+for f in glob.glob("en/r/*.html"):
+    n = os.path.basename(f)[:-5]
+    if n != "index" and n not in rs_en_files:
+        os.remove(f)
+if rs_rows_en:
+    rh_en = head("Nature reserves | Shuhud: a selection of the Arab world's and the world's great reserves",
+                 "Selected nature reserves in the Arab world and beyond: their creatures, plants and threats, with testimonies from there, in English and Arabic.",
+                 BASE + "en/r/", "", "", "en", {"ar": BASE + "r/", "en": BASE + "en/r/", "x-default": BASE + "r/"})
+    with open("en/r/index.html", "w", encoding="utf8") as fh:
+        fh.write(rh_en + f'<main class="wrap"><article lang="en" dir="ltr" style="text-align:left"><h1>Nature reserves</h1><div class="meta">{len(rs_rows_en)} reserves</div><ul class="list">' + "\n".join(rs_rows_en) + "</ul></article></main>" + FOOT_EN)
 for f in glob.glob("r/*.html"):
     n = os.path.basename(f)[:-5]
     if n != "index" and n not in rs_files:
         os.remove(f)
 if reserves:
     rh = head("المحميات | شهود — مختارات من أهم المحميات الطبيعية في العالم العربي والعالم",
-              "محميات طبيعية مختارة من العالم العربي والعالم: كائناتها ونباتاتها وما يهددها، وشهادات من هناك، بالعربية والإنجليزية.", BASE + "r/", "")
+              "محميات طبيعية مختارة من العالم العربي والعالم: كائناتها ونباتاتها وما يهددها، وشهادات من هناك، بالعربية والإنجليزية.", BASE + "r/", "", "", "ar", {"ar": BASE + "r/", "en": BASE + "en/r/", "x-default": BASE + "r/"})
     with open("r/index.html", "w", encoding="utf8") as fh:
         fh.write(rh + f'<main class="wrap"><article><h1>المحميات</h1><div class="meta">{len(rs_rows)} محمية · Nature reserves</div><ul class="list">' + "\n".join(rs_rows) + "</ul></article></main>" + FOOT)
+
+# English archive
+if en_files:
+    rows_en = []
+    for p in items:
+        if p["id"] not in built or SHORT[p["id"]] not in en_files: continue
+        en = p.get("en") or {}
+        d = date_of(p)
+        rows_en.append(f'<li><a href="{SHORT[p["id"]]}">{e(en["headline"])}</a><small>{p.get("animalEmoji","")} {e(en.get("animalName") or "")} · {nice(d, False) if d else ""}</small></li>')
+    arch_en = head("All pieces | Shuhud: the world's crises told by the creatures who live them",
+                   "The Shuhud archive: the world's crises seen through their environmental impact, told in the first person by the creatures who live them, in English and Arabic.",
+                   BASE + "en/p/", "", "", "en", {"ar": BASE + "p/", "en": BASE + "en/p/", "x-default": BASE + "p/"})
+    with open("en/p/index.html", "w", encoding="utf8") as fh:
+        fh.write(arch_en + f'<main class="wrap"><article lang="en" dir="ltr" style="text-align:left"><h1>All pieces</h1><div class="meta">{len(rows_en)} pieces</div><ul class="list">' + "\n".join(rows_en) + "</ul></article></main>" + FOOT_EN)
 
 # sitemap
 today = datetime.date.today().isoformat()
@@ -433,13 +520,21 @@ for p in items:
     if p["id"] in built:
         d = date_of(p) or today
         urls.append(f"  <url><loc>{BASE}p/{SHORT[p['id']]}</loc><lastmod>{d}</lastmod><priority>0.7</priority></url>")
+        if SHORT[p["id"]] in en_files:
+            urls.append(f"  <url><loc>{BASE}en/p/{SHORT[p['id']]}</loc><lastmod>{d}</lastmod><priority>0.7</priority></url>")
+if en_files:
+    urls.append(f"  <url><loc>{BASE}en/p/</loc><lastmod>{today}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>")
 if reserves:
     urls.append(f"  <url><loc>{BASE}r/</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
     for r in reserves:
         urls.append(f"  <url><loc>{BASE}r/{rs_slug(r)}</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
+        if rs_slug(r) in rs_en_files:
+            urls.append(f"  <url><loc>{BASE}en/r/{rs_slug(r)}</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
+    if rs_en_files:
+        urls.append(f"  <url><loc>{BASE}en/r/</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
 with open("sitemap.xml", "w", encoding="utf8") as fh:
     fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>\n")
-print(len(built), "piece pages,", len(reserves), "reserve pages")
+print(len(built), "piece pages,", len(en_files), "English,", len(reserves), "reserve pages,", len(rs_en_files), "English")
 with open(SHORT_PATH, "w", encoding="utf8") as fh:
     json.dump(SHORT, fh, ensure_ascii=False, indent=0)
 with open(OG_PATH, "w", encoding="utf8") as fh:
