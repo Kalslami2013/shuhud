@@ -792,8 +792,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794862783"</script>
-<script src="local.js?v=1794862783"></script>
+<script>window.SHUHUD_BUILD="1794901035"</script>
+<script src="local.js?v=1794901035"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1195,7 +1195,7 @@ function teaserHTML(raw,lead){
 /* ---------- «على رادار شهود» ---------- */
 const RADAR_URL=window.SHUHUD_STANDALONE?"/data/feed.json":"https://alshuhud.org/data/feed.json";
 /* trusted sources only, by language: the Arabic page shows Arabic outlets, the English page English ones */
-const RADAR_SRC={ar:["الأناضول","الجزيرة نت","الشرق الأوسط","BBC عربي","أخبار الأمم المتحدة","RT عربي","DW عربية","فرانس 24","سكاي نيوز عربية"],en:["UN News","UNEP","WMO","WHO","FAO","NASA Earth Observatory","NOAA","ReliefWeb","GDACS","USGS","BBC","Al Jazeera","The Guardian","Mongabay","Carbon Brief","Yale Environment 360","Climate Home News","Inside Climate News","Euronews","TASS","Down To Earth","Phys.org","New York Times","Washington Post","France 24 English","DW","Anadolu"],fr:["Le Monde","Reporterre","France 24","ONU Info"]};
+const RADAR_SRC={ar:["الأناضول","الجزيرة نت","الشرق الأوسط","BBC عربي","أخبار الأمم المتحدة","RT عربي","DW عربية","فرانس 24","سكاي نيوز عربية"],en:["UN News","UNEP","WMO","WHO","FAO","NASA Earth Observatory","NOAA","ReliefWeb","GDACS","USGS","BBC","Al Jazeera","The Guardian","UPI","Mongabay","Carbon Brief","Yale Environment 360","Climate Home News","Inside Climate News","Euronews","TASS","Down To Earth","Phys.org","New York Times","Washington Post","France 24 English","DW","Anadolu"],fr:["Le Monde","Reporterre","France 24","ONU Info"]};
 let radarAll=[],radarShown=12,radarAt="",reqIds=new Set();
 async function loadRadar(){try{const r=await fetch(RADAR_URL+"?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const l=await r.json();if(Array.isArray(l)){radarAll=l;renderRadar();try{renderPicks()}catch(e){}}}catch(e){}
   try{const r=await fetch(RADAR_URL.replace("feed.json","feed-status.json")+"?t="+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json();radarAt=j&&j.at||"";radarFoot()}}catch(e){}}
