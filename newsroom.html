@@ -341,10 +341,10 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
   .radar{position:absolute;top:0;bottom:0;left:calc(50% - 440px - 22px - 284px);width:284px;margin:0;padding:0}
   /* English page: the column moves to the reader's right, mirroring the Arabic page */
   html[dir=ltr] .radar{left:auto;right:calc(50% - 440px - 22px - 284px)}
-  .wrap:has(#v-live:not([hidden])){left:150px}
-  html[dir=ltr] .wrap:has(#v-live:not([hidden])){left:-150px}
+  .wrap:has(#v-live:not([hidden])):has(#radar:not([hidden])){left:150px}
+  html[dir=ltr] .wrap:has(#v-live:not([hidden])):has(#radar:not([hidden])){left:-150px}
   /* the language switch lines up with the radar column's outer edge (17 Nov 2026, Kamal) */
-  .wrap:has(#v-live:not([hidden])) .hero-tools{margin-inline-end:-306px}
+  .wrap:has(#v-live:not([hidden])):has(#radar:not([hidden])) .hero-tools{margin-inline-end:-306px}
   .radar .rd-in{position:sticky;top:0;max-height:calc(100vh - 12px);overflow:auto;padding-top:0}
   .radar .rd-head{position:sticky;top:0;z-index:2;margin:0 -12px 8px;padding:13px 12px 8px;background:linear-gradient(180deg,rgba(28,46,36,.99),rgba(20,34,27,.97));border-bottom:1px solid rgba(242,184,75,.18);border-radius:18px 18px 0 0}
   .radar ol{display:block;overflow:visible}
@@ -506,6 +506,7 @@ body.en .hero>p{max-width:54em}
   .eday-dial svg{width:100%;height:100%;display:block;overflow:visible}
   .eday-cap{font-size:13.5px;line-height:1.65;text-align:center;color:var(--parchment);background:rgba(16,26,20,.55);backdrop-filter:blur(6px);border:1px solid rgba(244,239,226,.14);border-radius:14px;padding:7px 14px}
 }
+@media (min-width:1100px){.wrap:not(:has(#radar:not([hidden]))) .eday-dial{width:128px;height:128px}}
 @media (min-width:1100px) and (max-width:1379px){
   .eday-dial{width:128px;height:128px}
   #eday{gap:8px}
@@ -855,8 +856,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794917052"</script>
-<script src="local.js?v=1794917052"></script>
+<script>window.SHUHUD_BUILD="1794917547"</script>
+<script src="local.js?v=1794917547"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -3027,7 +3028,7 @@ function idsPlace(){const m=document.getElementById("ids-menu");if(!m||m.hidden|
   const w=Math.max(r.width,190);m.style.width=w+"px";let x=r.left+r.width/2-w/2;x=Math.max(8,Math.min(x,innerWidth-w-8));m.style.left=x+"px";m.style.top=(r.bottom+6)+"px"}
 
 /* ---------- Earth's day dial ---------- */
-(()=>{const svg=document.getElementById("eday-svg");if(!svg||!matchMedia("(min-width:1100px)").matches&&!window.__edayForce)return;
+(()=>{const svg=document.getElementById("eday-svg");if(!svg)return;
   const NS="http://www.w3.org/2000/svg",C=100,R=74,el=(n,a,p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e};
   const pt=(r,f)=>{const a=f*2*Math.PI;return[C+r*Math.sin(a),C-r*Math.cos(a)]};
   const arc=(r,f0,f1)=>{if(f1<=f0)return"";const[x0,y0]=pt(r,f0),[x1,y1]=pt(r,f1);return`M${x0.toFixed(2)} ${y0.toFixed(2)}A${r} ${r} 0 ${f1-f0>.5?1:0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`};
@@ -3047,7 +3048,7 @@ function idsPlace(){const m=document.getElementById("ids-menu");if(!m||m.hidden|
     const era=p>=1?human:(ERAS.find(e=>p<e[1])||ERAS[4])[3];lab.textContent=en?era.en:era.ar};
   if(matchMedia("(prefers-reduced-motion:reduce)").matches){draw(1);glow.setAttribute("opacity",1);return}
   const SWEEP=22000,HOLD=7000;let t0=performance.now();
-  const tick=now=>{let t=now-t0;if(t>SWEEP+HOLD){t0=now;t=0}
+  const tick=now=>{if(!svg.getClientRects().length){requestAnimationFrame(tick);return}let t=now-t0;if(t>SWEEP+HOLD){t0=now;t=0}
     if(t<=SWEEP){const u=t/SWEEP,p=1-Math.pow(1-u,2.4);draw(Math.min(p,.99999));glow.setAttribute("opacity",0)}
     else{draw(1);const k=(t-SWEEP)/HOLD;glow.setAttribute("opacity",(0.55+0.45*Math.sin(k*Math.PI*4)).toFixed(2));glow.setAttribute("r",(4+1.6*Math.sin(k*Math.PI*4)).toFixed(2))}
     requestAnimationFrame(tick)};
