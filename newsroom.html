@@ -467,6 +467,7 @@ body.reader .rc .cnt.none{visibility:hidden}
 #ids-menu[hidden]{display:none}
 #ids-menu button{display:block;width:100%;text-align:start;border:1px solid transparent;background:transparent;color:var(--parchment);border-radius:10px;padding:11px 14px;font:inherit;font-size:15px;cursor:pointer}
 #ids-menu button:hover,#ids-menu button:focus-visible{background:rgba(255,255,255,.07);border-color:var(--line)}
+#ids-menu .tree svg{width:27px;height:27px;vertical-align:-8px;margin-inline-end:6px}
 #ids-menu .paw{filter:brightness(0) invert(1);margin-inline-end:6px}
 #ids-menu button.on{background:var(--moss);border-color:var(--leaf)}
 @keyframes idsIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
@@ -863,8 +864,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794950165"</script>
-<script src="local.js?v=1794950165"></script>
+<script>window.SHUHUD_BUILD="1794950287"</script>
+<script src="local.js?v=1794950287"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -3058,6 +3059,8 @@ function renderReserves(){const g=document.getElementById("rs-grid");if(!g)retur
   const go=()=>{try{show("ids");idsView("rs");const el=document.getElementById("rs-"+q);if(el)el.scrollIntoView({block:"start"});if(/^https?:/.test(location.protocol)&&location.hostname.indexOf("alshuhud")>=0)history.replaceState(null,"","/")}catch(e){}};
   window.addEventListener("load",()=>{setTimeout(go,700);setTimeout(()=>{try{if(!document.getElementById("rs-wrap").hidden){renderReserves();const el=document.getElementById("rs-"+q);if(el)el.scrollIntoView({block:"start"})}}catch(e){}},3500)})})();
 /* «Species & reserves» opens a small menu right under its tab: two choices one above the other */
+/* the reserves icon is Socotra's dragon's blood tree (17 Nov 2026, Kamal); no emoji exists for it */
+const DRAGON_TREE='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.8 10.8C2.2 3 21.8 3 23.2 10.8C19 13.2 5 13.2 .8 10.8Z" fill="#6FAE5A"/><path d="M12 22.5V14.2M12 14.2L6.4 10.4M12 14.2L17.6 10.4M12 14.2V10.6M9 12.2L9.6 10.5M15 12.2L14.4 10.5" stroke="#d9c7a2" stroke-width="2.3" stroke-linecap="round" fill="none"/><path d="M9.6 22.5h4.8" stroke="#d9c7a2" stroke-width="2.3" stroke-linecap="round"/></svg>';
 function idsMenu(b,hov){let m=document.getElementById("ids-menu");if(m&&!m.hidden&&m.__b===b){if(!hov&&!IDS_HOVER)m.hidden=true;return}
   if(!m){m=document.createElement("div");m.id="ids-menu";m.setAttribute("role","menu");document.body.appendChild(m);
     m.addEventListener("click",e=>{const o=e.target.closest("[data-idm]");if(!o)return;m.hidden=true;const t=m.__b;t.__go=true;t.click();idsView(o.dataset.idm);window.scrollTo({top:0,behavior:"smooth"})});
@@ -3066,7 +3069,7 @@ function idsMenu(b,hov){let m=document.getElementById("ids-menu");if(m&&!m.hidde
     document.addEventListener("keydown",e=>{if(e.key==="Escape")m.hidden=true});
     (document.querySelector("nav.main")||window).addEventListener("scroll",()=>{m.hidden=true},{passive:true})}
   const cur=!document.getElementById("v-ids").hidden?(document.getElementById("rs-wrap").hidden?"sp":"rs"):"";
-  m.innerHTML=`<button type="button" role="menuitem" data-idm="sp"${cur==="sp"?' class="on"':""}><span class="paw">🐾</span>${esc(T("segSp").replace("🐾","").trim())}</button><button type="button" role="menuitem" data-idm="rs"${cur==="rs"?' class="on"':""}>${esc(T("segRs"))}</button>`;
+  m.innerHTML=`<button type="button" role="menuitem" data-idm="sp"${cur==="sp"?' class="on"':""}><span class="paw">🐾</span>${esc(T("segSp").replace("🐾","").trim())}</button><button type="button" role="menuitem" data-idm="rs"${cur==="rs"?' class="on"':""}><span class="tree">${DRAGON_TREE}</span>${esc(T("segRs").replace("🌳","").trim())}</button>`;
   m.__b=b;m.hidden=false;idsPlace()}
 /* on a computer the menu also opens when the pointer rests on the tab, and closes when it leaves both */
 const IDS_HOVER=matchMedia("(hover:hover) and (pointer:fine)").matches;
