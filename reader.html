@@ -361,7 +361,7 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
   .radar ol{display:block;overflow:visible}
   .radar li{margin-bottom:8px}
 }
-.feed-q{max-width:1140px;margin:0 auto 10px;padding:0 16px}.feed-q input{width:100%;background:rgba(9,18,14,.78)!important;color:#f3ead6}.feed-q input::placeholder{color:rgba(243,234,214,.75)}
+.feed-q{max-width:1140px;margin:0 auto 10px;padding:0 16px;display:flex;align-items:center;gap:10px}.feed-q .status{margin:0;flex:0 0 auto;white-space:nowrap;font-size:12.5px;padding:8px 13px}.feed-q input{flex:1 1 auto;min-width:0;width:100%;background:rgba(9,18,14,.78)!important;color:#f3ead6}.feed-q input::placeholder{color:rgba(243,234,214,.75)}
 input[type=search].sp-q{box-sizing:border-box;background:rgba(0,0,0,.28);border:1px solid var(--line);color:var(--parchment);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:15px}
 .sp-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
 .sp-head input{flex:1;min-width:180px}
@@ -657,8 +657,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794919652"</script>
-<script src="local.js?v=1794919652"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794922508"</script>
+<script src="local.js?v=1794922508"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -2899,6 +2899,8 @@ function idsPlace(){const m=document.getElementById("ids-menu");if(!m||m.hidden|
     else{draw(1);const k=(t-SWEEP)/HOLD;glow.setAttribute("opacity",(0.55+0.45*Math.sin(k*Math.PI*4)).toFixed(2));glow.setAttribute("r",(4+1.6*Math.sin(k*Math.PI*4)).toFixed(2))}
     requestAnimationFrame(tick)};
   requestAnimationFrame(tick)})();
+/* the "last update" date sits beside the search box (17 Nov 2026, Kamal), not on its own line */
+(()=>{const b=document.getElementById("feed-q-box"),st=document.getElementById("status");if(b&&st)b.appendChild(st)})();
 function idsView(v){document.querySelectorAll("[data-idv]").forEach(b=>b.setAttribute("aria-selected",b.dataset.idv===v));
   const sw=document.getElementById("sp-wrap"),rw=document.getElementById("rs-wrap");if(sw)sw.hidden=v!=="sp";if(rw)rw.hidden=v!=="rs";if(v==="rs")renderReserves()}
 document.addEventListener("click",e=>{
