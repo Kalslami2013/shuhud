@@ -61,7 +61,7 @@ button{font-family:inherit;cursor:pointer}
 .eyebrow{font-size:17px;font-weight:600;letter-spacing:.02em;color:var(--amber);margin-top:2px}
 @media (max-width:600px){.eyebrow{font-size:15px}}
 .hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(54px,14vw,96px);line-height:1;margin:0;color:var(--parchment);text-shadow:0 4px 30px rgba(0,0,0,.6)}
-.hero p{margin:0;max-width:34em;color:var(--dim);text-wrap:pretty}
+.hero p{margin:0;max-width:44em;color:var(--dim);text-wrap:pretty}
 .brandmark{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
 .brandmark .paw{width:64px;height:auto;fill:var(--amber);filter:drop-shadow(0 0 18px rgba(242,184,75,.45))}
 .studio[hidden]{display:none}
@@ -561,7 +561,7 @@ body.en .hero>p{max-width:54em}
     <div class="hero-tools"><div class="lang" role="group" aria-label="Language / اللغة"><button type="button" data-lang="ar" aria-pressed="true">عربي</button><button type="button" data-lang="en" aria-pressed="false">English</button></div><button type="button" class="inst" id="inst-btn" hidden data-i18n="instBtn">📲 ثبّت التطبيق</button></div></div>
 <div class="inst-sheet" id="inst-sheet" hidden><div class="inst-box" role="dialog" aria-modal="true" aria-labelledby="inst-h"><button type="button" class="inst-x" data-x aria-label="✕">✕</button><img src="icon-192.png" alt="" width="64" height="64"><h3 id="inst-h" data-i18n="instTitle">ثبّت تطبيق شهود</h3><div class="inst-body"></div></div></div>
     <div class="eyebrow-row"><div class="eyebrow" data-i18n="eyebrow">أزمات البشر كما تعيشها الكائنات الأخرى</div><span class="beta" data-i18n="beta">نسخة تجريبية</span></div>
-    <p data-i18n="lede">لا ننقل الخبر، بل نتتبع أثره في الماء والغابة والبحر. كل أزمة يرويها كائن يعيش في قلبها، ومعها الأرقام ومصادرها.</p>
+    <p data-i18n="lede">نتتبع أثر الأحداث في البر والبحر، يرويه كائن يعيش في قلبها، بالأرقام ومصادرها.</p>
     <div class="scene-row"><span class="scene-dot"></span><span id="scene" data-i18n="sceneLoading">الغابة تقرأ ساعتك…</span>
       <label class="sr" for="sc-time">الوقت</label><select id="sc-time" class="mini" aria-label="وقت المشهد"><option value="auto" data-i18n="timeAuto">الوقت تلقائي</option><option value="dawn" data-i18n="dawn">فجر</option><option value="day" data-i18n="day">نهار</option><option value="dusk" data-i18n="dusk">غروب</option><option value="night" data-i18n="night">ليل</option></select>
       <label class="sr" for="sc-season">الفصل</label><select id="sc-season" class="mini" aria-label="فصل المشهد"><option value="auto" data-i18n="seasonAuto">الفصل تلقائي</option><option value="spring" data-i18n="spring">ربيع</option><option value="summer" data-i18n="summer">صيف</option><option value="autumn" data-i18n="autumn">خريف</option><option value="winter" data-i18n="winter">شتاء</option></select></div>
@@ -638,7 +638,7 @@ body.en .hero>p{max-width:54em}
   </section>
 
   <footer class="site-foot">
-    <div class="foot-intro"><p data-i18n="lede">لا ننقل الخبر، بل نتتبع أثره في الماء والغابة والبحر. كل أزمة يرويها كائن يعيش في قلبها، ومعها الأرقام ومصادرها.</p><div class="clock" data-i18n="clock">لو كان عمر الأرض يوماً واحداً، لظهر الإنسان قبل منتصف الليل بـ <b>٦ ثوانٍ</b> فقط</div></div>
+    <div class="foot-intro"><p data-i18n="lede">نتتبع أثر الأحداث في البر والبحر، يرويه كائن يعيش في قلبها، بالأرقام ومصادرها.</p><div class="clock" data-i18n="clock">لو كان عمر الأرض يوماً واحداً، لظهر الإنسان قبل منتصف الليل بـ <b>٦ ثوانٍ</b> فقط</div></div>
     <div id="s-wrap" hidden>
       <div class="sc-head"><h3 data-i18n="sTitle">تابعونا</h3></div>
       
@@ -657,8 +657,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794933608"</script>
-<script src="local.js?v=1794933608"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794933927"</script>
+<script src="local.js?v=1794933927"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -667,7 +667,7 @@ const $=s=>{const e=document.querySelector(s);if(e)return e;const m=/^#([\w-]+)/
 const DICT={
 ar:{
   brand:"شهود",eyebrow:"أزمات البشر كما تعيشها الكائنات الأخرى",beta:"نسخة تجريبية",
-  lede:"لا ننقل الخبر، بل نتتبع أثره في الماء والغابة والبحر. كل أزمة يرويها كائن يعيش في قلبها، ومعها الأرقام ومصادرها.",
+  lede:"نتتبع أثر الأحداث في البر والبحر، يرويه كائن يعيش في قلبها، بالأرقام ومصادرها.",
   clock:"لو كان عمر الأرض يوماً واحداً، لظهر الإنسان قبل منتصف الليل بـ <b>٦ ثوانٍ</b> فقط",
   sceneLoading:"الغابة تقرأ ساعتك…",timeAuto:"الوقت تلقائي",seasonAuto:"الفصل تلقائي",
   dawn:"فجر",day:"نهار",dusk:"غروب",night:"ليل",spring:"ربيع",summer:"صيف",autumn:"خريف",winter:"شتاء",tropic:"موسم استوائي",moon:"القمر",
@@ -733,7 +733,7 @@ ar:{
 },
 en:{
   brand:"Shuhud",eyebrow:"Human crises, as the other species live them",beta:"Beta version",
-  lede:"We don't relay the news. We follow its trail through water, forest and sea. Each crisis is told by a creature living at its heart, with the numbers and their sources.",
+  lede:"We trace what events leave on land and sea, told by a creature living at their heart, with the numbers and their sources.",
   clock:"If Earth's history were a single day, humans would appear just <b>6 seconds</b> before midnight",
   sceneLoading:"The forest is reading your clock…",timeAuto:"Time: auto",seasonAuto:"Season: auto",
   dawn:"Dawn",day:"Day",dusk:"Dusk",night:"Night",spring:"Spring",summer:"Summer",autumn:"Autumn",winter:"Winter",tropic:"Tropical season",moon:"Moon",
