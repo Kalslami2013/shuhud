@@ -453,6 +453,7 @@ body.reader .rc .cnt.none{visibility:hidden}
 #ids-menu[hidden]{display:none}
 #ids-menu button{display:block;width:100%;text-align:start;border:1px solid transparent;background:transparent;color:var(--parchment);border-radius:10px;padding:11px 14px;font:inherit;font-size:15px;cursor:pointer}
 #ids-menu button:hover,#ids-menu button:focus-visible{background:rgba(255,255,255,.07);border-color:var(--line)}
+#ids-menu .paw{filter:brightness(0) invert(1);margin-inline-end:6px}
 #ids-menu button.on{background:var(--moss);border-color:var(--leaf)}
 @keyframes idsIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 nav.main button[data-view="ids"]::after{content:" ▾";font-size:.8em;opacity:.75}
@@ -832,8 +833,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794904704"</script>
-<script src="local.js?v=1794904704"></script>
+<script>window.SHUHUD_BUILD="1794904963"</script>
+<script src="local.js?v=1794904963"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2989,7 +2990,7 @@ function idsMenu(b){let m=document.getElementById("ids-menu");if(m&&!m.hidden&&m
     document.addEventListener("keydown",e=>{if(e.key==="Escape")m.hidden=true});
     (document.querySelector("nav.main")||window).addEventListener("scroll",()=>{m.hidden=true},{passive:true})}
   const cur=!document.getElementById("v-ids").hidden?(document.getElementById("rs-wrap").hidden?"sp":"rs"):"";
-  m.innerHTML=`<button type="button" role="menuitem" data-idm="sp"${cur==="sp"?' class="on"':""}>${esc(T("segSp"))}</button><button type="button" role="menuitem" data-idm="rs"${cur==="rs"?' class="on"':""}>${esc(T("segRs"))}</button>`;
+  m.innerHTML=`<button type="button" role="menuitem" data-idm="sp"${cur==="sp"?' class="on"':""}><span class="paw">🐾</span>${esc(T("segSp").replace("🐾","").trim())}</button><button type="button" role="menuitem" data-idm="rs"${cur==="rs"?' class="on"':""}>${esc(T("segRs"))}</button>`;
   m.__b=b;m.hidden=false;idsPlace()}
 function idsPlace(){const m=document.getElementById("ids-menu");if(!m||m.hidden||!m.__b)return;const r=m.__b.getBoundingClientRect();
   const w=Math.max(r.width,190);m.style.width=w+"px";let x=r.left+r.width/2-w/2;x=Math.max(8,Math.min(x,innerWidth-w-8));m.style.left=x+"px";m.style.top=(r.bottom+6)+"px"}
