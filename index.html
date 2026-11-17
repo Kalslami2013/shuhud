@@ -34,7 +34,11 @@ body.en .card[dir="rtl"] h2,body.en .card[dir="rtl"] .q{font-family:"Aref Ruqaa"
 .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;background:var(--bark);backdrop-filter:blur(6px);padding:3px;gap:2px;width:fit-content}
 .lang button{border:0;background:transparent;color:var(--dim);border-radius:999px;padding:4px 12px;font-size:12.5px;font-family:inherit}
 .lang button[aria-pressed="true"]{background:var(--amber);color:#1d1406;font-weight:600}
-.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+/* trial label (17 Nov 2026, Kamal): the site is public but not officially launched */
+.eyebrow-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.beta{font-size:12px;font-weight:600;line-height:1;padding:5px 10px;border-radius:999px;border:1px solid rgba(242,184,75,.65);color:var(--amber);background:rgba(20,30,24,.55);backdrop-filter:blur(4px);white-space:nowrap;margin-top:2px}
+@media (max-width:640px){.beta{font-size:10.5px;padding:4px 8px}}
 .hero-tools{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .inst{border:1px solid var(--amber);background:rgba(242,184,75,.12);color:var(--amber);border-radius:999px;padding:5px 13px;font:600 12.5px/1.4 inherit;font-family:inherit;cursor:pointer;white-space:nowrap}
 .inst:hover{background:rgba(242,184,75,.22)}
@@ -342,6 +346,8 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
   html[dir=ltr] .radar{left:auto;right:calc(50% - 440px - 22px - 284px)}
   .wrap:has(#v-live:not([hidden])){left:150px}
   html[dir=ltr] .wrap:has(#v-live:not([hidden])){left:-150px}
+  /* the language switch lines up with the radar column's outer edge (17 Nov 2026, Kamal) */
+  .wrap:has(#v-live:not([hidden])) .hero-tools{margin-inline-end:-306px}
   .radar .rd-in{position:sticky;top:0;max-height:calc(100vh - 12px);overflow:auto;padding-top:0}
   .radar .rd-head{position:sticky;top:0;z-index:2;margin:0 -12px 8px;padding:13px 12px 8px;background:linear-gradient(180deg,rgba(28,46,36,.99),rgba(20,34,27,.97));border-bottom:1px solid rgba(242,184,75,.18);border-radius:18px 18px 0 0}
   .radar ol{display:block;overflow:visible}
@@ -530,7 +536,7 @@ body.en .hero>p{max-width:54em}
         <div class="hero-top"><div class="brandmark"><svg class="paw" viewBox="0 0 404 370" aria-hidden="true"><ellipse cx="202" cy="275" rx="115" ry="90"/><ellipse cx="52" cy="150" rx="52" ry="66"/><ellipse cx="140" cy="70" rx="54" ry="70"/><ellipse cx="264" cy="70" rx="54" ry="70"/><ellipse cx="352" cy="150" rx="52" ry="66"/></svg><h1 data-i18n="brand">شهود</h1></div>
     <div class="hero-tools"><div class="lang" role="group" aria-label="Language / اللغة"><button type="button" data-lang="ar" aria-pressed="true">عربي</button><button type="button" data-lang="en" aria-pressed="false">English</button></div><button type="button" class="inst" id="inst-btn" hidden data-i18n="instBtn">📲 ثبّت التطبيق</button></div></div>
 <div class="inst-sheet" id="inst-sheet" hidden><div class="inst-box" role="dialog" aria-modal="true" aria-labelledby="inst-h"><button type="button" class="inst-x" data-x aria-label="✕">✕</button><img src="icon-192.png" alt="" width="64" height="64"><h3 id="inst-h" data-i18n="instTitle">ثبّت تطبيق شهود</h3><div class="inst-body"></div></div></div>
-    <div class="eyebrow" data-i18n="eyebrow">أزمات البشر كما تعيشها الكائنات الأخرى</div>
+    <div class="eyebrow-row"><div class="eyebrow" data-i18n="eyebrow">أزمات البشر كما تعيشها الكائنات الأخرى</div><span class="beta" data-i18n="beta">نسخة تجريبية</span></div>
     <p data-i18n="lede">لا ننقل الخبر، بل نتتبع أثره في الماء والغابة والبحر. كل أزمة يرويها كائن يعيش في قلبها، ومعها الأرقام ومصادرها.</p>
     <div class="scene-row"><span class="scene-dot"></span><span id="scene" data-i18n="sceneLoading">الغابة تقرأ ساعتك…</span>
       <label class="sr" for="sc-time">الوقت</label><select id="sc-time" class="mini" aria-label="وقت المشهد"><option value="auto" data-i18n="timeAuto">الوقت تلقائي</option><option value="dawn" data-i18n="dawn">فجر</option><option value="day" data-i18n="day">نهار</option><option value="dusk" data-i18n="dusk">غروب</option><option value="night" data-i18n="night">ليل</option></select>
@@ -626,8 +632,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794905787"</script>
-<script src="local.js?v=1794905787"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794914961"</script>
+<script src="local.js?v=1794914961"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -635,7 +641,7 @@ const $=s=>{const e=document.querySelector(s);if(e)return e;const m=/^#([\w-]+)/
 /* ---------- language ---------- */
 const DICT={
 ar:{
-  brand:"شهود",eyebrow:"أزمات البشر كما تعيشها الكائنات الأخرى",
+  brand:"شهود",eyebrow:"أزمات البشر كما تعيشها الكائنات الأخرى",beta:"نسخة تجريبية",
   lede:"لا ننقل الخبر، بل نتتبع أثره في الماء والغابة والبحر. كل أزمة يرويها كائن يعيش في قلبها، ومعها الأرقام ومصادرها.",
   clock:"لو كان عمر الأرض يوماً واحداً، لظهر الإنسان قبل منتصف الليل بـ <b>٦ ثوانٍ</b> فقط",
   sceneLoading:"الغابة تقرأ ساعتك…",timeAuto:"الوقت تلقائي",seasonAuto:"الفصل تلقائي",
@@ -701,7 +707,7 @@ ar:{
   swipe:"اسحب للمزيد ←",voiceOf:n=>"بلسان "+n,card:k=>"البطاقة "+k,infoAlt:"الإنفوجراف"
 },
 en:{
-  brand:"Shuhud",eyebrow:"Human crises, as the other species live them",
+  brand:"Shuhud",eyebrow:"Human crises, as the other species live them",beta:"Beta version",
   lede:"We don't relay the news. We follow its trail through water, forest and sea. Each crisis is told by a creature living at its heart, with the numbers and their sources.",
   clock:"If Earth's history were a single day, humans would appear just <b>6 seconds</b> before midnight",
   sceneLoading:"The forest is reading your clock…",timeAuto:"Time: auto",seasonAuto:"Season: auto",
