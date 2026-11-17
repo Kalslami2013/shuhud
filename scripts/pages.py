@@ -123,7 +123,7 @@ header.top{border-bottom:1px solid var(--line);padding:14px 0}header.top .wrap{d
 article{padding:26px 0 10px}.kick{color:var(--acc);font-size:14px;font-weight:600}.meta{color:var(--mute);font-size:14px;margin:6px 0 18px}
 h1{font-size:30px;line-height:1.4;margin:6px 0}h2{font-size:21px;margin:28px 0 8px}
 figure{margin:0 0 18px;position:relative}figure .narr{position:absolute;right:12px;bottom:34px;width:20%;max-width:104px;min-width:52px;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid #f4efe2;box-shadow:0 4px 16px rgba(0,0,0,.55)}figure img{display:block;max-width:100%;max-height:520px;margin:0 auto;border-radius:12px}figcaption{color:var(--mute);font-size:12px;text-align:center;margin-top:4px}
-.voice{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;white-space:pre-line}
+.voice{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}.voice p{margin:0 0 1em}.voice p:last-child{margin:0}.voice h3{font-size:18px;color:var(--acc);margin:1.1em 0 .4em}.voice figure{margin:.6em 0 1em}
 .angle{font-size:19px;color:var(--mute)}.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .fig{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}.fig b{display:block;font-size:22px;color:var(--acc)}.fig small{color:var(--mute)}
 ul{padding-inline-start:22px}.q{border-inline-start:4px solid var(--acc);padding:4px 14px;font-style:italic}
@@ -149,12 +149,43 @@ FOOT = f"""<footer><div class="wrap">{SC}شهود · Shuhud — أزمات ال�
 </body></html>
 """
 
+# light markup in the testimony (same rules as richText() in the page): **bold**, [text](https://…), "## " subheading, "> " quote, ![caption](url)
+MD_IMG = re.compile(r"^!\[([^\]\n]*)\]\(((?:https?://|/_blob/|media/)[^\s)]+)\)$")
+def md_inline(t):
+    t = re.sub(r"\*\*([^*\n]+?)\*\*", r"<strong>\1</strong>", t)
+    return re.sub(r"\[([^\]\n]+)\]\((https?://[^\s)]+)\)", r'<a href="\2" target="_blank" rel="noopener nofollow">\1</a>', t)
+def md_img_src(u):
+    if u.startswith("/_blob/"): return BASE + "media/" + re.sub(r"[^\w-]", "", u[7:]) + ".jpg"
+    if u.startswith("media/"): return BASE + u
+    return u
+def rich(src):
+    out = []
+    for par in re.split(r"\n\s*\n", str(src or "")):
+        par = par.strip()
+        if not par: continue
+        m = MD_IMG.match(par)
+        if m:
+            out.append(f'<figure><img src="{e(md_img_src(m.group(2)))}" alt="{e(m.group(1))}" loading="lazy">' + (f"<figcaption>{e(m.group(1))}</figcaption>" if m.group(1) else "") + "</figure>")
+            continue
+        if re.match(r"^##\s+", par):
+            out.append(f'<h3>{md_inline(e(re.sub(r"^##\s+", "", par)))}</h3>'); continue
+        lines = par.split("\n")
+        if all(re.match(r"^>\s?", l) for l in lines):
+            out.append('<blockquote class="q">' + "<br>".join(md_inline(e(re.sub(r"^>\s?", "", l))) for l in lines) + "</blockquote>"); continue
+        out.append("<p>" + "<br>".join(md_inline(e(l)) for l in lines) + "</p>")
+    return "".join(out)
+def plain(src):
+    t = "\n\n".join(x for x in re.split(r"\n\s*\n", str(src or "")) if not MD_IMG.match(x.strip()))
+    t = re.sub(r"(?m)^(##\s+|>\s?)", "", t)
+    t = re.sub(r"\*\*([^*\n]+?)\*\*", r"\1", t)
+    return re.sub(r"\[([^\]\n]+)\]\((https?://[^\s)]+)\)", r"\1", t)
+
 def block(p, ar=True):
     t = (lambda a, b: a if ar else b)
     out = []
     if p.get("angle"): out.append(f'<p class="angle">{e(p["angle"])}</p>')
     if p.get("dispatch"):
-        out.append(f'<h2>{t("شهادة " + e(p.get("animalName")), "Testimony of the " + e(p.get("animalName")))}</h2><div class="voice">{e(p["dispatch"])}</div>')
+        out.append(f'<h2>{t("شهادة " + e(p.get("animalName")), "Testimony of the " + e(p.get("animalName")))}</h2><div class="voice">{rich(p["dispatch"])}</div>')
     if p.get("fact"): out.append(f'<h2>{t("ما حدث","What happened")}</h2><p>{e(p["fact"])}</p>')
     figs = [f for f in (p.get("figures") or []) if isinstance(f, dict) and f.get("value")]
     if figs:
@@ -268,7 +299,7 @@ for p in items:
     img, credit = image_of(p)
     en = p.get("en") if isinstance(p.get("en"), dict) else {}
     title = f'{p["headline"]} | شهود'
-    desc = short(p.get("angle") or p.get("fact") or p.get("dispatch"))
+    desc = short(p.get("angle") or p.get("fact") or plain(p.get("dispatch")))
     ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": short(p["headline"], 110),
           "description": desc, "inLanguage": ["ar", "en"] if en else "ar", "mainEntityOfPage": url,
           "author": {"@type": "Person", "name": "Kamal Al-Salami", "alternateName": "كمال السلامي"},
