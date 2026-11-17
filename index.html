@@ -451,6 +451,31 @@ body.reader .rc .cnt.none{visibility:hidden}
 .run-pick{flex-basis:100%;display:grid;gap:8px;background:rgba(9,18,14,.92);border:1px solid rgba(242,184,75,.35);border-radius:14px;padding:12px 14px}
 .run-pick .rp-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.run-pick label{display:flex;gap:6px;align-items:center;cursor:pointer;color:var(--parchment);font-size:14px}
 .run-pick select{width:auto}.run-pick .note{font-size:12.5px}
+/* «المحميات» (17 Nov 2026): curated reserves, linked to species cards and to the pieces written there */
+.ids-seg{display:inline-flex;gap:4px;padding:4px;margin:0 0 12px;border:1px solid var(--line);border-radius:999px;background:var(--bark);backdrop-filter:blur(6px)}
+.ids-seg button{border:0;background:transparent;color:var(--dim);border-radius:999px;padding:7px 16px;font:inherit;font-size:14px;cursor:pointer}
+.ids-seg button[aria-selected="true"]{background:var(--moss);color:var(--parchment);box-shadow:inset 0 0 0 1px var(--leaf)}
+.rs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:16px;margin-bottom:24px}
+.rs{background:var(--bark);border:1px solid var(--line);border-radius:18px;overflow:hidden;backdrop-filter:blur(8px);display:flex;flex-direction:column;min-width:0}
+.rs-ph{position:relative;aspect-ratio:16/9;background:radial-gradient(circle at 40% 35%,#2a4a37,#0e1f17);overflow:hidden}
+.rs-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.rs-ph .rs-cty{position:absolute;top:10px;inset-inline-start:10px;background:rgba(9,18,14,.82);color:var(--parchment);border-radius:999px;padding:3px 12px;font-size:12.5px;font-weight:600}
+.rs-ph .sp-cr{max-width:90%}
+.rs-bd{padding:14px 16px 16px;display:grid;gap:10px;min-width:0}
+.rs-bd h3{font-family:var(--f-display);font-size:25px;margin:0;line-height:1.3}
+.rs-st{font-size:13px;color:var(--amber);margin-top:-4px}
+.rs-ab{margin:0;font-size:14px;line-height:1.75;color:var(--parchment)}
+.rs-figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.rs-figs div{border:1px solid rgba(242,184,75,.25);background:rgba(242,184,75,.06);border-radius:12px;padding:8px 10px}
+.rs-figs b{display:block;color:var(--amber);font-size:16px;line-height:1.35}.rs-figs span{font-size:12px;color:var(--dim);line-height:1.5}
+.rs-lbl{font-size:12.5px;color:var(--amber);font-weight:600;margin-bottom:4px}
+.rs-chips{display:flex;flex-wrap:wrap;gap:6px}
+.rs-chips button,.rs-chips span{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--parchment);border-radius:999px;padding:3px 11px;font:inherit;font-size:13px}
+.rs-chips button{cursor:pointer;border-color:rgba(156,199,122,.45)}.rs-chips button:hover{background:rgba(156,199,122,.12)}
+.rs-th{margin:0;font-size:13.5px;line-height:1.7}
+.rs-seen ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}.rs-seen a{color:var(--leaf);font-size:13.5px}
+.rs-ft{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:10px;font-size:12px;color:var(--faint)}
+.rs-ft a{color:var(--dim)}
 /* headlines and summaries a little larger (Kamal, 15 Nov 2026) */
 .tz h3{font-size:22px}.tz p{font-size:15px}
 .lead h3{font-size:clamp(26px,3.5vw,36px)}.lead p{font-size:16.5px}
@@ -533,9 +558,16 @@ body.en .hero>p{max-width:54em}
   
 
   <section id="v-ids" hidden>
+    <div class="ids-seg" role="tablist"><button type="button" role="tab" data-idv="sp" aria-selected="true" data-i18n="segSp">🐾 الكائنات</button><button type="button" role="tab" data-idv="rs" aria-selected="false" data-i18n="segRs">🏞️ المحميات</button></div>
+    <div id="sp-wrap">
     <p class="manifesto" data-i18n="idsIntro">بطاقة تعريف لكل كائن ظهر في مادة.</p>
     <div class="sp-head"><input type="search" class="sp-q" data-i18n-ph="spSearch" placeholder="ابحث باسم الكائن…" aria-label="بحث"><span class="note" id="ids-count"></span></div>
     <div class="sp-grid" id="ids-grid"></div>
+    </div>
+    <div id="rs-wrap" hidden>
+    <p class="manifesto" data-i18n="rsIntro">محميات العالم كما يراها شهود.</p>
+    <div class="rs-grid" id="rs-grid"></div>
+    </div>
   </section>
 
   <section id="v-media" hidden>
@@ -585,8 +617,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794901035"</script>
-<script src="local.js?v=1794901035"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794902425"</script>
+<script src="local.js?v=1794902425"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -743,7 +775,7 @@ function applyStatic(){
   
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
 }
-function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();renderCats();renderFeed();try{renderRadar()}catch(e){}renderRoster();updateStatus();if(typeof renderSpecies==="function")renderSpecies();if(typeof renderMedia==="function")renderMedia();if(typeof renderPartners==="function")renderPartners();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
+function setLang(l){lang=l;try{localStorage.setItem("shuhud-lang",l)}catch(e){}applyStatic();try{if(!document.getElementById("rs-wrap").hidden)renderReserves()}catch(e){}renderCats();renderFeed();try{renderRadar()}catch(e){}renderRoster();updateStatus();if(typeof renderSpecies==="function")renderSpecies();if(typeof renderMedia==="function")renderMedia();if(typeof renderPartners==="function")renderPartners();if(typeof renderTrack==="function")renderTrack();if(draft)renderDraft();if(window.__forestLabel)window.__forestLabel();if(!$("#studio").hidden)renderStudio()}
 
 const ROSTER={
   oryx:{e:"🦌",n:"المها العربي",b:"صحراء الربع الخالي",r:"arabia"},
@@ -2437,7 +2469,9 @@ async function fireRun(k,text,b){if(b)b.disabled=true;runMsg(k,T("runSending"));
   finally{setTimeout(()=>{if(b)b.disabled=false},4000)}}
 /* ---------- species cards & endangered list ---------- */
 Object.assign(DICT.ar,{
-  navIds:"بطاقات الكائنات",navRed:"مهددة بالانقراض",navHeal:"🌱 الطبيعة تتعافى",
+  navIds:"الكائنات والمحميات",segSp:"🐾 الكائنات",segRs:"🏞️ المحميات",
+  rsIntro:"مختارات من محميات العالم الطبيعية، في العالم العربي وخارجه: صورتها، وأبرز كائناتها ونباتاتها، وما يهددها، والشهادات التي كتبتها كائناتها في شهود. تُضاف محميات جديدة تباعًا.",
+  rsSp:"أبرز الكائنات",rsPl:"أبرز النباتات",rsTh:"ما يهددها",rsSeen:"شهادات من هنا",rsMap:"🗺️ على الخريطة",rsSrc:"المصادر",rsSpHint:"اضغط اسم الكائن لترى بطاقته",navRed:"مهددة بالانقراض",navHeal:"🌱 الطبيعة تتعافى",
   idsIntro:"بطاقة تعريف لكل كائن ظهر في مادة من مواد شهود: صورته، وموطنه، ووضعه على القائمة الحمراء، والأحداث التي ظهر فيها.",
   redIntro:"كائنات مهددة بالانقراض، بعضها من مراسلي شهود وبعضها خارجهم. الأشد خطراً أولاً.",
   redNote:"التصنيفات من القائمة الحمراء للاتحاد الدولي لصون الطبيعة (IUCN) وقد تتغير. راجع رابط IUCN في البطاقة قبل النشر.",
@@ -2450,7 +2484,9 @@ Object.assign(DICT.ar,{
   stAll:""
 });
 Object.assign(DICT.en,{
-  navIds:"Species cards",navRed:"Endangered",navHeal:"🌱 Nature recovers",
+  navIds:"Species & reserves",segSp:"🐾 Species",segRs:"🏞️ Reserves",
+  rsIntro:"A selection of the world's nature reserves, in the Arab world and beyond: their landscape, their best-known creatures and plants, what threatens them, and the testimonies their creatures gave to Shuhud. More reserves are added over time.",
+  rsSp:"Notable creatures",rsPl:"Notable plants",rsTh:"Threats",rsSeen:"Testimonies from here",rsMap:"🗺️ On the map",rsSrc:"Sources",rsSpHint:"Tap a creature to see its card",navRed:"Endangered",navHeal:"🌱 Nature recovers",
   idsIntro:"An ID card for every creature that appeared in a Shuhud piece: its photo, home, Red List status and the events it witnessed.",
   redIntro:"Threatened species, some from the Shuhud correspondents and some beyond them. Most at risk first.",
   redNote:"Statuses follow the IUCN Red List and can change. Check the IUCN link on each card before publishing.",
@@ -2574,6 +2610,98 @@ function spCardHTML(k){
       </div>
     </div></article>`;
 }
+/* ---------- «المحميات»: curated data, kept in the page itself (first five, 17 Nov 2026) ---------- */
+const RESERVES=[
+ {id:"socotra",cc:"🇾🇪",ll:[12.5,53.9],match:["سقطرى","Socotra"],
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Dracaena_cinnabari_%2851885598720%29.jpg/960px-Dracaena_cinnabari_%2851885598720%29.jpg",credit:"Rod Waddington, CC BY-SA 2.0, Wikimedia Commons",
+  ar:{name:"أرخبيل سقطرى",cty:"اليمن",st:"موقع تراث عالمي لليونسكو منذ 2008",
+   about:"جزيرة يمنية في المحيط الهندي تنتمي جيولوجيًا إلى أفريقيا، عاشت عزلة طويلة جعلتها من أغنى بقاع الأرض بالكائنات المستوطنة، حتى وُصفت بأنها «أغرب مكان على الأرض».",
+   figs:[["نحو الثلث","من نباتاتها لا ينمو في أي مكان آخر على الأرض"],["132 × 42 كم","طول الجزيرة الكبرى وأقصى عرضها"],["2008","سنة إدراجها في التراث العالمي"]],
+   sp:[["زرزور سقطرى","socotra"],["عصفور الشمس السقطري"],["حرباء سقطرى"]],pl:["شجرة دم الأخوين","صبر سقطرى","أشجار اللبان","شجرة الخيار السقطرية"],
+   th:"الأعاصير التي اشتدت في السنوات الأخيرة (تشابالا وميغ عام 2015)، والرعي الجائر للماعز الذي يمنع تجدد أشجار دم الأخوين، والتغير المناخي، والتوسع العمراني."},
+  en:{name:"Socotra Archipelago",cty:"Yemen",st:"UNESCO World Heritage Site since 2008",
+   about:"A Yemeni island in the Indian Ocean that geologically belongs to Africa. Long isolation made it one of the richest places on Earth in endemic life, often called “the most alien-looking place on Earth”.",
+   figs:[["About a third","of its plants grow nowhere else on Earth"],["132 × 42 km","length and greatest width of the main island"],["2008","year it joined the World Heritage list"]],
+   sp:[["Socotra starling","socotra"],["Socotra sunbird"],["Socotra chameleon"]],pl:["Dragon's blood tree","Socotran aloe","Frankincense trees","Cucumber tree"],
+   th:"Stronger cyclones in recent years (Chapala and Megh in 2015), overgrazing by goats that stops dragon's blood trees from regenerating, climate change and building."},
+  src:[["Wikipedia: Socotra","https://en.wikipedia.org/wiki/Socotra"],["UNESCO","https://whc.unesco.org/en/list/1263"]]},
+ {id:"ahwar",cc:"🇮🇶",ll:[31.0,47.0],match:["الأهوار","أهوار","الجبايش","الحويزة","Mesopotamian Marshes","Iraqi marshes","Hammar","Hawizeh","Chibayish"],
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Chibayish_Marshes_in_Iraq_10.jpg/960px-Chibayish_Marshes_in_Iraq_10.jpg",credit:"Alli Khalil, CC BY-SA 4.0, Wikimedia Commons",
+  ar:{name:"أهوار جنوب العراق",cty:"العراق",st:"تراث عالمي طبيعي وثقافي لليونسكو منذ 2016",
+   about:"أكبر منظومة أراضٍ رطبة في غرب أوراسيا تاريخيًا، بين دجلة والفرات قرب البصرة والناصرية والعمارة، فيها الأهوار الوسطى والحمّار والحويزة، وإلى جوارها مدن سومرية قديمة.",
+   figs:[["نحو 20 ألف كم²","مساحتها الأصلية قبل التجفيف"],["نحو 10%","ما بقي منها قبل عام 2003 بعد حملات التجفيف"],["2016","سنة إدراجها في التراث العالمي"]],
+   sp:[["ثعلب الماء الأملس","otter"],["هازجة القصب البصرية"],["ثرثار العراق"],["الجاموس المائي"]],pl:["القصب","البردي"],
+   th:"الجفاف، وتراجع المياه الواصلة بسبب السدود في أعالي دجلة والفرات في تركيا وسوريا وإيران، وارتفاع الملوحة؛ وقد استعادت أجزاء منها مياهها بعد 2003 لكن التعافي هش."},
+  en:{name:"The Ahwar of Southern Iraq",cty:"Iraq",st:"UNESCO World Heritage Site (natural and cultural) since 2016",
+   about:"Historically the largest wetland system of western Eurasia, between the Tigris and Euphrates near Basra, Nasiriyah and Amarah: the Central, Hammar and Hawizeh marshes, beside ancient Sumerian cities.",
+   figs:[["About 20,000 km²","original area before draining"],["About 10%","left before 2003 after the draining campaigns"],["2016","year it joined the World Heritage list"]],
+   sp:[["Smooth-coated otter","otter"],["Basra reed warbler"],["Iraq babbler"],["Water buffalo"]],pl:["Common reed","Bulrush (cattail)"],
+   th:"Drought, less water arriving because of dams upstream on the Tigris and Euphrates in Turkey, Syria and Iran, and rising salinity. Parts were reflooded after 2003, but the recovery is fragile."},
+  src:[["Wikipedia: Mesopotamian Marshes","https://en.wikipedia.org/wiki/Mesopotamian_Marshes"],["UNESCO","https://whc.unesco.org/en/list/1481"]]},
+ {id:"virunga",cc:"🇨🇩",ll:[-0.9,29.4],match:["فيرونغا","Virunga"],
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Mount_Mikeno_%E2%80%93_Virunga_National_Park.jpg/960px-Mount_Mikeno_%E2%80%93_Virunga_National_Park.jpg",credit:"Fanny Schertzer, CC BY 3.0, Wikimedia Commons",
+  ar:{name:"متنزه فيرونغا الوطني",cty:"الكونغو الديمقراطية",st:"أقدم متنزه وطني في أفريقيا (1925)، وتراث عالمي مهدد منذ 1994",
+   about:"يمتد نحو 300 كم على حدود أوغندا ورواندا، من سهول بحيرة إدوارد إلى قمم روينزوري الجليدية، وفيه بركانا نيراغونغو ونياموراغيرا النشطان، وموطن نادر لغوريلا الجبال.",
+   figs:[["7,800 كم²","مساحة المتنزه"],["أكثر من 3,000 نوع","من الحيوان والنبات سُجّلت فيه"],["أكثر من 300 نوع","مستوطن في صدع ألبرتين"]],
+   sp:[["غوريلا الجبال","gorilla"],["فيل الغابة الأفريقي","elephant"],["القرد الذهبي"],["فرس النهر"]],pl:["اللوبيليا العملاقة على جبال روينزوري","غابات الخيزران الجبلية"],
+   th:"هجمات الجماعات المسلحة التي قتلت عددًا من حراسه، وطرح الحكومة عام 2022 مربعات للتنقيب عن النفط داخله، وقطع الأشجار لصناعة الفحم، ونشاط بركان نيراغونغو."},
+  en:{name:"Virunga National Park",cty:"DR Congo",st:"Africa's oldest national park (1925), a World Heritage Site in Danger since 1994",
+   about:"About 300 km along the borders with Uganda and Rwanda, from the plains of Lake Edward to the glaciers of the Rwenzori, with the active volcanoes Nyiragongo and Nyamuragira and a rare home of mountain gorillas.",
+   figs:[["7,800 km²","area of the park"],["Over 3,000 species","of animals and plants recorded"],["Over 300 species","endemic to the Albertine Rift"]],
+   sp:[["Mountain gorilla","gorilla"],["African forest elephant","elephant"],["Golden monkey"],["Hippopotamus"]],pl:["Giant lobelias of the Rwenzori","Montane bamboo forest"],
+   th:"Attacks by armed groups that have killed rangers, the government's 2022 auction of oil exploration blocks inside the park, logging for charcoal and the Nyiragongo volcano."},
+  src:[["Wikipedia: Virunga National Park","https://en.wikipedia.org/wiki/Virunga_National_Park"],["UNESCO","https://whc.unesco.org/en/list/63"]]},
+ {id:"bialowieza",cc:"🇵🇱 🇧🇾",ll:[52.73,23.85],match:["بياوفيجا","بيلوفيجسكايا","Białowieża","Bialowieza","Belovezhskaya"],
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Bialowieza_National_Park_in_Poland0029.JPG/960px-Bialowieza_National_Park_in_Poland0029.JPG",credit:"Jacek Karczmarz, CC BY-SA 3.0, Wikimedia Commons",
+  ar:{name:"غابة بياوفيجا",cty:"بولندا وبيلاروسيا",st:"تراث عالمي لليونسكو، وُسّع عبر الحدود عام 2014",
+   about:"آخر وأكبر بقايا الغابة البدائية التي غطّت سهول أوروبا قديمًا، تقطعها الحدود بين بولندا وبيلاروسيا، وفيها أكبر قطيع بري للبيسون الأوروبي، أثقل حيوان بري في القارة.",
+   figs:[["141,885 هكتارًا","مساحة موقع التراث العالمي"],["أكثر من 800","بيسون أوروبي يعيش فيها"],["نحو 105 كم²","مساحة متنزه بياوفيجا الوطني في الجانب البولندي"]],
+   sp:[["البيسون الأوروبي","bison"],["الوشق الأوراسي"],["الذئب الرمادي"],["نقار الخشب ثلاثي الأصابع"]],pl:["أشجار البلوط المعمّرة","الزيزفون","التنوب"],
+   th:"قطع الأشجار في الجانب البولندي عامي 2016 و2017، الذي قضت محكمة العدل الأوروبية بمخالفته القانون عام 2018، والجدار الحدودي الذي بنته بولندا عام 2022 ويقطع ممرات الحيوانات."},
+  en:{name:"Białowieża Forest",cty:"Poland and Belarus",st:"UNESCO World Heritage Site, extended across the border in 2014",
+   about:"The last and largest remnant of the primeval forest that once covered the European Plain, split by the Poland–Belarus border, home to the largest wild herd of European bison, Europe's heaviest land animal.",
+   figs:[["141,885 ha","area of the World Heritage Site"],["Over 800","European bison live there"],["About 105 km²","Białowieża National Park on the Polish side"]],
+   sp:[["European bison","bison"],["Eurasian lynx"],["Grey wolf"],["Three-toed woodpecker"]],pl:["Ancient oaks","Lime trees","Norway spruce"],
+   th:"Logging on the Polish side in 2016–2017, ruled unlawful by the EU Court of Justice in 2018, and the border wall Poland built in 2022 that cuts animal corridors."},
+  src:[["Wikipedia: Białowieża Forest","https://en.wikipedia.org/wiki/Bia%C5%82owie%C5%BCa_Forest"],["UNESCO","https://whc.unesco.org/en/list/33"]]},
+ {id:"galapagos",cc:"🇪🇨",ll:[-0.8,-91.1],match:["غالاباغوس","غالاباجوس","Galápagos","Galapagos"],
+  img:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Bartolom%C3%A9_Island_Pinnacle_Rock.jpg/960px-Bartolom%C3%A9_Island_Pinnacle_Rock.jpg",credit:"Cayambe, CC BY-SA 3.0, Wikimedia Commons",
+  ar:{name:"متنزه غالاباغوس الوطني",cty:"الإكوادور",st:"متنزه وطني منذ 1959، وأول موقع على قائمة التراث العالمي عام 1978",
+   about:"جزر بركانية في المحيط الهادئ ألهمت داروين نظرية التطور، تعيش فيها كائنات لا توجد في أي مكان آخر، وتحيط بها محمية بحرية من الأوسع في العالم.",
+   figs:[["97%","من مساحة يابسة الجزر متنزه وطني"],["1959","سنة إنشاء المتنزه، أول متنزه وطني في الإكوادور"],["1986","سنة إنشاء محمية غالاباغوس البحرية"]],
+   sp:[["سلحفاة غالاباغوس العملاقة"],["الإغوانا البحرية"],["عصافير داروين"],["بطريق غالاباغوس"]],pl:["صبار الأوبونتيا العملاق","أشجار السكاليسيا"],
+   th:"الأنواع الدخيلة التي جلبها الإنسان، وضغط السياحة والهجرة إلى الجزر (أُدرجت على قائمة التراث المهدد بين 2007 و2010)، والصيد غير المشروع، وموجات النينيو."},
+  en:{name:"Galápagos National Park",cty:"Ecuador",st:"National park since 1959, and the first site on the World Heritage list in 1978",
+   about:"Volcanic islands in the Pacific that inspired Darwin's theory of evolution, home to creatures found nowhere else and ringed by one of the world's largest marine reserves.",
+   figs:[["97%","of the islands' land area is national park"],["1959","year the park was created, Ecuador's first"],["1986","year the Galápagos Marine Reserve was created"]],
+   sp:[["Galápagos giant tortoise"],["Marine iguana"],["Darwin's finches"],["Galápagos penguin"]],pl:["Giant Opuntia cactus","Scalesia trees"],
+   th:"Invasive species brought by people, pressure from tourism and migration to the islands (on the World Heritage in Danger list in 2007–2010), illegal fishing and El Niño heatwaves."},
+  src:[["Wikipedia: Galápagos National Park","https://en.wikipedia.org/wiki/Gal%C3%A1pagos_National_Park"],["UNESCO","https://whc.unesco.org/en/list/1"]]}
+];
+const rsNorm=t=>String(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+/* the pieces written in a reserve: its names appear in the place, headline or testimony */
+function rsPieces(r){const keys=r.match.map(rsNorm);return items.filter(raw=>{const t=rsNorm([raw.place,raw.headline,raw.angle,raw.dispatch,raw.en&&raw.en.place].join(" "));return keys.some(k=>t.includes(k))})}
+function rsCardHTML(r){const en=isEn(),x=en?r.en:r.ar,ps=rsPieces(r);
+  const sp=x.sp.map(([n,k])=>k?`<button type="button" data-rssp="${esc(n)}" title="${esc(T("rsSpHint"))}">${esc(n)}</button>`:`<span>${esc(n)}</span>`).join("");
+  return `<article class="rs" id="rs-${r.id}">
+    <div class="rs-ph"><img src="${esc(r.img)}" alt="${esc(x.name)}" loading="lazy" onerror="this.remove()"><span class="rs-cty">${r.cc} ${esc(x.cty)}</span>${r.credit?`<span class="sp-cr">📷 ${esc(r.credit)}</span>`:""}</div>
+    <div class="rs-bd">
+      <h3>${esc(x.name)}</h3><div class="rs-st">${esc(x.st)}</div>
+      <p class="rs-ab">${esc(x.about)}</p>
+      <div class="rs-figs">${x.figs.map(([v,l])=>`<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div>
+      <div><div class="rs-lbl">${T("rsSp")}</div><div class="rs-chips">${sp}</div></div>
+      <div><div class="rs-lbl">${T("rsPl")}</div><div class="rs-chips">${x.pl.map(n=>`<span>${esc(n)}</span>`).join("")}</div></div>
+      <div><div class="rs-lbl">${T("rsTh")}</div><p class="rs-th">${esc(x.th)}</p></div>
+      ${ps.length?`<div class="rs-seen"><div class="rs-lbl">${T("rsSeen")} (${ps.length})</div><ul>${ps.slice(0,5).map(raw=>`<li><a href="#" data-rsopen="${esc(raw.id)}">${esc(L(raw).headline)}</a></li>`).join("")}</ul></div>`:""}
+      <div class="rs-ft"><a href="https://www.openstreetmap.org/?mlat=${r.ll[0]}&mlon=${r.ll[1]}#map=8/${r.ll[0]}/${r.ll[1]}" target="_blank" rel="noopener">${T("rsMap")} ↗</a><span>·</span><span>${T("rsSrc")}:</span>${r.src.map(([n,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join(" · ")}</div>
+    </div></article>`}
+function renderReserves(){const g=document.getElementById("rs-grid");if(g)g.innerHTML=RESERVES.map(rsCardHTML).join("")}
+function idsView(v){document.querySelectorAll("[data-idv]").forEach(b=>b.setAttribute("aria-selected",b.dataset.idv===v));
+  const sw=document.getElementById("sp-wrap"),rw=document.getElementById("rs-wrap");if(sw)sw.hidden=v!=="sp";if(rw)rw.hidden=v!=="rs";if(v==="rs")renderReserves()}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-idv]");if(b){idsView(b.dataset.idv);return}
+  const c=e.target.closest("[data-rssp]");if(c){const n=c.dataset.rssp;idsView("sp");spQuery=n;document.querySelectorAll(".sp-q:not(#feed-q)").forEach(o=>o.value=n);renderSpecies();const v=document.getElementById("v-ids");if(v)v.scrollIntoView({behavior:"smooth"});return}
+  const o=e.target.closest("[data-rsopen]");if(o){e.preventDefault();const id=o.dataset.rsopen;show("live");openId=null;openPiece(id)}});
 function renderSpecies(){
   const ids=$("#ids-grid"),red=$("#red-grid");if(!ids||!red)return;
   const q=spQuery.trim().toLowerCase();
