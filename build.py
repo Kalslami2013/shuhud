@@ -49,3 +49,18 @@ rsrc = rsrc.replace('const $=s=>document.querySelector(s);', NIL.replace('%s', j
 rsrc = re.sub(r'\b((?:key|gh|st|desk|nav(?:Desk|Track|Guide)|run)[A-Z]\w*|keyLbl|ghLbl):"(?:[^"\\]|\\.)*"', r'\1:""', rsrc)
 # the public page is the site's front page (alshuhud.org/); reader.html stays for old links
 for f in ('index.html','reader.html'):open(f,'w',encoding='utf8').write(rhead+rsrc+'\n</body></html>\n')
+
+# reserves: the RESERVES list of the page is saved as data/reserves.json, from which scripts/pages.py
+# builds one page per reserve (r/<name>.html) for search engines
+import subprocess
+_m=re.search(r'const RESERVES=(\[.*?\n\]);',src,re.S)
+if _m:
+  try:
+    _j=subprocess.run(['node','-e','process.stdout.write(JSON.stringify(eval(require("fs").readFileSync(0,"utf8"))))'],input=_m.group(1),capture_output=True,text=True,timeout=30).stdout
+    _d=json.loads(_j) if _j else None
+    if isinstance(_d,list) and _d:
+      _ord=re.search(r'const RS_ORDER=(\[[^\]]*\])',src)
+      _o=json.loads(_ord.group(1)) if _ord else []
+      _d.sort(key=lambda r:_o.index(r['id']) if r['id'] in _o else 99)
+      open('data/reserves.json','w',encoding='utf8').write(json.dumps(_d,ensure_ascii=False,indent=1))
+  except Exception as _e: print('reserves.json not written:',_e)

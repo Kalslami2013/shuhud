@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://alshuhud.org/</loc><lastmod>2026-11-16</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://alshuhud.org/p/</loc><lastmod>2026-11-16</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://alshuhud.org/</loc><lastmod>2026-11-17</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://alshuhud.org/p/</loc><lastmod>2026-11-17</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://alshuhud.org/p/allisshad-garonne</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/p/dugong-hormuz-supertanker</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/p/turtle-cayman</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
@@ -83,4 +83,15 @@
   <url><loc>https://alshuhud.org/p/warbler-datacenters</loc><lastmod>2026-10-27</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/p/dugong-hormuz</loc><lastmod>2026-10-27</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/p/coral-elnino</loc><lastmod>2026-10-27</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/socotra</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/iraq-marshes</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/wadi-rum</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/farasan</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/marawah</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/ras-mohammed</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/jabal-samhan</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/virunga</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/bialowieza</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/galapagos</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
 </urlset>

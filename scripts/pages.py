@@ -141,7 +141,7 @@ def head(title, desc, url, img, extra=""):
 <meta property="og:site_name" content="شهود · Shuhud"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{e(img)}">{'<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">' if '/og/' in img else ''}<meta property="og:locale" content="ar_AR"><meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(title)}"><meta name="twitter:description" content="{e(desc)}"><meta name="twitter:image" content="{e(img)}">
 {extra}<style>{CSS}</style></head><body>
-<header class="top"><div class="wrap"><a class="brand" href="{BASE}"><img src="{BASE}icon-192.png" alt="">شهود</a><nav><a href="{BASE}p/">كل القطع</a><a href="{BASE}#about">من نحن</a></nav></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="{BASE}"><img src="{BASE}icon-192.png" alt="">شهود</a><nav><a href="{BASE}p/">كل القطع</a><a href="{BASE}r/">المحميات</a><a href="{BASE}#about">من نحن</a></nav></div></header>
 """
 
 SC = ('<div class="sc">' + "".join(f'<a href="{e(href(x))}" target="_blank" rel="noopener me" title="{e(x.get("name") or x.get("platform"))}" aria-label="{e(x.get("name") or x.get("platform"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="{ICONS.get(x.get("platform"), ICONS["web"])}"/></svg></a>' for x in socials) + "</div>") if socials else ""
@@ -316,6 +316,84 @@ arch = head("كل القطع | شهود — أزمات العالم بلسان �
 with open("p/index.html", "w", encoding="utf8") as fh:
     fh.write(arch + f'<main class="wrap"><article><h1>كل القطع</h1><div class="meta">{len(rows)} قطعة</div><ul class="list">' + "\n".join(rows) + "</ul></article></main>" + FOOT)
 
+# reserves: one page per reserve (r/<name>.html) from data/reserves.json (written by build.py from the page's RESERVES list)
+RS_SLUG = {"ahwar": "iraq-marshes", "wadirum": "wadi-rum", "rasmohammed": "ras-mohammed", "samhan": "jabal-samhan"}
+reserves = [r for r in load("data/reserves.json") if isinstance(r, dict) and re.match(r"^[a-z]{2,24}$", str(r.get("id") or "")) and isinstance(r.get("ar"), dict)]
+def rs_slug(r): return RS_SLUG.get(r["id"], r["id"])
+def rs_norm(t): return re.sub(r"[ً-ْـ]", "", str(t or "")).lower()
+def rs_pieces(r):
+    keys = [rs_norm(k) for k in (r.get("match") or []) if k]
+    out = []
+    for p in items:
+        if p["id"] not in built: continue
+        en = p.get("en") if isinstance(p.get("en"), dict) else {}
+        t = rs_norm(" ".join(str(x or "") for x in (p.get("place"), p.get("headline"), p.get("angle"), p.get("dispatch"), en.get("place"))))
+        if any(k in t for k in keys): out.append(p)
+    return out
+def rs_block(x, ar, r, ps):
+    t = (lambda a, b: a if ar else b)
+    o = [f'<p class="angle">{e(x.get("about"))}</p>']
+    figs = [f for f in (x.get("figs") or []) if isinstance(f, list) and len(f) >= 2]
+    if figs:
+        o.append('<div class="figs">' + "".join(f'<div class="fig"><b>{e(v)}</b><small>{e(l)}</small></div>' for v, l, *_ in figs) + "</div>")
+    sp = [s[0] for s in (x.get("sp") or []) if s]
+    if sp: o.append(f'<h2>{t("أبرز الكائنات","Notable creatures")}</h2><ul>' + "".join(f"<li>{e(n)}</li>" for n in sp) + "</ul>")
+    if x.get("pl"): o.append(f'<h2>{t("أبرز النباتات","Notable plants")}</h2><ul>' + "".join(f"<li>{e(n)}</li>" for n in x["pl"]) + "</ul>")
+    if x.get("th"): o.append(f'<h2>{t("ما يهددها","Threats")}</h2><p>{e(x["th"])}</p>')
+    if ps:
+        o.append(f'<h2>{t("شهادات من هنا","Testimonies from here")}</h2><ul>' + "".join(
+            f'<li><a href="{BASE}p/{SHORT[p["id"]]}">{e(p["headline"] if ar else ((p.get("en") or {}).get("headline") or p["headline"]))}</a></li>' for p in ps) + "</ul>")
+    ll = r.get("ll") or []
+    if len(ll) == 2:
+        o.append(f'<p><a href="https://www.openstreetmap.org/?mlat={ll[0]}&amp;mlon={ll[1]}#map=8/{ll[0]}/{ll[1]}" target="_blank" rel="noopener">{t("🗺️ على الخريطة","🗺️ On the map")} ↗</a></p>')
+    return "\n".join(o)
+os.makedirs("r", exist_ok=True)
+rs_files = set()
+rs_rows = []
+for r in reserves:
+    ar, en = r["ar"], (r.get("en") if isinstance(r.get("en"), dict) else {})
+    slug = rs_slug(r)
+    url = f"{BASE}r/{slug}"
+    img = str(r.get("img") or "")
+    title = f'{ar.get("name")}{" | " + en["name"] if en.get("name") else ""} — محمية في {ar.get("cty")} | شهود'
+    desc = short(ar.get("about"))
+    share = og_image("r-" + slug, img) if img.startswith("http") else ""
+    ps = rs_pieces(r)
+    ld = {"@context": "https://schema.org", "@type": "Place", "name": ar.get("name"), "alternateName": en.get("name"),
+          "description": desc, "url": url, "containedInPlace": {"@type": "Country", "name": en.get("cty") or ar.get("cty")}}
+    ll = r.get("ll") or []
+    if len(ll) == 2: ld["geo"] = {"@type": "GeoCoordinates", "latitude": ll[0], "longitude": ll[1]}
+    if img: ld["image"] = [share or img]
+    goto = ('<script>if(!/bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|twitter|discord|linkedin|skype|preview|lighthouse|headless/i.test(navigator.userAgent)){'
+            'document.documentElement.style.background="#0b1712";document.write("<style>body{visibility:hidden}</style>");'
+            f'location.replace("/?r={r["id"]}")}}</script>\n')
+    extra = goto + '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+    body = [head(title, desc, url, share or img, extra), '<main class="wrap"><article>']
+    body.append(f'<div class="kick">🏞️ {r.get("cc","")} {e(ar.get("cty"))} · المحميات</div><h1>{e(ar.get("name"))}</h1><div class="meta">{e(ar.get("st"))}</div>')
+    if img:
+        body.append(f'<figure><img src="{e(img)}" alt="{e(ar.get("name"))}" loading="eager">{f"<figcaption>{e(r.get("credit"))}</figcaption>" if r.get("credit") else ""}</figure>')
+    body.append(rs_block(ar, True, r, ps))
+    if en.get("name"):
+        body.append(f'<section class="en" lang="en" dir="ltr"><h1>{e(en["name"])}</h1><div class="meta">{e(en.get("cty"))} · {e(en.get("st"))}</div>{rs_block(en, False, r, ps)}</section>')
+    srcs = [x for x in (r.get("src") or []) if isinstance(x, list) and len(x) >= 2 and str(x[1]).startswith("http")]
+    if srcs:
+        body.append('<h2>المصادر · Sources</h2><ul>' + "".join(f'<li><a href="{e(u)}" target="_blank" rel="noopener">{e(n)}</a></li>' for n, u, *_ in srcs) + "</ul>")
+    body.append(f'<a class="cta" href="{BASE}?r={r["id"]}">كل المحميات في شهود ←</a></article></main>')
+    body.append(FOOT)
+    with open(f"r/{slug}.html", "w", encoding="utf8") as fh:
+        fh.write("\n".join(body))
+    rs_files.add(slug)
+    rs_rows.append(f'<li><a href="{slug}">{e(ar.get("name"))}</a><small>{r.get("cc","")} {e(ar.get("cty"))} · {e(ar.get("st"))}</small></li>')
+for f in glob.glob("r/*.html"):
+    n = os.path.basename(f)[:-5]
+    if n != "index" and n not in rs_files:
+        os.remove(f)
+if reserves:
+    rh = head("المحميات | شهود — مختارات من أهم المحميات الطبيعية في العالم العربي والعالم",
+              "محميات طبيعية مختارة من العالم العربي والعالم: كائناتها ونباتاتها وما يهددها، وشهادات من هناك، بالعربية والإنجليزية.", BASE + "r/", "")
+    with open("r/index.html", "w", encoding="utf8") as fh:
+        fh.write(rh + f'<main class="wrap"><article><h1>المحميات</h1><div class="meta">{len(rs_rows)} محمية · Nature reserves</div><ul class="list">' + "\n".join(rs_rows) + "</ul></article></main>" + FOOT)
+
 # sitemap
 today = datetime.date.today().isoformat()
 urls = [f"  <url><loc>{BASE}</loc><lastmod>{today}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>",
@@ -324,9 +402,13 @@ for p in items:
     if p["id"] in built:
         d = date_of(p) or today
         urls.append(f"  <url><loc>{BASE}p/{SHORT[p['id']]}</loc><lastmod>{d}</lastmod><priority>0.7</priority></url>")
+if reserves:
+    urls.append(f"  <url><loc>{BASE}r/</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
+    for r in reserves:
+        urls.append(f"  <url><loc>{BASE}r/{rs_slug(r)}</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
 with open("sitemap.xml", "w", encoding="utf8") as fh:
     fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>\n")
-print(len(built), "piece pages")
+print(len(built), "piece pages,", len(reserves), "reserve pages")
 with open(SHORT_PATH, "w", encoding="utf8") as fh:
     json.dump(SHORT, fh, ensure_ascii=False, indent=0)
 with open(OG_PATH, "w", encoding="utf8") as fh:

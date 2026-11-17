@@ -824,8 +824,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794903385"</script>
-<script src="local.js?v=1794903385"></script>
+<script>window.SHUHUD_BUILD="1794904054"</script>
+<script src="local.js?v=1794904054"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2968,6 +2968,10 @@ function rsCardHTML(r){const en=isEn(),x=en?r.en:r.ar,ps=rsPieces(r);
 /* Arab-world reserves first, then the rest of the world */
 const RS_ORDER=["socotra","ahwar","wadirum","farasan","marawah","rasmohammed","samhan","virunga","bialowieza","galapagos"];
 function renderReserves(){const g=document.getElementById("rs-grid");if(!g)return;const o=id=>{const k=RS_ORDER.indexOf(id);return k<0?99:k};g.innerHTML=[...RESERVES].sort((a,b)=>o(a.id)-o(b.id)).map(rsCardHTML).join("")}
+/* a reserve page (alshuhud.org/r/<name>) sends people here as /?r=<id>: open the reserves tab at that reserve */
+(()=>{let q="";try{q=new URLSearchParams(location.search).get("r")||""}catch(e){}if(!/^[a-z]{2,24}$/.test(q))return;
+  const go=()=>{try{show("ids");idsView("rs");const el=document.getElementById("rs-"+q);if(el)el.scrollIntoView({block:"start"});if(/^https?:/.test(location.protocol)&&location.hostname.indexOf("alshuhud")>=0)history.replaceState(null,"","/")}catch(e){}};
+  window.addEventListener("load",()=>{setTimeout(go,700);setTimeout(()=>{try{if(!document.getElementById("rs-wrap").hidden){renderReserves();const el=document.getElementById("rs-"+q);if(el)el.scrollIntoView({block:"start"})}}catch(e){}},3500)})})();
 function idsView(v){document.querySelectorAll("[data-idv]").forEach(b=>b.setAttribute("aria-selected",b.dataset.idv===v));
   const sw=document.getElementById("sp-wrap"),rw=document.getElementById("rs-wrap");if(sw)sw.hidden=v!=="sp";if(rw)rw.hidden=v!=="rs";if(v==="rs")renderReserves()}
 document.addEventListener("click",e=>{
