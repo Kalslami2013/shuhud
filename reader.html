@@ -626,8 +626,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794905715"</script>
-<script src="local.js?v=1794905715"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794905787"</script>
+<script src="local.js?v=1794905787"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -2777,7 +2777,7 @@ function renderReserves(){const g=document.getElementById("rs-grid");if(!g)retur
   const go=()=>{try{show("ids");idsView("rs");const el=document.getElementById("rs-"+q);if(el)el.scrollIntoView({block:"start"});if(/^https?:/.test(location.protocol)&&location.hostname.indexOf("alshuhud")>=0)history.replaceState(null,"","/")}catch(e){}};
   window.addEventListener("load",()=>{setTimeout(go,700);setTimeout(()=>{try{if(!document.getElementById("rs-wrap").hidden){renderReserves();const el=document.getElementById("rs-"+q);if(el)el.scrollIntoView({block:"start"})}}catch(e){}},3500)})})();
 /* «Species & reserves» opens a small menu right under its tab: two choices one above the other */
-function idsMenu(b){let m=document.getElementById("ids-menu");if(m&&!m.hidden&&m.__b===b){m.hidden=true;return}
+function idsMenu(b,hov){let m=document.getElementById("ids-menu");if(m&&!m.hidden&&m.__b===b){if(!hov&&!IDS_HOVER)m.hidden=true;return}
   if(!m){m=document.createElement("div");m.id="ids-menu";m.setAttribute("role","menu");document.body.appendChild(m);
     m.addEventListener("click",e=>{const o=e.target.closest("[data-idm]");if(!o)return;m.hidden=true;const t=m.__b;t.__go=true;t.click();idsView(o.dataset.idm);window.scrollTo({top:0,behavior:"smooth"})});
     const close=e=>{if(!m.hidden&&!(e&&e.target&&(m.contains(e.target)||e.target===m.__b)))m.hidden=true};
@@ -2787,6 +2787,13 @@ function idsMenu(b){let m=document.getElementById("ids-menu");if(m&&!m.hidden&&m
   const cur=!document.getElementById("v-ids").hidden?(document.getElementById("rs-wrap").hidden?"sp":"rs"):"";
   m.innerHTML=`<button type="button" role="menuitem" data-idm="sp"${cur==="sp"?' class="on"':""}><span class="paw">🐾</span>${esc(T("segSp").replace("🐾","").trim())}</button><button type="button" role="menuitem" data-idm="rs"${cur==="rs"?' class="on"':""}>${esc(T("segRs"))}</button>`;
   m.__b=b;m.hidden=false;idsPlace()}
+/* on a computer the menu also opens when the pointer rests on the tab, and closes when it leaves both */
+const IDS_HOVER=matchMedia("(hover:hover) and (pointer:fine)").matches;
+if(IDS_HOVER)(()=>{let t=0;const b=document.querySelector('nav.main button[data-view="ids"]');if(!b)return;
+  const open=()=>{clearTimeout(t);t=setTimeout(()=>idsMenu(b,true),140)},shut=()=>{clearTimeout(t);t=setTimeout(()=>{const m=document.getElementById("ids-menu");if(m&&!m.matches(":hover")&&!b.matches(":hover"))m.hidden=true},260)};
+  b.addEventListener("mouseenter",open);b.addEventListener("mouseleave",shut);
+  document.addEventListener("mouseover",e=>{const m=document.getElementById("ids-menu");if(m&&m.contains(e.target))clearTimeout(t)});
+  document.addEventListener("mouseout",e=>{const m=document.getElementById("ids-menu");if(m&&m.contains(e.target)&&!m.contains(e.relatedTarget))shut()})})();
 function idsPlace(){const m=document.getElementById("ids-menu");if(!m||m.hidden||!m.__b)return;const r=m.__b.getBoundingClientRect();
   const w=Math.max(r.width,190);m.style.width=w+"px";let x=r.left+r.width/2-w/2;x=Math.max(8,Math.min(x,innerWidth-w-8));m.style.left=x+"px";m.style.top=(r.bottom+6)+"px"}
 function idsView(v){document.querySelectorAll("[data-idv]").forEach(b=>b.setAttribute("aria-selected",b.dataset.idv===v));
