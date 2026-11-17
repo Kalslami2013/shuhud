@@ -632,8 +632,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794914961"</script>
-<script src="local.js?v=1794914961"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794916205"</script>
+<script src="local.js?v=1794916205"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -671,7 +671,7 @@ ar:{
   deleted:"حُذفت الرواية",delFail:"تعذر الحذف",copied:"نُسخ النص",witness:"شاهد",
   emptyLoading:"تتجمع الحيوانات حول النار، وستظهر النشرة بعد لحظات.",emptyCat:"لا قطع في هذا الباب بعد. اكتب واحدة من غرفة التحرير.",emptyHeal:"هنا ما يعود إلى الحياة: محميات جديدة، وكائنات تخرج من خطر الانقراض، وولادات نادرة، وكائنات ظهرت بعد أن عُدّت منقرضة. تُنشر أولى قطعه قريبًا.",
   emptyAll:"الغابة صامتة الآن. اضغط «اكتب قطع اليوم الآن»، أو اكتب أول قطعة من غرفة التحرير.",
-  statusCount:n=>`${n.toLocaleString("ar")} شهادة منشورة`,lastUpdate:"آخر تحديث من الغابة",
+  statusCount:n=>`${n.toLocaleString("ar")} شهادة منشورة`,lastUpdate:"آخر تحديث",
   openInClaude:"افتح الصفحة داخل Claude لترى النشرة الحية.",signIn:"سجّل الدخول في Claude لترى النشرة الحية.",feedFail:"تعذر الوصول إلى النشرة الآن.",
   stories:n=>`${n} من الروايات`,
   reading:"يُقرأ…",readOk:n=>`قُرئ (${n.toLocaleString("ar")} حرفاً)`,readUnsupported:"نوع غير مدعوم للقراءة",readFail:"تعذرت قراءة الملف",
@@ -737,7 +737,7 @@ en:{
   deleted:"Story deleted",delFail:"Couldn't delete",copied:"Text copied",witness:"Witness",
   emptyLoading:"The animals are gathering around the fire. The feed will appear in a moment.",emptyCat:"Nothing in this section yet. Write one from the newsroom.",emptyHeal:"What comes back to life: new reserves, species leaving the danger list, rare births, species found again after being declared extinct. The first pieces are coming soon.",
   emptyAll:"The forest is quiet. Press “Write today's pieces now”, or write the first one from the newsroom.",
-  statusCount:n=>`${n} ${n===1?"testimony":"testimonies"} published`,lastUpdate:"last update from the forest",
+  statusCount:n=>`${n} ${n===1?"testimony":"testimonies"} published`,lastUpdate:"Last update",
   openInClaude:"Open this page inside Claude to see the live feed.",signIn:"Sign in to Claude to see the live feed.",feedFail:"Can't reach the feed right now.",
   stories:n=>`${n} ${n===1?"story":"stories"}`,
   reading:"Reading…",readOk:n=>`Read (${n.toLocaleString("en")} characters)`,readUnsupported:"This file type can't be read",readFail:"Couldn't read the file",
@@ -1130,7 +1130,9 @@ function updateStatus(){
   if(!dbReady){$("#status").textContent=T("loadingStatus");return}
   const lastLive=items.find(i=>i.kind==="live");
   $("#status").classList.toggle("count",!!items.length);
-  $("#status").textContent=items.length?`${T("statusCount")(items.length)}${lastLive?" · "+T("lastUpdate")+": "+fmtDate(lastLive.createdAt):""}`:"";
+  /* only the date of the latest testimony (17 Nov 2026, Kamal): no count, no "from the forest" */
+  const lastAt=(lastLive&&lastLive.createdAt)||items.map(i=>String(i.createdAt||"")).sort().pop();
+  $("#status").textContent=items.length&&lastAt?`${T("lastUpdate")}: ${fmtDate(lastAt)}`:"";
 }
 $("#feed").addEventListener("click",async e=>{
   const b=e.target.closest("[data-act]");if(!b)return;
