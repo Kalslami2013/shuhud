@@ -28,7 +28,7 @@ for s in load("data/species.json"):
             species[k] = s
 
 ICONS = json.load(open("scripts/social_icons.json", encoding="utf8"))
-ORDER = ["x","facebook","instagram","youtube","tiktok","telegram","whatsapp","linkedin","threads","bluesky","email","web"]
+ORDER = ["x","facebook","instagram","youtube","tiktok","telegram","whatsapp","linkedin","threads","bluesky","substack","email","web"]
 socials = [x for f in ("data/partners.json", "data/partners-gh.json") for x in load(f) if isinstance(x, dict) and x.get("type") == "social" and x.get("url")]
 socials.sort(key=lambda x: (ORDER.index(x.get("platform")) if x.get("platform") in ORDER else 99, str(x.get("createdAt") or "")))
 def href(x):
