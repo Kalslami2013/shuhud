@@ -864,8 +864,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1794950922"</script>
-<script src="local.js?v=1794950922"></script>
+<script>window.SHUHUD_BUILD="1794985683"</script>
+<script src="local.js?v=1794985683"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1308,12 +1308,12 @@ function agoTxt(iso){const m=Math.max(1,Math.round((Date.now()-Date.parse(iso))/
 /* the whole radar list, newest first: the first screen keeps at most two items per outlet, older items follow as the reader scrolls */
 /* the Arabic page shows Arabic sources plus the world's press and bodies (English, French) through their machine translation; the English page shows English and French */
 function radarText(x){return isEn()?(x.lang==="en"?x.text:x.trEn||""):(x.lang==="ar"?x.text:x.trAr||"")}
+/* newest first, strictly by time (18 Nov 2026, Kamal); the only exception: in the first twelve, no source appears more than twice
+   (its later items wait further down). Good news keeps its 🌱 mark but is no longer lifted above newer items */
 function radarList(){const ok=new Set([...RADAR_SRC.ar,...RADAR_SRC.en,...RADAR_SRC.fr]),cut=Date.now()-7*864e5,per={},first=[],rest=[];
-  for(const x of radarAll){if(!x||!ok.has(x.source)||!x.url||Date.parse(x.at)<cut||!radarText(x))continue;
-    per[x.source]=(per[x.source]||0)+1;(per[x.source]<=2&&first.length<12?first:rest).push(x)}
-  /* good news for nature (🌱) is lifted into the first screen, so it is not buried under the day's damage */
-  const all=[...first,...rest.sort((a,b)=>Date.parse(b.at)-Date.parse(a.at))],good=all.filter(x=>x.good).slice(0,2);
-  return good.length?[...all.slice(0,1),...good,...all.slice(1).filter(x=>!good.includes(x))]:all}
+  const pool=radarAll.filter(x=>x&&ok.has(x.source)&&x.url&&Date.parse(x.at)>=cut&&radarText(x)).sort((a,b)=>Date.parse(b.at)-Date.parse(a.at));
+  for(const x of pool){per[x.source]=(per[x.source]||0)+1;(first.length<12&&per[x.source]<=2?first:rest).push(x)}
+  return [...first,...rest]}
 /* a radar headline is linked to the piece written from it: by request id, or because the piece cites the same article */
 const rdUrl=u=>String(u||"").split(/[?#]/)[0].replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,"").toLowerCase();
 function radarPiece(x){const u=rdUrl(x.url);return items.find(p=>p.fromRequest===x.id||(u&&(p.sources||[]).some(s=>rdUrl(s&&s.url)===u)))}
