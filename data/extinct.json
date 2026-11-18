@@ -1,0 +1,391 @@
+{
+ "EXT_MASS": [
+  {
+   "id": "ordovician",
+   "ma": 445,
+   "clock": "21:38",
+   "emoji": "🧊",
+   "ar": {
+    "name": "انقراض الأوردوفيشي",
+    "when": "قبل نحو 445 مليون سنة",
+    "lost": "نحو 85% من الأنواع البحرية",
+    "cause": "عصر جليدي مفاجئ غطّى قارة غندوانا، فبردت الأرض وانخفض مستوى البحار، ثم عاد الدفء بسرعة.",
+    "about": "أول الانقراضات الخمسة الكبرى، وثانيها في الشدة. كانت الحياة كلها تقريبًا في البحار، فضربها التجمّد ثم الدفء في موجتين متتاليتين، وأزال ما بين 49 و60% من أجناسها.",
+    "gone": [
+     "ثلث عائلات ذوات القوائم العضدية والحزازيات",
+     "كثير من ثلاثيات الفصوص",
+     "الجرابتوليت"
+    ],
+    "survived": "تعافى التنوع إلى مستواه السابق خلال نحو 5 ملايين سنة من العصر السيلوري."
+   },
+   "en": {
+    "name": "End-Ordovician extinction",
+    "when": "About 445 million years ago",
+    "lost": "About 85% of marine species",
+    "cause": "A sudden ice age over the Gondwana continent cooled the Earth and dropped sea levels, followed by a rapid return of warmth.",
+    "about": "The first of the Big Five, and the second most severe. Almost all life was in the sea, and freezing then warming struck it in two pulses, wiping out 49 to 60% of marine genera.",
+    "gone": [
+     "A third of brachiopod and bryozoan families",
+     "Many trilobites",
+     "Graptolites"
+    ],
+    "survived": "Diversity recovered to its former level within about 5 million years of the Silurian."
+   },
+   "src": [
+    [
+     "Wikipedia: Late Ordovician mass extinction",
+     "https://en.wikipedia.org/wiki/Ordovician%E2%80%93Silurian_extinction_events"
+    ]
+   ]
+  },
+  {
+   "id": "devonian",
+   "ma": 372,
+   "clock": "22:02",
+   "emoji": "🪨",
+   "ar": {
+    "name": "انقراض الديفوني المتأخر",
+    "when": "قبل نحو 372 مليون سنة، تلته موجة ثانية قبل نحو 359 مليونًا",
+    "lost": "نحو 40% من الأنواع البحرية في موجته الأولى (والتقدير مختلف عليه)",
+    "cause": "غير محسوم: تغيّر مستوى البحار ونقص الأكسجين في المحيطات هما أقوى الفرضيات.",
+    "about": "امتد على ملايين السنين في موجات متتالية، وأصاب البحار وحدها تقريبًا. كانت اليابسة قد اكتست بالنباتات والحشرات، وكانت المحيطات تزخر بشعاب ضخمة بناها المرجان.",
+    "gone": [
+     "الكائنات البانية للشعاب، التي اختفت تقريبًا كلها",
+     "كثير من ثلاثيات الفصوص وذوات القوائم العضدية"
+    ],
+    "survived": "اليابسة نجت إلى حد كبير، ومنها بدأت الفقاريات زحفها خارج الماء."
+   },
+   "en": {
+    "name": "Late Devonian extinction",
+    "when": "About 372 million years ago, with a second wave about 359 million years ago",
+    "lost": "About 40% of marine species in its first wave (a contested estimate)",
+    "cause": "Unsettled: changing sea levels and oxygen-starved oceans are the leading hypotheses.",
+    "about": "It unfolded over millions of years in successive waves and struck the seas almost alone. Plants and insects had already colonised the land, and the oceans were full of huge reefs built by corals.",
+    "gone": [
+     "Reef-building organisms, which almost entirely vanished",
+     "Many trilobites and brachiopods"
+    ],
+    "survived": "Life on land largely survived, and from it vertebrates began their move out of the water."
+   },
+   "src": [
+    [
+     "Wikipedia: Late Devonian extinction",
+     "https://en.wikipedia.org/wiki/Late_Devonian_extinction"
+    ]
+   ]
+  },
+  {
+   "id": "permian",
+   "ma": 252,
+   "clock": "22:40",
+   "emoji": "🌋",
+   "ar": {
+    "name": "انقراض البرمي، «الموت العظيم»",
+    "when": "قبل نحو 252 مليون سنة",
+    "lost": "نحو 81% من الأنواع البحرية و70% من فقاريات اليابسة",
+    "cause": "ثورات بركانية هائلة في «مصاطب سيبيريا» قذفت ثاني أكسيد الكربون والكبريت، فارتفع الكربون في الجو من نحو 400 إلى 2,500 جزء في المليون، وسخنت الأرض، وحمضت المحيطات وفقدت أكسجينها.",
+    "about": "أشد انقراض عرفته الأرض: اختفت 57% من العائلات و62% من الأجناس، وهو أكبر انقراض معروف للحشرات. وتكمن عبرته في سببه: كربون يُضخ في الجو بسرعة، فيسخن الكوكب وتحمض البحار.",
+    "gone": [
+     "آخر ثلاثيات الفصوص",
+     "معظم الشعاب المرجانية القديمة",
+     "أغلب الزواحف الشبيهة بالثدييات"
+    ],
+    "survived": "من الناجين القلائل خرجت سلالات الديناصورات والثدييات لاحقًا."
+   },
+   "en": {
+    "name": "End-Permian extinction, “the Great Dying”",
+    "when": "About 252 million years ago",
+    "lost": "About 81% of marine species and 70% of land vertebrates",
+    "cause": "Colossal eruptions in the Siberian Traps poured out carbon dioxide and sulphur: atmospheric carbon rose from about 400 to 2,500 ppm, the planet heated, and the oceans acidified and lost their oxygen.",
+    "about": "The worst extinction Earth has known: 57% of families and 62% of genera disappeared, and it is the largest known extinction of insects. Its lesson lies in its cause: carbon pumped quickly into the air, a warming planet, acidifying seas.",
+    "gone": [
+     "The last trilobites",
+     "Most ancient coral reefs",
+     "Most mammal-like reptiles"
+    ],
+    "survived": "From the few survivors the lineages of dinosaurs and mammals later emerged."
+   },
+   "src": [
+    [
+     "Wikipedia: Permian–Triassic extinction event",
+     "https://en.wikipedia.org/wiki/Permian%E2%80%93Triassic_extinction_event"
+    ]
+   ]
+  },
+  {
+   "id": "triassic",
+   "ma": 201.5,
+   "clock": "22:56",
+   "emoji": "🔥",
+   "ar": {
+    "name": "انقراض الترياسي",
+    "when": "قبل نحو 201.5 مليون سنة",
+    "lost": "نحو نصف الأنواع، وتصل بعض التقديرات إلى 76%",
+    "cause": "ثورات بركانية في «إقليم الصهارة الأطلسي الأوسط» مع تفكك القارة العظمى «بانجيا»، قذفت ملايين الكيلومترات المكعبة من الحمم وكميات هائلة من ثاني أكسيد الكربون.",
+    "about": "تزامن اختفاء الأنواع مع طبقات الحمم بدقة، بحسب دراسة جامعة كولومبيا (2013) التي حددت تاريخه بنحو 201.56 مليون سنة. فتح هذا الانقراض الطريق لسيادة الديناصورات طوال العصر الجوراسي.",
+    "gone": [
+     "الكونودونتات",
+     "كثير من أقارب التماسيح الأوائل",
+     "نباتات عريضة الأوراق"
+    ],
+    "survived": "الديناصورات نجت وتوسعت لتسود اليابسة."
+   },
+   "en": {
+    "name": "End-Triassic extinction",
+    "when": "About 201.5 million years ago",
+    "lost": "About half of all species, with some estimates up to 76%",
+    "cause": "Eruptions of the Central Atlantic Magmatic Province, as the supercontinent Pangaea broke apart, poured out millions of cubic kilometres of lava and vast amounts of carbon dioxide.",
+    "about": "The disappearances line up precisely with the lava layers, according to a 2013 Columbia University study that dated them to about 201.56 million years ago. This extinction cleared the way for dinosaurs to rule throughout the Jurassic.",
+    "gone": [
+     "Conodonts",
+     "Many early crocodile relatives",
+     "Broad-leaved plants"
+    ],
+    "survived": "Dinosaurs survived and spread to dominate the land."
+   },
+   "src": [
+    [
+     "Columbia University: Megavolcanoes tied to pre-dinosaur mass extinction",
+     "https://news.climate.columbia.edu/2013/03/21/megavolcanoes-tied-to-pre-dinosaur-mass-extinction"
+    ],
+    [
+     "Live Science",
+     "https://www.livescience.com/28076-mega-volcanoes-caused-mass-extinction.html"
+    ]
+   ]
+  },
+  {
+   "id": "cretaceous",
+   "ma": 66,
+   "clock": "23:39",
+   "emoji": "☄️",
+   "ar": {
+    "name": "انقراض الطباشيري، نهاية الديناصورات",
+    "when": "قبل نحو 66 مليون سنة",
+    "lost": "نحو 75% من أنواع النبات والحيوان",
+    "cause": "كويكب عرضه 10 إلى 15 كيلومترًا ضرب شبه جزيرة يوكاتان في المكسيك، فحفر فوهة تشيكشولوب بقطر 180 كيلومترًا، وأدخل الأرض «شتاء» طويلًا حجب الشمس وأوقف التمثيل الضوئي.",
+    "about": "تشهد عليه طبقة رقيقة من الطين حول العالم غنية بعنصر الإيريديوم، الشائع في الكويكبات والنادر في قشرة الأرض. أنهى عصر الديناصورات، وكل حيوانات اليابسة تقريبًا التي تزيد على 25 كيلوغرامًا.",
+    "gone": [
+     "الديناصورات غير الطائرة",
+     "الزواحف البحرية الكبيرة",
+     "الأمونيات"
+    ],
+    "survived": "نجت الطيور، وهي سليلة الديناصورات، والثدييات الصغيرة والتماسيح والسلاحف، ومن الثدييات جاء الإنسان بعد ذلك بعشرات ملايين السنين."
+   },
+   "en": {
+    "name": "End-Cretaceous extinction, the end of the dinosaurs",
+    "when": "About 66 million years ago",
+    "lost": "About 75% of plant and animal species",
+    "cause": "An asteroid 10 to 15 km wide struck Mexico's Yucatán Peninsula, carving the 180 km Chicxulub crater and plunging Earth into a long “impact winter” that blocked the sun and halted photosynthesis.",
+    "about": "A thin worldwide clay layer rich in iridium, common in asteroids and rare in Earth's crust, bears witness to it. It ended the age of dinosaurs and of nearly all land animals heavier than 25 kg.",
+    "gone": [
+     "Non-avian dinosaurs",
+     "Large marine reptiles",
+     "Ammonites"
+    ],
+    "survived": "Birds, the descendants of dinosaurs, survived, along with small mammals, crocodiles and turtles; tens of millions of years later humans came from those mammals."
+   },
+   "src": [
+    [
+     "Wikipedia: Cretaceous–Paleogene extinction event",
+     "https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event"
+    ]
+   ]
+  }
+ ],
+ "EXT_HUMAN": [
+  {
+   "id": "dodo",
+   "year": "1662",
+   "emoji": "🦤",
+   "ar": {
+    "name": "طائر الدودو",
+    "where": "جزيرة موريشيوس في المحيط الهندي",
+    "when": "آخر مشاهدة موثوقة 1662، وانقرض نحو 1681",
+    "cause": "صيد البحارة، وحيوانات جلبها البشر كالجرذان والخنازير والقرود أكلت بيضه على الأرض، وقطع الغابات.",
+    "about": "طائر ضخم لا يطير، عاش آمنًا بلا مفترسات، فلم يعرف الخوف من الإنسان. صار بعد اختفائه رمزًا عالميًا للانقراض."
+   },
+   "en": {
+    "name": "Dodo",
+    "where": "Mauritius, Indian Ocean",
+    "when": "Last reliable sighting 1662; extinct around 1681",
+    "cause": "Hunting by sailors, introduced animals such as rats, pigs and monkeys that ate its ground-laid eggs, and forest clearing.",
+    "about": "A large flightless bird that lived without predators and never learned to fear people. After it vanished it became the world's symbol of extinction."
+   },
+   "src": [
+    [
+     "Wikipedia: Dodo",
+     "https://en.wikipedia.org/wiki/Dodo"
+    ]
+   ]
+  },
+  {
+   "id": "steller",
+   "year": "1768",
+   "emoji": "🌊",
+   "ar": {
+    "name": "بقرة البحر ستيلر",
+    "where": "جزر القائد في بحر بيرينغ",
+    "when": "انقرضت 1768، بعد 27 عامًا فقط من اكتشافها عام 1741",
+    "cause": "صيدها للحم والدهن على أيدي بحارة وصيادي الفراء.",
+    "about": "من أقارب الأطوم وخراف البحر، وكانت أضخمها، يتجاوز طولها ثمانية أمتار وترعى عشب البحر قرب الشاطئ. أسرع انقراض موثق لحيوان كبير بعد اكتشافه."
+   },
+   "en": {
+    "name": "Steller's sea cow",
+    "where": "Commander Islands, Bering Sea",
+    "when": "Extinct by 1768, only 27 years after its discovery in 1741",
+    "cause": "Hunted for meat and fat by sailors and fur hunters.",
+    "about": "A relative of the dugong and the manatees, and the largest of them, over eight metres long, grazing kelp near the shore. The fastest documented extinction of a large animal after its discovery."
+   },
+   "src": [
+    [
+     "Wikipedia: Steller's sea cow",
+     "https://en.wikipedia.org/wiki/Steller%27s_sea_cow"
+    ]
+   ]
+  },
+  {
+   "id": "greatauk",
+   "year": "1844",
+   "emoji": "🐧",
+   "ar": {
+    "name": "الأوك العظيم",
+    "where": "سواحل شمال الأطلسي",
+    "when": "قُتل آخر زوج معروف في جزيرة إلديي بآيسلندا عام 1844",
+    "cause": "الصيد الكثيف للحمه وريشه ودهنه، ثم لجامعي العينات حين صار نادرًا.",
+    "about": "طائر بحري لا يطير، يشبه البطريق، وكان يعشش بأعداد كبيرة على جزر الأطلسي الشمالي."
+   },
+   "en": {
+    "name": "Great auk",
+    "where": "North Atlantic coasts",
+    "when": "The last known pair was killed on Eldey, Iceland, in 1844",
+    "cause": "Heavy hunting for meat, feathers and oil, then by specimen collectors once it became rare.",
+    "about": "A flightless, penguin-like seabird that once nested in great numbers on North Atlantic islands."
+   },
+   "src": [
+    [
+     "Wikipedia: Great auk",
+     "https://en.wikipedia.org/wiki/Great_auk"
+    ]
+   ]
+  },
+  {
+   "id": "passengerpigeon",
+   "year": "1914",
+   "emoji": "🕊️",
+   "ar": {
+    "name": "الحمام المهاجر",
+    "where": "غابات أمريكا الشمالية",
+    "when": "ماتت «مارثا»، آخر حمامة منه، في حديقة حيوان سينسيناتي في 1 سبتمبر 1914",
+    "cause": "صيد تجاري بالجملة لحمًا رخيصًا، وقطع الغابات التي كان يعشش فيها.",
+    "about": "كان أكثر الطيور عددًا في العالم، بالمليارات، وكانت أسرابه تحجب الشمس ساعات. اختفى من البرية نحو عام 1900."
+   },
+   "en": {
+    "name": "Passenger pigeon",
+    "where": "Forests of North America",
+    "when": "Martha, the last of its kind, died at Cincinnati Zoo on 1 September 1914",
+    "cause": "Mass commercial hunting for cheap meat, and clearing of the forests where it nested.",
+    "about": "Once the most numerous bird on Earth, numbering in the billions, its flocks darkened the sky for hours. It vanished from the wild around 1900."
+   },
+   "src": [
+    [
+     "Smithsonian: Marking the centennial of extinction",
+     "https://newsdesk.si.edu/snapshot/marking-centennial-extinction"
+    ],
+    [
+     "Natural History Museum",
+     "https://www.nhm.ac.uk/discover/passenger-pigeon-how-the-worlds-most-common-bird-went-extinct.html"
+    ]
+   ]
+  },
+  {
+   "id": "thylacine",
+   "year": "1936",
+   "emoji": "🐺",
+   "ar": {
+    "name": "النمر التسماني",
+    "where": "جزيرة تسمانيا في أستراليا",
+    "when": "مات آخر حيوان معروف في حديقة حيوان هوبارت عام 1936",
+    "cause": "مكافآت حكومية لقتله بحجة حماية الأغنام، مع فقدان موطنه والأمراض.",
+    "about": "أكبر الجرابيات المفترسة في العصر الحديث، بخطوط على ظهره تشبه خطوط النمر. أُعلن منقرضًا رسميًا عام 1982."
+   },
+   "en": {
+    "name": "Thylacine (Tasmanian tiger)",
+    "where": "Tasmania, Australia",
+    "when": "The last known animal died at Hobart Zoo in 1936",
+    "cause": "Government bounties to kill it in the name of protecting sheep, along with habitat loss and disease.",
+    "about": "The largest carnivorous marsupial of modern times, with tiger-like stripes on its back. Officially declared extinct in 1982."
+   },
+   "src": [
+    [
+     "Wikipedia: Thylacine",
+     "https://en.wikipedia.org/wiki/Thylacine"
+    ]
+   ]
+  },
+  {
+   "id": "goldentoad",
+   "year": "1989",
+   "emoji": "🐸",
+   "ar": {
+    "name": "العلجوم الذهبي",
+    "where": "غابة مونتيفيردي الضبابية في كوستاريكا",
+    "when": "آخر مشاهدة 1989، وأُعلن منقرضًا 2004",
+    "cause": "يُرجَّح أنه فطر قاتل للبرمائيات مع جفاف وحرارة غير معتادين.",
+    "about": "علجوم برتقالي لامع لا يعيش إلا في رقعة جبلية صغيرة. من أوائل الانقراضات التي رُبطت بتغيّر المناخ."
+   },
+   "en": {
+    "name": "Golden toad",
+    "where": "Monteverde cloud forest, Costa Rica",
+    "when": "Last seen 1989; declared extinct 2004",
+    "cause": "Most likely a deadly amphibian fungus together with unusual drought and heat.",
+    "about": "A bright orange toad found only in a small mountain patch. One of the first extinctions linked to climate change."
+   },
+   "src": [
+    [
+     "Wikipedia: Golden toad",
+     "https://en.wikipedia.org/wiki/Golden_toad"
+    ]
+   ]
+  },
+  {
+   "id": "baiji",
+   "year": "2006",
+   "emoji": "🐬",
+   "ar": {
+    "name": "دلفين نهر اليانغتسي «بايجي»",
+    "where": "نهر اليانغتسي في الصين",
+    "when": "لم يعثر عليه مسح شامل عام 2006، فأُعلن منقرضًا وظيفيًا",
+    "cause": "الصيد العرضي في الشباك، والسدود، وحركة السفن الكثيفة، والتلوث.",
+    "about": "عاش في النهر نحو 20 مليون سنة، وكان أول نوع من الحيتانيات يختفي بسبب الإنسان."
+   },
+   "en": {
+    "name": "Baiji (Yangtze river dolphin)",
+    "where": "Yangtze River, China",
+    "when": "A full survey in 2006 found none; declared functionally extinct",
+    "cause": "Bycatch in fishing nets, dams, heavy shipping traffic and pollution.",
+    "about": "It lived in the river for some 20 million years and was the first cetacean driven to extinction by humans."
+   },
+   "src": [
+    [
+     "Wikipedia: Baiji",
+     "https://en.wikipedia.org/wiki/Baiji"
+    ]
+   ]
+  }
+ ],
+ "EXT_SIXTH": {
+  "ar": "## هل نحن في الانقراض السادس؟\n\nيرى كثير من العلماء أن الأرض تعيش «انقراضًا سادسًا» سببه الإنسان، ويُعرف بانقراض الهولوسين أو الأنثروبوسين. وتُقدَّر وتيرة اختفاء الأنواع اليوم بما بين **100 و1,000 ضعف** معدلها الطبيعي.\n\nوفي آخر تحديث للقائمة الحمراء في أكتوبر 2025، قيّم الاتحاد الدولي لصون الطبيعة **172,620 نوعًا**، منها **48,646 نوعًا مهددًا بالانقراض**. ولا يزال الجدل قائمًا حول تسميته «انقراضًا جماعيًا» بالمعنى نفسه للخمسة الكبرى، لكن الأسباب معروفة: فقدان الموائل، والصيد الجائر، والتلوث، وتغيّر المناخ.",
+  "en": "## Are we living through the sixth extinction?\n\nMany scientists say Earth is going through a human-driven “sixth extinction”, known as the Holocene or Anthropocene extinction. Species are estimated to be disappearing **100 to 1,000 times** faster than the natural background rate.\n\nIn its latest Red List update, in October 2025, the IUCN had assessed **172,620 species**, of which **48,646 are threatened with extinction**. Whether it already counts as a mass extinction on the scale of the Big Five is still debated, but its causes are known: habitat loss, overhunting and overfishing, pollution and climate change.",
+  "src": [
+   [
+    "IUCN, October 2025 Red List update",
+    "https://iucn.org/press-release/202510/arctic-seals-threatened-climate-change-birds-decline-globally-iucn-red-list"
+   ],
+   [
+    "Wikipedia: Holocene extinction",
+    "https://en.wikipedia.org/wiki/Holocene_extinction"
+   ]
+  ]
+ }
+}

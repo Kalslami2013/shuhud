@@ -64,3 +64,12 @@ if _m:
       _d.sort(key=lambda r:_o.index(r['id']) if r['id'] in _o else 99)
       open('data/reserves.json','w',encoding='utf8').write(json.dumps(_d,ensure_ascii=False,indent=1))
   except Exception as _e: print('reserves.json not written:',_e)
+
+# extinctions: EXT_MASS / EXT_HUMAN / EXT_SIXTH of the page are saved as data/extinct.json for scripts/pages.py (x/ and en/x/)
+try:
+  _mm={}
+  for _k in ("EXT_MASS","EXT_HUMAN","EXT_SIXTH"):
+    _m=re.search(r'const '+_k+r'=(.*?);\n',src,re.S)
+    if _m:_mm[_k]=json.loads(_m.group(1))
+  if len(_mm)==3:open('data/extinct.json','w',encoding='utf8').write(json.dumps(_mm,ensure_ascii=False,indent=1))
+except Exception as _e: print('extinct.json not written:',_e)

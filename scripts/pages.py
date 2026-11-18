@@ -521,6 +521,48 @@ if en_files:
     with open("en/p/index.html", "w", encoding="utf8") as fh:
         fh.write(arch_en + f'<main class="wrap"><article lang="en" dir="ltr" style="text-align:left"><h1>All pieces</h1><div class="meta">{len(rows_en)} pieces</div><ul class="list">' + "\n".join(rows_en) + "</ul></article></main>" + FOOT_EN)
 
+# extinctions: one Arabic page x/ and one English page en/x/ from data/extinct.json (+ Kamal's edits in data/extinct-db.json)
+EXT = {}
+try:
+    with open("data/extinct.json", encoding="utf8") as fh: EXT = json.load(fh)
+except Exception: EXT = {}
+ext_edits = {d.get("id"): d for d in load("data/extinct-db.json") if isinstance(d, dict)}
+def ext_get(x):
+    d = ext_edits.get(x["id"])
+    if not d: return x
+    return {**x, "src": d.get("src") if isinstance(d.get("src"), list) else x.get("src"), "ar": {**x["ar"], **(d.get("ar") or {})}, "en": {**x["en"], **(d.get("en") or {})}}
+def ext_page(lang):
+    ar = lang == "ar"; t = (lambda a, b: a if ar else b)
+    mass = [ext_get(x) for x in EXT.get("EXT_MASS", [])]; human = [ext_get(x) for x in EXT.get("EXT_HUMAN", [])]; six = EXT.get("EXT_SIXTH", {})
+    srcs = lambda x: ('<p class="meta">' + t("المصادر", "Sources") + ": " + " · ".join(f'<a href="{e(u)}" target="_blank" rel="noopener">{e(n)}</a>' for n, u, *_ in (x.get("src") or [])) + "</p>") if x.get("src") else ""
+    o = [f'<h1>{t("الانقراضات الكبرى في تاريخ الأرض", "The great extinctions in Earth’s history")}</h1>',
+         f'<p class="angle">{t("خمس مرات كادت الحياة على الأرض تنطفئ، ثم عادت: الانقراضات الخمسة الكبرى بالترتيب وموقع كلٍّ منها على «يوم الأرض»، ثم كائنات اختفت في زمن الإنسان، وسؤال الانقراض السادس.", "Five times life on Earth nearly went out, and came back: the Big Five in order, each placed on “Earth’s day”, then species that vanished in human times, and the question of a sixth extinction.")}</p>',
+         f'<h2>{t("الانقراضات الخمسة الكبرى", "The Big Five mass extinctions")}</h2>']
+    for x in mass:
+        y = x[lang]
+        o.append(f'<div class="fig" style="margin:12px 0"><small>{e(y.get("when"))} · 🕰️ {e(x.get("clock"))}</small><h3 style="margin:6px 0">{x.get("emoji","")} {e(y.get("name"))}</h3><b>{e(y.get("lost"))}</b>'
+                 f'<p><strong>{t("السبب", "Cause")}:</strong> {e(y.get("cause"))}</p>{rich(y.get("about"))}'
+                 + (f'<p><strong>{t("من اختفى", "Lost")}:</strong> {e("، ".join(y.get("gone") or []) if ar else ", ".join(y.get("gone") or []))}</p>' if y.get("gone") else "")
+                 + (f'<p>🌱 {e(y.get("survived"))}</p>' if y.get("survived") else "") + (rich(y.get("more")) if y.get("more") else "") + srcs(x) + "</div>")
+    o.append(f'<h2>{t("اختفت في زمن الإنسان", "Gone in human times")}</h2>')
+    for x in human:
+        y = x[lang]
+        o.append(f'<div class="fig" style="margin:12px 0"><b>{x.get("emoji","")} {e(x.get("year"))}</b><h3 style="margin:6px 0">{e(y.get("name"))}</h3><small>📍 {e(y.get("where"))}</small>'
+                 f'<p>{e(y.get("when"))}</p>{rich(y.get("about"))}<p><strong>{t("السبب", "Cause")}:</strong> {e(y.get("cause"))}</p>' + (rich(y.get("more")) if y.get("more") else "") + srcs(x) + "</div>")
+    if six: o.append(f'<div class="voice">{rich(six.get(lang))}</div>' + srcs(six))
+    return "\n".join(o)
+if EXT.get("EXT_MASS"):
+    alt_x = {"ar": BASE + "x/", "en": BASE + "en/x/", "x-default": BASE + "x/"}
+    os.makedirs("x", exist_ok=True); os.makedirs("en/x", exist_ok=True)
+    go_x = lambda q: ('<script>if(!/bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|twitter|discord|linkedin|skype|preview|lighthouse|headless/i.test(navigator.userAgent)){'
+                      'document.documentElement.style.background="#0b1712";document.write("<style>body{visibility:hidden}</style>");' f'location.replace("/{q}")}}</script>\n')
+    with open("x/index.html", "w", encoding="utf8") as fh:
+        fh.write(head("الانقراضات الكبرى في تاريخ الأرض | شهود", "الانقراضات الخمسة الكبرى بالترتيب وأسبابها وحجم خسائرها، وكائنات انقرضت في زمن الإنسان من الدودو إلى دلفين اليانغتسي، وهل نعيش الانقراض السادس؟", BASE + "x/", "", go_x("?x=1"), "ar", alt_x)
+                 + '<main class="wrap"><article>' + ext_page("ar") + f'<a class="cta" href="{BASE}?x=1">اقرأ في شهود ←</a></article></main>' + FOOT)
+    with open("en/x/index.html", "w", encoding="utf8") as fh:
+        fh.write(head("The great extinctions in Earth's history | Shuhud", "The Big Five mass extinctions in order, their causes and losses, species lost in human times from the dodo to the Yangtze river dolphin, and whether we are living through a sixth extinction.", BASE + "en/x/", "", go_x("?x=1&lang=en"), "en", alt_x)
+                 + '<main class="wrap"><article lang="en" dir="ltr" style="text-align:left">' + ext_page("en") + f'<a class="cta" href="{BASE}?x=1&amp;lang=en">Read on Shuhud →</a></article></main>' + FOOT_EN)
+
 # sitemap
 today = datetime.date.today().isoformat()
 urls = [f"  <url><loc>{BASE}</loc><lastmod>{today}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>",
@@ -541,6 +583,9 @@ if reserves:
             urls.append(f"  <url><loc>{BASE}en/r/{rs_slug(r)}</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
     if rs_en_files:
         urls.append(f"  <url><loc>{BASE}en/r/</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
+if EXT.get("EXT_MASS"):
+    urls.append(f"  <url><loc>{BASE}x/</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
+    urls.append(f"  <url><loc>{BASE}en/x/</loc><lastmod>{today}</lastmod><priority>0.7</priority></url>")
 with open("sitemap.xml", "w", encoding="utf8") as fh:
     fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>\n")
 print(len(built), "piece pages,", len(en_files), "English,", len(reserves), "reserve pages,", len(rs_en_files), "English")
