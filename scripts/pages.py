@@ -540,6 +540,7 @@ def ext_page(lang):
          f'<h2>{t("الانقراضات الخمسة الكبرى", "The Big Five mass extinctions")}</h2>']
     for x in mass:
         y = x[lang]
+        if x.get("img"): o.append(f'<figure style="margin:16px 0 0"><img src="{e(x["img"])}" alt="{e(y.get("name"))}" loading="lazy"><figcaption>{e(y.get("credit"))}</figcaption></figure>')
         o.append(f'<div class="fig" style="margin:12px 0"><small>{e(y.get("when"))} · 🕰️ {e(x.get("clock"))}</small><h3 style="margin:6px 0">{x.get("emoji","")} {e(y.get("name"))}</h3><b>{e(y.get("lost"))}</b>'
                  f'<p><strong>{t("السبب", "Cause")}:</strong> {e(y.get("cause"))}</p>{rich(y.get("about"))}'
                  + (f'<p><strong>{t("من اختفى", "Lost")}:</strong> {e("، ".join(y.get("gone") or []) if ar else ", ".join(y.get("gone") or []))}</p>' if y.get("gone") else "")
@@ -547,6 +548,7 @@ def ext_page(lang):
     o.append(f'<h2>{t("اختفت في زمن الإنسان", "Gone in human times")}</h2>')
     for x in human:
         y = x[lang]
+        if x.get("img"): o.append(f'<figure style="margin:16px 0 0"><img src="{e(x["img"])}" alt="{e(y.get("name"))}" loading="lazy"><figcaption>{e(y.get("credit"))}</figcaption></figure>')
         o.append(f'<div class="fig" style="margin:12px 0"><b>{x.get("emoji","")} {e(x.get("year"))}</b><h3 style="margin:6px 0">{e(y.get("name"))}</h3><small>📍 {e(y.get("where"))}</small>'
                  f'<p>{e(y.get("when"))}</p>{rich(y.get("about"))}<p><strong>{t("السبب", "Cause")}:</strong> {e(y.get("cause"))}</p>' + (rich(y.get("more")) if y.get("more") else "") + srcs(x) + "</div>")
     if six: o.append(f'<div class="voice">{rich(six.get(lang))}</div>' + srcs(six))

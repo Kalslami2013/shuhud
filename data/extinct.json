@@ -16,7 +16,8 @@
      "كثير من ثلاثيات الفصوص",
      "الجرابتوليت"
     ],
-    "survived": "تعافى التنوع إلى مستواه السابق خلال نحو 5 ملايين سنة من العصر السيلوري."
+    "survived": "تعافى التنوع إلى مستواه السابق خلال نحو 5 ملايين سنة من العصر السيلوري.",
+    "credit": "مجسم متحفي لقاع بحر أوردوفيشي قبل الكارثة · James St. John، CC BY 2.0، Wikimedia Commons"
    },
    "en": {
     "name": "End-Ordovician extinction",
@@ -29,14 +30,16 @@
      "Many trilobites",
      "Graptolites"
     ],
-    "survived": "Diversity recovered to its former level within about 5 million years of the Silurian."
+    "survived": "Diversity recovered to its former level within about 5 million years of the Silurian.",
+    "credit": "Museum diorama of a Late Ordovician seafloor · James St. John, CC BY 2.0, Wikimedia Commons"
    },
    "src": [
     [
      "Wikipedia: Late Ordovician mass extinction",
      "https://en.wikipedia.org/wiki/Ordovician%E2%80%93Silurian_extinction_events"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Diorama_of_a_Cincinnatian_seafloor_%28Late_Ordovician%29_%2844702899525%29.jpg/960px-Diorama_of_a_Cincinnatian_seafloor_%28Late_Ordovician%29_%2844702899525%29.jpg"
   },
   {
    "id": "devonian",
@@ -53,7 +56,8 @@
      "الكائنات البانية للشعاب، التي اختفت تقريبًا كلها",
      "كثير من ثلاثيات الفصوص وذوات القوائم العضدية"
     ],
-    "survived": "اليابسة نجت إلى حد كبير، ومنها بدأت الفقاريات زحفها خارج الماء."
+    "survived": "اليابسة نجت إلى حد كبير، ومنها بدأت الفقاريات زحفها خارج الماء.",
+    "credit": "مجسم سمكة دنكليوستيوس المدرّعة، من ضحايا الانقراض الديفوني، متحف التاريخ الطبيعي الأمريكي · Ryan Schwark، CC0"
    },
    "en": {
     "name": "Late Devonian extinction",
@@ -65,14 +69,16 @@
      "Reef-building organisms, which almost entirely vanished",
      "Many trilobites and brachiopods"
     ],
-    "survived": "Life on land largely survived, and from it vertebrates began their move out of the water."
+    "survived": "Life on land largely survived, and from it vertebrates began their move out of the water.",
+    "credit": "Model of Dunkleosteus, an armoured fish lost in the Devonian extinction, AMNH · Ryan Schwark, CC0"
    },
    "src": [
     [
      "Wikipedia: Late Devonian extinction",
      "https://en.wikipedia.org/wiki/Late_Devonian_extinction"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Dunkleosteus_model_AMNH.jpg/960px-Dunkleosteus_model_AMNH.jpg"
   },
   {
    "id": "permian",
@@ -90,7 +96,8 @@
      "معظم الشعاب المرجانية القديمة",
      "أغلب الزواحف الشبيهة بالثدييات"
     ],
-    "survived": "من الناجين القلائل خرجت سلالات الديناصورات والثدييات لاحقًا."
+    "survived": "من الناجين القلائل خرجت سلالات الديناصورات والثدييات لاحقًا.",
+    "credit": "هضبة بوتورانا في سيبيريا، من بقايا حمم «مصاطب سيبيريا» · jxandreani، CC BY 2.0، Wikimedia Commons"
    },
    "en": {
     "name": "End-Permian extinction, “the Great Dying”",
@@ -103,14 +110,16 @@
      "Most ancient coral reefs",
      "Most mammal-like reptiles"
     ],
-    "survived": "From the few survivors the lineages of dinosaurs and mammals later emerged."
+    "survived": "From the few survivors the lineages of dinosaurs and mammals later emerged.",
+    "credit": "Putorana Plateau, Siberia, built from the Siberian Traps lava · jxandreani, CC BY 2.0, Wikimedia Commons"
    },
    "src": [
     [
      "Wikipedia: Permian–Triassic extinction event",
      "https://en.wikipedia.org/wiki/Permian%E2%80%93Triassic_extinction_event"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Plato_Putorana_01.jpg/960px-Plato_Putorana_01.jpg"
   },
   {
    "id": "triassic",
@@ -128,7 +137,8 @@
      "كثير من أقارب التماسيح الأوائل",
      "نباتات عريضة الأوراق"
     ],
-    "survived": "الديناصورات نجت وتوسعت لتسود اليابسة."
+    "survived": "الديناصورات نجت وتوسعت لتسود اليابسة.",
+    "credit": "منحدرات باليسيدز في نيوجيرسي، صخور من صهارة ذلك الانقراض · CrankyScorpion، CC BY-SA 3.0، Wikimedia Commons"
    },
    "en": {
     "name": "End-Triassic extinction",
@@ -141,7 +151,8 @@
      "Many early crocodile relatives",
      "Broad-leaved plants"
     ],
-    "survived": "Dinosaurs survived and spread to dominate the land."
+    "survived": "Dinosaurs survived and spread to dominate the land.",
+    "credit": "The Palisades, New Jersey, rock from the magma of that extinction · CrankyScorpion, CC BY-SA 3.0, Wikimedia Commons"
    },
    "src": [
     [
@@ -152,7 +163,8 @@
      "Live Science",
      "https://www.livescience.com/28076-mega-volcanoes-caused-mass-extinction.html"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Palisades_Sill_near_Englewood_Cliffs.jpg"
   },
   {
    "id": "cretaceous",
@@ -170,7 +182,8 @@
      "الزواحف البحرية الكبيرة",
      "الأمونيات"
     ],
-    "survived": "نجت الطيور، وهي سليلة الديناصورات، والثدييات الصغيرة والتماسيح والسلاحف، ومن الثدييات جاء الإنسان بعد ذلك بعشرات ملايين السنين."
+    "survived": "نجت الطيور، وهي سليلة الديناصورات، والثدييات الصغيرة والتماسيح والسلاحف، ومن الثدييات جاء الإنسان بعد ذلك بعشرات ملايين السنين.",
+    "credit": "تصور فني لاصطدام كويكب تشيكشولوب · Donald E. Davis / NASA، ملكية عامة"
    },
    "en": {
     "name": "End-Cretaceous extinction, the end of the dinosaurs",
@@ -183,14 +196,16 @@
      "Large marine reptiles",
      "Ammonites"
     ],
-    "survived": "Birds, the descendants of dinosaurs, survived, along with small mammals, crocodiles and turtles; tens of millions of years later humans came from those mammals."
+    "survived": "Birds, the descendants of dinosaurs, survived, along with small mammals, crocodiles and turtles; tens of millions of years later humans came from those mammals.",
+    "credit": "Artist's impression of the Chicxulub impact · Donald E. Davis / NASA, public domain"
    },
    "src": [
     [
      "Wikipedia: Cretaceous–Paleogene extinction event",
      "https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Chicxulub_impact_-_artist_impression.jpg/960px-Chicxulub_impact_-_artist_impression.jpg"
   }
  ],
  "EXT_HUMAN": [
@@ -203,21 +218,24 @@
     "where": "جزيرة موريشيوس في المحيط الهندي",
     "when": "آخر مشاهدة موثوقة 1662، وانقرض نحو 1681",
     "cause": "صيد البحارة، وحيوانات جلبها البشر كالجرذان والخنازير والقرود أكلت بيضه على الأرض، وقطع الغابات.",
-    "about": "طائر ضخم لا يطير، عاش آمنًا بلا مفترسات، فلم يعرف الخوف من الإنسان. صار بعد اختفائه رمزًا عالميًا للانقراض."
+    "about": "طائر ضخم لا يطير، عاش آمنًا بلا مفترسات، فلم يعرف الخوف من الإنسان. صار بعد اختفائه رمزًا عالميًا للانقراض.",
+    "credit": "لوحة للدودو من القرن السابع عشر، يُرجح أنها لرولانت سافري · ملكية عامة"
    },
    "en": {
     "name": "Dodo",
     "where": "Mauritius, Indian Ocean",
     "when": "Last reliable sighting 1662; extinct around 1681",
     "cause": "Hunting by sailors, introduced animals such as rats, pigs and monkeys that ate its ground-laid eggs, and forest clearing.",
-    "about": "A large flightless bird that lived without predators and never learned to fear people. After it vanished it became the world's symbol of extinction."
+    "about": "A large flightless bird that lived without predators and never learned to fear people. After it vanished it became the world's symbol of extinction.",
+    "credit": "17th-century painting of a dodo, probably by Roelant Savery · public domain"
    },
    "src": [
     [
      "Wikipedia: Dodo",
      "https://en.wikipedia.org/wiki/Dodo"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Edwards%27_Dodo.jpg/960px-Edwards%27_Dodo.jpg"
   },
   {
    "id": "steller",
@@ -228,21 +246,24 @@
     "where": "جزر القائد في بحر بيرينغ",
     "when": "انقرضت 1768، بعد 27 عامًا فقط من اكتشافها عام 1741",
     "cause": "صيدها للحم والدهن على أيدي بحارة وصيادي الفراء.",
-    "about": "من أقارب الأطوم وخراف البحر، وكانت أضخمها، يتجاوز طولها ثمانية أمتار وترعى عشب البحر قرب الشاطئ. أسرع انقراض موثق لحيوان كبير بعد اكتشافه."
+    "about": "من أقارب الأطوم وخراف البحر، وكانت أضخمها، يتجاوز طولها ثمانية أمتار وترعى عشب البحر قرب الشاطئ. أسرع انقراض موثق لحيوان كبير بعد اكتشافه.",
+    "credit": "مجسم بقرة البحر ستيلر بالحجم الطبيعي · KKPCW، CC BY-SA 4.0، Wikimedia Commons"
    },
    "en": {
     "name": "Steller's sea cow",
     "where": "Commander Islands, Bering Sea",
     "when": "Extinct by 1768, only 27 years after its discovery in 1741",
     "cause": "Hunted for meat and fat by sailors and fur hunters.",
-    "about": "A relative of the dugong and the manatees, and the largest of them, over eight metres long, grazing kelp near the shore. The fastest documented extinction of a large animal after its discovery."
+    "about": "A relative of the dugong and the manatees, and the largest of them, over eight metres long, grazing kelp near the shore. The fastest documented extinction of a large animal after its discovery.",
+    "credit": "Life-size model of Steller's sea cow · KKPCW, CC BY-SA 4.0, Wikimedia Commons"
    },
    "src": [
     [
      "Wikipedia: Steller's sea cow",
      "https://en.wikipedia.org/wiki/Steller%27s_sea_cow"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/The_Model_of_Steller%27s_sea_cow_%28Hydrodamalis_gigas%29.jpg/960px-The_Model_of_Steller%27s_sea_cow_%28Hydrodamalis_gigas%29.jpg"
   },
   {
    "id": "greatauk",
@@ -253,21 +274,24 @@
     "where": "سواحل شمال الأطلسي",
     "when": "قُتل آخر زوج معروف في جزيرة إلديي بآيسلندا عام 1844",
     "cause": "الصيد الكثيف للحمه وريشه ودهنه، ثم لجامعي العينات حين صار نادرًا.",
-    "about": "طائر بحري لا يطير، يشبه البطريق، وكان يعشش بأعداد كبيرة على جزر الأطلسي الشمالي."
+    "about": "طائر بحري لا يطير، يشبه البطريق، وكان يعشش بأعداد كبيرة على جزر الأطلسي الشمالي.",
+    "credit": "الأوك العظيم بريشة أودوبون، 1836 · المعرض الوطني للفنون، CC0"
    },
    "en": {
     "name": "Great auk",
     "where": "North Atlantic coasts",
     "when": "The last known pair was killed on Eldey, Iceland, in 1844",
     "cause": "Heavy hunting for meat, feathers and oil, then by specimen collectors once it became rare.",
-    "about": "A flightless, penguin-like seabird that once nested in great numbers on North Atlantic islands."
+    "about": "A flightless, penguin-like seabird that once nested in great numbers on North Atlantic islands.",
+    "credit": "Great auk after John James Audubon, 1836 · National Gallery of Art, CC0"
    },
    "src": [
     [
      "Wikipedia: Great auk",
      "https://en.wikipedia.org/wiki/Great_auk"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Robert_Havell_after_John_James_Audubon%2C_Great_Auk%2C_1836%2C_NGA_32482.jpg/960px-Robert_Havell_after_John_James_Audubon%2C_Great_Auk%2C_1836%2C_NGA_32482.jpg"
   },
   {
    "id": "passengerpigeon",
@@ -278,14 +302,16 @@
     "where": "غابات أمريكا الشمالية",
     "when": "ماتت «مارثا»، آخر حمامة منه، في حديقة حيوان سينسيناتي في 1 سبتمبر 1914",
     "cause": "صيد تجاري بالجملة لحمًا رخيصًا، وقطع الغابات التي كان يعشش فيها.",
-    "about": "كان أكثر الطيور عددًا في العالم، بالمليارات، وكانت أسرابه تحجب الشمس ساعات. اختفى من البرية نحو عام 1900."
+    "about": "كان أكثر الطيور عددًا في العالم، بالمليارات، وكانت أسرابه تحجب الشمس ساعات. اختفى من البرية نحو عام 1900.",
+    "credit": "حمامة مهاجرة محنطة في متحف تولوز · Didier Descouens، CC BY-SA 3.0، Wikimedia Commons"
    },
    "en": {
     "name": "Passenger pigeon",
     "where": "Forests of North America",
     "when": "Martha, the last of its kind, died at Cincinnati Zoo on 1 September 1914",
     "cause": "Mass commercial hunting for cheap meat, and clearing of the forests where it nested.",
-    "about": "Once the most numerous bird on Earth, numbering in the billions, its flocks darkened the sky for hours. It vanished from the wild around 1900."
+    "about": "Once the most numerous bird on Earth, numbering in the billions, its flocks darkened the sky for hours. It vanished from the wild around 1900.",
+    "credit": "Mounted passenger pigeon, Toulouse museum · Didier Descouens, CC BY-SA 3.0, Wikimedia Commons"
    },
    "src": [
     [
@@ -296,7 +322,8 @@
      "Natural History Museum",
      "https://www.nhm.ac.uk/discover/passenger-pigeon-how-the-worlds-most-common-bird-went-extinct.html"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Pigeon_migrateur_MHNT.jpg/960px-Pigeon_migrateur_MHNT.jpg"
   },
   {
    "id": "thylacine",
@@ -307,21 +334,24 @@
     "where": "جزيرة تسمانيا في أستراليا",
     "when": "مات آخر حيوان معروف في حديقة حيوان هوبارت عام 1936",
     "cause": "مكافآت حكومية لقتله بحجة حماية الأغنام، مع فقدان موطنه والأمراض.",
-    "about": "أكبر الجرابيات المفترسة في العصر الحديث، بخطوط على ظهره تشبه خطوط النمر. أُعلن منقرضًا رسميًا عام 1982."
+    "about": "أكبر الجرابيات المفترسة في العصر الحديث، بخطوط على ظهره تشبه خطوط النمر. أُعلن منقرضًا رسميًا عام 1982.",
+    "credit": "آخر نمر تسماني معروف في حديقة حيوان بوماريس بهوبارت، 1936 · Ben Sheppard، ملكية عامة"
    },
    "en": {
     "name": "Thylacine (Tasmanian tiger)",
     "where": "Tasmania, Australia",
     "when": "The last known animal died at Hobart Zoo in 1936",
     "cause": "Government bounties to kill it in the name of protecting sheep, along with habitat loss and disease.",
-    "about": "The largest carnivorous marsupial of modern times, with tiger-like stripes on its back. Officially declared extinct in 1982."
+    "about": "The largest carnivorous marsupial of modern times, with tiger-like stripes on its back. Officially declared extinct in 1982.",
+    "credit": "The last known thylacine at Beaumaris Zoo, Hobart, 1936 · Ben Sheppard, public domain"
    },
    "src": [
     [
      "Wikipedia: Thylacine",
      "https://en.wikipedia.org/wiki/Thylacine"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Thylacine_at_Beaumaris_Zoo%2C_1936_%28NS4371-1-1063%29.jpg/960px-Thylacine_at_Beaumaris_Zoo%2C_1936_%28NS4371-1-1063%29.jpg"
   },
   {
    "id": "goldentoad",
@@ -332,21 +362,24 @@
     "where": "غابة مونتيفيردي الضبابية في كوستاريكا",
     "when": "آخر مشاهدة 1989، وأُعلن منقرضًا 2004",
     "cause": "يُرجَّح أنه فطر قاتل للبرمائيات مع جفاف وحرارة غير معتادين.",
-    "about": "علجوم برتقالي لامع لا يعيش إلا في رقعة جبلية صغيرة. من أوائل الانقراضات التي رُبطت بتغيّر المناخ."
+    "about": "علجوم برتقالي لامع لا يعيش إلا في رقعة جبلية صغيرة. من أوائل الانقراضات التي رُبطت بتغيّر المناخ.",
+    "credit": "العلجوم الذهبي في مونتيفيردي، ثمانينيات القرن العشرين · Charles H. Smith / هيئة الأسماك والحياة البرية الأمريكية، ملكية عامة"
    },
    "en": {
     "name": "Golden toad",
     "where": "Monteverde cloud forest, Costa Rica",
     "when": "Last seen 1989; declared extinct 2004",
     "cause": "Most likely a deadly amphibian fungus together with unusual drought and heat.",
-    "about": "A bright orange toad found only in a small mountain patch. One of the first extinctions linked to climate change."
+    "about": "A bright orange toad found only in a small mountain patch. One of the first extinctions linked to climate change.",
+    "credit": "Golden toad at Monteverde, 1980s · Charles H. Smith / US Fish and Wildlife Service, public domain"
    },
    "src": [
     [
      "Wikipedia: Golden toad",
      "https://en.wikipedia.org/wiki/Golden_toad"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Bufo_periglenes1-corrected.jpg/960px-Bufo_periglenes1-corrected.jpg"
   },
   {
    "id": "baiji",
@@ -357,21 +390,24 @@
     "where": "نهر اليانغتسي في الصين",
     "when": "لم يعثر عليه مسح شامل عام 2006، فأُعلن منقرضًا وظيفيًا",
     "cause": "الصيد العرضي في الشباك، والسدود، وحركة السفن الكثيفة، والتلوث.",
-    "about": "عاش في النهر نحو 20 مليون سنة، وكان أول نوع من الحيتانيات يختفي بسبب الإنسان."
+    "about": "عاش في النهر نحو 20 مليون سنة، وكان أول نوع من الحيتانيات يختفي بسبب الإنسان.",
+    "credit": "عينة «تشي تشي»، آخر دلفين بايجي عاش في الأسر حتى 2002 · Huangdan2060، CC BY 3.0، Wikimedia Commons"
    },
    "en": {
     "name": "Baiji (Yangtze river dolphin)",
     "where": "Yangtze River, China",
     "when": "A full survey in 2006 found none; declared functionally extinct",
     "cause": "Bycatch in fishing nets, dams, heavy shipping traffic and pollution.",
-    "about": "It lived in the river for some 20 million years and was the first cetacean driven to extinction by humans."
+    "about": "It lived in the river for some 20 million years and was the first cetacean driven to extinction by humans.",
+    "credit": "Specimen of Qi Qi, the last captive baiji, who lived until 2002 · Huangdan2060, CC BY 3.0, Wikimedia Commons"
    },
    "src": [
     [
      "Wikipedia: Baiji",
      "https://en.wikipedia.org/wiki/Baiji"
     ]
-   ]
+   ],
+   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Chinese_Baiji_dolphin_specimen_Qi_Qi.jpg/960px-Chinese_Baiji_dolphin_specimen_Qi_Qi.jpg"
   }
  ],
  "EXT_SIXTH": {
