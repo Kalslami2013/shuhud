@@ -408,6 +408,8 @@ body:not(.en) .sp .sci{text-align:right}
 .pt-visit{font-size:11px;color:var(--leaf);margin-top:2px}.pt>a:hover .pt-visit{text-decoration:underline}
 .pt-del{position:absolute;top:6px;inset-inline-end:6px;padding:2px 8px;font-size:11px}
 .subx{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 auto 22px;padding:12px 16px;max-width:640px;border:1px solid rgba(242,184,75,.45);border-radius:14px;background:rgba(14,26,20,.85);text-align:center}.subx-t{font-size:14.5px;color:var(--parchment)}.subx .btn{text-decoration:none}.subx-in{margin:12px 0 6px;max-width:none}
+.m-note{font-size:12.5px;color:var(--dim);align-self:center}
+.cap-box{margin-top:14px;border:1px solid rgba(242,184,75,.35);border-radius:14px;padding:12px 14px;background:rgba(14,26,20,.6);display:grid;gap:12px}.cap-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.cap-lg{display:flex;gap:6px}.cap-row{display:grid;gap:6px}.cap-l{font-size:13px;color:var(--amber)}.cap-n{color:var(--dim);font-size:12px}.cap-row textarea{width:100%;box-sizing:border-box;background:rgba(0,0,0,.25);color:var(--parchment);border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;font-size:14px;line-height:1.7;resize:vertical}.cap-row .btn{justify-self:start}
 .sc-head{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.sc-head h3{margin:0}#s-wrap{text-align:center;margin-bottom:26px}
 .sc-row{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}.sc{position:relative;display:inline-flex}.sc a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--bark);border:1px solid var(--line);color:var(--ink,#e8efe9);transition:transform .15s,border-color .15s}.sc a:hover{transform:translateY(-2px);border-color:var(--leaf)}.sc svg{width:20px;height:20px;fill:currentColor}
 .sc-del{position:absolute;top:-8px;inset-inline-end:-10px;padding:0 6px;font-size:10px;line-height:18px}
@@ -879,11 +881,12 @@ body.en .hero>p{max-width:54em}
     <div id="st-body"></div>
     <div class="st-actions" id="st-actions"></div>
     <p class="note" id="st-note"></p>
+    <div id="st-cap"></div>
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795036160"</script>
-<script src="local.js?v=1795036160"></script>
+<script>window.SHUHUD_BUILD="1795039303"</script>
+<script src="local.js?v=1795039303"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2677,6 +2680,31 @@ function setMode(m){
 }
 function curSize(){const L=SIZES[stMode];const s=L.find(x=>x[0]===$("#st-size").value)||L[0];return[s[1],s[2]]}
 const curRes=()=>+$("#st-res").value||1;
+/* «نص المنشور»: ready-to-paste post text for each platform, built from the piece itself (no AI, no credit) */
+let capLang=null;
+function capTag(t){return "#"+String(t||"").replace(/&/g,"و").replace(/[^\p{L}\p{N}]+/gu,"_").replace(/^_+|_+$/g,"")}
+function capTexts(raw,lg){const en=lg==="en"&&raw.en,i=en?{...raw,...raw.en}:raw,sid=(typeof SHORTID==="object"&&SHORTID[raw.id])||"";
+  const link=en?(sid?`https://alshuhud.org/en/p/${sid}`:`https://alshuhud.org/?p=${encodeURIComponent(raw.id)}&lang=en`):(sid?`https://alshuhud.org/p/${sid}`:`https://alshuhud.org/?p=${encodeURIComponent(raw.id)}`);
+  const cat=raw.category||"",catEn=(typeof CAT_EN==="object"&&CAT_EN[cat])||"";
+  const tags=en?["#Shuhud",catEn?capTag(catEn.replace(/&/g,"and").replace(/\b\w/g,c=>c.toUpperCase()).replace(/\s+/g,"")):""]:["#شهود",cat?capTag(cat):""];const tg=tags.filter(Boolean).join(" ");
+  const f=(i.figures||[])[0],nar=(i.animalName||raw.animalName||"").trim();
+  const head=String(i.headline||"").trim(),ang=String(i.angle||"").trim();
+  let shortT=`${head}\n\n${ang}`;const room=280-24-tg.length-4;if(shortT.length>room)shortT=shortT.slice(0,room-1).replace(/\s+\S*$/,"")+"…";
+  shortT+=`\n\n${link}\n${tg}`;
+  const L2=[head,"",ang];
+  if(f)L2.push("",`📊 ${f.value}${f.label?": "+f.label:""}${f.source?` (${f.source})`:""}`);
+  if(nar)L2.push("",en?`🐾 Told by: ${nar}`:`🐾 يرويها: ${nar}`);
+  if(i.question)L2.push("",`❓ ${i.question}`);
+  L2.push("",en?`Read the full testimony, with every source: ${link}`:`الشهادة كاملة بمصادرها: ${link}`,"",en?`📬 Weekly newsletter: alshuhud.substack.com`:`📬 النشرة الأسبوعية: alshuhud.substack.com`,"",tg);
+  return {short:shortT,long:L2.join("\n"),link}}
+function renderCap(){const box=document.getElementById("st-cap");if(!box)return;if(!stItem||stItem.id==="draft"){box.innerHTML="";return}
+  const lg=capLang||(isEn()&&stItem.en?"en":"ar"),t=capTexts(stItem,lg),en=isEn();
+  box.innerHTML=`<div class="cap-box"><div class="cap-h"><b>${T("capH")}</b><span class="cap-lg"><button type="button" class="chip" data-caplg="ar" aria-pressed="${lg==="ar"}">عربي</button>${stItem.en?`<button type="button" class="chip" data-caplg="en" aria-pressed="${lg==="en"}">English</button>`:""}</span></div>
+    <div class="cap-row"><div class="cap-l">${T("capShort")} <span class="cap-n">${t.short.length-t.link.length+23}/280</span></div><textarea readonly dir="${lg==="en"?"ltr":"rtl"}" rows="5">${esc(t.short)}</textarea><button type="button" class="btn" data-capcp="short">${T("capCopy")}</button></div>
+    <div class="cap-row"><div class="cap-l">${T("capLong")}</div><textarea readonly dir="${lg==="en"?"ltr":"rtl"}" rows="10">${esc(t.long)}</textarea><button type="button" class="btn" data-capcp="long">${T("capCopy")}</button></div></div>`}
+document.addEventListener("click",async e=>{const l=e.target.closest("[data-caplg]");if(l){capLang=l.dataset.caplg;renderCap();return}
+  const c=e.target.closest("[data-capcp]");if(!c||!stItem)return;const lg=capLang||(isEn()&&stItem.en?"en":"ar"),t=capTexts(stItem,lg)[c.dataset.capcp];
+  try{await navigator.clipboard.writeText(t);toast(T("capDone"))}catch(_){const ta=c.parentElement.querySelector("textarea");ta.select();try{document.execCommand("copy");toast(T("capDone"))}catch(__){}}});
 async function renderStudio(){
   if(stAbort)stAbort();
   const body=$("#st-body"),act=$("#st-actions"),note=$("#st-note");clearUrls();
@@ -2686,6 +2714,7 @@ async function renderStudio(){
   [...$("#st-theme").options].forEach(o=>o.textContent=o.value==="auto"?T("themes").auto+" ("+T("themes")[themeOf(stItem)]+")":T("themes")[o.value]);
   [...$("#st-tone").options].forEach(o=>o.textContent=T("tones2")[o.value]);[...$("#st-style").options].forEach(o=>o.textContent=T("styles")[o.value]);$("#st-theme-w").hidden=PRO();LIGHTMODE=toneOf(stItem)==="light";
   useTheme($("#st-theme").value==="auto"?themeOf(stItem):$("#st-theme").value);
+  try{renderCap()}catch(_){}
   body.innerHTML=`<div class="thinking"><span class="walker">🐾</span>${T("drawing")}</div>`;act.innerHTML="";note.textContent=downloads?"":T("noSave");
   await fontsReady();
   if(!stPhoto&&stItem.imageUrl&&!stItem._noPhoto)stPhoto=await loadImg(stItem.imageUrl).catch(()=>null);
@@ -3245,7 +3274,7 @@ $("#sp-photo-in").onchange=async e=>{const f=e.target.files[0];e.target.value=""
 Object.assign(DICT.ar,{
   navMedia:"ميديا",navAbout:"من نحن",
   mediaIntro:"ما تنتجه منصة شهود من صور وبطاقات وفيديو وكاروسيل وإنفوجراف.",
-  mAll:"الكل",mTypes:{image:"صور",card:"بطاقات",video:"فيديو",carousel:"كاروسيل",info:"إنفوجراف"},
+  capH:"📝 نص المنشور",capShort:"قصير (إكس)",capLong:"طويل (فيسبوك، إنستغرام، لينكدإن)",capCopy:"📋 نسخ",capDone:"نُسخ النص",mLangAll:"🌐 كل اللغات",mLangNone:"لا توجد مواد بالعربية بعد، فتظهر كل المواد.",mAll:"الكل",mTypes:{image:"صور",card:"بطاقات",video:"فيديو",carousel:"كاروسيل",info:"إنفوجراف"},
   mAddBtn:"➕ أضف مادة",mAddTitle:"أضف مادة إلى ميديا",mType:"النوع",mTitle:"العنوان",mCaption:"وصف قصير (اختياري)",mFiles:"الملفات (صورة أو أكثر، أو فيديو)",
   mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تظهر المادة في الصفحة العامة بعد «زامن النسخة المستقلة».",
   mSave:"انشر في ميديا",mSaving:"تُرفع الملفات…",mSaved:"نُشرت في ميديا",mFail:"تعذر النشر",mNeed:"اختر ملفاً وأضف عنواناً",mTooBig:"الملف أكبر من الحد المسموح للنشر في ميديا",
@@ -3280,7 +3309,7 @@ Object.assign(DICT.ar,{
 Object.assign(DICT.en,{
   navMedia:"Media",navAbout:"About us",
   mediaIntro:"Photos, cards, videos, carousels and infographics produced by Shuhud.",
-  mAll:"All",mTypes:{image:"Photos",card:"Cards",video:"Video",carousel:"Carousels",info:"Infographics"},
+  capH:"📝 Post text",capShort:"Short (X)",capLong:"Long (Facebook, Instagram, LinkedIn)",capCopy:"📋 Copy",capDone:"Text copied",mLangAll:"🌐 All languages",mLangNone:"No English media yet, so everything is shown.",mAll:"All",mTypes:{image:"Photos",card:"Cards",video:"Video",carousel:"Carousels",info:"Infographics"},
   mAddBtn:"➕ Add an item",mAddTitle:"Add to Media",mType:"Type",mTitle:"Title",mCaption:"Short description (optional)",mFiles:"Files (one or more images, or a video)",
   mFilesNote:"20 MB per file. For a carousel pick several images in order. Items reach the public page after “Sync the standalone copy”.",
   mSave:"Publish to Media",mSaving:"Uploading…",mSaved:"Published to Media",mFail:"Couldn't publish",mNeed:"Pick a file and add a title",mTooBig:"A file is larger than the Media upload limit",
@@ -3309,7 +3338,7 @@ Object.assign(DICT.en,{
 <p>Une édition française est en préparation pour le Maghreb et l’Afrique francophone. Contact : kalslami2013@gmail.com</p></section>
 `
 });
-let media=[],mType="all",mArmed=null,mBusy=false;
+let media=[],mType="all",mArmed=null,mBusy=false,mAllLang=false;
 const M_TYPES=["image","card","video","carousel","info"];
 /* files uploaded inside Claude are copied to media/ on the public site by the sync task */
 const mSrc=f=>{const u=String(f.url||"");if(window.SHUHUD_STANDALONE)return u.startsWith("/_blob/")?"/media/"+f.id+(f.ext||""):/^media\//.test(u)?"/"+u:u;
@@ -3335,9 +3364,11 @@ function mergeMedia(){const seen=new Set(mediaDb.map(m=>m.id));media=[...mediaDb
 function renderMedia(){
   const g=$("#media-grid");if(!g)return;
   $("#media-add-btn").hidden=!canAddMedia();if(!canAddMedia())$("#media-add").hidden=true;if(typeof renderGh==="function")renderGh();
-  const cnt={};media.forEach(m=>cnt[m.type]=(cnt[m.type]||0)+1);
-  $("#media-chips").innerHTML=["all",...M_TYPES].filter(t=>t==="all"||cnt[t]).map(t=>`<button class="chip" type="button" aria-pressed="${t===mType}" data-mt="${t}">${t==="all"?T("mAll"):esc(T("mTypes")[t])}<span class="n">${t==="all"?media.length:cnt[t]}</span></button>`).join("");
-  const list=mType==="all"?media:media.filter(m=>m.type===mType);
+  const want=isEn()?"en":"ar",byLang=media.filter(m=>(m.lang||"ar")===want),fallback=!byLang.length&&media.length>0,editor=!READER;
+  const pool=(mAllLang&&editor)||fallback?media:byLang;
+  const cnt={};pool.forEach(m=>cnt[m.type]=(cnt[m.type]||0)+1);
+  $("#media-chips").innerHTML=["all",...M_TYPES].filter(t=>t==="all"||cnt[t]).map(t=>`<button class="chip" type="button" aria-pressed="${t===mType}" data-mt="${t}">${t==="all"?T("mAll"):esc(T("mTypes")[t])}<span class="n">${t==="all"?pool.length:cnt[t]}</span></button>`).join("")+(editor&&!fallback?`<button class="chip" type="button" aria-pressed="${mAllLang}" data-mlang="1">${T("mLangAll")}</button>`:"")+(fallback?`<span class="m-note">${isEn()?T("mLangNone"):T("mLangNone")}</span>`:"");
+  const list=mType==="all"?pool:pool.filter(m=>m.type===mType);
   g.innerHTML=list.length?list.map(mediaHTML).join(""):`<div class="card empty"><div class="big">🎞️</div>${T("mEmpty")}</div>`;
   /* every carousel opens on its first card (the title card), and the counter follows the swipe */
   g.querySelectorAll(".md-car").forEach(c=>{const n=c.parentElement.querySelector(".md-n"),tot=c.children.length;
@@ -3365,7 +3396,7 @@ function lbGo(d){if(!lb)return;const k=lb.k+d;if(k<0||k>=lb.files.length)return;
 function lbClose(){const box=$("#lb");if(box)box.hidden=true;lb=null;document.body.style.overflow=""}
 addEventListener("keydown",e=>{if(!lb)return;if(e.key==="Escape")lbClose();else if(e.key==="ArrowLeft")lbGo(lb.dir==="rtl"?1:-1);else if(e.key==="ArrowRight")lbGo(lb.dir==="rtl"?-1:1)});
 $("#media-grid").addEventListener("click",e=>{const im=e.target.closest("[data-lb]");if(!im)return;const m=media.find(x=>x.id===im.closest(".md").dataset.mid);if(m){const imgs=(m.files||[]).filter(f=>!String(f.mime||"").startsWith("video/"));lbOpen(m,Math.min(+im.dataset.lb,imgs.length-1))}});
-$("#media-chips").addEventListener("click",e=>{const b=e.target.closest("[data-mt]");if(!b)return;mType=b.dataset.mt;renderMedia()});
+$("#media-chips").addEventListener("click",e=>{if(e.target.closest("[data-mlang]")){mAllLang=!mAllLang;renderMedia();return}const b=e.target.closest("[data-mt]");if(!b)return;mType=b.dataset.mt;renderMedia()});
 $("#media-add-btn").onclick=()=>{$("#media-add").hidden=!$("#media-add").hidden};
 $("#media-grid").addEventListener("click",async e=>{const b=e.target.closest("[data-md]");if(!b)return;const id=b.closest(".md").dataset.mid;const m=media.find(x=>x.id===id);if(!m)return;
   if(mArmed!==id){mArmed=id;renderMedia();setTimeout(()=>{if(mArmed===id){mArmed=null;renderMedia()}},4000);return}
