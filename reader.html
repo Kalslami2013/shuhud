@@ -474,6 +474,7 @@ body.reader .rc .cnt.none{visibility:hidden}
 #ids-menu .paw{filter:brightness(0) invert(1);margin-inline-end:6px}
 #ids-menu button.on{background:var(--moss);border-color:var(--leaf)}
 @keyframes idsIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+nav.main button[data-q]::after{content:"⏳ " attr(data-q);margin-inline-start:6px;font-size:.78em;background:var(--amber);color:#1d1406;border-radius:999px;padding:1px 7px;font-weight:700}
 nav.main button[data-view="ids"]::after{content:" ▾";font-size:.8em;opacity:.75}
 .ids-seg{display:none!important}
 .ids-seg{display:inline-flex;gap:4px;padding:4px;margin:0 0 12px;border:1px solid var(--line);border-radius:999px;background:var(--bark);backdrop-filter:blur(6px)}
@@ -657,8 +658,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794985683"</script>
-<script src="local.js?v=1794985683"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1794988567"</script>
+<script src="local.js?v=1794988567"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -1290,17 +1291,19 @@ function pickList(){const cut=Date.now()-48*36e5,trusted=new Set([...RADAR_SRC.a
   const seenCat={},out=[];for(const x of cand){const c=x.category;if((seenCat[c]||0)>=1+Math.floor(out.length/12))continue;seenCat[c]=(seenCat[c]||0)+1;out.push(x)}
   return out}
 function renderPicks(){const box=document.getElementById("picks");if(!box)return;if(!window.SHUHUD_STANDALONE||READER){box.hidden=true;return}
-  const all=pickList(),list=all.slice(pkPage*8,pkPage*8+8),pend=reqList.filter(r=>!pkDone(r.trackId));
+  const all=pickList(),list=all.slice(pkPage*8,pkPage*8+8),pend=reqList.filter(r=>!pkDone(r.trackId||r.id));
   const li=x=>`<li><input type="checkbox" id="pk-${esc(x.id)}" data-pk="${esc(x.id)}"${pkSel.has(x.id)?" checked":""}><label for="pk-${esc(x.id)}"><span class="pk-t">${esc(pkText(x))}</span><span class="pk-m"><span class="pk-tag">${esc(catName(x.category))}</span>${x.good?"🌱":""}<b>${esc(x.source)}</b>·<time>${agoTxt(x.at)}</time>·<a href="${esc(x.url)}" target="_blank" rel="noopener">↗</a></span></label></li>`;
   box.innerHTML=`<h2 id="picks-h">${T("pkH")}</h2><p class="pk-sub">${T("pkSub")}</p>${list.length?`<ol>${list.map(li).join("")}</ol>`:`<p class="pk-sub">${T("pkNone")}</p>`}
     <div class="pk-bar"><button class="btn run" type="button" id="pk-send"${pkSel.size?"":" disabled"}>${T("pkSend")(pkSel.size)}</button>${all.length>8?`<button class="btn" type="button" id="pk-more">${T("pkMore")}</button>`:""}</div>
-    ${pend.length?`<div class="pk-q"><b>${T("pkQueue")(pend.length)}</b><ol>${pend.map(r=>`<li><span class="pk-t" style="font-size:14px">${esc(r.trAr||r.text)}</span><button type="button" data-pkdel="${esc(r.trackId)}" title="${esc(T("pkDel"))}" aria-label="${esc(T("pkDel"))}">✕</button></li>`).join("")}</ol></div>`:""}`;
+    ${pend.length?`<div class="pk-q"><b>${T("pkQueue")(pend.length)}</b><ol>${pend.map(r=>{const t=String(r.trAr||r.text||r.headline||"");return `<li><span class="pk-t" style="font-size:14px">${esc(t.length>170?t.slice(0,170).replace(/\s\S*$/,"")+"…":t)}</span><button type="button" data-pkdel="${esc(r.trackId||r.id)}" title="${esc(T("pkDel"))}" aria-label="${esc(T("pkDel"))}">✕</button></li>`}).join("")}</ol></div>`:""}`;
+  /* the number waiting to be written shows on the «الرصد» tab, so the queue is never out of sight (18 Nov 2026, Kamal) */
+  const nb=document.querySelector('nav.main button[data-view="track"]');if(nb){if(pend.length)nb.dataset.q=pend.length;else delete nb.dataset.q}
   box.hidden=false}
 document.addEventListener("change",e=>{const c=e.target.closest&&e.target.closest("[data-pk]");if(!c)return;c.checked?pkSel.add(c.dataset.pk):pkSel.delete(c.dataset.pk);const b=document.getElementById("pk-send");if(b){b.disabled=!pkSel.size;b.textContent=T("pkSend")(pkSel.size)}});
 document.addEventListener("click",async e=>{
   if(e.target.closest("#pk-more")){const n=Math.ceil(pickList().length/8);pkPage=(pkPage+1)%Math.max(1,n);renderPicks();return}
   const del=e.target.closest("[data-pkdel]");if(del){if(!ghTok()){toast(T("ghFirstKey"));return}const id=del.dataset.pkdel;
-    try{await ghSaveList(l=>l.filter(x=>x.trackId!==id),"Request removed",REQ_PATH);reqList=reqList.filter(x=>x.trackId!==id);reqIds.delete(id);renderPicks();renderTrack();renderRadar()}catch(err){toast(T("mFail"))}return}
+    try{await ghSaveList(l=>l.filter(x=>(x.trackId||x.id)!==id),"Request removed",REQ_PATH);reqList=reqList.filter(x=>(x.trackId||x.id)!==id);reqIds.delete(id);renderPicks();renderTrack();renderRadar()}catch(err){toast(T("mFail"))}return}
   if(!e.target.closest("#pk-send"))return;if(!ghTok()){toast(T("ghFirstKey"));return}
   const chosen=radarAll.filter(x=>pkSel.has(x.id));if(!chosen.length)return;const now=new Date().toISOString();
   const add=chosen.map(t=>({trackId:t.id,text:t.text,trAr:t.trAr||"",en:t.en&&t.en.text||"",source:t.source||"",url:t.url||"",date:t.date||String(t.at||"").slice(0,10),at:now}));
@@ -3361,7 +3364,7 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
   db=await c.use("db");
   if(!db){statusMsg="signIn";dbReady=true;updateStatus();renderFeed();return}
   db.collection("dispatches").orderBy("createdAt","desc").limit(200).onSnapshot(snap=>{
-    dbReady=true;items=snap.docs.map(d=>({id:d.id,...d.data()}));
+    dbReady=true;items=snap.docs.map(d=>({id:d.id,...d.data()}));try{renderPicks()}catch(_){}
     updateStatus();renderCats();renderFeed();renderRoster();renderTrack();renderSpecies();
   },()=>{dbReady=true;statusMsg="feedFail";updateStatus();renderFeed()});
   db.collection("partners").onSnapshot(snap=>{partners=snap.docs.map(d=>({id:d.id,...d.data()}));renderPartners()},()=>{});
