@@ -28,7 +28,8 @@ jobs:
           for round in 1 2 3 4 5; do
             git pull -q --rebase || true
             node scripts/feed.mjs || echo "feed round $round failed"
-            git add data/feed.json data/feed-status.json
+            node scripts/alerts.mjs || echo "alerts round $round failed"
+            git add data/feed.json data/feed-status.json data/alerts.json
             if ! git diff --cached --quiet; then
               git commit -q -m "Tracker: hourly feed update"
               for i in 1 2 3; do git pull -q --rebase && git push -q && break; sleep 7; done
