@@ -346,6 +346,7 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
 /* wide screens: the column stands right beside the pieces (fixed gap), starts level with them and stays in view while scrolling */
 @media (min-width:1380px){
   #v-live{position:relative}
+  /* 19 Nov 2026 (Kamal): the tab bar now spans the radar column, so the radar starts just under it and stays under it while scrolling */
   .radar{position:absolute;top:0;bottom:0;left:calc(50% - 440px - 22px - 284px);width:284px;margin:0;padding:0}
   /* English page: the column moves to the reader's right, mirroring the Arabic page */
   html[dir=ltr] .radar{left:auto;right:calc(50% - 440px - 22px - 284px)}
@@ -353,7 +354,7 @@ input.secret{-webkit-text-security:disc;text-security:disc;font-family:monospace
   html[dir=ltr] .wrap:has(#v-live:not([hidden])):has(#radar:not([hidden])){left:-150px}
   /* the language switch lines up with the radar column's outer edge (17 Nov 2026, Kamal) */
   .wrap:has(#v-live:not([hidden])):has(#radar:not([hidden])) .hero-tools{margin-inline-end:-306px}
-  .radar .rd-in{position:sticky;top:0;max-height:calc(100vh - 12px);overflow:auto;padding-top:0}
+  .radar .rd-in{position:sticky;top:calc(var(--navh,64px) + 10px);max-height:calc(100vh - var(--navh,64px) - 22px);overflow:auto;padding-top:0}
   .radar .rd-head{position:sticky;top:0;z-index:2;margin:0 -12px 8px;padding:13px 12px 8px;background:linear-gradient(180deg,rgba(28,46,36,.99),rgba(20,34,27,.97));border-bottom:1px solid rgba(242,184,75,.18);border-radius:18px 18px 0 0}
   .radar ol{display:block;overflow:visible}
   .radar li{margin-bottom:8px}
@@ -923,8 +924,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795073046"</script>
-<script src="local.js?v=1795073046"></script>
+<script>window.SHUHUD_BUILD="1795073532"</script>
+<script src="local.js?v=1795073532"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1397,10 +1398,8 @@ function renderRadar(){const box=$("#radar");if(!box)return;const list=radarList
   ol.addEventListener("scroll",()=>{if(Math.abs(ol.scrollLeft)+ol.clientWidth>ol.scrollWidth-200)more()},{passive:true});
   placeRadar()}
 setInterval(radarFoot,60000);
-/* on wide screens the column starts level with the tab bar and stays beside it while scrolling */
-function placeRadar(){const box=$("#radar"),mk=document.getElementById("nav-mark"),vl=document.getElementById("v-live");if(!box||!mk||!vl)return;
-  if(!matchMedia("(min-width:1380px)").matches){box.style.top="";return}
-  box.style.top=Math.round(mk.getBoundingClientRect().top-vl.getBoundingClientRect().top)+"px"}
+/* the column used to start level with the tab bar; since the bar spans the column (19 Nov 2026, Kamal) it starts just under it, from CSS (--navh) */
+function placeRadar(){const box=$("#radar");if(box)box.style.top=""}
 addEventListener("resize",()=>{try{placeRadar()}catch(e){}});setTimeout(()=>{try{placeRadar()}catch(e){}},1500);
 document.addEventListener("click",e=>{const b=e.target.closest("[data-rdopen]");if(!b)return;e.preventDefault();openPiece(b.dataset.rdopen)});
 loadRadar();setInterval(loadRadar,30*60*1000);
@@ -3358,6 +3357,8 @@ document.addEventListener("click",e=>{
   const r=e.target.closest("[data-atrs]");if(r){show("ids");idsView("rs");rsOpen(r.dataset.atrs);return}
   const wb=e.target.closest("[data-atwar]");if(wb){const c=CONF.find(x=>x.id===wb.dataset.atwar);if(!c)return;AT.layers.war=true;AT.migFocus=null;AT.sel={k:"w",id:c.id};if(AT.mode==="globe")AT.rot=[-c.ll[1],-Math.max(-60,Math.min(60,c.ll[0]))];AT.idle=performance.now();atRenderChrome();atCard();document.getElementById("at-stage").scrollIntoView({behavior:"smooth",block:"center"});return}
   const g=e.target.closest("[data-atgo]");if(g){const a=AT.alerts.find(x=>x.id===g.dataset.atgo);if(!a)return;AT.sel={k:"a",id:a.id};AT.layers.alerts=true;if(AT.mode==="globe")AT.rot=[-a.lon,-Math.max(-60,Math.min(60,a.lat))];AT.idle=performance.now();atRenderChrome();atCard();document.getElementById("at-stage").scrollIntoView({behavior:"smooth",block:"center"})}});
+/* the tab bar's height, for the radar column that sits under it */
+(()=>{const nv=document.querySelector("nav.main");if(!nv||!window.ResizeObserver)return;const set=()=>document.documentElement.style.setProperty("--navh",nv.offsetHeight+"px");set();new ResizeObserver(set).observe(nv)})();
 /* the atlas opens from alshuhud.org/?atlas=1 too */
 (()=>{let q="";try{q=new URLSearchParams(location.search).get("atlas")||""}catch(e){}if(q!=="1")return;window.addEventListener("load",()=>setTimeout(()=>{try{show("atlas")}catch(e){}},600))})();
 
