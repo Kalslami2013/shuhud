@@ -388,7 +388,9 @@ body:not(.en) .sp .sci{text-align:right}
 .sp-seen li{font-size:13px;line-height:1.55}.sp-seen .when{display:block;font-size:11.5px;color:var(--faint)}
 .sp-act{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .sp-act a.btn{text-decoration:none}
-.md-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px;margin-bottom:24px}
+.md-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:24px;margin-bottom:24px}
+.md-grid.md-groups{display:block}.md-sec{margin-bottom:34px}.md-sub{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:24px}
+.md-h{display:flex;align-items:center;gap:8px;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid rgba(242,184,75,.3);font-size:19px;color:var(--amber)}.md-h .n{font-size:12px;color:var(--dim);background:rgba(255,255,255,.06);border-radius:999px;padding:1px 9px}
 .md-grid>.empty{grid-column:1/-1}
 .md{background:var(--bark);border:1px solid var(--line);border-radius:18px;overflow:hidden;backdrop-filter:blur(8px);display:flex;flex-direction:column;min-width:0}
 .md-media{position:relative;background:#07120d}
@@ -564,6 +566,8 @@ body.en .hero>p{max-width:54em}
 @media (min-width:1100px){.wrap:not(:has(#radar:not([hidden]))) .eday-dial{width:128px;height:128px}}
 /* English lines run longer: on wide screens move the clock outward so the date row stays on one line (19 Nov 2026, Kamal) */
 @media (min-width:1380px){body.en #eday{inset-inline-end:-120px}body.en .hero>p[data-i18n],body.en .hero>.scene-row{max-width:calc(100% - 170px)}}
+/* without the radar the tab bar spans 150px further each side; the header follows it, so the logo sits further right and the buttons and clock further left (19 Nov 2026, Kamal) */
+@media (min-width:1380px){.wrap:not(:has(#v-live:not([hidden])):has(#radar:not([hidden]))) .hero{margin-inline:-150px}}
 /* with the radar column shown, the clock moves outward, nearer the language switch but not touching it (19 Nov 2026, Kamal); other tabs keep it where it was */
 @media (min-width:1380px){body:not(.en) .wrap:has(#v-live:not([hidden])):has(#radar:not([hidden])) #eday{inset-inline-end:-95px}body:not(.en) .wrap:has(#v-live:not([hidden])):has(#radar:not([hidden])) .hero>p[data-i18n],body:not(.en) .wrap:has(#v-live:not([hidden])):has(#radar:not([hidden])) .hero>.scene-row{max-width:calc(100% - 190px)}}
 /* without the radar the language and install buttons sit at the dial's height: put them side by side so they stay above it (19 Nov 2026, Kamal) */
@@ -718,8 +722,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795083152"</script>
-<script src="local.js?v=1795083152"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795084151"</script>
+<script src="local.js?v=1795084151"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-cap", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -3521,7 +3525,9 @@ function renderMedia(){
   const cnt={};pool.forEach(m=>cnt[m.type]=(cnt[m.type]||0)+1);
   $("#media-chips").innerHTML=["all",...M_TYPES].filter(t=>t==="all"||cnt[t]).map(t=>`<button class="chip" type="button" aria-pressed="${t===mType}" data-mt="${t}">${t==="all"?T("mAll"):esc(T("mTypes")[t])}<span class="n">${t==="all"?pool.length:cnt[t]}</span></button>`).join("")+(editor&&!fallback?`<button class="chip" type="button" aria-pressed="${mAllLang}" data-mlang="1">${T("mLangAll")}</button>`:"")+(fallback?`<span class="m-note">${isEn()?T("mLangNone"):T("mLangNone")}</span>`:"");
   const list=mType==="all"?pool:pool.filter(m=>m.type===mType);
-  g.innerHTML=list.length?list.map(mediaHTML).join(""):`<div class="card empty"><div class="big">🎞️</div>${T("mEmpty")}</div>`;
+  /* «الكل» shows each kind in its own group (video, carousel, infographic, cards…), so they don't mix (19 Nov 2026, Kamal) */
+  const grpd=mType==="all"&&new Set(list.map(m=>m.type)).size>1;g.classList.toggle("md-groups",!!grpd);
+  g.innerHTML=!list.length?`<div class="card empty"><div class="big">🎞️</div>${T("mEmpty")}</div>`:grpd?["video","carousel","info","card","image"].filter(t=>list.some(m=>m.type===t)).map(t=>{const xs=list.filter(m=>m.type===t);return `<section class="md-sec"><h3 class="md-h">${esc(T("mTypes")[t])}<span class="n">${xs.length}</span></h3><div class="md-sub">${xs.map(mediaHTML).join("")}</div></section>`}).join(""):list.map(mediaHTML).join("");
   /* every carousel opens on its first card (the title card), and the counter follows the swipe */
   g.querySelectorAll(".md-car").forEach(c=>{const n=c.parentElement.querySelector(".md-n"),tot=c.children.length;
     const start=()=>{c.scrollLeft=0};start();requestAnimationFrame(start);c.querySelectorAll("img").forEach(im=>im.addEventListener("load",()=>{if(!c.dataset.moved)start()},{once:true}));
