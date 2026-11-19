@@ -922,8 +922,8 @@ body.en .hero>p{max-width:54em}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795053729"</script>
-<script src="local.js?v=1795053729"></script>
+<script>window.SHUHUD_BUILD="1795072538"</script>
+<script src="local.js?v=1795072538"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -3195,12 +3195,15 @@ const AT_ICON={EQ:"⛰️",TC:"🌀",FL:"🌊",DR:"☀️",VO:"🌋",WF:"🔥",S
 const AT_LEVEL={red:"#ef4444",orange:"#f59e0b",green:"#e9d36a"};
 const AT={ready:false,busy:false,mode:"globe",rot:[-30,-18],zoom:1,layers:{hot:true,pieces:true,alerts:true,reserves:true,mig:false},alerts:[],alertsAt:"",alertsFail:false,sel:null,raf:0,idle:0,drag:null,pts:[],t0:0};
 function atPieces(){return (items||[]).filter(r=>r&&r.id&&r.headline&&!r._draft).map(r=>{const g=(isFinite(r.lat)&&isFinite(r.lon))?[+r.lat,+r.lon]:GEO[r.id];return g?{k:"p",id:r.id,lat:g[0],lon:g[1],raw:r}:null}).filter(Boolean)}
-/* «بؤر الأزمات»: where our own testimonies cluster (3+ crisis pieces within ~550 km over the last 60 days, 2+ of them on the same theme), drawn as a red glow.
+/* «بؤر الأزمات»: where our own testimonies on one crisis theme cluster (within ~550 km over the last 60 days; rule below), drawn as a red glow.
    Built from the pieces themselves, so human-made crises (ship attacks, spills, wars) show even when no hazard system reports them */
 function atHot(){const cut=Date.now()-60*864e5,ps=atPieces().filter(p=>p.raw.category!==HEAL&&Date.parse(p.raw.createdAt||p.raw.eventDate||0)>=cut).sort((a,b)=>String(b.raw.createdAt).localeCompare(String(a.raw.createdAt)));
-  const used=new Set(),out=[];for(const p of ps){if(used.has(p.id))continue;const grp=ps.filter(q=>!used.has(q.id)&&d3.geoDistance([p.lon,p.lat],[q.lon,q.lat])*6371<550);if(grp.length<3)continue;grp.forEach(q=>used.add(q.id));
+  /* 19 Nov 2026 (Kamal: "what crisis is in London?"): a hotspot is ONE crisis theme repeating in one place, so only same-theme pieces count:
+     3+ on the same theme, or 2+ for «الحروب والبيئة» (war is a crisis by itself); unrelated stories nearby no longer add up */
+  const used=new Set(),out=[];for(const p of ps){if(used.has(p.id))continue;const near=ps.filter(q=>!used.has(q.id)&&d3.geoDistance([p.lon,p.lat],[q.lon,q.lat])*6371<550);
+    const cats={};near.forEach(q=>cats[q.raw.category]=(cats[q.raw.category]||0)+1);const top=Object.entries(cats).sort((a,b)=>b[1]-a[1])[0],cat=top[0];
+    if(!(top[1]>=3||(cat==="الحروب والبيئة"&&top[1]>=2)))continue;const grp=near.filter(q=>q.raw.category===cat);grp.forEach(q=>used.add(q.id));
     const c=d3.geoCentroid({type:"MultiPoint",coordinates:grp.map(q=>[q.lon,q.lat])}),r=Math.max(...grp.map(q=>d3.geoDistance(c,[q.lon,q.lat])))*180/Math.PI+2.2;
-    const cats={};grp.forEach(q=>cats[q.raw.category]=(cats[q.raw.category]||0)+1);const top=Object.entries(cats).sort((a,b)=>b[1]-a[1])[0],cat=top[0];if(top[1]<2){grp.forEach(q=>used.delete(q.id));continue}
     const nm=raw=>{const pl=String(L(raw).place||"").replace(/\([^)]*\)/g,""),seg=pl.split(/[،,]/).map(x=>x.trim()).filter(Boolean),last=seg[seg.length-1]||"";return (seg.length>1&&last.length>3?last:(seg[0]||"").split(/\s+and\s+|\s+و(?=ال)/)[0]).replace(/^(The|the)\s+/,"").trim()};
     out.push({k:"h",id:"h-"+p.id,lon:c[0],lat:c[1],r,grp,cat,name:nm(grp.find(q=>q.raw.category===cat).raw)})}return out}
 function atReserves(){return RESERVES.map(r=>({k:"r",id:r.id,lat:r.ll[0],lon:r.ll[1],r}))}
