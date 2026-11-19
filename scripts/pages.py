@@ -386,7 +386,7 @@ with open("p/index.html", "w", encoding="utf8") as fh:
     fh.write(arch + f'<main class="wrap"><article><h1>كل القطع</h1><div class="meta">{len(rows)} قطعة</div><ul class="list">' + "\n".join(rows) + "</ul></article></main>" + FOOT)
 
 # reserves: one page per reserve (r/<name>.html) from data/reserves.json (written by build.py from the page's RESERVES list)
-RS_SLUG = {"ahwar": "iraq-marshes", "wadirum": "wadi-rum", "rasmohammed": "ras-mohammed", "samhan": "jabal-samhan"}
+RS_SLUG = {"ahwar": "iraq-marshes", "wadirum": "wadi-rum", "rasmohammed": "ras-mohammed", "samhan": "jabal-samhan", "gbr": "great-barrier-reef", "jau": "jau-amazon"}
 reserves = [r for r in load("data/reserves.json") if isinstance(r, dict) and re.match(r"^[a-z]{2,24}$", str(r.get("id") or "")) and isinstance(r.get("ar"), dict)]
 # Kamal's edits from the Claude copy (synced into data/reserves-db.json) are laid over the page's text
 for d in load("data/reserves-db.json"):
