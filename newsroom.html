@@ -218,13 +218,16 @@ section[id^="v-"]:not([hidden]){animation:vfade .32s ease both}
 .fig.warn .s{color:var(--ember)}
 .foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px;color:var(--faint)}
 .foot .src{margin-inline-end:auto;min-width:0;overflow-wrap:anywhere}
-.srcs{border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.18);padding:0;font-size:13px}
-.srcs summary{cursor:pointer;list-style:none;padding:9px 14px;color:var(--dim);font-weight:600;display:flex;align-items:center;gap:8px}.srcs summary::-webkit-details-marker{display:none}
-.srcs summary::after{content:"▾";margin-inline-start:auto;transition:transform .2s}.srcs[open] summary::after{transform:rotate(180deg)}
-.srcs summary .n{font-size:11.5px;background:rgba(255,255,255,.07);border-radius:999px;padding:1px 8px;font-weight:500}
-.srcs ol{margin:0;padding:2px 14px 10px;padding-inline-start:34px;display:grid;gap:5px;color:var(--faint)}
-.srcs li{line-height:1.6}.srcs li a{color:var(--parchment);text-decoration:none;border-bottom:1px solid rgba(242,184,75,.35)}.srcs li a:hover{color:var(--amber)}
-.srcs .src-h{display:inline-block;font-size:11.5px;color:var(--faint);margin-inline-start:12px;opacity:.85;direction:ltr;unicode-bidi:isolate}
+.srcs{border-top:1px solid var(--line);padding-top:12px;font-size:13.5px}
+.srcs-h{font-weight:600;color:var(--dim);margin-bottom:6px;font-size:13px}
+.srcs ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.srcs li{line-height:1.6;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.srcs li a{color:var(--parchment);text-decoration:none;border-bottom:1px solid rgba(242,184,75,.35)}.srcs li a:hover{color:var(--amber)}
+.srcs .src-h{font-size:11.5px;color:var(--faint);direction:ltr;unicode-bidi:isolate;opacity:.85}
+.srcs .src-k{font-size:11px;font-weight:600;border-radius:999px;padding:1px 9px;border:1px solid var(--line);color:var(--dim);flex:none}
+.srcs .k-study{color:#b9a7ff;border-color:rgba(139,124,246,.45)}.srcs .k-official{color:#8fd3ff;border-color:rgba(80,170,230,.45)}.srcs .k-press{color:#f2c879;border-color:rgba(242,184,75,.45)}
+.srcs details{margin-top:8px}.srcs summary{cursor:pointer;list-style:none;color:var(--faint);font-size:12.5px;width:fit-content}.srcs summary::-webkit-details-marker{display:none}.srcs summary:hover{color:var(--amber)}
+.srcs details ul{margin-top:8px;opacity:.9}
 .btn{border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:10px;padding:6px 11px;font-size:12.5px}
 .btn:hover{color:var(--parchment);border-color:var(--leaf)}
 .btn.danger{color:var(--ember)}
@@ -970,8 +973,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795128774"</script>
-<script src="local.js?v=1795128774"></script>
+<script>window.SHUHUD_BUILD="1795129082"</script>
+<script src="local.js?v=1795129082"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1003,7 +1006,7 @@ ar:{
   dGo:"اقرأ الأزمة بعين الكائن",
   manifesto:"نحن لا نقرأ الصحف. نقرأ الماء حين يجف، والسماء حين تحترق، والأرض حين ترتجف قبل أن تشعروا بها. هؤلاء مراسلونا.",
   crisis:"الأزمة",angle:"الزاوية البيئية",chain:"سلسلة الأثر",figures:"بالأرقام",fact:"ما حدث عند البشر",question:"سؤال مفتوح",
-  sources:"المصادر",source:"المصدر",fromDesk:"من غرفة التحرير",listen:"استمع",export:"تصدير",copy:"نسخ",del:"حذف",delConfirm:"تأكيد الحذف",
+  sources:"المصادر",srcKey:"المصادر الأساسية",srcMore:n=>`+ ${n} ${n<=10&&n>=3?"مراجع إضافية":"مرجعاً إضافياً"} للتحقق`,srcK_study:"دراسة",srcK_official:"جهة رسمية",srcK_press:"وكالة وصحافة",source:"المصدر",fromDesk:"من غرفة التحرير",listen:"استمع",export:"تصدير",copy:"نسخ",del:"حذف",delConfirm:"تأكيد الحذف",
   deleted:"حُذفت الرواية",delFail:"تعذر الحذف",copied:"نُسخ النص",witness:"شاهد",
   emptyLoading:"تتجمع الحيوانات حول النار، وستظهر النشرة بعد لحظات.",emptyCat:"لا قطع في هذا الباب بعد. اكتب واحدة من غرفة التحرير.",emptyHeal:"هنا ما يعود إلى الحياة: محميات جديدة، وكائنات تخرج من خطر الانقراض، وولادات نادرة، وكائنات ظهرت بعد أن عُدّت منقرضة. تُنشر أولى قطعه قريباً.",
   emptyAll:"الغابة صامتة الآن. اضغط «اكتب قطع اليوم الآن»، أو اكتب أول قطعة من غرفة التحرير.",
@@ -1069,7 +1072,7 @@ en:{
   dGo:"Read the crisis through the creature's eyes",
   manifesto:"We don't read newspapers. We read water as it dries, skies as they burn, and the ground as it trembles before you feel it. These are our correspondents.",
   crisis:"The crisis",angle:"The environmental angle",chain:"Chain of impact",figures:"By the numbers",fact:"What happened among humans",question:"An open question",
-  sources:"Sources",source:"Source",fromDesk:"from the newsroom",listen:"Listen",export:"Export",copy:"Copy",del:"Delete",delConfirm:"Confirm delete",
+  sources:"Sources",srcKey:"Key sources",srcMore:n=>`+ ${n} more reference${n>1?"s":""} used for verification`,srcK_study:"Study",srcK_official:"Official",srcK_press:"Agency & press",source:"Source",fromDesk:"from the newsroom",listen:"Listen",export:"Export",copy:"Copy",del:"Delete",delConfirm:"Confirm delete",
   deleted:"Story deleted",delFail:"Couldn't delete",copied:"Text copied",witness:"Witness",
   emptyLoading:"The animals are gathering around the fire. The feed will appear in a moment.",emptyCat:"Nothing in this section yet. Write one from the newsroom.",emptyHeal:"What comes back to life: new reserves, species leaving the danger list, rare births, species found again after being declared extinct. The first pieces are coming soon.",
   emptyAll:"The forest is quiet. Press “Write today's pieces now”, or write the first one from the newsroom.",
@@ -1245,11 +1248,23 @@ function renderCats(){
 }
 const EMOJI_SAFE={"🦭":"🐟","🪸":"🐚","🫏":"🐴","🐻‍❄️":"🐻","🦬":"🐂","🪼":"🐙","🪲":"🐞"};const safeE=e=>EMOJI_SAFE[e]||e;
 function who(i){const r=ROSTER[i.animal];return{e:safeE(i.animalEmoji||r?.e||"🐾"),n:i.animalName||(r?rName(i.animal):T("witness")),b:i.animalHabitat||(r?rBio(i.animal):"")}}
-/* sources as a tidy numbered list under one fold (20 Nov 2026, Kamal: a long run of underlined links crowded the piece); three or fewer stay open */
-function srcBlock(i,hide){const list=Array.isArray(i.sources)&&i.sources.length?i.sources:(i.source||i.sourceUrl?[{name:i.source,url:i.sourceUrl}]:[]);if(!list.length)return"";
-  const host=u=>{try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return""}};
-  const li=list.map(s=>`<li>${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name||T("source"))}</a>${host(s.url)?`<span class="src-h">${esc(host(s.url))}</span>`:""}`:esc(s.name||"")}</li>`).join("");
-  return `<details class="srcs"${list.length<=3?" open":""}${hide?" hidden":""}><summary>📚 ${T("sources")} <span class="n">${list.length}</span></summary><ol>${li}</ol></details>`}
+/* sources, read like a funder or a seasoned editor would (20 Nov 2026, Kamal): up to three key sources always visible, each tagged by kind
+   (study, official body, agency/press), chosen for variety of kind and site; everything else folds under «+ N مراجع إضافية للتحقق».
+   Display only: the piece's sources themselves are never changed */
+const SRC_KIND=[["study",/doi\.org|iopscience|nature\.com|science\.org|sciencedirect|springer|wiley|pnas|plos|pmc\.ncbi|ncbi\.nlm|arxiv|eartharxiv|biorxiv|researchgate|cambridge\.org\/core|\.edu\b|\.ac\.[a-z]{2}\b|دراسة|مجلة|جامعة|معهد/i],
+  ["official",/\.gov\b|\.gov\.[a-z]{2}|\.int\b|un\.org|unep|undp|unesco|unicef|who\.int|fao\.org|wmo|ipcc|iucn|europa\.eu|copernicus|nasa|noaa|usgs|esa\.int|worldbank|ministry|وزارة|هيئة|الأمم المتحدة|منظمة|البنك الدولي|وكالة الفضاء/i],
+  ["press",/reuters|apnews|afp|aa\.com\.tr|anadolu|bloomberg|asharq|nytimes|washingtonpost|theguardian|bbc|aljazeera|ft\.com|wsj|economist|lemonde|france24|dw\.com|mongabay|insideclimatenews|carbonbrief|grist|yale|phys\.org|sciencedaily|tass|xinhua|wam\.ae|spa\.gov\.sa|qna\.org|ina\.iq|saba|al-monitor|aawsat|euronews|cnn|npr|axios|rferl|kyodo|nhk/i]];
+const srcHost=u=>{try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return""}};
+function srcKind(s){const t=(s.url||"")+" "+(s.name||"");for(const [k,re] of SRC_KIND)if(re.test(t))return k;return""}
+function srcBlock(i,hide){const list=(Array.isArray(i.sources)&&i.sources.length?i.sources:(i.source||i.sourceUrl?[{name:i.source,url:i.sourceUrl}]:[])).filter(s=>s&&(s.name||s.url));if(!list.length)return"";
+  const KEY=list.length<=4?list.length:3,key=[],seenK=new Set(),seenH=new Set();
+  for(const k of ["study","official","press"]){const s=list.find(x=>!key.includes(x)&&srcKind(x)===k&&!seenH.has(srcHost(x.url)));if(s&&key.length<KEY){key.push(s);seenK.add(k);seenH.add(srcHost(s.url))}}
+  for(const s of list){if(key.length>=KEY)break;if(!key.includes(s)&&!seenH.has(srcHost(s.url))){key.push(s);seenH.add(srcHost(s.url))}}
+  for(const s of list){if(key.length>=KEY)break;if(!key.includes(s))key.push(s)}
+  const keyOrd=key,rest=list.filter(s=>!key.includes(s));
+  const tag=s=>{const k=srcKind(s);return k?`<span class="src-k k-${k}">${T("srcK_"+k)}</span>`:""};
+  const li=s=>`<li>${tag(s)}${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name||T("source"))}</a>${srcHost(s.url)?`<span class="src-h">${esc(srcHost(s.url))}</span>`:""}`:esc(s.name||"")}</li>`;
+  return `<div class="srcs"${hide?" hidden":""}><div class="srcs-h">📚 ${T(rest.length?"srcKey":"sources")}</div><ul>${keyOrd.map(li).join("")}</ul>${rest.length?`<details><summary>${T("srcMore")(rest.length)}</summary><ul>${rest.map(li).join("")}</ul></details>`:""}</div>`}
 function srcList(i){
   const list=Array.isArray(i.sources)&&i.sources.length?i.sources:(i.source||i.sourceUrl?[{name:i.source,url:i.sourceUrl}]:[]);
   return list.map(s=>s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name||T("source"))}</a>`:esc(s.name||"")).join(isEn()?", ":"، ");
@@ -2888,7 +2903,7 @@ const RUN_TEXT="تشغيل يدوي طلبه كمال الآن من داخل ا�
 const runDaily=(mode,n)=>RUN_DAILY.replace("اكتب 3 قطع بالضبط في هذه الجولة (طلبات كمال أولاً إن وُجدت، ثم أقوى الأزمات الموثقة)",
   mode==="only"?"وضع الجولة: طلبات كمال فقط. اكتب طلباته المنتظرة في requests-gh.json وحدها (حتى 5)، الطلبات التي فيها hold:true أجّلها كمال: لا تكتبها ولا تعدّها ولا تحذفها من الملف.، ولا تختر أي قصة من عندك؛ إن لم يوجد طلب منتظر فلا تكتب شيئاً وقل ذلك في السطر الأخير":
   `وضع الجولة: طلبات كمال ثم اختيارك. الطلبات التي فيها hold:true أجّلها كمال: لا تكتبها ولا تعدّها ولا تحذفها من الملف. اكتب طلباته المنتظرة أولاً، ثم أكمل من اختيارك حتى يصبح مجموع قطع الجولة ${n} (إن كانت طلباته ${n} أو أكثر فاكتب طلباته وحدها حتى 5)`);
-const RUN_DAILY="تشغيل يدوي طلبه كمال الآن من داخل التطبيق. اكتب 3 قطع بالضبط في هذه الجولة (طلبات كمال أولاً إن وُجدت، ثم أقوى الأزمات الموثقة)، بالجودة والتدقيق المعتادين، ثم توقف. الطلبات التي فيها hold:true أجّلها كمال: لا تكتبها ولا تعدّها ولا تحذفها من الملف. قاعدة الأرقام: قيمة كل رقم (value) تُقرأ وحدها كعنوان واضح فيها العدد والوحدة وما يُعدّ، مثل «أكثر من 1,900 طائر نافق» لا «1,900 طائر»، والشرح (label) يضيف المكان وتاريخ الرقم والمقارنة. قاعدة الأسماء: كل اسم علم في العنوان (نهر، مدينة، بلد، منطقة، جهة، كائن) يجب أن يرد صراحة في الخلاصة (angle) وفي الفقرة الأولى من الشهادة، ومعه ما يعرّف القارئ به (مثل «نهر الغارون في جنوب غرب فرنسا»)، بالعربية والإنجليزية. وفي العنوان نفسه يأتي الاسم غير المشهور مع كلمة تعرّفه («نهر الغارون» لا «الغارون»، «بحيرة تشاد»، «غابة بياوفيجا»)، والأسماء المشهورة (فرنسا، النيل، الأمازون، غزة) بلا إضافة؛ ولا أقواس حول الأسماء إلا لاسم أجنبي غريب لا تتسع الجملة لتعريفه. تنوين الفتح يُكتب على الألف بعد الحرف («صباحاً»، «نحواً»، «مثلاً»، «جداً»)، لا التنوين قبل الألف؛ وبلا ألف بعد التاء المربوطة والهمزة («مرةً»، «ماءً»). لا تنشئ أي جدولة ولا تعِد تشغيل نفسك.";
+const RUN_DAILY="تشغيل يدوي طلبه كمال الآن من داخل التطبيق. اكتب 3 قطع بالضبط في هذه الجولة (طلبات كمال أولاً إن وُجدت، ثم أقوى الأزمات الموثقة)، بالجودة والتدقيق المعتادين، ثم توقف. قاعدة المصادر (للقطع الجديدة فقط): من 4 إلى 6 مصادر في الحقل sources، أولها أهمها: الدراسة أو التقرير الأصلي، ثم الجهة الرسمية، ثم وكالة أو صحيفة كبرى؛ ولا أكثر من مصدرين من الموقع نفسه؛ وما استُعمل للتحقق فقط لا يُدرج. الطلبات التي فيها hold:true أجّلها كمال: لا تكتبها ولا تعدّها ولا تحذفها من الملف. قاعدة الأرقام: قيمة كل رقم (value) تُقرأ وحدها كعنوان واضح فيها العدد والوحدة وما يُعدّ، مثل «أكثر من 1,900 طائر نافق» لا «1,900 طائر»، والشرح (label) يضيف المكان وتاريخ الرقم والمقارنة. قاعدة الأسماء: كل اسم علم في العنوان (نهر، مدينة، بلد، منطقة، جهة، كائن) يجب أن يرد صراحة في الخلاصة (angle) وفي الفقرة الأولى من الشهادة، ومعه ما يعرّف القارئ به (مثل «نهر الغارون في جنوب غرب فرنسا»)، بالعربية والإنجليزية. وفي العنوان نفسه يأتي الاسم غير المشهور مع كلمة تعرّفه («نهر الغارون» لا «الغارون»، «بحيرة تشاد»، «غابة بياوفيجا»)، والأسماء المشهورة (فرنسا، النيل، الأمازون، غزة) بلا إضافة؛ ولا أقواس حول الأسماء إلا لاسم أجنبي غريب لا تتسع الجملة لتعريفه. تنوين الفتح يُكتب على الألف بعد الحرف («صباحاً»، «نحواً»، «مثلاً»، «جداً»)، لا التنوين قبل الألف؛ وبلا ألف بعد التاء المربوطة والهمزة («مرةً»، «ماءً»). لا تنشئ أي جدولة ولا تعِد تشغيل نفسك.";
 let mcp=null;
 const runsGet=()=>{try{return JSON.parse(localStorage.getItem(RUN_KEY)||"{}")}catch(e){return{}}};
 const runsSet=o=>{try{localStorage.setItem(RUN_KEY,JSON.stringify(o))}catch(e){}};
