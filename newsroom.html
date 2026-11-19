@@ -627,6 +627,9 @@ nav.main button:hover{border-color:rgba(244,239,226,.35)}
 /* «من نحن» reads like the pieces: Arabic text in «عام الإبل» Medium (19 Nov 2026, Kamal); the English/French block keeps its own font */
 body:not(.en) .about :is(p,li):not(.about-fr *):not([dir=ltr] *){font-family:var(--f-display);font-weight:500;font-size:17px;line-height:1.9}
 body:not(.en) .about .lead{font-size:18.5px}.about h4{font-weight:800}
+
+/* radar headlines in «عام الإبل» Medium, like the pieces' summaries (19 Nov 2026, Kamal's trial; revert by deleting this rule); the source/time line stays IBM Plex */
+body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-size:15.5px;line-height:1.6}
 </style>
 
 <canvas id="forest" aria-hidden="true"></canvas>
@@ -954,8 +957,8 @@ body:not(.en) .about .lead{font-size:18.5px}.about h4{font-weight:800}
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795117292"</script>
-<script src="local.js?v=1795117292"></script>
+<script>window.SHUHUD_BUILD="1795118668"</script>
+<script src="local.js?v=1795118668"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
