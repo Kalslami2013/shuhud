@@ -630,6 +630,10 @@ body:not(.en) .about .lead{font-size:18.5px}.about h4{font-weight:800}
 
 /* radar headlines in «عام الإبل» Medium, like the pieces' summaries (19 Nov 2026, Kamal's trial; revert by deleting this rule); the source/time line stays IBM Plex */
 body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-size:15.5px;line-height:1.6}
+
+/* the opened piece reads on a solid surface (19 Nov 2026, Kamal approved my option 2): same dark green, no see-through, softer cream text; feed cards and the radar keep their translucent look. Revert by deleting this rule */
+#feed .card[data-id]{background:#121a16;backdrop-filter:none;border-color:rgba(244,239,226,.10)}
+#feed .card[data-id] .voice{color:#e6dfcc}
 </style>
 
 <canvas id="forest" aria-hidden="true"></canvas>
@@ -957,8 +961,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795118668"</script>
-<script src="local.js?v=1795118668"></script>
+<script>window.SHUHUD_BUILD="1795119591"</script>
+<script src="local.js?v=1795119591"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
