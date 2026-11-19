@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://alshuhud.org/</loc><lastmod>2026-11-18</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://alshuhud.org/p/</loc><lastmod>2026-11-18</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://alshuhud.org/</loc><lastmod>2026-11-19</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://alshuhud.org/p/</loc><lastmod>2026-11-19</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://alshuhud.org/p/tiger-bhutan</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/en/p/tiger-bhutan</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/p/thornbackray-northsea</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
@@ -188,29 +188,39 @@
   <url><loc>https://alshuhud.org/en/p/dugong-hormuz</loc><lastmod>2026-10-27</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/p/coral-elnino</loc><lastmod>2026-10-27</lastmod><priority>0.7</priority></url>
   <url><loc>https://alshuhud.org/en/p/coral-elnino</loc><lastmod>2026-10-27</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/p/</loc><lastmod>2026-11-18</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/socotra</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/socotra</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/iraq-marshes</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/iraq-marshes</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/wadi-rum</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/wadi-rum</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/farasan</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/farasan</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/marawah</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/marawah</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/ras-mohammed</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/ras-mohammed</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/jabal-samhan</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/jabal-samhan</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/virunga</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/virunga</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/bialowieza</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/bialowieza</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/r/galapagos</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/galapagos</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/r/</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/x/</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://alshuhud.org/en/x/</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/p/</loc><lastmod>2026-11-19</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/socotra</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/socotra</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/iraq-marshes</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/iraq-marshes</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/wadi-rum</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/wadi-rum</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/farasan</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/farasan</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/marawah</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/marawah</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/ras-mohammed</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/ras-mohammed</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/jabal-samhan</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/jabal-samhan</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/virunga</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/virunga</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/bialowieza</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/bialowieza</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/galapagos</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/galapagos</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/serengeti</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/serengeti</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/great-barrier-reef</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/great-barrier-reef</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/sundarbans</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/sundarbans</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/jau-amazon</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/jau-amazon</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/r/yellowstone</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/yellowstone</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/r/</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/x/</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://alshuhud.org/en/x/</loc><lastmod>2026-11-19</lastmod><priority>0.7</priority></url>
 </urlset>
