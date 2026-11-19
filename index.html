@@ -765,8 +765,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795129277"</script>
-<script src="local.js?v=1795129277"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795129523"</script>
+<script src="local.js?v=1795129523"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-cap", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -3148,9 +3148,9 @@ function atWarDraw(ctx,path,proj,t){AT.war=AT.layers.war?CONF:[];
 })}
 /* crisis names go on top of every dot; when two names would overlap, the next one shifts down or up, else waits for the globe to turn */
 const WAR_PRI=["gaza","gulf","yemen","ukraine","sudan","drc","sahel","myanmar"];
-function atWarLabels(ctx,proj){const boxes=[];[...(AT.war||[])].sort((a,b)=>WAR_PRI.indexOf(a.id)-WAR_PRI.indexOf(b.id)).forEach(c=>{if(!atVisible(proj,c.ll[1],c.ll[0]))return;const xy=proj([c.ll[1],c.ll[0]]);if(!xy)return;
+function atWarLabels(ctx,proj){const boxes=[];AT.wlab=[];[...(AT.war||[])].sort((a,b)=>WAR_PRI.indexOf(a.id)-WAR_PRI.indexOf(b.id)).forEach(c=>{if(!atVisible(proj,c.ll[1],c.ll[0]))return;const xy=proj([c.ll[1],c.ll[0]]);if(!xy)return;
   const lab=`⚔️ ${(isEn()?c.en:c.ar).name}`;ctx.font="700 12px 'IBM Plex Sans Arabic',sans-serif";const tw=ctx.measureText(lab).width+16,hgt=21;
-  const o=[[0,0],[0,23],[0,-23],[tw*.55,12],[-tw*.55,12],[0,46]].find(([dx,dy])=>!boxes.some(b=>Math.abs(b.x-(xy[0]+dx))<(b.w+tw)/2+2&&Math.abs(b.y-(xy[1]+dy))<hgt+2));if(!o)return;const x=xy[0]+o[0],y=xy[1]+o[1];boxes.push({x,y,w:tw});
+  const o=[[0,0],[0,23],[0,-23],[tw*.55,12],[-tw*.55,12],[0,46]].find(([dx,dy])=>!boxes.some(b=>Math.abs(b.x-(xy[0]+dx))<(b.w+tw)/2+2&&Math.abs(b.y-(xy[1]+dy))<hgt+2));if(!o)return;const x=xy[0]+o[0],y=xy[1]+o[1];boxes.push({x,y,w:tw});AT.wlab.push({id:c.id,x0:x-tw/2,x1:x+tw/2,y0:y-11,y1:y+12});
   ctx.fillStyle="rgba(69,10,10,.9)";ctx.beginPath();ctx.roundRect?ctx.roundRect(x-tw/2,y-10,tw,hgt,10):ctx.rect(x-tw/2,y-10,tw,hgt);ctx.fill();ctx.strokeStyle="rgba(248,113,113,.75)";ctx.lineWidth=1;ctx.stroke();
   ctx.fillStyle="#fee2e2";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(lab,x,y+1);ctx.textAlign="start";ctx.textBaseline="alphabetic"})}
 
@@ -3206,7 +3206,9 @@ function atDraw(now){const {ctx,w,h,dpr}=AT;if(!ctx)return;ctx.setTransform(dpr,
   atWarLabels(ctx,proj);
   if(AT.sel){const s=AT.pts.find(p=>p.o.k===AT.sel.k&&p.o.id===AT.sel.id);if(s){ctx.beginPath();ctx.arc(s.x,s.y,11,0,7);ctx.strokeStyle="#fff";ctx.lineWidth=2;ctx.stroke()}}}
 function atHit(x,y){let best=null,bd=14;for(const p of AT.pts){const d=Math.hypot(p.x-x,p.y-y);if(d<bd){bd=d;best=p}}return best}
-function atPick(x,y){const p=atHit(x,y);if(p){AT.sel={k:p.o.k,id:p.o.id};atCard();return}
+function atPick(x,y){/* a war label is the clearest target, so it wins over dots under it (20 Nov 2026, Kamal) */
+  const wl=(AT.wlab||[]).find(b=>x>=b.x0&&x<=b.x1&&y>=b.y0&&y<=b.y1);if(wl){AT.sel={k:"w",id:wl.id};atCard();const cd=document.getElementById("at-card");if(cd&&innerWidth<900)cd.scrollIntoView({behavior:"smooth",block:"nearest"});return}
+  const p=atHit(x,y);if(p){AT.sel={k:p.o.k,id:p.o.id};atCard();return}
   let h=null,w=null;try{const ll=atProj().invert([x,y]);if(ll){h=(AT.hot||[]).find(q=>d3.geoDistance(ll,[q.lon,q.lat])*180/Math.PI<=q.r);if(!h)w=(AT.war||[]).filter(c=>d3.geoDistance(ll,[c.ll[1],c.ll[0]])*180/Math.PI<=c.r).sort((a,b)=>a.r-b.r)[0]}}catch(e){}AT.sel=h?{k:"h",id:h.id}:w?{k:"w",id:w.id}:null;atCard()}
 function atLoop(now){if(!document.getElementById("at-cv")||document.getElementById("v-atlas").hidden){AT.raf=0;return}
   if(AT.mode==="globe"&&!AT.drag&&!AT.sel&&now-AT.idle>3500&&!matchMedia("(prefers-reduced-motion: reduce)").matches)AT.rot=[AT.rot[0]+.06,AT.rot[1]];
