@@ -14,7 +14,14 @@
 @font-face{font-family:"Shuhud Camel";font-weight:500;font-display:swap;src:url("/_blob/d8f81817591752ab4a8e6d2151bea223") format("woff2"),url("/fonts/camel-medium.woff2") format("woff2")}
 @font-face{font-family:"Shuhud Camel";font-weight:700;font-display:swap;src:url("/_blob/3a69f5b983502c46c666eaa3fead7502") format("woff2"),url("/fonts/camel-bold.woff2") format("woff2")}
 @font-face{font-family:"Shuhud Camel";font-weight:800;font-display:swap;src:url("/_blob/eaf92c1dd9e193d911a3955d744a54dc") format("woff2"),url("/fonts/camel-extrabold.woff2") format("woff2")}
-:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+/* reading text in «عام الإبل» Medium, like the headlines (19 Nov 2026, Kamal); small interface text (buttons, chips, dates, sources, radar items, forms) stays IBM Plex */
+body:not(.en) .voice,body:not(.en) .angle,body:not(.en) .tz p,body:not(.en) .rs-ab,body:not(.en) .ex-intro,body:not(.en) .ex-card p,body:not(.en) .ex-h p{font-family:var(--f-display);font-weight:500}
+body:not(.en) .voice{font-size:18px;line-height:1.95}body:not(.en) .angle{font-size:17px}body:not(.en) .tz p{font-size:16px}body:not(.en) .lead p{font-size:17.5px}body:not(.en) .rs-ab{font-size:16.5px}
+@media (max-width:640px){body:not(.en) .voice{font-size:17.5px}body:not(.en) .angle{font-size:16.5px}}
+/* «رادار شهود» is a name with «شهود» in it: it keeps the logo's Ruqaa */
+.radar h2,.radar .rd-head h2{font-family:var(--f-logo)}
+</style></head><body>
 
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -729,8 +736,8 @@ body.en .hero>p{max-width:54em}
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795107285"</script>
-<script src="local.js?v=1795107285"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795107603"</script>
+<script src="local.js?v=1795107603"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-cap", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
