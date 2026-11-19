@@ -772,8 +772,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795131022"</script>
-<script src="local.js?v=1795131022"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795132717"</script>
+<script src="local.js?v=1795132717"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-cap", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -3588,7 +3588,7 @@ const mSrc=f=>{const u=String(f.url||"");if(window.SHUHUD_STANDALONE)return u.st
   /* the Claude copy also shows media made in the website's newsroom (media/g_*): those live on alshuhud.org */
   return /^media\//.test(u)?"https://alshuhud.org/"+u:u};
 const canAddMedia=()=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE)||(typeof ghMode==="function"&&ghMode()&&!!ghTok());
-const canDelMedia=m=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE&&!m._site)||(typeof ghMode==="function"&&ghMode()&&!!ghTok()&&String(m.id).startsWith("g_"));
+const canDelMedia=m=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE&&!m._site)||(typeof ghMode==="function"&&ghMode()&&!!ghTok());
 /* a video shows its cover (title card) before it plays; older videos without one open on the title frame */
 const vidTag=(m,f)=>m.poster?`<video src="${esc(mSrc(f))}" poster="${esc(/^media\/g_/.test(m.poster.url||"")&&Date.now()-Date.parse(m.createdAt||0)<9e5?"https://raw.githubusercontent.com/Kalslami2013/shuhud/main/"+m.poster.url:mSrc(m.poster))}" controls playsinline preload="metadata"></video>`:`<video src="${esc(mSrc(f))}#t=2" controls playsinline preload="metadata"></video>`;
 function mediaHTML(m){
@@ -3602,8 +3602,8 @@ function mediaHTML(m){
     <span class="tag">${esc(T("mTypes")[m.type]||"")}</span>${t?`<h3>${esc(t)}</h3>`:""}${c?`<p>${esc(c)}</p>`:""}
     <div class="md-ft"><span class="note">${fmtDate(m.createdAt)}</span>${canDelMedia(m)?`<button class="btn danger" type="button" data-md="del">${mArmed===m.id?T("mDelConfirm"):T("mDel")}</button>`:""}</div></div></article>`;
 }
-let mediaDb=[],mediaSite=[];
-function mergeMedia(){const seen=new Set(mediaDb.map(m=>m.id));media=[...mediaDb,...mediaSite.filter(m=>!seen.has(m.id))].sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));renderMedia()}
+let mediaDb=[],mediaSite=[],mediaHidden=new Set();
+function mergeMedia(){const seen=new Set(mediaDb.map(m=>m.id));media=[...mediaDb.filter(m=>!mediaHidden.has(m.id)&&!m._del),...mediaSite.filter(m=>!seen.has(m.id))].sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));renderMedia()}
 /* «الكل» (20 Nov 2026, Kamal): the newest four of any kind first, then one row per kind, ordered by which kind was exported most recently, each with «عرض الكل» */
 function mGrouped(list){const latest=list.slice(0,4),shown=new Set(latest.map(m=>m.id)),order=[];list.forEach(m=>{if(!order.includes(m.type))order.push(m.type)});
   const sec=(h,n,xs,t)=>`<section class="md-sec"><h3 class="md-h">${h}${n?`<span class="n">${n}</span>`:""}${t?`<button type="button" class="md-all" data-mtall="${t}">${T("mSeeAll")}</button>`:""}</h3><div class="md-sub">${xs.map(mediaHTML).join("")}</div></section>`;
@@ -3650,7 +3650,9 @@ $("#media-chips").addEventListener("click",e=>{if(e.target.closest("[data-mlang]
 $("#media-add-btn").onclick=()=>{$("#media-add").hidden=!$("#media-add").hidden};
 $("#media-grid").addEventListener("click",async e=>{const b=e.target.closest("[data-md]");if(!b)return;const id=b.closest(".md").dataset.mid;const m=media.find(x=>x.id===id);if(!m)return;
   if(mArmed!==id){mArmed=id;renderMedia();setTimeout(()=>{if(mArmed===id){mArmed=null;renderMedia()}},4000);return}
-  mArmed=null;try{if(ghMode()){await ghDel(m)}else{await db.collection("media").doc(id).delete();for(const f of m.files||[]){try{await assets.delete(f.id)}catch(_){}}}toast(T("mDeleted"))}catch(err){toast(T("mFail"))}});
+  mArmed=null;try{if(ghMode()){
+      /* items made in the Claude copy live in data/media.json, which the sync rewrites: hide them with a small tombstone in media-gh.json (20 Nov 2026, Kamal) */
+      if(String(m.id).startsWith("g_"))await ghDel(m);else{await ghSaveList(l=>[...l.filter(x=>x.id!==m.id),{id:m.id,_del:true}],"Media: hide "+(m.title||m.id));try{await db.collection("media").doc(m.id).delete()}catch(e){}}}else{await db.collection("media").doc(id).delete();for(const f of m.files||[]){try{await assets.delete(f.id)}catch(_){}}}toast(T("mDeleted"))}catch(err){toast(T("mFail"))}});
 /* one place that publishes to Media, used by the form and by the export studio */
 const mMax=()=>(typeof ghMode==="function"&&ghMode()?45:20)*1024*1024;
 async function mediaPublish(type,title,caption,files,extra={}){
@@ -3849,7 +3851,7 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
   db.collection("partners").onSnapshot(snap=>{partners=snap.docs.map(d=>({id:d.id,...d.data()}));renderPartners()},()=>{});
   db.collection("media").orderBy("createdAt","desc").limit(300).onSnapshot(snap=>{mediaDb=snap.docs.map(d=>({id:d.id,...d.data()}));mergeMedia()},()=>{});
   /* media made on the website (newsroom.html with the GitHub key) sit in data/media-gh.json: show them here too, read-only */
-  if(!window.SHUHUD_STANDALONE)fetch("https://alshuhud.org/data/media-gh.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(l=>{if(Array.isArray(l)){mediaSite=l.filter(x=>x&&x.id&&!x._del).map(x=>({...x,_site:true}));mergeMedia()}}).catch(()=>{});
+  if(!window.SHUHUD_STANDALONE)fetch("https://alshuhud.org/data/media-gh.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(l=>{if(Array.isArray(l)){mediaSite=l.filter(x=>x&&x.id&&!x._del).map(x=>({...x,_site:true}));mediaHidden=new Set(l.filter(x=>x&&x._del).map(x=>x.id));mergeMedia()}}).catch(()=>{});
   db.collection("extinct").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{m[d.id]=d.data()});extDocs=m;try{if(!extEditId&&!document.getElementById("ext-wrap").hidden)renderExt()}catch(_){}},()=>{});
   db.collection("reserves").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{m[d.id]=d.data()});rsDocs=m;try{if(!rsEditId&&!document.getElementById("rs-wrap").hidden)renderReserves()}catch(_){}},()=>{});
   db.collection("species").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{const x=d.data();m[x.key||d.id]=x});spDocs=m;spLoaded=true;renderSpecies();try{if(!NARR.playing&&!openId)renderFeed()}catch(_){}},()=>{});

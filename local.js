@@ -18,7 +18,7 @@
     const loc=await getAll();const map=new Map();
     (remote[col]||[]).forEach(d=>map.set(d.id,{...(map.get(d.id)||{}),...d,_remote:true}));
     Object.entries(loc).forEach(([k,v])=>{if(!k.startsWith(col+"/"))return;const id=k.slice(col.length+1);if(v&&v.__deleted)map.delete(id);else map.set(id,{...(map.get(id)||{}),...v,id})});
-    return [...map.values()].filter(d=>!(d._photo&&!d.headline));
+    return [...map.values()].filter(d=>!(d._photo&&!d.headline)&&!d._del);
   }
   async function notify(){for(const s of subs){try{s.run()}catch(e){}}}
   function snap(list){const docs=list.map(d=>({id:d.id,exists:true,data:()=>{const {id,...rest}=d;return rest},metadata:{}}));return {docs,size:docs.length,empty:!docs.length,docChanges:()=>[],metadata:{}}}
