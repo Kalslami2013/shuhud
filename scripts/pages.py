@@ -36,7 +36,7 @@ def href(x):
     if x.get("platform") == "email" and not u.lower().startswith("mailto:"): return "mailto:" + u
     return u if re.match(r"^(https?:|mailto:)", u, re.I) else "https://" + u
 
-e = lambda s: html.escape(str(s or ""), quote=True)
+e = lambda s: html.escape(str(s or "").replace("\u064B\u0627", "\u0627\u064B"), quote=True)  # tanween on the alif («صباحاً»), Kamal 19 Nov 2026
 SAFE = re.compile(r"^[A-Za-z0-9_-]{1,120}$")
 
 def date_of(p):
@@ -151,7 +151,7 @@ SC = ('<div class="sc">' + "".join(f'<a href="{e(href(x))}" target="_blank" rel=
 FOOT_EN = f"""<footer><div class="wrap">{SC}<a href="https://alshuhud.substack.com/subscribe" target="_blank" rel="noopener" style="display:block;margin:0 auto 14px;padding:10px 14px;max-width:560px;border:1px solid #c9921f;border-radius:12px;text-decoration:none;color:inherit;text-align:center">📬 The Shuhud weekly: one story in your inbox every week, free · <b>Subscribe</b></a>Shuhud · شهود: the world's crises told by the creatures who live them. <a href="{BASE}?lang=en">alshuhud.org</a></div></footer>
 </body></html>
 """
-FOOT = f"""<footer><div class="wrap">{SC}<a href="https://alshuhud.substack.com/subscribe" target="_blank" rel="noopener" style="display:block;margin:0 auto 14px;padding:10px 14px;max-width:560px;border:1px solid #c9921f;border-radius:12px;text-decoration:none;color:inherit;text-align:center">📬 نشرة شهود الأسبوعية: قصة واحدة كل أسبوع في بريدك، مجانًا · <b>اشترك</b></a>شهود · Shuhud — أزمات العالم بلسان الكائنات التي تعيشها. <a href="{BASE}">alshuhud.org</a></div></footer>
+FOOT = f"""<footer><div class="wrap">{SC}<a href="https://alshuhud.substack.com/subscribe" target="_blank" rel="noopener" style="display:block;margin:0 auto 14px;padding:10px 14px;max-width:560px;border:1px solid #c9921f;border-radius:12px;text-decoration:none;color:inherit;text-align:center">📬 نشرة شهود الأسبوعية: قصة واحدة كل أسبوع في بريدك، مجاناً · <b>اشترك</b></a>شهود · Shuhud — أزمات العالم بلسان الكائنات التي تعيشها. <a href="{BASE}">alshuhud.org</a></div></footer>
 </body></html>
 """
 
