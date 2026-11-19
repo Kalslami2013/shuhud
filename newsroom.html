@@ -593,7 +593,8 @@ body.en .hero>p{max-width:54em}
 }
 @media (min-width:1100px){.wrap:not(:has(#radar:not([hidden]))) .eday-dial{width:128px;height:128px}}
 /* English lines run longer: on wide screens move the clock outward so the date row stays on one line (19 Nov 2026, Kamal) */
-@media (min-width:1380px){body.en #eday{inset-inline-end:-120px}body.en .hero>p[data-i18n],body.en .hero>.scene-row{max-width:calc(100% - 170px)}}
+@media (min-width:1100px){/* English caption on two lines like the Arabic, so the dial clears the language buttons */body.en #eday{width:320px}}
+@media (min-width:1380px){/* only on Home with the radar: elsewhere the English clock stays inside the frame like the Arabic one (20 Nov 2026, Kamal) */body.en .wrap:has(#v-live:not([hidden])):has(#radar:not([hidden])) #eday{inset-inline-end:-120px}body.en .hero>p[data-i18n],body.en .hero>.scene-row{max-width:calc(100% - 170px)}}
 /* without the radar the tab bar spans 150px further each side; the header follows it, so the logo sits further right and the buttons and clock further left (19 Nov 2026, Kamal) */
 @media (min-width:1380px){.wrap:not(:has(#v-live:not([hidden])):has(#radar:not([hidden]))) .hero{margin-inline:-150px}}
 /* with the radar column shown, the clock moves outward, nearer the language switch but not touching it (19 Nov 2026, Kamal); other tabs keep it where it was */
@@ -978,8 +979,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795129762"</script>
-<script src="local.js?v=1795129762"></script>
+<script>window.SHUHUD_BUILD="1795130437"</script>
+<script src="local.js?v=1795130437"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
