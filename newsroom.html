@@ -962,8 +962,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795125474"</script>
-<script src="local.js?v=1795125474"></script>
+<script>window.SHUHUD_BUILD="1795125875"</script>
+<script src="local.js?v=1795125875"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -2756,10 +2756,13 @@ const toBlob=cv=>new Promise(r=>cv.toBlob(r,"image/png"));
 function clearUrls(){stUrls.forEach(u=>URL.revokeObjectURL(u));stUrls=[]}
 function openStudio(raw){if(typeof stopNarration==="function")stopNarration();stItem=raw;$("#st-theme").value="auto";if($("#st-style"))$("#st-style").value="pro";if($("#st-tone"))$("#st-tone").value="auto";stPhoto=null;stPhotoLocal=false;$("#studio").hidden=false;document.body.style.overflow="hidden";setMode(stMode);setTimeout(()=>$("#st-close").focus(),30)}
 function closeStudio(){if(stAbort)stAbort();if(typeof mPrev==="function"&&mPrev)mPrev();clearUrls();$("#studio").hidden=true;document.body.style.overflow=""}
+const ST_SIZE={};
+$("#st-size").addEventListener("change",e=>{ST_SIZE[stMode]=e.target.value});
 function setMode(m){
   if(stAbort)stAbort();stMode=m;document.querySelectorAll("#studio .st-tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.m===m));
   const sel=$("#st-size");$("#st-audio-w").hidden=m!=="video";$("#st-amb-w").hidden=m!=="video";$("#st-motion-w").hidden=m!=="video";$("#st-dur-w").hidden=m!=="video";$("#st-res-w").hidden=m==="video";
-  const cur=sel.value;sel.innerHTML=SIZES[m].map(s=>`<option value="${s[0]}">${T("sizes")[s[0]]}</option>`).join("");if(SIZES[m].some(s=>s[0]===cur))sel.value=cur;
+  /* each tab opens on its own best size (4:5 cards, 9:16 video), and remembers what Kamal picked in that tab (20 Nov 2026) */
+  sel.innerHTML=SIZES[m].map(s=>`<option value="${s[0]}">${T("sizes")[s[0]]}</option>`).join("");sel.value=(ST_SIZE[m]&&SIZES[m].some(s=>s[0]===ST_SIZE[m]))?ST_SIZE[m]:SIZES[m][0][0];
   renderStudio();
 }
 function curSize(){const L=SIZES[stMode];const s=L.find(x=>x[0]===$("#st-size").value)||L[0];return[s[1],s[2]]}
