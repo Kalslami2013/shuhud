@@ -218,6 +218,13 @@ section[id^="v-"]:not([hidden]){animation:vfade .32s ease both}
 .fig.warn .s{color:var(--ember)}
 .foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px;color:var(--faint)}
 .foot .src{margin-inline-end:auto;min-width:0;overflow-wrap:anywhere}
+.srcs{border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.18);padding:0;font-size:13px}
+.srcs summary{cursor:pointer;list-style:none;padding:9px 14px;color:var(--dim);font-weight:600;display:flex;align-items:center;gap:8px}.srcs summary::-webkit-details-marker{display:none}
+.srcs summary::after{content:"▾";margin-inline-start:auto;transition:transform .2s}.srcs[open] summary::after{transform:rotate(180deg)}
+.srcs summary .n{font-size:11.5px;background:rgba(255,255,255,.07);border-radius:999px;padding:1px 8px;font-weight:500}
+.srcs ol{margin:0;padding:2px 14px 10px;padding-inline-start:34px;display:grid;gap:5px;color:var(--faint)}
+.srcs li{line-height:1.6}.srcs li a{color:var(--parchment);text-decoration:none;border-bottom:1px solid rgba(242,184,75,.35)}.srcs li a:hover{color:var(--amber)}
+.srcs .src-h{display:inline-block;font-size:11.5px;color:var(--faint);margin-inline-start:12px;opacity:.85;direction:ltr;unicode-bidi:isolate}
 .btn{border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:10px;padding:6px 11px;font-size:12.5px}
 .btn:hover{color:var(--parchment);border-color:var(--leaf)}
 .btn.danger{color:var(--ember)}
@@ -963,8 +970,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795128366"</script>
-<script src="local.js?v=1795128366"></script>
+<script>window.SHUHUD_BUILD="1795128774"</script>
+<script src="local.js?v=1795128774"></script>
 <script>
 const $=s=>document.querySelector(s);
 /* ---------- language ---------- */
@@ -1238,6 +1245,11 @@ function renderCats(){
 }
 const EMOJI_SAFE={"🦭":"🐟","🪸":"🐚","🫏":"🐴","🐻‍❄️":"🐻","🦬":"🐂","🪼":"🐙","🪲":"🐞"};const safeE=e=>EMOJI_SAFE[e]||e;
 function who(i){const r=ROSTER[i.animal];return{e:safeE(i.animalEmoji||r?.e||"🐾"),n:i.animalName||(r?rName(i.animal):T("witness")),b:i.animalHabitat||(r?rBio(i.animal):"")}}
+/* sources as a tidy numbered list under one fold (20 Nov 2026, Kamal: a long run of underlined links crowded the piece); three or fewer stay open */
+function srcBlock(i,hide){const list=Array.isArray(i.sources)&&i.sources.length?i.sources:(i.source||i.sourceUrl?[{name:i.source,url:i.sourceUrl}]:[]);if(!list.length)return"";
+  const host=u=>{try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return""}};
+  const li=list.map(s=>`<li>${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name||T("source"))}</a>${host(s.url)?`<span class="src-h">${esc(host(s.url))}</span>`:""}`:esc(s.name||"")}</li>`).join("");
+  return `<details class="srcs"${list.length<=3?" open":""}${hide?" hidden":""}><summary>📚 ${T("sources")} <span class="n">${list.length}</span></summary><ol>${li}</ol></details>`}
 function srcList(i){
   const list=Array.isArray(i.sources)&&i.sources.length?i.sources:(i.source||i.sourceUrl?[{name:i.source,url:i.sourceUrl}]:[]);
   return list.map(s=>s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name||T("source"))}</a>`:esc(s.name||"")).join(isEn()?", ":"، ");
@@ -1333,7 +1345,7 @@ function cardHTML(raw){
       <div class="tags"><span class="tag">${esc(catName(raw.category||""))}</span><span>${esc(i.place||"")}</span><span>${fmtDate(i.createdAt||i.eventDate)}</span></div></div>
     ${editId===raw.id?editHTML(raw):richHTML((()=>{const s=shownImg(raw);return {...i,imageUrl:s.img,imageCredit:s.credit,_narr:s.narr}})(),false)}
     ${openId===raw.id&&editId!==raw.id?`<div class="subx subx-in"><span class="subx-t">${T("subT")}</span><a class="btn primary" href="https://alshuhud.substack.com/subscribe" target="_blank" rel="noopener">${T("subB")}</a></div>`:""}
-    <div class="foot"${editId===raw.id?" hidden":""}><span class="src">${src?T("sources")+": "+src:""}${raw.kind==="desk"?" · "+T("fromDesk"):""}</span>
+    ${srcBlock(i,editId===raw.id)}<div class="foot"${editId===raw.id?" hidden":""}><span class="src">${raw.kind==="desk"?T("fromDesk"):""}</span>
       ${"speechSynthesis" in window?`<button class="btn" data-act="say">${T("listen")}</button>`:""}
       ${canEditPiece()?`<button class="btn" data-act="edit">${T("edBtn")}</button>`:""}
       <button class="btn" data-act="photo">${raw.imageUrl?T("changePhotoShort"):T("photo")}</button>
