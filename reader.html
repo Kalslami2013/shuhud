@@ -404,6 +404,7 @@ body:not(.en) .sp .sci{text-align:right}
 .sp-act a.btn{text-decoration:none}
 .md-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:24px;margin-bottom:24px}
 .md-grid.md-groups{display:block}.md-sec{margin-bottom:34px}.md-sub{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:24px}
+.md-h .md-all{margin-inline-start:auto;background:none;border:1px solid rgba(242,184,75,.4);color:var(--amber);border-radius:999px;padding:4px 14px;font:600 13px var(--f-ui,inherit);cursor:pointer}.md-h .md-all:hover{background:rgba(242,184,75,.12)}
 .md-h{display:flex;align-items:center;gap:8px;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid rgba(242,184,75,.3);font-size:19px;color:var(--amber)}.md-h .n{font-size:12px;color:var(--dim);background:rgba(255,255,255,.06);border-radius:999px;padding:1px 9px}
 .md-grid>.empty{grid-column:1/-1}
 .md{background:var(--bark);border:1px solid var(--line);border-radius:18px;overflow:hidden;backdrop-filter:blur(8px);display:flex;flex-direction:column;min-width:0}
@@ -754,8 +755,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795125875"</script>
-<script src="local.js?v=1795125875"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795126522"</script>
+<script src="local.js?v=1795126522"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-cap", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -3474,7 +3475,7 @@ $("#sp-photo-in").onchange=async e=>{const f=e.target.files[0];e.target.value=""
 Object.assign(DICT.ar,{
   navMedia:"ميديا",navAbout:"من نحن",navAtlas:"🌍 الأطلس",atTitle:"أطلس شهود البيئي",atSub:"الأزمات البيئية الجارية على كوكب واحد: الحروب والأزمات الكبرى، وشهاداتنا، وإنذارات الكوارث الحية، والمحميات. أدِر الكرة واضغط أي نقطة.",atLoading:"نرسم الكوكب…",atNoLib:"تعذّر تحميل الخريطة. تحقق من الاتصال وأعد المحاولة.",atHint:"اسحب لتدوير الكرة · قرّب بعجلة الفأرة أو بإصبعين · اضغط نقطة",atL_hot:"بؤر الأزمات",atL_war:"الحروب والأزمات",atWarK:"حرب وأزمة كبرى",atWarPcs:"شهاداتنا من هنا",atWarList:"الحروب والأزمات الكبرى",atHotK:"بؤرة أزمة",atHotN:n=>`${n} شهادات من هذه المنطقة في آخر 60 يوماً`,atL_pieces:"شهاداتنا",atL_alerts:"إنذارات حية",atL_reserves:"محميات",atGlobe:"كرة",atFlat:"خريطة مسطحة",atPick:"اضغط أي نقطة على الكرة لترى ما يحدث هناك.<br><br>⚔️ حرب أو أزمة كبرى · 🔥 بؤرة أزمة وثّقتها شهاداتنا · 🐾 شهادة من شهود · ⚠️ إنذار حي (أحمر، برتقالي، أصفر) · 🌳 محمية",atRead:"اقرأ الشهادة ←",atReserve:"محمية",atLive:"إنذار حي",atSource:"المصدر",atNear:"شهادات قريبة:",atLatest:"⚠️ آخر الإنذارات الحية",atNoAlerts:"الإنذارات الحية تظهر في الموقع العام والنسخة المستقلة.",atCredit:"المصادر: نظام الإنذار العالمي بالكوارث (GDACS)، وهيئة المسح الجيولوجي الأمريكية (USGS)، وناسا (EONET)، تُحدَّث كل ساعة",atMin:m=>`منذ ${m} د`,atHr:h=>`منذ ${h} س`,atDay:d=>`منذ ${d} يوم`,
   mediaIntro:"ما تنتجه منصة شهود من صور وبطاقات وفيديو وكاروسيل وإنفوجراف.",
-  capH:"📝 نص المنشور",capShort:"قصير (إكس)",capLong:"طويل (فيسبوك، إنستغرام، لينكدإن)",capCopy:"📋 نسخ",capDone:"نُسخ النص",mLangAll:"🌐 كل اللغات",mLangNone:"لا توجد مواد بالعربية بعد، فتظهر كل المواد.",mAll:"الكل",mTypes:{image:"صور",card:"بطاقات",video:"فيديو",carousel:"كاروسيل",info:"إنفوجراف"},
+  mLatest:"🆕 الأحدث",mSeeAll:"عرض الكل ←",capH:"📝 نص المنشور",capShort:"قصير (إكس)",capLong:"طويل (فيسبوك، إنستغرام، لينكدإن)",capCopy:"📋 نسخ",capDone:"نُسخ النص",mLangAll:"🌐 كل اللغات",mLangNone:"لا توجد مواد بالعربية بعد، فتظهر كل المواد.",mAll:"الكل",mTypes:{image:"صور",card:"بطاقات",video:"فيديو",carousel:"كاروسيل",info:"إنفوجراف"},
   mAddBtn:"➕ أضف مادة",mAddTitle:"أضف مادة إلى ميديا",mType:"النوع",mTitle:"العنوان",mCaption:"وصف قصير (اختياري)",mFiles:"الملفات (صورة أو أكثر، أو فيديو)",
   mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تظهر المادة في الصفحة العامة بعد «زامن النسخة المستقلة».",
   mSave:"انشر في ميديا",mSaving:"تُرفع الملفات…",mSaved:"نُشرت في ميديا",mFail:"تعذر النشر",mNeed:"اختر ملفاً وأضف عنواناً",mTooBig:"الملف أكبر من الحد المسموح للنشر في ميديا",
@@ -3506,7 +3507,7 @@ Object.assign(DICT.ar,{
 Object.assign(DICT.en,{
   navMedia:"Media",navAbout:"About us",navAtlas:"🌍 Atlas",atTitle:"The Shuhud Environmental Atlas",atSub:"The environmental crises unfolding now, on one planet: major wars and crises, our testimonies, live disaster alerts and nature reserves. Spin the globe and tap any point.",atLoading:"Drawing the planet…",atNoLib:"The map could not load. Check your connection and try again.",atHint:"Drag to spin · zoom with the wheel or two fingers · tap a point",atL_hot:"Crisis hotspots",atL_war:"Wars and crises",atWarK:"War and major crisis",atWarPcs:"Our testimonies from here",atWarList:"Major wars and crises",atHotK:"Crisis hotspot",atHotN:n=>`${n} testimonies from this area in the last 60 days`,atL_pieces:"Testimonies",atL_alerts:"Live alerts",atL_reserves:"Reserves",atGlobe:"Globe",atFlat:"Flat map",atPick:"Tap any point on the globe to see what is happening there.<br><br>⚔️ a war or major crisis · 🔥 a crisis hotspot our testimonies document · 🐾 a Shuhud testimony · ⚠️ a live alert (red, orange, yellow) · 🌳 a reserve",atRead:"Read the testimony →",atReserve:"Reserve",atLive:"Live alert",atSource:"Source",atNear:"Testimonies nearby:",atLatest:"⚠️ Latest live alerts",atNoAlerts:"Live alerts appear on the public site and the standalone app.",atCredit:"Sources: Global Disaster Alert and Coordination System (GDACS), US Geological Survey (USGS) and NASA (EONET), refreshed hourly",atMin:m=>`${m} min ago`,atHr:h=>`${h} h ago`,atDay:d=>`${d} d ago`,
   mediaIntro:"Photos, cards, videos, carousels and infographics produced by Shuhud.",
-  capH:"📝 Post text",capShort:"Short (X)",capLong:"Long (Facebook, Instagram, LinkedIn)",capCopy:"📋 Copy",capDone:"Text copied",mLangAll:"🌐 All languages",mLangNone:"No English media yet, so everything is shown.",mAll:"All",mTypes:{image:"Photos",card:"Cards",video:"Video",carousel:"Carousels",info:"Infographics"},
+  mLatest:"🆕 Latest",mSeeAll:"See all →",capH:"📝 Post text",capShort:"Short (X)",capLong:"Long (Facebook, Instagram, LinkedIn)",capCopy:"📋 Copy",capDone:"Text copied",mLangAll:"🌐 All languages",mLangNone:"No English media yet, so everything is shown.",mAll:"All",mTypes:{image:"Photos",card:"Cards",video:"Video",carousel:"Carousels",info:"Infographics"},
   mAddBtn:"➕ Add an item",mAddTitle:"Add to Media",mType:"Type",mTitle:"Title",mCaption:"Short description (optional)",mFiles:"Files (one or more images, or a video)",
   mFilesNote:"20 MB per file. For a carousel pick several images in order. Items reach the public page after “Sync the standalone copy”.",
   mSave:"Publish to Media",mSaving:"Uploading…",mSaved:"Published to Media",mFail:"Couldn't publish",mNeed:"Pick a file and add a title",mTooBig:"A file is larger than the Media upload limit",
@@ -3555,6 +3556,10 @@ function mediaHTML(m){
 }
 let mediaDb=[],mediaSite=[];
 function mergeMedia(){const seen=new Set(mediaDb.map(m=>m.id));media=[...mediaDb,...mediaSite.filter(m=>!seen.has(m.id))].sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));renderMedia()}
+/* «الكل» (20 Nov 2026, Kamal): the newest four of any kind first, then one row per kind, ordered by which kind was exported most recently, each with «عرض الكل» */
+function mGrouped(list){const latest=list.slice(0,4),shown=new Set(latest.map(m=>m.id)),order=[];list.forEach(m=>{if(!order.includes(m.type))order.push(m.type)});
+  const sec=(h,n,xs,t)=>`<section class="md-sec"><h3 class="md-h">${h}${n?`<span class="n">${n}</span>`:""}${t?`<button type="button" class="md-all" data-mtall="${t}">${T("mSeeAll")}</button>`:""}</h3><div class="md-sub">${xs.map(mediaHTML).join("")}</div></section>`;
+  return sec(T("mLatest"),0,latest,"")+order.map(t=>{const all=list.filter(m=>m.type===t),xs=all.filter(m=>!shown.has(m.id)).slice(0,2);return xs.length?sec(esc(T("mTypes")[t]),all.length,xs,t):""}).join("")}
 function renderMedia(){
   const g=$("#media-grid");if(!g)return;
   $("#media-add-btn").hidden=!canAddMedia();if(!canAddMedia())$("#media-add").hidden=true;if(typeof renderGh==="function")renderGh();
@@ -3565,7 +3570,7 @@ function renderMedia(){
   const list=mType==="all"?pool:pool.filter(m=>m.type===mType);
   /* «الكل» shows each kind in its own group (video, carousel, infographic, cards…), so they don't mix (19 Nov 2026, Kamal) */
   const grpd=mType==="all"&&new Set(list.map(m=>m.type)).size>1;g.classList.toggle("md-groups",!!grpd);
-  g.innerHTML=!list.length?`<div class="card empty"><div class="big">🎞️</div>${T("mEmpty")}</div>`:grpd?["video","carousel","info","card","image"].filter(t=>list.some(m=>m.type===t)).map(t=>{const xs=list.filter(m=>m.type===t);return `<section class="md-sec"><h3 class="md-h">${esc(T("mTypes")[t])}<span class="n">${xs.length}</span></h3><div class="md-sub">${xs.map(mediaHTML).join("")}</div></section>`}).join(""):list.map(mediaHTML).join("");
+  g.innerHTML=!list.length?`<div class="card empty"><div class="big">🎞️</div>${T("mEmpty")}</div>`:grpd?mGrouped(list):list.map(mediaHTML).join("");
   /* every carousel opens on its first card (the title card), and the counter follows the swipe */
   g.querySelectorAll(".md-car").forEach(c=>{const n=c.parentElement.querySelector(".md-n"),tot=c.children.length;
     const start=()=>{c.scrollLeft=0};start();requestAnimationFrame(start);c.querySelectorAll("img").forEach(im=>im.addEventListener("load",()=>{if(!c.dataset.moved)start()},{once:true}));
@@ -3592,6 +3597,7 @@ function lbGo(d){if(!lb)return;const k=lb.k+d;if(k<0||k>=lb.files.length)return;
 function lbClose(){const box=$("#lb");if(box)box.hidden=true;lb=null;document.body.style.overflow=""}
 addEventListener("keydown",e=>{if(!lb)return;if(e.key==="Escape")lbClose();else if(e.key==="ArrowLeft")lbGo(lb.dir==="rtl"?1:-1);else if(e.key==="ArrowRight")lbGo(lb.dir==="rtl"?-1:1)});
 $("#media-grid").addEventListener("click",e=>{const im=e.target.closest("[data-lb]");if(!im)return;const m=media.find(x=>x.id===im.closest(".md").dataset.mid);if(m){const imgs=(m.files||[]).filter(f=>!String(f.mime||"").startsWith("video/"));lbOpen(m,Math.min(+im.dataset.lb,imgs.length-1))}});
+$("#media-grid").addEventListener("click",e=>{const b=e.target.closest("[data-mtall]");if(!b)return;mType=b.dataset.mtall;renderMedia();$("#media-chips").scrollIntoView({behavior:"smooth",block:"start"})});
 $("#media-chips").addEventListener("click",e=>{if(e.target.closest("[data-mlang]")){mAllLang=!mAllLang;renderMedia();return}const b=e.target.closest("[data-mt]");if(!b)return;mType=b.dataset.mt;renderMedia()});
 $("#media-add-btn").onclick=()=>{$("#media-add").hidden=!$("#media-add").hidden};
 $("#media-grid").addEventListener("click",async e=>{const b=e.target.closest("[data-md]");if(!b)return;const id=b.closest(".md").dataset.mid;const m=media.find(x=>x.id===id);if(!m)return;
