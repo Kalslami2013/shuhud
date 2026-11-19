@@ -118,7 +118,7 @@ button{font-family:inherit;cursor:pointer}
 .scene-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;font-size:13px;color:var(--parchment)}
 .scene-row #scene{background:var(--bark);border:1px solid var(--line);border-radius:999px;padding:5px 13px;backdrop-filter:blur(6px)}
 .scene-dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber)}
-select.mini{width:auto;font-size:12.5px;padding:5px 10px;border-radius:999px;background:var(--bark);backdrop-filter:blur(6px)}
+select.mini{width:auto;max-width:100%;font-size:12.5px;padding:5px 10px;border-radius:999px;background:var(--bark);backdrop-filter:blur(6px)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .hero h1,.hero p,.eyebrow{text-shadow:0 2px 14px rgba(0,0,0,.75),0 0 2px rgba(0,0,0,.6)}
 .hero p{color:var(--parchment)}
@@ -754,8 +754,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795120937"</script>
-<script src="local.js?v=1795120937"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795125474"</script>
+<script src="local.js?v=1795125474"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-cap", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -808,7 +808,7 @@ ar:{
   notTranslated:"هذه القطعة بلا نسخة إنجليزية بعد.",
   /* studio */
   stTitle:"",close:"إغلاق",tCards:"بطاقات سوشيال",tInfo:"إنفوجراف",tVideo:"فيديو",size:"المقاس",audio:"خلفية صوتية من الغابة",
-  sizes:{"long":"طولي حسب المحتوى","4x5":"عمودي 4:5","1x1":"مربع 1:1","9x16":"ستوري 9:16","16x9":"أفقي 16:9","a4":"ورقة A4"},res:"الدقة",resOpts:{"1":"عادية","2":"عالية ×2","3":"فائقة ×3 (4K)"},drawing:"نرسم…",
+  sizes:{"long":"طولي · الموقع وتيليغرام وواتساب","4x5":"عمودي 4:5 · إنستغرام وفيسبوك ولينكدإن (الأفضل)","3x4":"عمودي 3:4 · شبكة إنستغرام الجديدة","1x1":"مربع 1:1 · إكس وتيليغرام وواتساب","9x16":"عمودي كامل 9:16 · ريلز وتيك توك وشورتس والستوري","16x9":"أفقي 16:9 · يوتيوب وإكس والموقع","a4":"ورقة A4 · طباعة وPDF للجهات"},res:"الدقة",resOpts:{"1":"عادية","2":"عالية ×2","3":"فائقة ×3 (4K)"},drawing:"نرسم…",
   noSave:"الحفظ غير متاح في هذا العرض. اضغط مطولاً على الصورة لحفظها.",save:"حفظ",saveZip:"حفظ كل البطاقات (ZIP)",zipping:"نجمع البطاقات…",zipFail:"تعذر تجهيز الملف المضغوط",
   savePng:"حفظ الإنفوجراف (PNG)",preview:"معاينة",makeVideo:s=>`صناعة الفيديو (${s} ثانية)`,recording:"يُسجَّل الفيديو الآن، أبقِ الصفحة مفتوحة…",
   recStopped:"توقف التسجيل.",recReady:(mb,ext)=>`جاهز: ${mb} ميغابايت بصيغة ${ext}`,saveVideo:ext=>`حفظ الفيديو (${ext})`,recFail:"تعذر تسجيل الفيديو في هذا المتصفح.",
@@ -873,7 +873,7 @@ en:{
   translate:"Translate to English",translating:"Translating…",translated:"English version added",trFail:"Couldn't translate",
   notTranslated:"This piece has no English version yet.",
   stTitle:"",close:"Close",tCards:"Social cards",tInfo:"Infographic",tVideo:"Video",size:"Size",audio:"Forest soundscape",
-  sizes:{"long":"Long (fits content)","4x5":"Portrait 4:5","1x1":"Square 1:1","9x16":"Story 9:16","16x9":"Landscape 16:9","a4":"A4 page"},res:"Resolution",resOpts:{"1":"Standard","2":"High ×2","3":"Ultra ×3 (4K)"},drawing:"Drawing…",
+  sizes:{"long":"Long · website, Telegram, WhatsApp","4x5":"Portrait 4:5 · Instagram, Facebook, LinkedIn (best)","3x4":"Portrait 3:4 · new Instagram grid","1x1":"Square 1:1 · X, Telegram, WhatsApp","9x16":"Full vertical 9:16 · Reels, TikTok, Shorts, Stories","16x9":"Landscape 16:9 · YouTube, X, website","a4":"A4 page · print and PDF for funders"},res:"Resolution",resOpts:{"1":"Standard","2":"High ×2","3":"Ultra ×3 (4K)"},drawing:"Drawing…",
   noSave:"Saving isn't available in this view. Long-press the image to save it.",save:"Save",saveZip:"Save all cards (ZIP)",zipping:"Packing the cards…",zipFail:"Couldn't build the ZIP file",
   savePng:"Save infographic (PNG)",preview:"Preview",makeVideo:s=>`Make the video (${s} seconds)`,recording:"Recording the video now. Keep this page open…",
   recStopped:"Recording stopped.",recReady:(mb,ext)=>`Ready: ${mb} MB, ${ext}`,saveVideo:ext=>`Save video (${ext})`,recFail:"This browser couldn't record the video.",
@@ -1747,7 +1747,7 @@ const DIR=()=>CL==="en"?"ltr":"rtl";
 const FR=(ctx,x,y,w,h)=>ctx.fillRect(CL==="en"?CWd-x-w:x,y,w,h);
 function setCanvasLang(i,W){CWd=W;CL=isEn()&&i.en?"en":"ar"}
 let downloads=null,stItem=null,stMode="cards",stUrls=[],stAbort=null;
-const SIZES={info:[["long",1080,0],["4x5",1080,1350],["1x1",1080,1080],["9x16",1080,1920],["16x9",1920,1080],["a4",1240,1754]],cards:[["4x5",1080,1350],["1x1",1080,1080],["9x16",1080,1920]],video:[["9x16",1080,1920],["1x1",1080,1080],["4x5",1080,1350]]};
+const SIZES={info:[["long",1080,0],["4x5",1080,1350],["1x1",1080,1080],["9x16",1080,1920],["16x9",1920,1080],["a4",1240,1754]],cards:[["4x5",1080,1350],["3x4",1080,1440],["1x1",1080,1080],["9x16",1080,1920]],video:[["9x16",1080,1920],["4x5",1080,1350],["1x1",1080,1080]]};
 
 async function fontsReady(){try{await Promise.all(['700 64px "Aref Ruqaa"','700 64px "Shuhud Camel"','800 64px "Shuhud Camel"','500 32px "Shuhud Camel"','400 32px "IBM Plex Sans Arabic"','600 32px "IBM Plex Sans Arabic"','700 64px "Fraunces"','400 32px "IBM Plex Sans"','600 32px "IBM Plex Sans"'].map(f=>document.fonts.load(f)))}catch(e){}}
 function paw(ctx,cx,top,size,color){const s=size/404,cy=top+245*s;ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(cx,cy+30*s,115*s,90*s,0,0,Math.PI*2);ctx.fill();[[-150,-95,52,66],[-62,-175,54,70],[62,-175,54,70],[150,-95,52,66]].forEach(([dx,dy,rx,ry])=>{ctx.beginPath();ctx.ellipse(cx+dx*s,cy+dy*s,rx*s,ry*s,0,0,Math.PI*2);ctx.fill()})}
@@ -2360,8 +2360,8 @@ function proSlides(i,W,H,forVideo,target=0){
     fade(ctx,p,0,.3,()=>{if(i.crisis)proKicker(ctx,i.crisis,W,y-40*u,u,cw)});
     fade(ctx,p,.1,.45,()=>{if(onP){ctx.shadowColor="rgba(0,0,0,.6)";ctx.shadowBlur=20*u;ctx.shadowOffsetY=2*u}txt(ctx,i.headline,{...hl,y:y+fs*.9})});
     if(narrOnCover||!coverImg)fade(ctx,p,.3,.6,()=>{proSign(ctx,W,bottom-62*u,u,r,onP)});
-    if(stPhoto&&i.imageCredit){ctx.font=proFont(400,17*u);ctx.fillStyle="rgba(255,255,255,.7)";ctx.direction="ltr";ctx.textAlign=AL("left");ctx.fillText("📷 "+(i.imageCredit.length>70?i.imageCredit.split("·").slice(-2).join("·").trim():i.imageCredit),MX(pad),top-20*u)}
-    else if(!stPhoto&&stNarr&&i.__narrCredit){ctx.font=proFont(400,17*u);ctx.fillStyle="rgba(255,255,255,.7)";ctx.direction="ltr";ctx.textAlign=AL("left");ctx.fillText("📷 "+i.__narrCredit,MX(pad),top-20*u)}
+    if(stPhoto&&i.imageCredit){ctx.font=proFont(400,17*u);ctx.fillStyle="rgba(255,255,255,.7)";ctx.direction="ltr";ctx.textAlign=AL("left");ctx.fillText("📷 "+(i.imageCredit.length>70?i.imageCredit.split("·").slice(-2).join("·").trim():i.imageCredit),MX(pad),W>H?H-28*u:top-20*u)}
+    else if(!stPhoto&&stNarr&&i.__narrCredit){ctx.font=proFont(400,17*u);ctx.fillStyle="rgba(255,255,255,.7)";ctx.direction="ltr";ctx.textAlign=AL("left");ctx.fillText("📷 "+i.__narrCredit,MX(pad),W>H?H-28*u:top-20*u)}
   }});
   /* 2 · what happened: the news, in an agency register */
   if(i.fact||i.angle)S.push({key:"fact",d:6.5,draw:(ctx,p)=>{let y=top+30*u;
@@ -2381,7 +2381,9 @@ function proSlides(i,W,H,forVideo,target=0){
     S.push({key:"fig"+s,d:2.4+2.2*group.length,ground:s===0&&$("#st-tone")&&$("#st-tone").value==="auto"?"color":"",draw:(ctx,p)=>{
       proLabel(ctx,en?"By the numbers":"بالأرقام",W,top+30*u,u);
       const slot=(bottom-top-120*u)/group.length;
-      group.forEach((f,k)=>{let sy=top+120*u+k*slot,a=.05+k*.3;const big=(tall?150:sq?132:146)*u;
+      group.forEach((f,k)=>{let sy=top+120*u+k*slot,a=.05+k*.3;let big=(tall?150:sq?132:146)*u;
+        /* a long value shrinks until it fits in two lines, instead of being cut with «…» (20 Nov 2026) */
+        {const b0=big;while(big>b0*.5&&txt(ctx,f.value,{x:W-pad,y:0,maxW:cw,font:proFont(700,big),lh:big*1.05,maxLines:9,measure:true})>big*1.05*2.05)big*=.92}
         /* a single number sits in the optical middle of the card */
         if(group.length===1){const vh=txt(ctx,f.value,{x:W-pad,y:0,maxW:cw,font:proFont(700,big),lh:big*1.05,maxLines:2,measure:true}),lh2=txt(ctx,f.label||"",{x:W-pad,y:0,maxW:cw*.92,font:proFont(500,40*u),lh:58*u,maxLines:6,measure:true});
           sy=Math.max(top+110*u,top+90*u+(bottom-top-90*u-(vh+lh2+70*u))/2.4)}
