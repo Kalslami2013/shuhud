@@ -1,0 +1,31 @@
+name: Media previews
+# Free GitHub job (no Claude): makes light WebP previews of new media images so the site stays fast on phones.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "media/**"
+      - "!media/t/**"
+      - scripts/thumbs.py
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: data-writes
+  cancel-in-progress: false
+jobs:
+  thumbs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --quiet pillow
+      - run: python3 scripts/thumbs.py
+      - name: Commit if changed
+        run: |
+          git config user.name "shuhud-bot"
+          git config user.email "shuhud-bot@users.noreply.github.com"
+          git add -A media/t data/thumbs.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Media previews: update"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1

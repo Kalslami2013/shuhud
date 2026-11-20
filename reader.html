@@ -772,12 +772,13 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795132717"</script>
-<script src="local.js?v=1795132717"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795156750"</script>
+<script src="local.js?v=1795156750"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-cap", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
 const $=s=>{const e=document.querySelector(s);if(e)return e;const m=/^#([\w-]+)/.exec(s);return m&&__CUT.has(m[1])?__nil:null};
+var MEDIA_DIRTY=true;
 /* ---------- language ---------- */
 const DICT={
 ar:{
@@ -1024,7 +1025,7 @@ function fmtDate(iso){try{return new Date(iso).toLocaleDateString(isEn()?"en-GB"
 const VIEWS=["live","atlas","track","desk","corr","ids","red","media","about","guide"];
 /* switching tabs keeps the reader in place: the tab bar stays where it is and the new section starts right under it (no jump back to the top, no jump down) */
 function keepNav(){const m=document.getElementById("nav-mark");if(!m)return;const top=m.getBoundingClientRect().top+scrollY;if(scrollY>top)window.scrollTo({top,behavior:"instant"})}
-function show(v){try{if(NARR.playing)stopNarration()}catch(e){}keepNav();setTimeout(()=>{try{placeRadar()}catch(e){}},0);if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track"||v==="guide")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});if(v==="atlas")setTimeout(()=>{try{atOpen()}catch(e){}},0);document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
+function show(v){try{if(NARR.playing)stopNarration()}catch(e){}keepNav();setTimeout(()=>{try{placeRadar()}catch(e){}},0);if(!VIEWS.includes(v)||(READER&&(v==="desk"||v==="track"||v==="guide")))v="live";VIEWS.forEach(x=>{$("#v-"+x).hidden=x!==v});if(v==="atlas")setTimeout(()=>{try{atOpen()}catch(e){}},0);if(v==="media"&&MEDIA_DIRTY)setTimeout(()=>{try{renderMedia()}catch(e){}},0);document.querySelectorAll("nav.main button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v))}
 function clearHash(){if(!location.hash&&!/^\/p\//.test(location.pathname))return;try{history.pushState(null,"",/^\/p\//.test(location.pathname)?"/":location.pathname+location.search)}catch(e){location.hash=""}}
 const HEAL="الطبيعة تتعافى";
 document.querySelectorAll("nav.main button").forEach(b=>b.onclick=()=>{if((b.dataset.view==="ids"||b.dataset.view==="red")&&!b.__go){idsMenu(b);return}b.__go=false;const was=openId,v=b.dataset.view;
@@ -3590,13 +3591,17 @@ const mSrc=f=>{const u=String(f.url||"");if(window.SHUHUD_STANDALONE)return u.st
 const canAddMedia=()=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE)||(typeof ghMode==="function"&&ghMode()&&!!ghTok());
 const canDelMedia=m=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE&&!m._site)||(typeof ghMode==="function"&&ghMode()&&!!ghTok());
 /* a video shows its cover (title card) before it plays; older videos without one open on the title frame */
-const vidTag=(m,f)=>m.poster?`<video src="${esc(mSrc(f))}" poster="${esc(/^media\/g_/.test(m.poster.url||"")&&Date.now()-Date.parse(m.createdAt||0)<9e5?"https://raw.githubusercontent.com/Kalslami2013/shuhud/main/"+m.poster.url:mSrc(m.poster))}" controls playsinline preload="metadata"></video>`:`<video src="${esc(mSrc(f))}#t=2" controls playsinline preload="metadata"></video>`;
+/* light WebP previews made by the free "Media previews" GitHub job (media/t/<name>.webp, list in data/thumbs.json): the gallery shows them,
+   the lightbox and downloads keep the originals (20 Nov 2026: the gallery pulled ~55 MB of full PNGs on every phone visit) */
+let THUMBS=new Set();if(window.SHUHUD_STANDALONE)fetch("data/thumbs.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(l=>{THUMBS=new Set(l);if(!$("#v-media").hidden)renderMedia()}).catch(()=>{});
+const mView=f=>{const u=mSrc(f),m=/\/media\/([^/?#]+)\.(png|jpe?g|webp)$/i.exec(u);return m&&THUMBS.has(m[1]+"."+m[2])?"/media/t/"+m[1]+".webp":u};
+const vidTag=(m,f)=>m.poster?`<video src="${esc(mSrc(f))}" poster="${esc(/^media\/g_/.test(m.poster.url||"")&&Date.now()-Date.parse(m.createdAt||0)<9e5?"https://raw.githubusercontent.com/Kalslami2013/shuhud/main/"+m.poster.url:mView(m.poster))}" controls playsinline preload="none"></video>`:(()=>{const mm=/\/media\/([^/?#]+)\.(mp4|webm)$/i.exec(mSrc(f));return mm&&THUMBS.has(mm[1]+"."+mm[2])?`<video src="${esc(mSrc(f))}" poster="/media/t/${esc(mm[1])}.webp" controls playsinline preload="none"></video>`:`<video src="${esc(mSrc(f))}#t=2" controls playsinline preload="metadata"></video>`})();
 function mediaHTML(m){
   const files=Array.isArray(m.files)?m.files:[];const isVid=f=>String(f.mime||"").startsWith("video/");
   let body="";
   const mdir=m.lang==="en"?"ltr":m.lang==="ar"?"rtl":(isEn()?"ltr":"rtl");
-  if(files.length>1)body=`<div class="md-car" dir="${mdir}">${files.map((f,k)=>isVid(f)?vidTag(m,f):`<img src="${esc(mSrc(f))}" alt="${esc((m.title||"")+" "+(k+1))}" data-lb="${k}">`).join("")}</div><div class="md-n" dir="ltr">1 / ${files.length}</div><button dir="ltr" class="md-arw md-prev" type="button" data-step="-1" aria-label="${T("lbPrev")}">${mdir==="rtl"?"›":"‹"}</button><button dir="ltr" class="md-arw md-next" type="button" data-step="1" aria-label="${T("lbNext")}">${mdir==="rtl"?"‹":"›"}</button>`;
-  else if(files[0])body=isVid(files[0])?vidTag(m,files[0]):`<img src="${esc(mSrc(files[0]))}" alt="${esc(m.title||"")}" loading="lazy" data-lb="0">`;
+  if(files.length>1)body=`<div class="md-car" dir="${mdir}">${files.map((f,k)=>isVid(f)?vidTag(m,f):`<img src="${esc(mView(f))}" alt="${esc((m.title||"")+" "+(k+1))}" loading="lazy" decoding="async" data-lb="${k}">`).join("")}</div><div class="md-n" dir="ltr">1 / ${files.length}</div><button dir="ltr" class="md-arw md-prev" type="button" data-step="-1" aria-label="${T("lbPrev")}">${mdir==="rtl"?"›":"‹"}</button><button dir="ltr" class="md-arw md-next" type="button" data-step="1" aria-label="${T("lbNext")}">${mdir==="rtl"?"‹":"›"}</button>`;
+  else if(files[0])body=isVid(files[0])?vidTag(m,files[0]):`<img src="${esc(mView(files[0]))}" alt="${esc(m.title||"")}" loading="lazy" decoding="async" data-lb="0">`;
   const t=isEn()&&m.en&&m.en.title?m.en.title:m.title,c=isEn()&&m.en&&m.en.caption?m.en.caption:m.caption;
   return `<article class="md" data-mid="${esc(m.id)}"><div class="md-media">${body}</div><div class="md-bd">
     <span class="tag">${esc(T("mTypes")[m.type]||"")}</span>${t?`<h3>${esc(t)}</h3>`:""}${c?`<p>${esc(c)}</p>`:""}
@@ -3609,6 +3614,8 @@ function mGrouped(list){const latest=list.slice(0,4),shown=new Set(latest.map(m=
   const sec=(h,n,xs,t)=>`<section class="md-sec"><h3 class="md-h">${h}${n?`<span class="n">${n}</span>`:""}${t?`<button type="button" class="md-all" data-mtall="${t}">${T("mSeeAll")}</button>`:""}</h3><div class="md-sub">${xs.map(mediaHTML).join("")}</div></section>`;
   return sec(T("mLatest"),0,latest,"")+order.map(t=>{const all=list.filter(m=>m.type===t),xs=all.filter(m=>!shown.has(m.id)).slice(0,2);return xs.length?sec(esc(T("mTypes")[t]),all.length,xs,t):""}).join("")}
 function renderMedia(){
+  /* built only when the Media tab is open, so the home page never downloads the gallery */
+  if($("#v-media")&&$("#v-media").hidden){MEDIA_DIRTY=true;return}MEDIA_DIRTY=false;
   const g=$("#media-grid");if(!g)return;
   $("#media-add-btn").hidden=!canAddMedia();if(!canAddMedia())$("#media-add").hidden=true;if(typeof renderGh==="function")renderGh();
   const want=isEn()?"en":"ar",byLang=media.filter(m=>(m.lang||"ar")===want),fallback=!byLang.length&&media.length>0,editor=!READER;
