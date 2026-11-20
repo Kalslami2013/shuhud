@@ -980,8 +980,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795156750"</script>
-<script src="local.js?v=1795156750"></script>
+<script>window.SHUHUD_BUILD="1795159181"</script>
+<script src="local.js?v=1795159181"></script>
 <script>
 const $=s=>document.querySelector(s);
 var MEDIA_DIRTY=true;
@@ -3868,12 +3868,18 @@ $("#media-grid").addEventListener("click",async e=>{const b=e.target.closest("[d
       if(String(m.id).startsWith("g_"))await ghDel(m);else{await ghSaveList(l=>[...l.filter(x=>x.id!==m.id),{id:m.id,_del:true}],"Media: hide "+(m.title||m.id));try{await db.collection("media").doc(m.id).delete()}catch(e){}}}else{await db.collection("media").doc(id).delete();for(const f of m.files||[]){try{await assets.delete(f.id)}catch(_){}}}toast(T("mDeleted"))}catch(err){toast(T("mFail"))}});
 /* one place that publishes to Media, used by the form and by the export studio */
 const mMax=()=>(typeof ghMode==="function"&&ghMode()?45:20)*1024*1024;
+/* the site keeps a high-quality JPEG of each large PNG instead of the PNG itself: 5–10× lighter on GitHub, same look (20 Nov 2026, Kamal);
+   the PNG downloaded from the studio stays untouched on Kamal's device. Small or non-PNG files, and any failure, keep the original */
+async function mJpeg(f){try{if(!f||f.type!=="image/png"||f.size<600*1024)return f;
+  const bmp=await createImageBitmap(f),c=document.createElement("canvas");c.width=bmp.width;c.height=bmp.height;const x=c.getContext("2d");x.fillStyle="#07120d";x.fillRect(0,0,c.width,c.height);x.drawImage(bmp,0,0);
+  const bl=await new Promise(r=>c.toBlob(r,"image/jpeg",.9));if(!bl||bl.size>=f.size)return f;return new File([bl],f.name.replace(/\.png$/i,".jpg"),{type:"image/jpeg"})}catch(e){return f}}
 async function mediaPublish(type,title,caption,files,extra={}){
+  files=await Promise.all(files.map(mJpeg));if(extra.posterFile)extra={...extra,posterFile:await mJpeg(extra.posterFile)};
   if(files.some(f=>f.size>mMax()))throw {code:"too_big"};
   if(typeof ghMode==="function"&&ghMode()){await ghAdd(type,title,caption,files,extra);return}
   const {posterFile,...ex}=extra;
   const up=[];for(const f of files){const u=await assets.upload(f);const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[""])[0].toLowerCase();up.push({id:u.id,url:u.url,mime:f.type||u.contentType||"",ext,name:f.name})}
-  if(posterFile){try{const u=await assets.upload(posterFile);ex.poster={id:u.id,url:u.url,mime:"image/png",ext:".png",name:posterFile.name}}catch(_){}}
+  if(posterFile){try{const u=await assets.upload(posterFile);ex.poster={id:u.id,url:u.url,mime:posterFile.type||"image/png",ext:(posterFile.name.match(/\.[a-z0-9]{2,5}$/i)||[".png"])[0].toLowerCase(),name:posterFile.name}}catch(_){}}
   await db.collection("media").add({type,title,caption,files:up,createdAt:new Date().toISOString(),...ex});
 }
 /* the export studio's button: send what was just made straight to Media */
@@ -3926,7 +3932,7 @@ async function ghList(path=GH.list){const j=await ghApi(path);return {sha:j&&j.s
 async function ghSaveList(change,msg,path=GH.list){for(let k=0;k<2;k++){const {sha,list}=await ghList(path);try{await ghApi(path,"PUT",{message:msg,content:ghB64(JSON.stringify(change(list))),...(sha?{sha}:{})});return}catch(e){if(e.code!==409||k)throw e}}}
 async function ghAdd(type,title,caption,files,ext0={}){
   const {posterFile,...extra}=ext0;
-  if(posterFile){try{const pid="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);await ghApi("media/"+pid+".png","PUT",{message:"Media: add cover "+posterFile.name,content:await fileB64(posterFile)});extra.poster={id:pid,url:"media/"+pid+".png",mime:"image/png",ext:".png",name:posterFile.name}}catch(_){}}
+  if(posterFile){try{const pid="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const pe=(posterFile.name.match(/\.[a-z0-9]{2,5}$/i)||[".png"])[0].toLowerCase();await ghApi("media/"+pid+pe,"PUT",{message:"Media: add cover "+posterFile.name,content:await fileB64(posterFile)});extra.poster={id:pid,url:"media/"+pid+pe,mime:posterFile.type||"image/png",ext:pe,name:posterFile.name}}catch(_){}}
   const up=[];for(const f of files){const id="g_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const ext=(f.name.match(/\.[a-z0-9]{2,5}$/i)||[".jpg"])[0].toLowerCase();
     await ghApi("media/"+id+ext,"PUT",{message:"Media: add "+f.name,content:await fileB64(f)});up.push({id,url:"media/"+id+ext,mime:f.type||"",ext,name:f.name})}
   const item={id:"g_"+Date.now().toString(36),type,title,caption,files:up,createdAt:new Date().toISOString(),...extra};
