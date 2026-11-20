@@ -19,11 +19,11 @@ for n in sorted(os.listdir(SRC)):
         done.append(n)
     except Exception as e:print("skip",n,e)
 import subprocess,shutil
-if shutil.which("ffmpeg"):
-    for n in sorted(os.listdir(SRC)):
+# video posters: a frame at 2 s when ffmpeg is there; a poster already in media/t is kept either way
+for n in sorted(os.listdir(SRC)):
         if not n.lower().endswith((".mp4",".webm")):continue
         p=os.path.join(SRC,n);out=os.path.join(DST,os.path.splitext(n)[0]+".webp")
-        if not os.path.exists(out) or os.path.getmtime(out)<os.path.getmtime(p):
+        if shutil.which("ffmpeg") and not os.path.exists(out):
             subprocess.run(["ffmpeg","-y","-loglevel","error","-ss","2","-i",p,"-frames:v","1","-vf","scale=720:-2","-q:v","70",out])
         if os.path.exists(out):done.append(n)
 json.dump(done,open("data/thumbs.json","w"))
