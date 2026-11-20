@@ -841,7 +841,7 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
       <details><summary>٢. دورة العمل العادية خطوة بخطوة</summary>
         <ol>
           <li>في نسخة Claude، في «الرئيسية»: اضغط <b>«✨ اكتب قطع اليوم الآن»</b>. يكتب Claude ثلاث قطع (طلباتك أولاً).</li>
-          <li>تظهر رسالة «⏳ Claude يعمل الآن». انتظر 10 إلى 15 دقيقة، ولا تضغط مرة أخرى.</li>
+          <li>تظهر رسالة «⏳ Claude يعمل الآن»، ولا تضغط مرة أخرى. حين تصل القطع تتغير تلقائياً إلى «✅ انتهى Claude» (عادةً خلال 10 إلى 15 دقيقة)، وبعدها يمكنك التصدير أو المزامنة.</li>
           <li>حدّث الصفحة: تظهر القطع الجديدة في أعلى «الرئيسية». راجعها، وعدّل ما تريد بزر «✏️ تعديل».</li>
           <li>(اختياري) اكتب لي في محادثة Claude: <b>«صور القطع الجديدة»</b> لأبحث عن صور حرة للأحداث.</li>
           <li>اضغط <b>«↻ زامن النسخة المستقلة»</b> (بجانب زر الكتابة). بعد 5 دقائق تقريباً تصل القطع إلى alshuhud.org وتُبنى صفحاتها وروابطها القصيرة وتُبلَّغ Google تلقائياً.</li>
@@ -980,8 +980,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795194299"</script>
-<script src="local.js?v=1795194299"></script>
+<script>window.SHUHUD_BUILD="1795194515"</script>
+<script src="local.js?v=1795194515"></script>
 <script>
 const $=s=>document.querySelector(s);
 var MEDIA_DIRTY=true;
@@ -999,7 +999,7 @@ ar:{
   pkSent:n=>`أُرسلت ${n} إلى قائمة الكتابة. اضغط الآن «اكتب قطع اليوم» في نسخة Claude أو لوحة الرصد.`,pkQueue:n=>`في انتظار الكتابة (${n})`,pkHeldN:n=>`مؤجلة لوقت لاحق (${n})`,pkHeld:"مؤجلة",pkLater:"⏸ لاحقاً",pkResume:"✍️ اكتبها",pkHoldHint:"«اكتب قطع اليوم» يكتب الطلبات الجاهزة فقط. اضغط «⏸ لاحقاً» لتُبقي طلباً محفوظاً هنا دون كتابته الآن، و«✍️ اكتبها» حين تريده.",pkNone:"لا مقترحات جديدة الآن.",pkDel:"احذف من القائمة",
   rpTitle:"ماذا يكتب Claude في هذه الجولة؟",rpOnly:"طلباتي فقط (ما أرسلته من الرادار والرصد)",rpFill:"طلباتي، ثم أكمل من اختيارك حتى",rpGo:"✨ ابدأ الكتابة",rpCancel:"إلغاء",
   rpNote:"تستغرق الجولة نحو 10 دقائق، وتظهر القطع هنا. ثم اضغط «↻ زامن النسخة المستقلة» لتظهر في الموقع العام.",
-  runMonitor:"🔍 ارصد الآن",runSync:"↻ زامن النسخة المستقلة",runNoMcp:"الزر لا يعمل في هذا التطبيق أو المتصفح. افتح شهود من متصفح الكمبيوتر، أو اكتب لـClaude في المحادثة: «اكتب قطع اليوم».",runDaily:"✨ اكتب قطع اليوم الآن",runSending:"يبدأ…",runStarted:"بدأ. تصل النتائج خلال دقائق، ثم يتوقف وحده.",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"وافق على طلب الإذن ثم اضغط مرة أخرى.",runDenied:"لم يُسمح للصفحة بتشغيل المهام. فعّلها من قائمة الأذونات أعلى الصفحة.",runFail:"لم يبدأ. جرّب بعد دقيقة.",runLast:"آخر تشغيل",syncEarly:"⚠️ كتابة قطع اليوم لم تنتهِ بعد، فالمزامنة الآن لن تنقل القطع الجديدة. انتظر حتى تختفي رسالة «Claude يعمل الآن»، أو اضغط مرة أخرى للمزامنة رغم ذلك.",runBusy:t=>`⏳ Claude يعمل الآن (بدأ ${t}). تظهر النتائج خلال 10 إلى 15 دقيقة، لا تضغط مرة أخرى.`,
+  runMonitor:"🔍 ارصد الآن",runSync:"↻ زامن النسخة المستقلة",runNoMcp:"الزر لا يعمل في هذا التطبيق أو المتصفح. افتح شهود من متصفح الكمبيوتر، أو اكتب لـClaude في المحادثة: «اكتب قطع اليوم».",runDaily:"✨ اكتب قطع اليوم الآن",runSending:"يبدأ…",runStarted:"بدأ. تصل النتائج خلال دقائق، ثم يتوقف وحده.",runWait:m=>`يعمل الآن، انتظر ${m.toLocaleString("ar")} دقيقة قبل تشغيله مرة أخرى.`,runApproval:"وافق على طلب الإذن ثم اضغط مرة أخرى.",runDenied:"لم يُسمح للصفحة بتشغيل المهام. فعّلها من قائمة الأذونات أعلى الصفحة.",runFail:"لم يبدأ. جرّب بعد دقيقة.",runLast:"آخر تشغيل",syncEarly:"⚠️ كتابة قطع اليوم لم تنتهِ بعد، فالمزامنة الآن لن تنقل القطع الجديدة. انتظر حتى تختفي رسالة «Claude يعمل الآن»، أو اضغط مرة أخرى للمزامنة رغم ذلك.",runBusy:t=>`⏳ Claude يعمل الآن (بدأ ${t}). تظهر النتائج خلال 10 إلى 15 دقيقة، لا تضغط مرة أخرى.`,runBusySync:t=>`⏳ المزامنة جارية (بدأت ${t}). تنتهي عادةً خلال دقيقتين إلى 5 دقائق.`,runDone:t=>`✅ انتهى Claude (${t}). يمكنك المتابعة.`,runDoneSync:t=>`✅ انتهت المزامنة (${t}). يظهر التعديل في الموقع خلال دقائق.`,
   navLive:"الرئيسية",radarH:"رادار شهود",radarSub:"ما نراقبه الآن حول العالم، من الوكالات والهيئات الدولية",radarRead:"اقرأ الشهادة",radarTr:"عنوان مترجم آلياً من لغته الأصلية",speaker:"الراوي:",radarMk:"✍️ حوّله إلى قطعة",radarUpd:t=>"آخر تحديث للرادار: "+t,feedSearch:"🔍 ابحث في القطع: كلمة، مكان، كائن…",noFound:"لا قطع تطابق بحثك.",navGuide:"📘 دليلي",navDesk:"غرفة التحرير",navCorr:"المراسلون",catsAria:"أبواب النشرة",
   loadingStatus:"تتجمع الحيوانات حول النار…",all:"الكل",
   deskTitle:"غرفة التحرير",deskSub:"أعطِ شهود أزمة، واختر من يرويها، أو دع الغابة تختار.",
@@ -1065,7 +1065,7 @@ en:{
   pkSent:n=>`${n} sent to the writing list. Now press “Write today's pieces” in the Claude copy or the radar panel.`,pkQueue:n=>`Waiting to be written (${n})`,pkHeldN:n=>`Held for later (${n})`,pkHeld:"held",pkLater:"⏸ Later",pkResume:"✍️ Write it",pkHoldHint:"“Write today's pieces” only takes ready requests. Press “⏸ Later” to keep a request here without writing it now, and “✍️ Write it” when you want it.",pkNone:"No new picks right now.",pkDel:"Remove from the list",
   rpTitle:"What should Claude write this round?",rpOnly:"Only my requests (what I sent from the radar and tracker)",rpFill:"My requests, then your own picks up to",rpGo:"✨ Start writing",rpCancel:"Cancel",
   rpNote:"A round takes about 10 minutes and the pieces appear here. Then press “↻ Sync the standalone copy” to put them on the public site.",
-  runMonitor:"🔍 Track now",runSync:"↻ Sync the standalone copy",runNoMcp:"This button doesn't work in this app or browser. Open Shuhud in a desktop browser, or ask Claude in the chat: “write today's pieces”.",runDaily:"✨ Write today's pieces now",runSending:"Starting…",runStarted:"Started. Results arrive in a few minutes, then it stops on its own.",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"Approve the permission prompt, then press again.",runDenied:"This page isn't allowed to run tasks. Turn it on from the page's permissions menu.",runFail:"Didn't start. Try again in a minute.",runLast:"Last run",syncEarly:"⚠️ Today's pieces are still being written, so syncing now won't carry them. Wait until “Claude is working” disappears, or press again to sync anyway.",runBusy:t=>`⏳ Claude is working (started ${t}). Results appear within 10–15 minutes; no need to press again.`,
+  runMonitor:"🔍 Track now",runSync:"↻ Sync the standalone copy",runNoMcp:"This button doesn't work in this app or browser. Open Shuhud in a desktop browser, or ask Claude in the chat: “write today's pieces”.",runDaily:"✨ Write today's pieces now",runSending:"Starting…",runStarted:"Started. Results arrive in a few minutes, then it stops on its own.",runWait:m=>`Running now. Wait ${m} min before starting it again.`,runApproval:"Approve the permission prompt, then press again.",runDenied:"This page isn't allowed to run tasks. Turn it on from the page's permissions menu.",runFail:"Didn't start. Try again in a minute.",runLast:"Last run",syncEarly:"⚠️ Today's pieces are still being written, so syncing now won't carry them. Wait until “Claude is working” disappears, or press again to sync anyway.",runBusy:t=>`⏳ Claude is working (started ${t}). Results appear within 10–15 minutes; no need to press again.`,runBusySync:t=>`⏳ Sync in progress (started ${t}). It usually ends within 2–5 minutes.`,runDone:t=>`✅ Claude has finished (${t}). You can carry on.`,runDoneSync:t=>`✅ Sync finished (${t}). The site updates within minutes.`,
   navLive:"Home",radarH:"Shuhud Radar",radarSub:"What we are watching around the world, from agencies and international bodies",radarRead:"Read the testimony",radarTr:"Headline machine-translated from its original language",speaker:"Told by",radarMk:"✍️ Turn into a piece",radarUpd:t=>"Radar last updated "+t,feedSearch:"🔍 Search the pieces: a word, a place, a species…",noFound:"No pieces match your search.",navGuide:"📘 My guide",navDesk:"Newsroom",navCorr:"Correspondents",catsAria:"Feed sections",
   loadingStatus:"The animals are gathering around the fire…",all:"All",
   deskTitle:"Newsroom",deskSub:"Give the witnesses a crisis, pick who tells it, or let the forest choose.",
@@ -2921,16 +2921,24 @@ let mcp=null;
 const runsGet=()=>{try{return JSON.parse(localStorage.getItem(RUN_KEY)||"{}")}catch(e){return{}}};
 const runsSet=o=>{try{localStorage.setItem(RUN_KEY,JSON.stringify(o))}catch(e){}};
 function runNotes(){const last=runsGet();document.querySelectorAll("[data-note]").forEach(n=>{const k=n.dataset.note,t=last[k];if(n.dataset.msg){n.textContent=n.dataset.msg;return}
-  /* for 15 minutes after a press the note says the run is still going (the run happens on Claude's side, the page cannot see it) */
-  if(t&&Date.now()-t<15*60*1000){n.textContent=T("runBusy")(new Date(t).toLocaleTimeString(isEn()?"en-GB":"ar",{hour:"2-digit",minute:"2-digit"}));return}
+  /* 20 Nov 2026 (Kamal): the busy note now ends as soon as the work is seen: new pieces or tracker items arrive in the live database,
+     or the site's pieces.json is newer than the press (sync); otherwise it falls back to 15 minutes (5 for sync) */
+  const hm=x=>new Date(x).toLocaleTimeString(isEn()?"en-GB":"ar",{hour:"2-digit",minute:"2-digit"}),done=last[k+"_done"];
+  if(t&&done&&done>=t&&Date.now()-done<20*60*1000){n.textContent=T(k==="sync"?"runDoneSync":"runDone")(hm(done));return}
+  if(t&&!(done>=t)&&Date.now()-t<(k==="sync"?5:15)*60*1000){n.textContent=T(k==="sync"?"runBusySync":"runBusy")(hm(t));return}
   n.textContent=t?T("runLast")+": "+new Date(t).toLocaleString(isEn()?"en-GB":"ar",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}):""})}
 setInterval(()=>{try{runNotes()}catch(e){}},60000);
+function runSeen(k,when){const l=runsGet(),t=l[k];if(!t||l[k+"_done"]>=t||!(when>=t-60000))return;l[k+"_done"]=Date.now();runsSet(l);try{runNotes()}catch(e){}}
+/* sync: for 10 minutes after the press, compare the site's pieces.json with the pieces here; when every piece matches (headline and text), the sync is done */
+setInterval(async()=>{const l=runsGet(),t=l.sync;if(!t||l.sync_done>=t||Date.now()-t>10*60*1000||window.SHUHUD_STANDALONE||!items.length)return;
+  try{const r=await fetch("https://alshuhud.org/data/pieces.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const site=new Map((await r.json()).map(x=>[x.id,x]));
+    const same=items.every(x=>{const y=site.get(x.id);return y&&y.headline===x.headline&&y.dispatch===x.dispatch});if(same)runSeen("sync",Date.now())}catch(e){}},45000);
 function runMsg(k,m){const n=document.querySelector(`[data-note="${k}"]`);if(!n)return;n.dataset.msg=m;n.textContent=m;clearTimeout(n._t);n._t=setTimeout(()=>{delete n.dataset.msg;runNotes()},9000)}
 document.querySelectorAll("[data-run]").forEach(b=>b.onclick=async()=>{
   const k=b.dataset.run,last=runsGet(),ago=Date.now()-(last[k]||0);
-  if(ago<RUN_COOL){runMsg(k,T("runWait")(Math.ceil((RUN_COOL-ago)/60000)));return}
+  if(ago<RUN_COOL&&!(last[k+"_done"]>=last[k])){runMsg(k,T("runWait")(Math.ceil((RUN_COOL-ago)/60000)));return}
   /* syncing while today's pieces are still being written would copy the site without them: warn once */
-  if(k==="sync"&&last.daily&&Date.now()-last.daily<15*60*1000&&!b.dataset.sure){b.dataset.sure="1";runMsg(k,T("syncEarly"));setTimeout(()=>{delete b.dataset.sure},20000);return}
+  if(k==="sync"&&last.daily&&!(last.daily_done>=last.daily)&&Date.now()-last.daily<15*60*1000&&!b.dataset.sure){b.dataset.sure="1";runMsg(k,T("syncEarly"));setTimeout(()=>{delete b.dataset.sure},20000);return}
   delete b.dataset.sure;
   if(!mcp){runMsg(k,T("runNoMcp"));return}
   if(k==="daily"){showRunPick();return}
@@ -4070,6 +4078,7 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
   if(!db){statusMsg="signIn";dbReady=true;updateStatus();renderFeed();return}
   db.collection("dispatches").orderBy("createdAt","desc").limit(200).onSnapshot(snap=>{
     dbReady=true;items=snap.docs.map(d=>({id:d.id,...d.data()}));try{renderPicks()}catch(_){}
+    try{const nw=Math.max(0,...items.filter(x=>x.kind==="live").map(x=>Date.parse(x.createdAt)||0));if(nw)runSeen("daily",nw)}catch(_){}
     updateStatus();renderCats();renderFeed();renderRoster();renderTrack();renderSpecies();
   },()=>{dbReady=true;statusMsg="feedFail";updateStatus();renderFeed()});
   db.collection("partners").onSnapshot(snap=>{partners=snap.docs.map(d=>({id:d.id,...d.data()}));renderPartners()},()=>{});
@@ -4079,7 +4088,7 @@ applyStatic();renderCats();renderFeed();renderRoster();updateStatus();renderTrac
   db.collection("extinct").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{m[d.id]=d.data()});extDocs=m;try{if(!extEditId&&!document.getElementById("ext-wrap").hidden)renderExt()}catch(_){}},()=>{});
   db.collection("reserves").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{m[d.id]=d.data()});rsDocs=m;try{if(!rsEditId&&!document.getElementById("rs-wrap").hidden)renderReserves()}catch(_){}},()=>{});
   db.collection("species").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{const x=d.data();m[x.key||d.id]=x});spDocs=m;spLoaded=true;renderSpecies();try{if(!NARR.playing&&!openId)renderFeed()}catch(_){}},()=>{});
-  db.collection("monitor").orderBy("at","desc").limit(300).onSnapshot(snap=>{trackDb=snap.docs.map(d=>({id:d.id,...d.data()}));mergeTrack()},()=>{});
+  db.collection("monitor").orderBy("at","desc").limit(300).onSnapshot(snap=>{trackDb=snap.docs.map(d=>({id:d.id,...d.data()}));mergeTrack();try{const nw=Math.max(0,...trackDb.map(x=>Date.parse(x.at)||0));if(nw)runSeen("monitor",nw)}catch(_){}},()=>{});
   if(!window.SHUHUD_STANDALONE){loadSiteFeed();setInterval(loadSiteFeed,30*60*1000)}
 })();
 
