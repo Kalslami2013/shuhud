@@ -982,8 +982,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795208432"</script>
-<script src="local.js?v=1795208432"></script>
+<script>window.SHUHUD_BUILD="1795282065"</script>
+<script src="local.js?v=1795282065"></script>
 <script>
 const $=s=>document.querySelector(s);
 var MEDIA_DIRTY=true;
@@ -3939,7 +3939,7 @@ Object.assign(DICT.en,{ghFirstPub:"Connect GitHub first so the piece reaches rea
 if(window.SHUHUD_STANDALONE){Object.assign(DICT.ar,{mFilesNote:"حد الملف الواحد 20 ميغابايت. للكاروسيل اختر عدة صور بالترتيب. تُرفع المادة إلى GitHub وتظهر للقرّاء بعد دقيقة أو دقيقتين."});Object.assign(DICT.en,{mFilesNote:"20 MB per file. For a carousel pick several images in order. The item goes to GitHub and readers see it within a minute or two."})}
 const GH={repo:"Kalslami2013/shuhud",list:"data/media-gh.json",plist:"data/partners-gh.json",pieces:"data/pieces-gh.json",key:"shuhud-gh-token"};
 /* Files just pushed to GitHub take a minute to reach Pages: fall back to the raw copy once. */
-addEventListener("error",e=>{const el=e.target;if(!el||!/^(IMG|VIDEO)$/.test(el.tagName)||el.dataset.raw)return;const m=(el.getAttribute("src")||"").match(/(?:^|\/)(media\/g_[\w.-]+)(#[^#]*)?$/);if(!m)return;el.dataset.raw="1";el.src="https://raw.githubusercontent.com/"+GH.repo+"/main/"+m[1]+(m[2]||"")},true);
+addEventListener("error",e=>{const el=e.target;if(!el||!/^(IMG|VIDEO)$/.test(el.tagName))return;{const t=/\/media\/t\/([^/?#]+)\.webp$/.exec(el.getAttribute(el.tagName==="VIDEO"?"poster":"src")||"");if(t&&!el.dataset.full){const o=[...THUMBS].find(n=>n.startsWith(t[1]+"."));if(o){el.dataset.full="1";if(el.tagName==="VIDEO")el.poster="/media/"+o;else el.src="/media/"+o;return}}}if(el.dataset.raw)return;const m=(el.getAttribute("src")||"").match(/(?:^|\/)(media\/g_[\w.-]+)(#[^#]*)?$/);if(!m)return;el.dataset.raw="1";el.src="https://raw.githubusercontent.com/"+GH.repo+"/main/"+m[1]+(m[2]||"")},true);
 const ghTok=()=>{try{return localStorage.getItem(GH.key)||""}catch(e){return ""}};
 const ghMode=()=>!!window.SHUHUD_STANDALONE&&!READER;
 const ghB64=s=>btoa(unescape(encodeURIComponent(s))),ghUnB64=s=>decodeURIComponent(escape(atob(String(s).replace(/\n/g,""))));
