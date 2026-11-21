@@ -982,8 +982,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795282065"</script>
-<script src="local.js?v=1795282065"></script>
+<script>window.SHUHUD_BUILD="1795282507"</script>
+<script src="local.js?v=1795282507"></script>
 <script>
 const $=s=>document.querySelector(s);
 var MEDIA_DIRTY=true;
@@ -3825,7 +3825,7 @@ function mediaHTML(m){
   const files=Array.isArray(m.files)?m.files:[];const isVid=f=>String(f.mime||"").startsWith("video/");
   let body="";
   const mdir=m.lang==="en"?"ltr":m.lang==="ar"?"rtl":(isEn()?"ltr":"rtl");
-  if(files.length>1)body=`<div class="md-car" dir="${mdir}">${files.map((f,k)=>isVid(f)?vidTag(m,f):`<img src="${esc(mView(f))}" alt="${esc((m.title||"")+" "+(k+1))}" loading="lazy" decoding="async" data-lb="${k}">`).join("")}</div><div class="md-n" dir="ltr">1 / ${files.length}</div><button dir="ltr" class="md-arw md-prev" type="button" data-step="-1" aria-label="${T("lbPrev")}">${mdir==="rtl"?"›":"‹"}</button><button dir="ltr" class="md-arw md-next" type="button" data-step="1" aria-label="${T("lbNext")}">${mdir==="rtl"?"‹":"›"}</button>`;
+  if(files.length>1)body=`<div class="md-car" dir="${mdir}">${files.map((f,k)=>isVid(f)?vidTag(m,f):`<img src="${esc(mView(f))}" alt="${esc((m.title||"")+" "+(k+1))}" loading="${k<2?"eager":"lazy"}" decoding="async" data-lb="${k}">`).join("")}</div><div class="md-n" dir="ltr">1 / ${files.length}</div><button dir="ltr" class="md-arw md-prev" type="button" data-step="-1" aria-label="${T("lbPrev")}">${mdir==="rtl"?"›":"‹"}</button><button dir="ltr" class="md-arw md-next" type="button" data-step="1" aria-label="${T("lbNext")}">${mdir==="rtl"?"‹":"›"}</button>`;
   else if(files[0])body=isVid(files[0])?vidTag(m,files[0]):`<img src="${esc(mView(files[0]))}" alt="${esc(m.title||"")}" loading="lazy" decoding="async" data-lb="0">`;
   const t=isEn()&&m.en&&m.en.title?m.en.title:m.title,c=isEn()&&m.en&&m.en.caption?m.en.caption:m.caption;
   return `<article class="md" data-mid="${esc(m.id)}"><div class="md-media">${body}</div><div class="md-bd">
@@ -3854,7 +3854,7 @@ function renderMedia(){
   /* every carousel opens on its first card (the title card), and the counter follows the swipe */
   g.querySelectorAll(".md-car").forEach(c=>{const n=c.parentElement.querySelector(".md-n"),tot=c.children.length;
     const start=()=>{c.scrollLeft=0};start();requestAnimationFrame(start);c.querySelectorAll("img").forEach(im=>im.addEventListener("load",()=>{if(!c.dataset.moved)start()},{once:true}));
-    c.addEventListener("scroll",()=>{c.dataset.moved="1";const k=Math.round(Math.abs(c.scrollLeft)/Math.max(1,c.clientWidth))+1;c.dataset.k=Math.min(tot,k)-1;if(n)n.textContent=Math.min(tot,k)+" / "+tot},{passive:true});
+    c.addEventListener("scroll",()=>{if(!c.dataset.eager){c.dataset.eager="1";c.querySelectorAll("img[loading=lazy]").forEach(im=>{im.loading="eager"})}c.dataset.moved="1";const k=Math.round(Math.abs(c.scrollLeft)/Math.max(1,c.clientWidth))+1;c.dataset.k=Math.min(tot,k)-1;if(n)n.textContent=Math.min(tot,k)+" / "+tot},{passive:true});
     c.parentElement.querySelectorAll(".md-arw").forEach(b=>b.onclick=e=>{e.stopPropagation();const cur=+(c.dataset.k||0),to=Math.max(0,Math.min(tot-1,cur+(+b.dataset.step)));c.scrollTo({left:(c.dir==="rtl"?-1:1)*to*c.clientWidth,behavior:"smooth"});c.dataset.k=to;if(n)n.textContent=(to+1)+" / "+tot})});
   const sel=$("#m-type");if(sel&&!sel.options.length)sel.innerHTML=M_TYPES.map(t=>`<option value="${t}"></option>`).join("");
   if(sel)[...sel.options].forEach(o=>o.textContent=T("mTypes")[o.value]);
