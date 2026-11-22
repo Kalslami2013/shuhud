@@ -75,11 +75,11 @@
     const ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
     let ev=null,el=null;const en=()=>document.documentElement.lang==="en";
     const mob=matchMedia("(pointer:coarse)").matches;const label=()=>en()?(mob?"📲 Install Shuhud on your phone":"📲 Install Shuhud as an app"):(mob?"📲 ثبّت «شهود» على هاتفك":"📲 ثبّت «شهود» كتطبيق");
-    const hint=()=>en()?"In Safari: tap Share ⎋ then «Add to Home Screen».":"في سفاري: اضغط زر المشاركة ⎋ ثم «إضافة إلى الشاشة الرئيسية».";
+    const hint=()=>en()?"In Safari: tap ••• (or Share ⬆︎), then Share, then “Add to Home Screen”.":"في سفاري: اضغط ••• (أو زر المشاركة ⬆︎)، ثم «مشاركة»، ثم «إضافة إلى الشاشة الرئيسية».";
     function show(){if(el||!(ev||ios))return;const m=document.querySelector(".foot-mail");if(!m)return;
-      el=document.createElement("p");el.className="foot-mail foot-app";el.innerHTML='<a href="#"></a>';const a=el.firstChild;a.textContent=label();
+      el=document.createElement("p");el.className="foot-mail foot-app";el.innerHTML='<a href="#"></a>';const a=el.firstChild;a.textContent=label();a.dir=en()?"ltr":"rtl";
       a.onclick=async x=>{x.preventDefault();if(ev){ev.prompt();try{const c=await ev.userChoice;if(c.outcome==="accepted")el.remove()}catch(_){}ev=null}else{a.textContent=hint()}};
-      m.after(el);new MutationObserver(()=>{a.textContent=label()}).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]})}
+      m.after(el);new MutationObserver(()=>{a.textContent=label();a.dir=en()?"ltr":"rtl"}).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]})}
     addEventListener("beforeinstallprompt",x=>{x.preventDefault();ev=x;show()});
     addEventListener("appinstalled",()=>{el&&el.remove()});
     if(ios)addEventListener("load",()=>setTimeout(show,1500));
