@@ -148,10 +148,10 @@ def head(title, desc, url, img, extra="", lang="ar", alt=None):
 """
 
 SC = ('<div class="sc">' + "".join(f'<a href="{e(href(x))}" target="_blank" rel="noopener me" title="{e(x.get("name") or x.get("platform"))}" aria-label="{e(x.get("name") or x.get("platform"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="{ICONS.get(x.get("platform"), ICONS["web"])}"/></svg></a>' for x in socials) + "</div>") if socials else ""
-FOOT_EN = f"""<footer><div class="wrap">{SC}<a href="https://alshuhud.substack.com/subscribe" target="_blank" rel="noopener" style="display:block;margin:0 auto 14px;padding:10px 14px;max-width:560px;border:1px solid #c9921f;border-radius:12px;text-decoration:none;color:inherit;text-align:center">📬 The Shuhud weekly: one story in your inbox every week, free · <b>Subscribe</b></a>Shuhud · شهود: the world's crises told by the creatures who live them. <a href="{BASE}?lang=en">alshuhud.org</a></div></footer>
+FOOT_EN = f"""<footer><div class="wrap">{SC}<a href="https://alshuhud.substack.com/" target="_blank" rel="noopener" style="display:block;margin:0 auto 14px;padding:10px 14px;max-width:560px;border:1px solid #c9921f;border-radius:12px;text-decoration:none;color:inherit;text-align:center">📬 The Shuhud weekly: one story in your inbox every week, free · <b>Subscribe</b></a>Shuhud · شهود: the world's crises told by the creatures who live them. <a href="{BASE}?lang=en">alshuhud.org</a></div></footer>
 </body></html>
 """
-FOOT = f"""<footer><div class="wrap">{SC}<a href="https://alshuhud.substack.com/subscribe" target="_blank" rel="noopener" style="display:block;margin:0 auto 14px;padding:10px 14px;max-width:560px;border:1px solid #c9921f;border-radius:12px;text-decoration:none;color:inherit;text-align:center">📬 نشرة شهود الأسبوعية: قصة واحدة كل أسبوع في بريدك، مجاناً · <b>اشترك</b></a>شهود · Shuhud — أزمات العالم بلسان الكائنات التي تعيشها. <a href="{BASE}">alshuhud.org</a></div></footer>
+FOOT = f"""<footer><div class="wrap">{SC}<a href="https://alshuhud.substack.com/" target="_blank" rel="noopener" style="display:block;margin:0 auto 14px;padding:10px 14px;max-width:560px;border:1px solid #c9921f;border-radius:12px;text-decoration:none;color:inherit;text-align:center">📬 نشرة شهود الأسبوعية: قصة واحدة كل أسبوع في بريدك، مجاناً · <b>اشترك</b></a>شهود · Shuhud — أزمات العالم بلسان الكائنات التي تعيشها. <a href="{BASE}">alshuhud.org</a></div></footer>
 </body></html>
 """
 
