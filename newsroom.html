@@ -982,8 +982,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795362178"</script>
-<script src="local.js?v=1795362178"></script>
+<script>window.SHUHUD_BUILD="1795388308"</script>
+<script src="local.js?v=1795388308"></script>
 <script>
 const $=s=>document.querySelector(s);
 var MEDIA_DIRTY=true;
@@ -1638,9 +1638,9 @@ function pickList(){const cut=Date.now()-48*36e5,trusted=new Set([...RADAR_SRC.a
 function renderPicks(){const box=document.getElementById("picks");if(!box)return;if(!window.SHUHUD_STANDALONE||READER){box.hidden=true;return}
   const all=pickList(),list=all.slice(pkPage*8,pkPage*8+8),pend=reqList.filter(r=>!pkDone(r.trackId||r.id)),ready=pend.filter(r=>!r.hold),held=pend.filter(r=>r.hold);
   const li=x=>`<li><input type="checkbox" id="pk-${esc(x.id)}" data-pk="${esc(x.id)}"${pkSel.has(x.id)?" checked":""}><label for="pk-${esc(x.id)}"><span class="pk-t">${esc(pkText(x))}</span><span class="pk-m"><span class="pk-tag">${esc(catName(x.category))}</span>${x.good?"🌱":""}<b>${esc(x.source)}</b>·<time>${agoTxt(x.at)}</time>·<a href="${esc(x.url)}" target="_blank" rel="noopener">↗</a></span></label></li>`;
-  box.innerHTML=`<h2 id="picks-h">${T("pkH")}</h2><p class="pk-sub">${T("pkSub")}</p>${list.length?`<ol>${list.map(li).join("")}</ol>`:`<p class="pk-sub">${T("pkNone")}</p>`}
-    <div class="pk-bar"><button class="btn run" type="button" id="pk-send"${pkSel.size?"":" disabled"}>${T("pkSend")(pkSel.size)}</button>${all.length>8?`<button class="btn" type="button" id="pk-more">${T("pkMore")}</button>`:""}</div>
-    ${pend.length?`<div class="pk-q"><b>${T("pkQueue")(ready.length)}</b>${held.length?` · <span class="pk-hn">${T("pkHeldN")(held.length)}</span>`:""}<p class="pk-sub">${T("pkHoldHint")}</p><ol>${[...ready,...held].map(r=>{const t=String(r.trAr||r.text||r.headline||"");return `<li${r.hold?' class="held"':""}><button type="button" class="pk-hold" data-pkhold="${esc(r.trackId||r.id)}">${r.hold?T("pkResume"):T("pkLater")}</button><span class="pk-t" style="font-size:14px">${r.hold?`<i class="pk-tag">${T("pkHeld")}</i> `:""}${esc(t.length>170?t.slice(0,170).replace(/\s\S*$/,"")+"…":t)}</span><button type="button" data-pkdel="${esc(r.trackId||r.id)}" title="${esc(T("pkDel"))}" aria-label="${esc(T("pkDel"))}">✕</button></li>`}).join("")}</ol></div>`:""}`;
+  /* 23 Nov 2026 (Kamal): no automatic «مقترحات اليوم»; only the stories he sent from the radar or the tracker, waiting to be written */
+  const nb0=document.querySelector('nav.main button[data-view="track"]');if(!pend.length){box.hidden=true;if(nb0)delete nb0.dataset.q;return}
+  box.innerHTML=`${pend.length?`<div class="pk-q"><b>${T("pkQueue")(ready.length)}</b>${held.length?` · <span class="pk-hn">${T("pkHeldN")(held.length)}</span>`:""}<p class="pk-sub">${T("pkHoldHint")}</p><ol>${[...ready,...held].map(r=>{const t=String(r.trAr||r.text||r.headline||"");return `<li${r.hold?' class="held"':""}><button type="button" class="pk-hold" data-pkhold="${esc(r.trackId||r.id)}">${r.hold?T("pkResume"):T("pkLater")}</button><span class="pk-t" style="font-size:14px">${r.hold?`<i class="pk-tag">${T("pkHeld")}</i> `:""}${esc(t.length>170?t.slice(0,170).replace(/\s\S*$/,"")+"…":t)}</span><button type="button" data-pkdel="${esc(r.trackId||r.id)}" title="${esc(T("pkDel"))}" aria-label="${esc(T("pkDel"))}">✕</button></li>`}).join("")}</ol></div>`:""}`;
   /* the number waiting to be written shows on the «الرصد» tab, so the queue is never out of sight (18 Nov 2026, Kamal) */
   const nb=document.querySelector('nav.main button[data-view="track"]');if(nb){if(ready.length)nb.dataset.q=ready.length;else delete nb.dataset.q}
   box.hidden=false}
@@ -2947,13 +2947,11 @@ document.querySelectorAll("[data-run]").forEach(b=>b.onclick=async()=>{
   fireRun(k,RUN_TEXT,b)});
 function showRunPick(){const box=document.getElementById("run-pick");if(!box)return;if(!box.hidden){box.hidden=true;return}
   box.innerHTML=`<b>${T("rpTitle")}</b><label><input type="radio" name="rp-mode" value="only" checked> ${T("rpOnly")}</label>
-    <div class="rp-row"><label><input type="radio" name="rp-mode" value="fill"> ${T("rpFill")}</label><select id="rp-n" aria-label="N"><option>1</option><option>2</option><option selected>3</option></select></div>
     <div class="rp-row"><button class="btn run" type="button" id="rp-go">${T("rpGo")}</button><button class="btn" type="button" id="rp-x">${T("rpCancel")}</button></div><span class="note">${T("rpNote")}</span>`;
   box.hidden=false;
-  box.querySelector("#rp-n").onchange=()=>{box.querySelector('[name="rp-mode"][value="fill"]').checked=true};
   box.querySelector("#rp-x").onclick=()=>{box.hidden=true};
-  box.querySelector("#rp-go").onclick=()=>{const mode=box.querySelector('[name="rp-mode"]:checked').value,n=+box.querySelector("#rp-n").value;box.hidden=true;
-    fireRun("daily",runDaily(mode,n),document.querySelector('[data-run="daily"]'))}}
+  box.querySelector("#rp-go").onclick=()=>{box.hidden=true;/* 23 Nov 2026 (Kamal): Claude writes only what Kamal chose, never picks stories itself */
+    fireRun("daily",runDaily("only"),document.querySelector('[data-run="daily"]'))}}
 async function fireRun(k,text,b){if(b)b.disabled=true;runMsg(k,T("runSending"));const last=runsGet();
   try{await mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:RUNS[k],text},{cache:false});
     last[k]=Date.now();runsSet(last);runMsg(k,T("runStarted"))}
