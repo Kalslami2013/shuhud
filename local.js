@@ -68,23 +68,8 @@
   async function checkVersion(){try{const r=await fetch("version.txt?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const v=(await r.text()).trim();
     if(v&&window.SHUHUD_BUILD&&v!==window.SHUHUD_BUILD){const k="shuhud-reloaded-"+v;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.replace(location.pathname+"?v="+v+location.hash)}}}catch(e){}}
   checkVersion();document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkVersion()});
-  /* the site as an app: offline copy (sw.js, network first) and a quiet "install" link in the footer */
+  /* the site as an app: offline copy (sw.js, network first); the install button itself is #inst-btn in index.html */
   try{if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}))}catch(e){}
-  (function(){
-    const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone;if(standalone)return;
-    const ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-    let ev=null,el=null;const en=()=>document.documentElement.lang==="en";
-    const mob=matchMedia("(pointer:coarse)").matches;const label=()=>en()?(mob?"📲 Install Shuhud on your phone":"📲 Install Shuhud as an app"):(mob?"📲 ثبّت «شهود» على هاتفك":"📲 ثبّت «شهود» كتطبيق");
-    const inapp=/FBAN|FBAV|FB_IAB|Instagram|Line\/|Twitter|LinkedInApp|Snapchat|TikTok/i.test(navigator.userAgent);
-    const hint=()=>inapp?(en()?"You are inside an app's browser: open alshuhud.org in Safari first (••• then “Open in browser”), then install it from there.":"أنت داخل متصفح تطبيق آخر (فيسبوك مثلاً): افتح الموقع في سفاري أولاً (••• ثم «فتح في المتصفح»)، ثم ثبّته من هناك."):en()?"In Safari: tap ••• (or Share ⬆︎), then Share, then “Add to Home Screen”.":"في سفاري: اضغط ••• (أو زر المشاركة ⬆︎)، ثم «مشاركة»، ثم «إضافة إلى الشاشة الرئيسية».";
-    function show(){if(el||!(ev||ios))return;const m=document.querySelector(".foot-mail");if(!m)return;
-      el=document.createElement("p");el.className="foot-mail foot-app";el.innerHTML='<a href="#"></a>';const a=el.firstChild;a.textContent=label();a.dir=en()?"ltr":"rtl";
-      a.onclick=async x=>{x.preventDefault();if(ev){ev.prompt();try{const c=await ev.userChoice;if(c.outcome==="accepted")el.remove()}catch(_){}ev=null}else{a.textContent=hint()}};
-      m.after(el);new MutationObserver(()=>{a.textContent=label();a.dir=en()?"ltr":"rtl"}).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]})}
-    addEventListener("beforeinstallprompt",x=>{x.preventDefault();ev=x;show()});
-    addEventListener("appinstalled",()=>{el&&el.remove()});
-    if(ios)addEventListener("load",()=>setTimeout(show,1500));
-  })();
   window.SHUHUD_STANDALONE=true;window.shuhudKey={get:getKey,set:k=>{try{k?localStorage.setItem(KEY,k):localStorage.removeItem(KEY)}catch(e){}}};
   window.shuhudRefresh=refresh;
   /* reader page (reader.html): reading only, no uploads, no AI, no saving */

@@ -774,8 +774,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795328061"</script>
-<script src="local.js?v=1795328061"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795334164"</script>
+<script src="local.js?v=1795334164"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-cap", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
@@ -3840,21 +3840,21 @@ $("#s-save").onclick=async()=>{
   catch(err){toast(T("mFail"))}finally{sBusy=false;b.disabled=false;b.textContent=T("sSave")}};
 /* ---------- install the site as an app (standalone site only; Chrome/Edge prompt, otherwise short steps) ---------- */
 Object.assign(DICT.ar,{instBtn:"📲 ثبّت التطبيق",instTitle:"ثبّت تطبيق شهود",instDone:"ثُبّت التطبيق على جهازك",
-  instIOS:"<ol><li>اضغط زر المشاركة <b>⬆︎</b> أسفل Safari</li><li>اختر <b>«إضافة إلى الشاشة الرئيسية»</b></li><li>اضغط <b>«إضافة»</b></li></ol><p>يظهر شهود على شاشتك ويفتح كتطبيق كامل، مجاناً.</p>",
-  instIOSOther:"<ol><li>افتح الموقع في متصفح <b>Safari</b></li><li>اضغط زر المشاركة <b>⬆︎</b></li><li>اختر <b>«إضافة إلى الشاشة الرئيسية»</b></li></ol>",
+  instIOS:"<ol><li>اضغط زر المشاركة <b>⬆︎</b> أسفل Safari (أو النقاط <b>•••</b> ثم <b>«مشاركة»</b>)</li><li>اختر <b>«إضافة إلى الشاشة الرئيسية»</b></li><li>اضغط <b>«إضافة»</b></li></ol><p>يظهر شهود على شاشتك ويفتح كتطبيق كامل، مجاناً.</p>",
+  instIOSOther:"<ol><li>افتح الموقع في متصفح <b>Safari</b> (من داخل فيسبوك أو إنستغرام: <b>•••</b> ثم «فتح في المتصفح»)</li><li>اضغط زر المشاركة <b>⬆︎</b></li><li>اختر <b>«إضافة إلى الشاشة الرئيسية»</b></li></ol>",
   instChrome:"<ol><li>انسخ رابط الموقع: <b>alshuhud.org</b></li><li>افتحه في متصفح <b>Chrome</b></li><li>اضغط <b>«📲 ثبّت التطبيق»</b> ثم <b>«تثبيت»</b></li></ol><p>متصفح هاتفك الحالي يصنع نسخة قديمة قد يحظرها Google Play. أو اختر من قائمته <b>«إضافة إلى الشاشة الرئيسية»</b> (اختصار) بدل «تثبيت».</p>",
   instSamsung:"<ol><li>اضغط أيقونة التثبيت <b>⤓</b> في شريط العنوان إن ظهرت، أو افتح القائمة <b>≡</b></li><li>اختر <b>«إضافة الصفحة إلى»</b> ثم <b>«الشاشة الرئيسية»</b></li><li>اضغط <b>«إضافة»</b></li></ol><p>أو افتح الموقع في <b>Chrome</b> واضغط الزر مرة أخرى.</p>",
   instOther:"<ol><li>افتح قائمة المتصفح <b>⋮</b> أعلى الشاشة</li><li>اختر <b>«تثبيت التطبيق»</b> أو <b>«إضافة إلى الشاشة الرئيسية»</b></li><li>اضغط <b>«تثبيت»</b></li></ol><p>على الكمبيوتر: اضغط أيقونة التثبيت في شريط العنوان. يظهر شهود كتطبيق كامل، مجاناً.</p>"});
 Object.assign(DICT.en,{instBtn:"📲 Install the app",instTitle:"Install the Shuhud app",instDone:"The app is installed on your device",
-  instIOS:"<ol><li>Tap the Share button <b>⬆︎</b> in Safari</li><li>Choose <b>“Add to Home Screen”</b></li><li>Tap <b>“Add”</b></li></ol><p>Shuhud appears on your screen and opens as a full app, for free.</p>",
-  instIOSOther:"<ol><li>Open this site in <b>Safari</b></li><li>Tap the Share button <b>⬆︎</b></li><li>Choose <b>“Add to Home Screen”</b></li></ol>",
+  instIOS:"<ol><li>Tap the Share button <b>⬆︎</b> in Safari (or <b>•••</b>, then <b>“Share”</b>)</li><li>Choose <b>“Add to Home Screen”</b></li><li>Tap <b>“Add”</b></li></ol><p>Shuhud appears on your screen and opens as a full app, for free.</p>",
+  instIOSOther:"<ol><li>Open this site in <b>Safari</b> (inside Facebook or Instagram: <b>•••</b>, then “Open in browser”)</li><li>Tap the Share button <b>⬆︎</b></li><li>Choose <b>“Add to Home Screen”</b></li></ol>",
   instChrome:"<ol><li>Copy the site address: <b>alshuhud.org</b></li><li>Open it in <b>Chrome</b></li><li>Tap <b>“📲 Install the app”</b>, then <b>“Install”</b></li></ol><p>Your current browser builds an outdated app package that Google Play may block. Or choose <b>“Add to Home screen”</b> (a shortcut) from its menu instead of “Install”.</p>",
   instSamsung:"<ol><li>Tap the install icon <b>⤓</b> in the address bar if you see it, or open the menu <b>≡</b></li><li>Choose <b>“Add page to”</b> then <b>“Home screen”</b></li><li>Tap <b>“Add”</b></li></ol><p>Or open the site in <b>Chrome</b> and tap the button again.</p>",
   instOther:"<ol><li>Open the browser menu <b>⋮</b></li><li>Choose <b>“Install app”</b> or <b>“Add to Home screen”</b></li><li>Tap <b>“Install”</b></li></ol><p>On a computer, click the install icon in the address bar. Shuhud opens as a full app, for free.</p>"});
 (function(){
   const btn=$("#inst-btn"),sheet=$("#inst-sheet");if(!btn||!sheet||!window.SHUHUD_STANDALONE)return;
   if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)return;
-  const ua=navigator.userAgent,ios=/iphone|ipad|ipod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1),safari=ios&&!/crios|fxios|edgios|gsa/i.test(ua);
+  const ua=navigator.userAgent,ios=/iphone|ipad|ipod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1),safari=ios&&!/crios|fxios|edgios|gsa|FBAN|FBAV|FB_IAB|Instagram|LinkedInApp|Twitter/i.test(ua);
   const android=/android/i.test(ua),samsung=/SamsungBrowser/i.test(ua),otherAndroid=android&&!samsung&&(!/Chrome\//.test(ua)||/MiuiBrowser|XiaoMi|OPR\/|Opera|UCBrowser|HeyTapBrowser|YaBrowser|HuaweiBrowser|VivoBrowser|EdgA|Firefox|DuckDuckGo|; wv\)/i.test(ua));
   let ev=null;btn.hidden=false;
   addEventListener("beforeinstallprompt",e=>{e.preventDefault();ev=e});
