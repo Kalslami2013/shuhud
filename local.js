@@ -69,7 +69,7 @@
     if(v&&window.SHUHUD_BUILD&&v!==window.SHUHUD_BUILD){const k="shuhud-reloaded-"+v;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.replace(location.pathname+"?v="+v+location.hash)}}}catch(e){}}
   checkVersion();document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkVersion()});
   /* the site as an app: offline copy (sw.js, network first); the install button itself is #inst-btn in index.html */
-  try{if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}))}catch(e){}
+  try{if("serviceWorker" in navigator)navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{})}catch(e){}/* offline copy switched off 23 Nov 2026 */
   window.SHUHUD_STANDALONE=true;window.shuhudKey={get:getKey,set:k=>{try{k?localStorage.setItem(KEY,k):localStorage.removeItem(KEY)}catch(e){}}};
   window.shuhudRefresh=refresh;
   /* reader page (reader.html): reading only, no uploads, no AI, no saving */
