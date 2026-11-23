@@ -982,8 +982,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795388308"</script>
-<script src="local.js?v=1795388308"></script>
+<script>window.SHUHUD_BUILD="1795443589"</script>
+<script src="local.js?v=1795443589"></script>
 <script>
 const $=s=>document.querySelector(s);
 var MEDIA_DIRTY=true;
@@ -3039,11 +3039,15 @@ const ST_ORDER=["CR","EN","VU","NT","DD","LC","NE","DOM"],THREAT=["CR","EN","VU"
 let spDocs={},spQuery="",redSt="all",spBusy=null,spPhotoKey=null;
 const spHash=s=>{let h=5381;for(const c of String(s))h=(h*33+c.codePointAt(0))>>>0;return h.toString(36)};
 const spNorm=x=>String(x||"").trim().replace(/^ال/,"").toLowerCase();
-const spKey=i=>{const n=String(i.animalName||"").trim();
+/* speed (23 Nov 2026): spKey was recomputed for every piece × every species card (about 5 s on a phone before the pieces showed); results are cached per piece object */
+const SPK=new WeakMap();
+const spKey=i=>{if(i&&typeof i==="object"){const c=SPK.get(i);if(c!==undefined&&c.n===i.animalName&&c.a===i.animal)return c.k;const k=spKey0(i);SPK.set(i,{k,n:i.animalName,a:i.animal});return k}return spKey0(i)};
+const spKey0=i=>{const n=String(i.animalName||"").trim();
   if(ROSTER[i.animal]){const ra=spNorm(ROSTER[i.animal].n),re=String((ROSTER_EN[i.animal]||[""])[0]).toLowerCase(),na=spNorm(n),ne=String((i.en&&i.en.animalName)||"").toLowerCase();
     if(!n||na===ra||(na.startsWith(ra)&&(!ne||!re||ne.endsWith(re))))return i.animal}const m=Object.keys(EXTRA).find(k=>[EXTRA[k][1].split(" (")[0],EXTRA[k][2]].some(v=>spNorm(v)===spNorm(n)));return m||"n:"+n};
 const spDocId=k=>k.startsWith("n:")?"c_"+spHash(k):k;
-const spItems=k=>items.filter(i=>spKey(i)===k);
+let SPI=null,SPI_SRC=null;
+const spItems=k=>{if(SPI_SRC!==items||!SPI){SPI_SRC=items;SPI=new Map();for(const i of items){const kk=spKey(i);if(!SPI.has(kk))SPI.set(kk,[]);SPI.get(kk).push(i)}}return (SPI.get(k)||[]).slice()};
 function spInfo(k){
   let b;
   if(ROSTER[k]){const x=SPX[k]||[];b={e:ROSTER[k].e,name:rName(k),bio:rBio(k),sci:x[0],st:x[1],roster:true,r:ROSTER[k].r}}
