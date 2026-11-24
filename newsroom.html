@@ -982,8 +982,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795507187"</script>
-<script src="local.js?v=1795507187"></script>
+<script>window.SHUHUD_BUILD="1795514145"</script>
+<script src="local.js?v=1795514145"></script>
 <script>
 const $=s=>document.querySelector(s);
 var MEDIA_DIRTY=true;
@@ -1649,9 +1649,9 @@ document.addEventListener("click",async e=>{
   if(e.target.closest("#pk-more")){const n=Math.ceil(pickList().length/8);pkPage=(pkPage+1)%Math.max(1,n);renderPicks();return}
   const hb=e.target.closest("[data-pkhold]");if(hb){if(!ghTok()){toast(T("ghFirstKey"));return}const id=hb.dataset.pkhold,cur=reqList.find(x=>(x.trackId||x.id)===id),h=!(cur&&cur.hold);hb.disabled=true;
     /* «لاحقاً» keeps a request in the list without letting the writing round take it (19 Nov 2026, Kamal) */
-    try{await ghSaveList(l=>l.map(x=>(x.trackId||x.id)===id?(h?{...x,hold:true}:(({hold,...y})=>y)(x)):x),h?"Request held for later":"Request back in the writing list",REQ_PATH);reqList=reqList.map(x=>(x.trackId||x.id)===id?(h?{...x,hold:true}:(({hold,...y})=>y)(x)):x);renderPicks()}catch(err){hb.disabled=false;toast(T("mFail"))}return}
+    try{await ghSaveList(l=>l.map(x=>(x.trackId||x.id)===id?(h?{...x,hold:true}:(({hold,...y})=>y)(x)):x),h?"Request held for later":"Request back in the writing list",REQ_PATH);reqList=reqList.map(x=>(x.trackId||x.id)===id?(h?{...x,hold:true}:(({hold,...y})=>y)(x)):x);renderPicks()}catch(err){hb.disabled=false;toast(ghErrTxt(err))}return}
   const del=e.target.closest("[data-pkdel]");if(del){if(!ghTok()){toast(T("ghFirstKey"));return}const id=del.dataset.pkdel;
-    try{await ghSaveList(l=>l.filter(x=>(x.trackId||x.id)!==id),"Request removed",REQ_PATH);reqList=reqList.filter(x=>(x.trackId||x.id)!==id);reqIds.delete(id);renderPicks();renderTrack();renderRadar()}catch(err){toast(T("mFail"))}return}
+    try{await ghSaveList(l=>l.filter(x=>(x.trackId||x.id)!==id),"Request removed",REQ_PATH);reqList=reqList.filter(x=>(x.trackId||x.id)!==id);reqIds.delete(id);renderPicks();renderTrack();renderRadar()}catch(err){toast(ghErrTxt(err))}return}
   if(!e.target.closest("#pk-send"))return;if(!ghTok()){toast(T("ghFirstKey"));return}
   const chosen=radarAll.filter(x=>pkSel.has(x.id));if(!chosen.length)return;const now=new Date().toISOString();
   const add=chosen.map(t=>({trackId:t.id,text:t.text,trAr:t.trAr||"",en:t.en&&t.en.text||"",source:t.source||"",url:t.url||"",date:t.date||String(t.at||"").slice(0,10),at:now}));
@@ -3947,8 +3947,9 @@ const ghMode=()=>!!window.SHUHUD_STANDALONE&&!READER;
 const ghB64=s=>btoa(unescape(encodeURIComponent(s))),ghUnB64=s=>decodeURIComponent(escape(atob(String(s).replace(/\n/g,""))));
 const fileB64=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(",")[1]);r.onerror=no;r.readAsDataURL(f)});
 async function ghApi(path,method="GET",body){
-  const r=await fetch("https://api.github.com/repos/"+GH.repo+"/contents/"+path,{method,headers:{Authorization:"Bearer "+ghTok(),Accept:"application/vnd.github+json",...(body?{"Content-Type":"application/json"}:{})},body:body?JSON.stringify(body):undefined});
+  const r=await fetch("https://api.github.com/repos/"+GH.repo+"/contents/"+path,{method,cache:"no-store",headers:{Authorization:"Bearer "+ghTok(),Accept:"application/vnd.github+json",...(body?{"Content-Type":"application/json"}:{})},body:body?JSON.stringify(body):undefined});
   if(r.status===404&&method==="GET")return null;if(!r.ok)throw {code:r.status};return r.json()}
+const ghErrTxt=e=>{const c=e&&e.code;return c===401||c===403?(isEn()?"The GitHub key was refused ("+c+"): add a new key":"رفض GitHub المفتاح ("+c+"): أضف مفتاحاً جديداً"):T("mFail")+(c?" ("+c+")":"")};
 async function ghList(path=GH.list){const j=await ghApi(path);return {sha:j&&j.sha,list:j?JSON.parse(ghUnB64(j.content)||"[]"):[]}}
 async function ghSaveList(change,msg,path=GH.list){for(let k=0;k<2;k++){const {sha,list}=await ghList(path);try{await ghApi(path,"PUT",{message:msg,content:ghB64(JSON.stringify(change(list))),...(sha?{sha}:{})});return}catch(e){if(e.code!==409||k)throw e}}}
 async function ghAdd(type,title,caption,files,ext0={}){
