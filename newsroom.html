@@ -982,8 +982,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795517335"</script>
-<script src="local.js?v=1795517335"></script>
+<script>window.SHUHUD_BUILD="1795527849"</script>
+<script src="local.js?v=1795527849"></script>
 <script>
 const $=s=>document.querySelector(s);
 var MEDIA_DIRTY=true;
@@ -3820,8 +3820,14 @@ const canDelMedia=m=>(!!assets&&!!db&&!READER&&!window.SHUHUD_STANDALONE&&!m._si
 /* a video shows its cover (title card) before it plays; older videos without one open on the title frame */
 /* light WebP previews made by the free "Media previews" GitHub job (media/t/<name>.webp, list in data/thumbs.json): the gallery shows them,
    the lightbox and downloads keep the originals (20 Nov 2026: the gallery pulled ~55 MB of full PNGs on every phone visit) */
-let THUMBS=new Set();if(window.SHUHUD_STANDALONE)fetch("data/thumbs.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(l=>{THUMBS=new Set(l);if(!$("#v-media").hidden)renderMedia()}).catch(()=>{});
-const mView=f=>{const u=mSrc(f),m=/\/media\/([^/?#]+)\.(png|jpe?g|webp)$/i.exec(u);return m&&THUMBS.has(m[1]+"."+m[2])?"/media/t/"+m[1]+".webp":u};
+let THUMBS=new Set();fetch((window.SHUHUD_STANDALONE?"":"https://alshuhud.org/")+"data/thumbs.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(l=>{THUMBS=new Set(l);if(!$("#v-media").hidden)renderMedia()}).catch(()=>{});
+const mView=f=>{const u=mSrc(f),m=/\/media\/([^/?#]+)\.(png|jpe?g|webp)$/i.exec(u);return m&&THUMBS.has(m[1]+"."+m[2])?(window.SHUHUD_STANDALONE?"":"https://alshuhud.org")+"/media/t/"+m[1]+".webp":u};
+/* 24 Nov 2026 (Kamal: website-made infographics showed as broken images in the Claude copy): the Claude page may not load images
+   from other sites, but it may fetch them; so any <img>/poster pointing at alshuhud.org is fetched and shown as an embedded data URL */
+if(!window.SHUHUD_STANDALONE){const SIC=new Map(),sfx=u=>{if(!SIC.has(u))SIC.set(u,fetch(u).then(r=>r.ok?r.blob():Promise.reject()).then(b=>new Promise((ok,no)=>{const fr=new FileReader();fr.onload=()=>ok(fr.result);fr.onerror=no;fr.readAsDataURL(b)})).catch(()=>{SIC.delete(u);return ""}));return SIC.get(u)};
+  const fix=el=>{for(const [attr,sel] of [["src","img"],["poster","video"]]){const nodes=el.matches&&el.matches(sel)?[el]:el.querySelectorAll?el.querySelectorAll(sel):[];
+    nodes.forEach(n=>{const u=n.getAttribute(attr)||"";if(!u.startsWith("https://alshuhud.org/"))return;n.dataset.site=u;n.removeAttribute(attr);sfx(u).then(d=>{if(d&&n.dataset.site===u)n.setAttribute(attr,d)})})}};
+  new MutationObserver(ms=>ms.forEach(m=>{m.addedNodes.forEach(n=>{if(n.nodeType===1)fix(n)});if(m.type==="attributes")fix(m.target)})).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["src","poster"]})}
 const vidTag=(m,f)=>m.poster?`<video src="${esc(mSrc(f))}" poster="${esc(/^media\/g_/.test(m.poster.url||"")&&Date.now()-Date.parse(m.createdAt||0)<9e5?"https://raw.githubusercontent.com/Kalslami2013/shuhud/main/"+m.poster.url:mView(m.poster))}" controls playsinline preload="none"></video>`:(()=>{const mm=/\/media\/([^/?#]+)\.(mp4|webm)$/i.exec(mSrc(f));return mm&&THUMBS.has(mm[1]+"."+mm[2])?`<video src="${esc(mSrc(f))}" poster="/media/t/${esc(mm[1])}.webp" controls playsinline preload="none"></video>`:`<video src="${esc(mSrc(f))}#t=2" controls playsinline preload="metadata"></video>`})();
 function mediaHTML(m){
   const files=Array.isArray(m.files)?m.files:[];const isVid=f=>String(f.mime||"").startsWith("video/");
