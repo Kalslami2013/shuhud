@@ -22,7 +22,9 @@ seo=f'''<title>شهود | أزمات العالم بلسان الكائنات ا
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="شهود · Shuhud"><meta name="twitter:description" content="{DESC_EN}"><meta name="twitter:image" content="{BASE}og.jpg">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"شهود","alternateName":"Shuhud","url":"{BASE}","logo":"{BASE}icon-512.png","description":"{DESC_EN}","founder":{{"@type":"Person","name":"Kamal Al-Salami","alternateName":"كمال السلامي","jobTitle":"Founder and editor-in-chief"}},"inLanguage":["ar","en"]}}</script>
 '''
-rhead=head.replace('href="manifest.webmanifest"','href="reader.webmanifest"').replace('</head>',seo+'</head>')
+# Cloudflare Web Analytics (free, no cookies): public pages only, not newsroom.html
+CFWA='<!-- Cloudflare Web Analytics --><script type=\'module\' src=\'https://static.cloudflareinsights.com/beacon.min.js\' data-cf-beacon=\'{"token": "729a651c282448f48d9b144cfcefabd8"}\'></script><!-- End Cloudflare Web Analytics -->\n'
+rhead=head.replace('href="manifest.webmanifest"','href="reader.webmanifest"').replace('</head>',seo+CFWA+'</head>')
 rsrc=src.replace('<script>window.SHUHUD_BUILD=','<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD=',1).replace('<title>شهود</title>','',1)
 # the public page carries none of the newsroom's tools: their markup is cut out, and lookups of the removed elements get a harmless stand-in
 CUT_IDS = set()

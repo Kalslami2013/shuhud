@@ -3,6 +3,8 @@
 # Run from the repo root: python3 scripts/pages.py   (the GitHub workflow pages.yml runs it on every data change)
 import json, os, re, html, glob, datetime
 
+# Cloudflare Web Analytics (free, no cookies)
+CFWA='<!-- Cloudflare Web Analytics --><script type=\'module\' src=\'https://static.cloudflareinsights.com/beacon.min.js\' data-cf-beacon=\'{"token": "729a651c282448f48d9b144cfcefabd8"}\'></script><!-- End Cloudflare Web Analytics -->\n'
 BASE = "https://alshuhud.org/"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
@@ -143,7 +145,7 @@ def head(title, desc, url, img, extra="", lang="ar", alt=None):
 <meta name="theme-color" content="#0b1712"><link rel="icon" href="{BASE}favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="96x96" href="{BASE}icon-96.png"><link rel="icon" type="image/png" sizes="192x192" href="{BASE}icon-192.png"><link rel="apple-touch-icon" href="{BASE}icon-180.png">
 <meta property="og:site_name" content="{'Shuhud · شهود' if en else 'شهود · Shuhud'}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(url)}"><meta property="og:image" content="{e(img)}">{'<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">' if '/og/' in img else ''}<meta property="og:locale" content="{'en_GB' if en else 'ar_AR'}"><meta property="og:locale:alternate" content="{'ar_AR' if en else 'en_GB'}">{hl}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(title)}"><meta name="twitter:description" content="{e(desc)}"><meta name="twitter:image" content="{e(img)}">
-{extra}<style>{CSS}</style></head><body>
+{extra}{CFWA}<style>{CSS}</style></head><body>
 <header class="top"><div class="wrap">{(f'<a class="brand" href="{BASE}?lang=en"><img src="{BASE}icon-192.png" alt="">Shuhud</a><nav><a href="{BASE}en/p/">All pieces</a><a href="{BASE}en/r/">Reserves</a><a href="{BASE}?lang=en#about">About</a></nav>') if en else (f'<a class="brand" href="{BASE}"><img src="{BASE}icon-192.png" alt="">شهود</a><nav><a href="{BASE}p/">كل القطع</a><a href="{BASE}r/">المحميات</a><a href="{BASE}#about">من نحن</a></nav>')}</div></header>
 """
 
