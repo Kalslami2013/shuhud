@@ -311,7 +311,7 @@ for p in items:
     desc = short(p.get("angle") or p.get("fact") or plain(p.get("dispatch")))
     ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": short(p["headline"], 110),
           "description": desc, "inLanguage": ["ar", "en"] if en else "ar", "mainEntityOfPage": url,
-          "author": {"@type": "Person", "name": "Kamal Al-Salami", "alternateName": "كمال السلامي"},
+          "author": {"@type": "Organization", "name": "Shuhud", "alternateName": "شهود", "url": BASE},
           "publisher": {"@type": "NewsMediaOrganization", "name": "شهود", "alternateName": "Shuhud", "url": BASE, "logo": {"@type": "ImageObject", "url": BASE + "icon-512.png"}}}
     if d: ld["datePublished"] = str(p.get("createdAt") or d)[:25]
     if img: ld["image"] = [img]
