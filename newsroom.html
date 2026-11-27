@@ -667,7 +667,9 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   .scene-row{margin-top:8px!important;transform:scale(.88);transform-origin:right center}
   html[dir="ltr"] .scene-row{transform-origin:left center}
   /* the smaller clock sits low beside the language buttons, not under them (Home with the radar keeps its own offset) */
-  #eday{transform:scale(.74);transform-origin:bottom center;bottom:6px!important;inset-inline-end:190px}
+  /* only the dial shrinks; the caption keeps its normal size and sits on the same line as the date buttons (27 Nov 2026, Kamal) */
+  #eday{gap:8px!important;bottom:10px!important;inset-inline-end:190px}
+  #eday .eday-dial{width:104px!important;height:104px!important}
 }
 @media (min-width:1100px) and (max-width:1379px){body.en #eday .eday-cap{display:none}}
 </style>
@@ -998,8 +1000,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
   </div>
 </div>
 
-<script>window.SHUHUD_BUILD="1795762568"</script>
-<script src="local.js?v=1795762568"></script>
+<script>window.SHUHUD_BUILD="1795762790"</script>
+<script src="local.js?v=1795762790"></script>
 <script>
 const $=s=>document.querySelector(s);
 var MEDIA_DIRTY=true;
