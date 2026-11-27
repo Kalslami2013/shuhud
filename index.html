@@ -657,6 +657,22 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
 /* the opened piece reads on a solid surface (19 Nov 2026, Kamal approved my option 2): same dark green, no see-through, softer cream text; feed cards and the radar keep their translucent look. Revert by deleting this rule */
 #feed .card[data-id]{background:#121a16;backdrop-filter:none;border-color:rgba(244,239,226,.10)}
 #feed .card[data-id] .voice{color:#e6dfcc}
+/* compact desktop header (27 Nov 2026, Kamal: the header took about half the first screen): smaller logo with the paw beside it,
+   the second description line hidden, a smaller Earth clock; phones keep their own compact header. Revert by deleting this block */
+@media (min-width:1100px){
+  .hero{padding-top:24px!important;padding-bottom:8px!important}
+  .hero-top{align-items:center!important;min-height:0!important}
+  .brandmark{display:flex!important;flex-direction:row!important;align-items:center!important;gap:14px!important;height:auto!important}
+  .brandmark .paw{width:46px!important;height:42px!important;margin:0!important}
+  .brandmark h1{font-size:64px!important;line-height:1.05!important;margin:0!important}
+  .eyebrow-row{margin-top:2px!important}
+  .hero > p[data-i18n="lede"]{display:none!important}
+  .scene-row{margin-top:8px!important;transform:scale(.88);transform-origin:right center}
+  html[dir="ltr"] .scene-row{transform-origin:left center}
+  /* the smaller clock sits low beside the language buttons, not under them (Home with the radar keeps its own offset) */
+  #eday{transform:scale(.74);transform-origin:bottom center;bottom:6px!important;inset-inline-end:190px}
+}
+@media (min-width:1100px) and (max-width:1379px){body.en #eday .eday-cap{display:none}}
 </style>
 
 <canvas id="forest" aria-hidden="true"></canvas>
@@ -774,8 +790,8 @@ body:not(.en) .radar a.rd-t{font-family:var(--f-display);font-weight:500;font-si
 <button type="button" class="narr-stop" id="narr-stop" hidden>■ <span data-i18n="nStopAll">إيقاف القراءة</span></button>
 
 
-<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795527849"</script>
-<script src="local.js?v=1795527849"></script>
+<script>window.SHUHUD_READER=true;window.SHUHUD_BUILD="1795762568"</script>
+<script src="local.js?v=1795762568"></script>
 <script>
 const __nil=new Proxy(function(){},{get:(t,k)=>k===Symbol.iterator?()=>[][Symbol.iterator]():k===Symbol.toPrimitive?()=>"":k==="then"?undefined:k==="length"?0:(k==="hidden"||k==="disabled")?true:["value","textContent","innerHTML","innerText","src","href","className"].includes(k)?"":["files","options","children"].includes(k)?[]:__nil,set:()=>true,apply:()=>__nil});
 const __CUT=new Set(["az-key", "az-note", "az-region", "az-save", "b-clip", "b-copy", "b-open", "b-paste", "b-use", "d-adv", "d-angle", "d-az-box", "d-bridge", "d-bridge-box", "d-file", "d-go", "d-key-box", "d-len", "d-manual", "d-manual-box", "d-narr", "d-note", "d-out", "d-src", "d-text", "d-tone", "d-url", "drop", "files", "gh-box", "gh-link", "gh-save", "gh-tok", "gh-unlink", "k-key", "k-save", "m-angle", "m-caption", "m-cat", "m-crisis", "m-dispatch", "m-emoji", "m-fact", "m-figures", "m-files", "m-hab", "m-headline", "m-impacts", "m-name", "m-place", "m-preview", "m-question", "m-save", "m-title", "m-type", "media-add", "media-add-btn", "p-add-btn", "p-form", "p-logo", "p-name", "p-name-en", "p-save", "p-type", "p-url", "photo-in", "picks", "run-live", "run-pick", "run-track", "s-add-btn", "s-form", "s-plat", "s-save", "s-url", "scene-in", "st-actions", "st-amb", "st-amb-w", "st-audio-w", "st-body", "st-cap", "st-close", "st-dur", "st-dur-w", "st-motion", "st-motion-w", "st-mprev", "st-music", "st-note", "st-photo", "st-res", "st-res-w", "st-size", "st-size-w", "st-style", "st-style-w", "st-theme", "st-theme-w", "st-title", "st-tone", "st-tone-w", "studio", "tr-all", "tr-order", "tr-status", "track", "v-desk", "v-guide", "v-track"]);
